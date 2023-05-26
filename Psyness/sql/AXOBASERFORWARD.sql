@@ -14,7 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema axobase
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `axobase` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+CREATE SCHEMA IF NOT EXISTS `axobase` DEFAULT CHARACTER SET utf8mb4 COLLATE=utf8_general_ci;
 USE `axobase` ;
 
 -- -----------------------------------------------------
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interpub` (
   PRIMARY KEY (`PubNumId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE=utf8_general_ci;
 
 
 -- -----------------------------------------------------
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interusers` (
   PRIMARY KEY (`IUserNum`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE=utf8_general_ci;
 
 
 -- -----------------------------------------------------
@@ -52,8 +52,8 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `axobase`.`interuserspub` (
   `PubNumId` INT NOT NULL AUTO_INCREMENT,
   `IUserNum` INT NULL DEFAULT NULL,
-  INDEX `PubNumId` (`PubNumId` ASC) VISIBLE,
-  INDEX `IUserNum` (`IUserNum` ASC) VISIBLE,
+  INDEX `PubNumId` (`PubNumId` ASC) ,
+  INDEX `IUserNum` (`IUserNum` ASC) ,
   CONSTRAINT `interuserspub_ibfk_1`
     FOREIGN KEY (`PubNumId`)
     REFERENCES `axobase`.`interpub` (`PubNumId`)
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interuserspub` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE=utf8_general_ci;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

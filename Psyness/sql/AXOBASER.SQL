@@ -1,4 +1,4 @@
-Drop database if exists Axobase;
+drop database if exists Axobase;
 create database Axobase;
 use Axobase;
 
@@ -32,6 +32,5 @@ IUserNum int,
 foreign key (PubNumId) references InterPub (PubNumId) on delete cascade on update cascade,
 foreign key (IUserNum) references InterUsers (IUserNum) on delete cascade on update cascade
 );
-
 
 
