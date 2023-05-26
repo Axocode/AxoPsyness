@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interpub` (
   PRIMARY KEY (`PubNumId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE=utf8_general_ci;
+COLLATE=utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interusers` (
   PRIMARY KEY (`IUserNum`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE=utf8_general_ci;
+COLLATE=utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interuserspub` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE=utf8_general_ci;
+COLLATE=utf8mb4_general_ci;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
