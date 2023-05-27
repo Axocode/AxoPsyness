@@ -1,6 +1,6 @@
-drop database if exists Axobase;
-create database Axobase;
-use Axobase;
+drop database if exists axobase;
+create database axobase;
+use axobase;
 
 -- Tabla principal usuarios
 
@@ -32,5 +32,3 @@ IUserNum int,
 foreign key (PubNumId) references InterPub (PubNumId) on delete cascade on update cascade,
 foreign key (IUserNum) references InterUsers (IUserNum) on delete cascade on update cascade
 );
-
-
