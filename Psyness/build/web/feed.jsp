@@ -44,7 +44,9 @@
           HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
           else{out.print("<script>location.replace('index.jsp');</script>");}
-                
+                String data = (String) sesion.getAttribute("SIImgNum");
+                if (data != null) {}
+                    else{data = "perfilsidebar.png";}
                 Helpers helpers = null;
                 InterPub user = null;
                 String aux = null;
@@ -209,7 +211,7 @@
         <div class="main-content">
             <div class="write-post-container">
                 <div class="user-profile">
-                    <img src="images/perfilsidebar.png">
+                    <img src="images/<%=data%>">
                     <div>
                         <p><%=sesion.getAttribute("SIUser")%></p>
                         <small>Public</small>
@@ -234,7 +236,7 @@
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="user-profile-modal">
-                                <img src="images/perfilsidebar.png">
+                                <img src="images/<%=data%>">
                                 <div>
                                     <p><%=sesion.getAttribute("SIUser")%></p>
                                 </div>
@@ -274,10 +276,13 @@
            InterUsers interUsers = dao.getInterUsersByPubNumId(trows.getPubNumId());
 
            if (interUsers != null) {
+           String data1 = interUsers.getIImgNum();
+           if (data1 != null) {}
+                    else{data1 = "perfilsidebar.png";}
     %>
             <div class="post-container">
                 <div class="user-profile">
-                    <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><img src="images/perfilsidebar.png"></a>
+                    <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><img src="images/<%=data1%>"></a>
                     <div>
                         <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><%=interUsers.getIUser()%></p></a>
                         <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small>Public</small></a>
@@ -303,11 +308,12 @@
             %>
         </div>
         <!-----------------------------------right-sidebar(VERGAS)------------------------------------------------------------------------->
+
         <div class="right-sidebar">
             <div class="sidebar-profile">
                 <a href="profile.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="a-perfil" style="text-decoration:none">                    
                 <div class="user-profile">
-                    <img src="images/perfilsidebar.png" id="foton">
+                    <img src="images/<%=data%>" id="foton">
                     <div>
                         <p id="username"><%=sesion.getAttribute("SIUser")%></p>
                         <small><%=sesion.getAttribute("SIUserNum")%></small>

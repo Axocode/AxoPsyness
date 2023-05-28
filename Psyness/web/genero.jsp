@@ -29,7 +29,10 @@
 <%
     HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
-          else{out.print("<script>location.replace('index.jsp');</script>");}                        
+          else{out.print("<script>location.replace('index.jsp');</script>");}  
+          String data = (String) sesion.getAttribute("SIImgNum");
+                if (data != null) {}
+                    else{data = "perfilsidebar.png";}
 %>    
     <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
@@ -166,7 +169,7 @@
             <div class="write-post-container">
                    
                 <div class="user-profile">                   
-                    <img src="images/perfilsidebar.png">
+                    <img src="images/<%=data%>">
                     <div>
                         <p id="username"><%=sesion.getAttribute("SIUser")%></p>
                         <small><%=sesion.getAttribute("SIAge")%></small>
@@ -276,7 +279,7 @@
             <div class="sidebar-profile">
                 <a href="profile.jsp" class="a-perfil" style="text-decoration:none">                    
                 <div class="user-profile">
-                    <img src="images/perfilsidebar.png" id="foton">
+                    <img src="images/<%=data%>" id="foton">
                     <div>
                         <p id="username"><%=sesion.getAttribute("SIUser")%></p>
                         <small><%=sesion.getAttribute("SIAge")%></small>

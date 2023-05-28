@@ -90,6 +90,7 @@
                     InterUsersService inter = new InterUsersService();
                     InterUsers userR = inter.getUserByInterUsers(request.getParameter("IUser"));
                     Integer SIUserNum = userR.getIUserNum();
+                    String SIImgNum = userR.getIImgNum();
             
             
             
@@ -108,6 +109,7 @@
                     sesion.setAttribute("SIAge", SIAge);
                     sesion.setAttribute("SIEmail", SIEmail);
                     sesion.setAttribute("SIPassword", SIPassword);
+                    sesion.setAttribute("SIImgNum", SIImgNum);
                     sesion.setAttribute("valido", "creacionValida");
                     response.sendRedirect("feed.jsp");
                     }else

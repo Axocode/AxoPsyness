@@ -10,7 +10,7 @@ IUser varchar ( 15 ) ,
 IAge varchar( 2 ) ,
 IEmail varchar ( 40 ) ,
 IPassword varchar (  25  ),
-IImgNum varchar( 1 )
+IImgNum varchar( 20 )
 );
 
 -- Tabla secundaria de  publicaciones

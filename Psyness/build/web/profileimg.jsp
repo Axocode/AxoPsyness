@@ -1,3 +1,11 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="org.axocode.dao.service.Conexion"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="org.axocode.dao.service.InterUsersService"%>
+<%@page import="org.axocode.dao.InterUsers"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -21,7 +29,67 @@
 <%
     HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
-          else{out.print("<script>location.replace('index.jsp');</script>");}                        
+          else{out.print("<script>location.replace('index');</script>");}   
+          
+          
+          
+        String img = request.getParameter("img");
+        
+        if (img != null) {
+                  
+              
+        int iUserNum = (Integer) sesion.getAttribute("SIUserNum");
+        String iUser = (String) sesion.getAttribute("SIUser");
+        String iAge = (String) sesion.getAttribute("SIAge");
+        String iEmail = (String) sesion.getAttribute("SIEmail");
+        String iPas = (String) sesion.getAttribute("SIPassword");
+        
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+    
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        String dbURL = "jdbc:mysql://localhost:3306/axobase";
+        String dbUsername = "root";
+        String dbPassword = "1234";
+        int row=0;
+        int si = 0;
+        conn = DriverManager.getConnection(dbURL, dbUsername, dbPassword);
+        
+        String query = "UPDATE INTERUSERS SET IUser =?, IAge =?, IEmail =?, IPassword =?, IImgNum=?  WHERE IUserNum =?";
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, iUser);
+        stmt.setString(2, iAge);
+        stmt.setString(3, iEmail);
+        stmt.setString(4, iPas);
+        stmt.setString(5, img);
+        stmt.setInt(6, iUserNum);
+        
+            row = stmt.executeUpdate();
+            si = 1;
+            
+            
+            session.setAttribute("SIImgNum", img);
+            session.setAttribute("signUp", "crearCuenta"); 
+            session.setAttribute("signUp", "crearCuenta"); 
+
+            
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (rs != null) {
+            rs.close();
+        }
+        if (stmt != null) {
+            stmt.close();
+        }
+        if (conn != null) {
+            conn.close();
+        }
+    }
+}
 %>        
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
@@ -144,7 +212,7 @@
                        <img src="images/prof1.png" class="fotoperfil"/>
                         <div class="overlay2">
                             <div class="seleccionar">   
-                                <a href="#" ><span class="badge bg-light text-dark">Seleccionar</span></a>
+                                <a href="profileimg.jsp?img=prof1.png" ><span class="badge bg-light text-dark">Seleccionar</span></a>
                             </div>
                         </div>                        
                     </div>
@@ -153,7 +221,7 @@
                        <img src="images/prof2.png" class="fotoperfil"/>
                         <div class="overlay2">
                             <div class="seleccionar">   
-                                <a href="#" ><span class="badge bg-light text-dark">Seleccionar</span></a>
+                                <a href="profileimg.jsp?img=prof2.png" ><span class="badge bg-light text-dark">Seleccionar</span></a>
                             </div>
                         </div>                        
                     </div>
@@ -162,7 +230,7 @@
                        <img src="images/prof3.png" class="fotoperfil"/>
                         <div class="overlay2">
                             <div class="seleccionar">   
-                                <a href="#" ><span class="badge bg-light text-dark">Seleccionar</span></a>
+                                <a href="profileimg.jsp?img=prof3.png" ><span class="badge bg-light text-dark">Seleccionar</span></a>
                             </div>
                         </div>                        
                     </div>
@@ -171,7 +239,7 @@
                        <img src="images/prof4.png" class="fotoperfil"/>
                         <div class="overlay2">
                             <div class="seleccionar">   
-                                <a href="#" ><span class="badge bg-light text-dark">Seleccionar</span></a>
+                                <a href="profileimg.jsp?img=prof4.png" ><span class="badge bg-light text-dark">Seleccionar</span></a>
                             </div>
                         </div>                        
                     </div>
@@ -180,7 +248,7 @@
                        <img src="images/prof5.png" class="fotoperfil"/>
                         <div class="overlay2">
                             <div class="seleccionar">   
-                                <a href="#" ><span class="badge bg-light text-dark">Seleccionar</span></a>
+                                <a href="profileimg.jsp?img=prof5.png" ><span class="badge bg-light text-dark">Seleccionar</span></a>
                             </div>
                         </div>                        
                     </div>
@@ -189,7 +257,7 @@
                        <img src="images/prof6.png" class="fotoperfil"/>
                         <div class="overlay2">
                             <div class="seleccionar">   
-                                <a href="#" ><span class="badge bg-light text-dark">Seleccionar</span></a>
+                                <a href="profileimg.jsp?img=prof6.png" ><span class="badge bg-light text-dark">Seleccionar</span></a>
                             </div>
                         </div>                        
                     </div>
@@ -198,7 +266,7 @@
                        <img src="images/prof7.png" class="fotoperfil"/>
                         <div class="overlay2">
                             <div class="seleccionar">   
-                                <a href="#" ><span class="badge bg-light text-dark">Seleccionar</span></a>
+                                <a href="profileimg.jsp?img=prof7.png" ><span class="badge bg-light text-dark">Seleccionar</span></a>
                             </div>
                         </div>                        
                     </div>
@@ -207,7 +275,7 @@
                        <img src="images/prof8.png" class="fotoperfil"/>
                         <div class="overlay2">
                             <div class="seleccionar">   
-                                <a href="#" ><span class="badge bg-light text-dark">Seleccionar</span></a>
+                                <a href="profileimg.jsp?img=prof8.png" ><span class="badge bg-light text-dark">Seleccionar</span></a>
                             </div>
                         </div>                        
                     </div>

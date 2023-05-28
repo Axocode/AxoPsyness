@@ -3,6 +3,7 @@
     Created on : 19 may 2023, 19:17:04
     Author     : BD1
 --%>
+<%@page import="org.axocode.helper.InterUsersHelper"%>
 <%@page import="org.axocode.dao.InterUsers"%>
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="java.util.Collections"%>
@@ -36,20 +37,32 @@
     else{out.print("<script>location.replace('index.jsp');</script>");}                        
     String nombre =null;
     String edad = null;
+    String data = null;
+    String data3 = (String) sesion.getAttribute("SIImgNum");
+                if (data3 != null) {}
+                    else{data3 = "perfilsidebar.png";}
     
         InterPubHelper pubHelper = new InterPubHelper();
+        InterUsersHelper userHelper = new InterUsersHelper();
+        
+        
         List<InterPub>list = pubHelper.getListT();
+        List<InterUsers>listita = userHelper.getListT();
+        
         Collections.reverse(list);
-        if( list != null && list.size() > 0)
+        if( listita != null && listita.size() > 0)
         {
-        for(InterPub trows : list)
+        for(InterUsers suko : listita)
         {
            InterUsersService dao = new InterUsersService();
-           InterUsers interUsers = dao.getInterUsersByPubNumId(trows.getPubNumId());
+           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
            if (interUsers != null) {
            if ((request.getParameter("id").toString()).equals(interUsers.getIUserNum().toString())) {
             nombre = (interUsers.getIUser());
             edad = (interUsers.getIAge());
+            data = interUsers.getIImgNum();
+                if (data != null) {}
+                    else{data = "perfilsidebar.png";}
             
     }}}}
 %>  
@@ -165,11 +178,12 @@
                 <div class="write-post-container">
                 <div class="user-profile-top">
                     <div class="contenedor-imagen">
-                        <img src="images/perfilsidebar.png" class="">
+                        <img src="images/<%=data%>" class="">
                         <div class="overlay">
                             <div class="editar">
-                                <a href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"></path></svg></a>
-
+                                <%if (nombre.equals(sesion.getAttribute("SIUser"))) {%>
+                                <a href="profileimg.jsp"> <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"></path></svg></a>
+                                <%}%>
                             </div>
                         </div>
                     </div>
@@ -249,12 +263,15 @@
 
            if (interUsers != null) {
            if ((request.getParameter("id").toString()).equals(interUsers.getIUserNum().toString())) {
+            String data1 = interUsers.getIImgNum();
+            if (data1 != null) {}
+                    else{data1 = "perfilsidebar.png";}
                    
                
     %>
             <div class="post-container">
                 <div class="user-profile">
-                    <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><img src="images/perfilsidebar.png"></a>
+                    <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><img src="images/<%=data1%>"></a>
                     <div>
                         <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><%=interUsers.getIUser()%></p></a>
                         <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small>Public</small></a>
@@ -282,9 +299,9 @@
             </div>
             <div class="right-sidebar" >
             <div class="sidebar-profile">
-                <a href="profile.jsp" class="a-perfil" style="text-decoration:none">                    
+                <a href="profile.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="a-perfil" style="text-decoration:none">                    
                 <div class="user-profile">
-                    <img src="images/perfilsidebar.png" id="foton">
+                    <img src="images/<%=data3%>" id="foton">
                     <div>
                         <p id="username"><%=sesion.getAttribute("SIUser")%></p>
                         <small><%=sesion.getAttribute("SIAge")%></small>
@@ -329,7 +346,6 @@
                             <ul class="list-group list-group-flush">
                               <li class="list-group-item"><svg class="svg-inline--fa fa-check-circle fa-w-16" aria-hidden="true" data-prefix="far" data-icon="check-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"></path></svg><b><a href="https://www.uv.mx/cendhiu/files/2013/08/Articulo-Violencia-de-genero.pdf">Violencia de género</a></b></li>
                               <li class="list-group-item"><svg class="svg-inline--fa fa-check-circle fa-w-16" aria-hidden="true" data-prefix="far" data-icon="check-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"></path></svg><b><a href="http://www.fundacionmujeres.es/maletincoeducacion/pdf/CUAD5horiz.pdf">Fórmulas para la equidad de género</a></b></li>
-
                             </ul>
                           </div>
                         </div>

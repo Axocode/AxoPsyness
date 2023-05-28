@@ -395,5 +395,39 @@ public class InterUsersService extends Conexion<InterUsers>
     
     return aux;
 }
-    
+
+        public boolean updateUsuario( InterUsers interUsers )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "update INTERUSERS SET IIMGNUM = ? WHERE IUSERNUM = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setString(1, interUsers.getIImgNum());
+            preparedStatement.setInt(2, interUsers.getIUserNum());
+            
+            
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+
 }
