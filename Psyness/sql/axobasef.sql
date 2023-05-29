@@ -10,7 +10,9 @@ IUser varchar ( 15 ) ,
 IAge varchar( 2 ) ,
 IEmail varchar ( 40 ) ,
 IPassword varchar (  25  ),
-IImgNum varchar( 20 )
+IImgNum varchar( 20 ),
+IUserSeguidores int default 0,
+IUserSeguidos int default 0
 );
 
 -- Tabla secundaria de  publicaciones
@@ -25,6 +27,12 @@ PubMg int
 
 -- relacion
 
+create table InterFlow (
+FlowSeguidoresID int,
+FlowSeguidoID int,
+foreign key (FlowSeguidoresID) references InterUsers(IUserNum) on delete cascade on update cascade,
+foreign key (FlowSeguidoID) references InterUsers(IUserNum) on delete cascade on update cascade
+);
 
 create table InterUsersPub (
 PubNumId int AUTO_INCREMENT,

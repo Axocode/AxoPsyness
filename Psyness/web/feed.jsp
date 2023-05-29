@@ -3,6 +3,7 @@
     Created on : 7 may. 2023, 20:33:13
     Author     : Admin
 --%>
+<%@page import="org.axocode.dao.service.InterFlowService"%>
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.List"%>
@@ -267,7 +268,6 @@
         InterPubHelper pubHelper = new InterPubHelper();
         List<InterPub>list = pubHelper.getListT();
         Collections.reverse(list);
-
         if( list != null && list.size() > 0)
         {
         for(InterPub trows : list)
@@ -280,7 +280,7 @@
            if (data1 != null) {}
                     else{data1 = "perfilsidebar.png";}
     %>
-            <div class="post-container">
+            <div class="post-container" id="<%=trows.getPubNumId()%>">
                 <div class="user-profile">
                     <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><img src="images/<%=data1%>"></a>
                     <div>
@@ -294,9 +294,17 @@
                     <div class="activity-icons">
                         <div><a href="#"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
-                        <%if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {%>
-                        <div><a href="#"><img src="images/follow.png">Seguir</a></div>
-                        <%}%>
+                        <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
+                            InterFlowService flowww = new InterFlowService();
+                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");;
+                            boolean seguir = flowww.isUserFollowing(interUsers.getIUserNum(), FlowSeguidorID );        
+                            if (seguir == true ) {
+                        %>
+                        <div><a href="seguirnt.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed"><img src="images/follow.png">Dejar de Seguir</a></div>
+                        <%}else{%>
+                        <div><a href="seguir.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed"><img src="images/follow.png">Seguir</a></div>
+                        <%}}%>
+                        
                     </div>
                     <div class="post-profile-icon">
 

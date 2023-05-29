@@ -3,6 +3,7 @@
     Created on : 19 may 2023, 19:17:04
     Author     : BD1
 --%>
+<%@page import="org.axocode.dao.service.InterFlowService"%>
 <%@page import="org.axocode.helper.InterUsersHelper"%>
 <%@page import="org.axocode.dao.InterUsers"%>
 <%@page import="org.axocode.dao.service.InterUsersService"%>
@@ -38,6 +39,7 @@
     String nombre =null;
     String edad = null;
     String data = null;
+    int postK = 0;
     String data3 = (String) sesion.getAttribute("SIImgNum");
                 if (data3 != null) {}
                     else{data3 = "perfilsidebar.png";}
@@ -61,6 +63,7 @@
             nombre = (interUsers.getIUser());
             edad = (interUsers.getIAge());
             data = interUsers.getIImgNum();
+            postK = interUsers.getIUserNum();
                 if (data != null) {}
                     else{data = "perfilsidebar.png";}
             
@@ -197,9 +200,16 @@
                     <div class="activity-icons">
                         <div><a href="#"><img src="images/heart.png"></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
-                        <%if (!nombre.equals(sesion.getAttribute("SIUser"))) {%>
-                        <div><a href="#"><img src="images/follow.png">Seguir</a></div>
-                        <%}%>
+                        <%  if (!nombre.equals(sesion.getAttribute("SIUser"))) {
+                            InterFlowService flowww = new InterFlowService();
+                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");;
+                            boolean seguir = flowww.isUserFollowing(postK, FlowSeguidorID );        
+                            if (seguir == true ) {
+                        %>
+                        <div><a href="seguirnt.jsp?id=<%=postK%>&&chest=profile"><img src="images/follow.png">Dejar de Seguir</a></div>
+                        <%}else{%>
+                        <div><a href="seguir.jsp?id=<%=postK%>&&chest=profile"><img src="images/follow.png">Seguir</a></div>
+                        <%}}%>
                     </div>
                     <div class="post-profile-icon">
 
@@ -283,9 +293,16 @@
                     <div class="activity-icons">
                         <div><a href="#"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
-                        <%if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {%>
-                        <div><a href="#"><img src="images/follow.png">Seguir</a></div>
-                        <%}%>
+                        <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
+                            InterFlowService flowww = new InterFlowService();
+                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");;
+                            boolean seguir = flowww.isUserFollowing(interUsers.getIUserNum(), FlowSeguidorID );        
+                            if (seguir == true ) {
+                        %>
+                        <div><a href="seguirnt.jsp?id=<%=interUsers.getIUserNum()%>&&chest=profile"><img src="images/follow.png">Dejar de Seguir</a></div>
+                        <%}else{%>
+                        <div><a href="seguir.jsp?id=<%=interUsers.getIUserNum()%>&&chest=profile"><img src="images/follow.png">Seguir</a></div>
+                        <%}}%>
                     </div>
                     <div class="post-profile-icon">
 

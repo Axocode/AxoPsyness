@@ -178,8 +178,10 @@ public class InterUsersService extends Conexion<InterUsers>
                         String IEmail = resultSet.getString("IEmail");
                         String IPassword = resultSet.getString("IPassword");
                         String IImgNum = resultSet.getString("IImgNum");
+                        int IUserSeguidores = resultSet.getInt("IUserSeguidores");
+                        int IUserSeguidos = resultSet.getInt("IUserSeguidos");
 
-                        interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum);
+                        interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IUserSeguidores, IUserSeguidos);
                     }
                 }
             }
@@ -430,4 +432,134 @@ public class InterUsersService extends Conexion<InterUsers>
     }
 
 
+    public boolean updateFlowSeguidoresNum( InterUsers interUsers )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDORES = IUSERSEGUIDORES + 1 WHERE IUSERNUM = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setInt(1, interUsers.getIUserNum());
+            
+            
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+
+        public boolean updateFlowSeguidoNum( InterUsers interUsers )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDOS = IUSERSEGUIDOS + 1 WHERE IUSERNUM = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setInt(1, interUsers.getIUserNum());
+            
+            
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+        
+        
+            public boolean unFlowSeguidoresNum( InterUsers interUsers )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDORES = IUSERSEGUIDORES - 1 WHERE IUSERNUM = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setInt(1, interUsers.getIUserNum());
+            
+            
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+
+        public boolean unFlowSeguidoNum( InterUsers interUsers )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDOS = IUSERSEGUIDOS - 1 WHERE IUSERNUM = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setInt(1, interUsers.getIUserNum());
+            
+            
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }
