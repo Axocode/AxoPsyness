@@ -3,6 +3,10 @@
     Created on : 21 may. 2023, 13:57:14
     Author     : Admin
 --%>
+<%@page import="org.axocode.dao.service.InterUsersService"%>
+<%@page import="java.util.List"%>
+<%@page import="org.axocode.dao.InterUsers"%>
+<%@page import="org.axocode.helper.InterUsersHelper"%>
 <%@page session="true"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,6 +37,26 @@
           String data = (String) sesion.getAttribute("SIImgNum");
                 if (data != null) {}
                     else{data = "perfilsidebar.png";}
+                    
+    int seguidores = 0;
+    int seguidos = 0;
+                InterUsersHelper userHelper = new InterUsersHelper();
+        List<InterUsers>listita = userHelper.getListT();
+        
+                    if( listita != null && listita.size() > 0)
+        {
+        for(InterUsers suko : listita)
+        {
+           InterUsersService dao = new InterUsersService();
+           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
+           if (interUsers != null) {
+           if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
+            
+            seguidores = interUsers.getIUserSeguidores();
+            seguidos = interUsers.getIUserSeguidos();
+                
+            
+    }}}}
 %>    
     <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
@@ -280,8 +304,8 @@
                 <br>
                 <div class="stats">
                     <div class="activity-icons">
-                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores<img src="images/friends.png"></a></div>
-                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos<img src="images/friends.png"></a></div>
+                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores: <%=seguidores%><img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos: <%=seguidos%><img src="images/friends.png"></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
                     </div>
                 </div>

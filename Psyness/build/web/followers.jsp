@@ -213,8 +213,8 @@
                 <br>
                 <div class="stats">
                     <div class="activity-icons">
-                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores<img src="images/friends.png"></a></div>
-                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos<img src="images/friends.png"></a></div>
+                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores: <%=sesion.getAttribute("SISeguidores")%><img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos: <%=sesion.getAttribute("SISeguidos")%><img src="images/friends.png"></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
                     </div>
                 </div>

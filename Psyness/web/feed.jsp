@@ -56,7 +56,8 @@
                 aux = "Guardar";
                 readonly = "";
                 String guardar = request.getParameter("guardar");
-                
+                int seguidores = 0;
+                int seguidos = 0;
                 helpers = new InterPubHelper( ).addRequest( request );
                 
                 
@@ -75,8 +76,26 @@
                 boolean success = interUsersPubService.addUsersPub(contextInterses);
                 
                    response.sendRedirect("error.jsp"); 
+                    }
                     
-    }
+                    
+        InterUsersHelper userHelper = new InterUsersHelper();
+        List<InterUsers>listita = userHelper.getListT();
+        
+                    if( listita != null && listita.size() > 0)
+        {
+        for(InterUsers suko : listita)
+        {
+           InterUsersService dao = new InterUsersService();
+           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
+           if (interUsers != null) {
+           if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
+            
+            seguidores = interUsers.getIUserSeguidores();
+            seguidos = interUsers.getIUserSeguidos();
+                
+            
+    }}}}
 %>
     <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
@@ -292,7 +311,7 @@
                 <p class="post-text"><%=trows.getPubCont()%></p>
                 <div class="post-row">
                     <div class="activity-icons">
-                        <div><a href="#"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
+                        <div><a href="megusta.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&id=<%=interUsers.getIUserNum()%>"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
                         <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                             InterFlowService flowww = new InterFlowService();
@@ -330,8 +349,8 @@
                 <br>
                 <div class="stats">
                     <div class="activity-icons">
-                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores<img src="images/friends.png"></a></div>
-                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos<img src="images/friends.png"></a></div>
+                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores: <%=seguidores%><img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos: <%=seguidos%><img src="images/friends.png"></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
                     </div>
                 </div>

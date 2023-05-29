@@ -22,7 +22,7 @@ IUserSeguidos int default 0
 create table InterPub (
 PubNumId int AUTO_INCREMENT primary key not null,
 PubCont text( 500 ),
-PubMg int
+PubMg int default 0
 );
 
 -- relacion

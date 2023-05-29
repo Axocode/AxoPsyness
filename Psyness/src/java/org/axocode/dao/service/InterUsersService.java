@@ -388,6 +388,8 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
             aux.setIEmail(resultSet.getString(4));
             aux.setIPassword(resultSet.getString(5));
             aux.setIImgNum(resultSet.getString(6));
+            aux.setIUserSeguidores(resultSet.getInt(7));
+            aux.setIUserSeguidos(resultSet.getInt(8));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -443,6 +445,8 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
             aux.setIEmail(resultSet.getString(4));
             aux.setIPassword(resultSet.getString(5));
             aux.setIImgNum(resultSet.getString(6));
+            aux.setIUserSeguidores(resultSet.getInt(7));
+            aux.setIUserSeguidos(resultSet.getInt(8));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();

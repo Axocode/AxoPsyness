@@ -96,7 +96,38 @@ public class InterPubService extends Conexion<InterPub>
         }
         return false;
     }
-    
+        public boolean updateMgWithPubNum( InterPub exp )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE INTERPUB SET PUBMG = PUBMG + 1 WHERE PUBNUMID = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setInt(1, exp.getPubNumId());
+            
+            
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+        
     public InterPub getPubByInterPub(int PubNumId) {
     InterPub aux = null;
     Connection connection = null;

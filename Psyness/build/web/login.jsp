@@ -32,12 +32,15 @@
              if (user != null) {
              
             Integer SIUserNum = user.getIUserNum();
+            Integer SISeguidores = user.getIUserSeguidores();
+            Integer SISeguidos = user.getIUserSeguidos();
             String SIAge = user.getIAge();
             String SIEmail = user.getIEmail();
             String SIPassword = user.getIPassword();
             String SIImgNum = user.getIImgNum();
                     
-                    
+                    sesion.setAttribute("SISeguidores", SISeguidores);
+                    sesion.setAttribute("SISeguidos", SISeguidos);
                     sesion.setAttribute("SIUserNum", SIUserNum);
                     sesion.setAttribute("SIUser", NombreUsuario);
                     sesion.setAttribute("SIAge", SIAge);

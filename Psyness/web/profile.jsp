@@ -39,6 +39,8 @@
     String nombre =null;
     String edad = null;
     String data = null;
+    int seguidores = 0;
+    int seguidos = 0;
     int postK = 0;
     String data3 = (String) sesion.getAttribute("SIImgNum");
                 if (data3 != null) {}
@@ -64,8 +66,30 @@
             edad = (interUsers.getIAge());
             data = interUsers.getIImgNum();
             postK = interUsers.getIUserNum();
+            seguidores = interUsers.getIUserSeguidores();
+            seguidos = interUsers.getIUserSeguidos();
                 if (data != null) {}
                     else{data = "perfilsidebar.png";}
+            
+    }}}}
+    
+
+
+
+    int seguidores1 = 0;
+    int seguidos1 = 0;
+                    if( listita != null && listita.size() > 0)
+        {
+        for(InterUsers suko : listita)
+        {
+           InterUsersService dao = new InterUsersService();
+           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
+           if (interUsers != null) {
+           if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
+            
+            seguidores1 = interUsers.getIUserSeguidores();
+            seguidos1 = interUsers.getIUserSeguidos();
+                
             
     }}}}
 %>  
@@ -198,8 +222,8 @@
                
                 <div class="post-row">
                     <div class="activity-icons">
-                        <div><a href="followers.jsp?id=<%=postK%>">Seguidores<img src="images/friends.png"></a></div>
-                        <div><a href="follows.jsp?id=<%=postK%>">Seguidos<img src="images/friends.png"></a></div>
+                        <div><a href="followers.jsp?id=<%=postK%>">Seguidores: <%=seguidores%><img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=postK%>">Seguidos: <%=seguidos%><img src="images/friends.png"></a></div>
                         <%
                             if (nombre.equals(sesion.getAttribute("SIUser"))) {
                                   %>
@@ -299,7 +323,7 @@
                 <p class="post-text"><%=trows.getPubCont()%></p>
                 <div class="post-row">
                     <div class="activity-icons">
-                        <div><a href="#"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
+                        <div><a href="megusta.jsp?pub=<%=trows.getPubNumId()%>&&chest=profile&&id=<%=interUsers.getIUserNum()%>"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
                         <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                             InterFlowService flowww = new InterFlowService();
@@ -335,8 +359,8 @@
                 <br>
                 <div class="stats">
                     <div class="activity-icons">
-                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores<img src="images/friends.png"></a></div>
-                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos<img src="images/friends.png"></a></div>
+                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores: <%=seguidores1%><img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos: <%=seguidos1%><img src="images/friends.png"></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
                     </div>
                 </div>
