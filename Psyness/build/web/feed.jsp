@@ -330,9 +330,9 @@
                 <br>
                 <div class="stats">
                     <div class="activity-icons">
-                        <div><a href="#"><img src="images/heart.png"></a></div>
+                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores<img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos<img src="images/friends.png"></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
-                        <div><a href="followers.jsp"><img src="images/friends.png">Seguidores</a></div>
                     </div>
                 </div>
                 </a>

@@ -198,9 +198,17 @@
                
                 <div class="post-row">
                     <div class="activity-icons">
-                        <div><a href="#"><img src="images/heart.png"></a></div>
+                        <div><a href="followers.jsp?id=<%=postK%>">Seguidores<img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=postK%>">Seguidos<img src="images/friends.png"></a></div>
+                        <%
+                            if (nombre.equals(sesion.getAttribute("SIUser"))) {
+                                  %>
                         <div><a href="#"><img src="images/star.png"></a></div>
-                        <%  if (!nombre.equals(sesion.getAttribute("SIUser"))) {
+                        <%
+                            }
+                          
+                            
+                            if (!nombre.equals(sesion.getAttribute("SIUser"))) {
                             InterFlowService flowww = new InterFlowService();
                             int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");;
                             boolean seguir = flowww.isUserFollowing(postK, FlowSeguidorID );        
@@ -327,10 +335,9 @@
                 <br>
                 <div class="stats">
                     <div class="activity-icons">
-
-                        <div><a href="#"><img src="images/heart.png">500k</a></div>
-                        <div><a href="#"><img src="images/star.png">120</a></div>
-                        <div><a href="followers.jsp"><img src="images/friends.png">Seguidores</a></div>
+                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores<img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos<img src="images/friends.png"></a></div>
+                        <div><a href="#"><img src="images/star.png"></a></div>
                     </div>
                 </div>
                 </a>

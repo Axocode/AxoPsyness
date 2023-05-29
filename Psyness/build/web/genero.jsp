@@ -169,20 +169,12 @@
             <div class="write-post-container">
                    
                 <div class="user-profile">                   
-                    <img src="images/<%=data%>">
                     <div>
-                        <p id="username"><%=sesion.getAttribute("SIUser")%></p>
-                        <small><%=sesion.getAttribute("SIAge")%></small>
+                        <p id="username">Listado de temas</p>
                     </div> 
-
                 </div>
-                <br>
                 <div class="post-input-container">
-                    <div class="checkbox">
-                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
-                          ¿Ver mas Publicaciones?
-                        </button>
-                    </div>
+
 
                         <!--MODAL-->
                               
@@ -277,7 +269,7 @@
         <!-----------------------------------right-sidebar(VERGAS)------------------------------------------------------------------------->
         <div class="right-sidebar">
             <div class="sidebar-profile">
-                <a href="profile.jsp" class="a-perfil" style="text-decoration:none">                    
+                <a href="profile.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="a-perfil" style="text-decoration:none">                    
                 <div class="user-profile">
                     <img src="images/<%=data%>" id="foton">
                     <div>
@@ -288,9 +280,9 @@
                 <br>
                 <div class="stats">
                     <div class="activity-icons">
-                        <div><a href="#"><img src="images/heart.png"></a></div>
+                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores<img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos<img src="images/friends.png"></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
-                        <div><a href="followers.jsp"><img src="images/friends.png">Seguidores</a></div>
                     </div>
                 </div>
                 </a>
