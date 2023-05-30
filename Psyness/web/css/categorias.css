@@ -302,7 +302,7 @@ Publicar
 /*Side bar Izquierda*/
 
 .left_sidebar{
-    background: #000;
+    background: #141414;
     flex-basis: 25%;
     position: fixed;
     top: -0.5%;

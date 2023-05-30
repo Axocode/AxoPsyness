@@ -155,7 +155,7 @@ Publicar
 }
 .post-container{
     width: 100%;
-    background: #f6f6f6;
+    background: white;
     border-radius: 6px;
     padding: 20px;
     color: #626262;
@@ -309,7 +309,7 @@ Publicar
 /*Side bar Izquierda*/
 
 .left_sidebar{
-    background: #000;
+    background: #141414;
     flex-basis: 25%;
     position: fixed;
     top: -0.5%;
