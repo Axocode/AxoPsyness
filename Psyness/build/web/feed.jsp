@@ -3,6 +3,9 @@
     Created on : 7 may. 2023, 20:33:13
     Author     : Admin
 --%>
+<%@page import="org.axocode.dao.InterFav"%>
+<%@page import="org.axocode.helper.InterFavHelper"%>
+<%@page import="org.axocode.dao.service.InterFavService"%>
 <%@page import="org.axocode.dao.service.InterFlowService"%>
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="java.util.Comparator"%>
@@ -284,6 +287,7 @@
                 </div>
             </div>
 <%
+        
         InterPubHelper pubHelper = new InterPubHelper();
         List<InterPub>list = pubHelper.getListT();
         Collections.reverse(list);
@@ -294,10 +298,11 @@
            InterUsersService dao = new InterUsersService();
            InterUsers interUsers = dao.getInterUsersByPubNumId(trows.getPubNumId());
 
-           if (interUsers != null) {
-           String data1 = interUsers.getIImgNum();
-           if (data1 != null) {}
-                    else{data1 = "perfilsidebar.png";}
+            if (interUsers != null) {
+            String data1 = interUsers.getIImgNum();
+            if (data1 != null) {}
+                else{data1 = "perfilsidebar.png";}
+                
     %>
             <div class="post-container" id="<%=trows.getPubNumId()%>">
                 <div class="user-profile">
@@ -312,7 +317,16 @@
                 <div class="post-row">
                     <div class="activity-icons">
                         <div><a href="megusta.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&id=<%=interUsers.getIUserNum()%>"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
-                        <div><a href="#"><img src="images/star.png"></a></div>
+                        <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
+                            InterFavService fav = new InterFavService();
+                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
+                            boolean seguir = fav.isUserFav(trows.getPubNumId(), FlowSeguidorID );        
+                            if (seguir == true ) {
+                        %>
+                        <div><a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favoritont"><img src="images/star.png">Eliminar</a></div>
+                        <%}else{%>
+                        <div><a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favorito"><img src="images/star.png">Agregar</a></div>
+                        <%}}%>
                         <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                             InterFlowService flowww = new InterFlowService();
                             int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");;
@@ -351,7 +365,7 @@
                     <div class="activity-icons">
                         <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores: <%=seguidores%><img src="images/friends.png"></a></div>
                         <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos: <%=seguidos%><img src="images/friends.png"></a></div>
-                        <div><a href="#"><img src="images/star.png"></a></div>
+                        <div><a href="favs.jsp?rufless=on&&favs=<%=sesion.getAttribute("SIUserNum")%>"><img src="images/star.png"></a></div>
                     </div>
                 </div>
                 </a>

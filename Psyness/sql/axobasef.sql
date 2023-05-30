@@ -26,6 +26,12 @@ PubMg int default 0
 );
 
 -- relacion
+create table InterFav(
+FavIdPub int,
+FavIdUser int,
+foreign key (FavIdPub) references InterPub (PubNumId) on delete cascade on update cascade,
+foreign key (FavIdUser) references InterUsers(IUserNum) on delete cascade on update cascade
+);
 
 create table InterFlow (
 FlowSeguidoresID int,
