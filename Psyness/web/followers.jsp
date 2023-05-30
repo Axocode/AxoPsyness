@@ -52,6 +52,23 @@
      if (nombreper.equals(session.getAttribute("SIUser"))) {
             seguidormain = "sigue";
         }
+        
+int seguidores = 0;
+    int seguidos = 0;
+        
+                    if( listita != null && listita.size() > 0)
+        {
+        for(InterUsers suko : listita)
+        {
+           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
+           if (interUsers != null) {
+           if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
+            
+            seguidores = interUsers.getIUserSeguidores();
+            seguidos = interUsers.getIUserSeguidos();
+                
+            
+    }}}}
 %>        
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
@@ -213,8 +230,8 @@
                 <br>
                 <div class="stats">
                     <div class="activity-icons">
-                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores: <%=sesion.getAttribute("SISeguidores")%><img src="images/friends.png"></a></div>
-                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos: <%=sesion.getAttribute("SISeguidos")%><img src="images/friends.png"></a></div>
+                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores: <%=seguidores%><img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos: <%=seguidos%><img src="images/friends.png"></a></div>
                         <div><a href="#"><img src="images/star.png"></a></div>
                     </div>
                 </div>
