@@ -27,8 +27,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interpub` (
   PRIMARY KEY (`pubnumid`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -46,8 +45,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interusers` (
   PRIMARY KEY (`iusernum`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -69,8 +67,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interfav` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -92,8 +89,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interflow` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -116,8 +112,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interuserspub` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
