@@ -164,25 +164,18 @@
         <!-----------------------------------main-content(EXEL)--------------------------------------------------->
         <div class="main-content">
             <div class="write-post-container">
-                <div class="user-profile">
-                    <img src="images/perfilsidebar.png">
+                   
+                <div class="user-profile">                   
                     <div>
-                        <p>JASNA</p>
-                        <small>Public</small>
-                    </div>
-
+                        <p id="username">Subtemas</p>
+                    </div> 
                 </div>
-                <br>
                 <div class="post-input-container">
-                    <div class="checkbox">
-                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                          ¿Que desea publicar?
-                        </button>
-                    </div>
 
-                        <!--MODAL
+
+                        <!--MODAL-->
                               
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <!--  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -211,8 +204,9 @@
                             </div>
                           </div>
                         </div>
-                      </div>
-                        -->
+                      </div><!-- comment -->
+                        <!--FIN MODAL-->
+                    
                 </div>
             </div>
             
@@ -260,25 +254,7 @@
         </div>
         <!-----------------------------------right-sidebar(VERGAS)------------------------------------------------------------------------->
         <div class="right-sidebar">
-            <div class="sidebar-profile">
-                <a href="profile.jsp" class="a-perfil" style="text-decoration:none">                    
-                <div class="user-profile">
-                    <img src="images/perfilsidebar.png" id="foton">
-                    <div>
-                        <p id="username">1234</p>
-                        <small>JAFNA</small>
-                    </div>   
-                </div>
-                <br>
-                <div class="stats">
-                    <div class="activity-icons">
-                        <div><img src="images/heart.png"></a></div>
-                        <div><img src="images/star.png"></a></div>
-                        <div><a href="followers.jsp"><img src="images/friends.png">Seguidores</a></div>
-                    </div>
-                </div>
-                </a>
-            </div>
+            
             
            
             

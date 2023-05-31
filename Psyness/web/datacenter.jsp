@@ -153,25 +153,26 @@
 
                             <div class="col">
                                 <div class="card" id="cajitas">
-                                    <div class="card_img">
-                                        <img src="images/apoyotelefono.png" width="150">
+                                     <div class="card_img">
+                                        <img src="images/apoyofamiliar.png" width="150">
                                     </div>
                                     <div class="col_info">
                                         <i class="fa-solid fa-user"></i>
-                                        <span class="titulo-detalle">SAPTEL</span>
-                                        <p>Sistema Nacional de Apoyo en Crisis por Teléfono</p>
+                                        <span class="titulo-detalle">Red de Género Cecyt 9</span>
+                                        <p>Instituto Politecnico Nacional</p>
                                     </div>
                                     <div class="col_info">
-                                        <i class="fa-solid fa-phone"></i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2v.511l-8 6.223-8-6.222V6h16zM4 18V9.044l7.386 5.745a.994.994 0 0 0 1.228 0L20 9.044 20.002 18H4z"></path></svg>
                                         <span class="titulo-detalle">Contacto</span>
-                                        <p>01 800 472 7835</p>
+                                        <p>genero@ipn.mx</p>
                                     </div>
                                     <div class="col_info">
                                         <i class="fas fa-map-marker-alt"></i>
                                         <span class="titulo-detalle">Website</span>
-                                        <a href="https://www.saptel.org.mx/" Target='_blank'>saptel.com</a>
+                                        <a href="https://www.cecyt9.ipn.mx/red-genero-jdb.html" target="_blank">cecyt9.ipn.mx</a>
                                     </div>
                                 </div>
+                                
                             </div>
 
                             <div class="col">
@@ -268,23 +269,23 @@
                             
                             <div class="col">
                                 <div class="card" id="cajitas">
-                                     <div class="card_img">
-                                        <img src="images/apoyofamiliar.png" width="150">
+                                    <div class="card_img">
+                                        <img src="images/apoyotelefono.png" width="150">
                                     </div>
                                     <div class="col_info">
                                         <i class="fa-solid fa-user"></i>
-                                        <span class="titulo-detalle">ILEF</span>
-                                        <p>Instituto Latinoamericano Familiar</p>
+                                        <span class="titulo-detalle">SAPTEL</span>
+                                        <p>Sistema Nacional de Apoyo en Crisis por Teléfono</p>
                                     </div>
                                     <div class="col_info">
                                         <i class="fa-solid fa-phone"></i>
                                         <span class="titulo-detalle">Contacto</span>
-                                        <p>55 5554 5611</p>
+                                        <p>01 800 472 7835</p>
                                     </div>
                                     <div class="col_info">
                                         <i class="fas fa-map-marker-alt"></i>
                                         <span class="titulo-detalle">Website</span>
-                                        <a href="https://www.ilef.com.mx/" Target='_blank'>ilef.com</a>
+                                        <a href="https://www.saptel.org.mx/" Target='_blank'>saptel.com</a>
                                     </div>
                                 </div>
                             </div>
