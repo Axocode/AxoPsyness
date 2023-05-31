@@ -21,7 +21,7 @@
         HttpSession sesion = request.getSession();
         if (request.getParameter("cerrar")!= null) {
                     session.invalidate();
-%>
+        %>
                     <script>window.location.href = "feed.jsp";</script>
                     <%
                 }

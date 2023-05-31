@@ -10,16 +10,36 @@ public class InterUsers implements Serializable{
     private String IEmail;
     private String IPassword;
     private String IImgNum;
+    private Integer IUserSeguidores;
+    private Integer IUserSeguidos;
 
-    
-    public InterUsers(Integer IUserNum, String IUser, String IAge, String IEmail, String IPassword, String IImgNum) {
+    public InterUsers(Integer IUserNum, String IUser, String IAge, String IEmail, String IPassword, String IImgNum, Integer IUserSeguidores, Integer IUserSeguidos) {
     this.IUserNum = IUserNum;
     this.IUser = IUser;
     this.IAge = IAge;
     this.IEmail = IEmail;
     this.IPassword = IPassword;
     this.IImgNum = IImgNum;
+    this.IUserSeguidores = IUserSeguidores;
+    this.IUserSeguidos = IUserSeguidos;
 }
+    public Integer getIUserSeguidores() {
+        return IUserSeguidores;
+    }
+
+    public void setIUserSeguidores(Integer IUserSeguidores) {
+        this.IUserSeguidores = IUserSeguidores;
+    }
+
+    public Integer getIUserSeguidos() {
+        return IUserSeguidos;
+    }
+
+    public void setIUserSeguidos(Integer IUserSeguidos) {
+        this.IUserSeguidos = IUserSeguidos;
+    }
+
+    
     
     public InterUsers() {
     }

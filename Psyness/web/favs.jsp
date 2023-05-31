@@ -287,7 +287,14 @@
                 </div>
             </div>
 <%
-        
+        int u = Integer.parseInt(request.getParameter("favs"));
+        if (request.getParameter("rufless").equals("on")) {                       
+            InterFavService favService = new InterFavService();
+            List<InterFav>cont = favService.getInterFavList(u);
+
+        if (cont != null && cont.size() > 0) {
+        for (InterFav interFav : cont) {
+                
         InterPubHelper pubHelper = new InterPubHelper();
         List<InterPub>list = pubHelper.getListT();
         Collections.reverse(list);
@@ -303,6 +310,11 @@
             if (data1 != null) {}
                 else{data1 = "perfilsidebar.png";}
                 
+                  if (interFav.getFavIdPub().equals(trows.getPubNumId())) {
+                          
+                      
+      
+                    
     %>
             <div class="post-container" id="<%=trows.getPubNumId()%>">
                 <div class="user-profile">
@@ -323,9 +335,9 @@
                             boolean seguir = fav.isUserFav(trows.getPubNumId(), FlowSeguidorID );        
                             if (seguir == true ) {
                         %>
-                        <div><a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favoritont"><img src="images/star.png">Eliminar</a></div>
+                        <div><a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=rufless&&id=<%=request.getParameter("favs")%>&&action1=Favoritont"><img src="images/star.png">Eliminar</a></div>
                         <%}else{%>
-                        <div><a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favorito"><img src="images/star.png">Agregar</a></div>
+                        <div><a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=rufless&&id=<%=request.getParameter("favs")%>&&action1=Favorito"><img src="images/star.png">Agregar</a></div>
                         <%}}%>
                         <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                             InterFlowService flowww = new InterFlowService();
@@ -333,9 +345,9 @@
                             boolean seguir = flowww.isUserFollowing(interUsers.getIUserNum(), FlowSeguidorID );        
                             if (seguir == true ) {
                         %>
-                        <div><a href="seguirnt.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed"><img src="images/follow.png">Dejar de Seguir</a></div>
+                        <div><a href="seguirnt.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=rufless"><img src="images/follow.png">Dejar de Seguir</a></div>
                         <%}else{%>
-                        <div><a href="seguir.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed"><img src="images/follow.png">Seguir</a></div>
+                        <div><a href="seguir.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=rufless"><img src="images/follow.png">Seguir</a></div>
                         <%}}%>
                         
                     </div>
@@ -345,7 +357,7 @@
                 </div>
             </div>
             <%
-                }}}
+                }}}}}}}
             %>
         </div>
         <!-----------------------------------right-sidebar(VERGAS)------------------------------------------------------------------------->
@@ -365,7 +377,7 @@
                     <div class="activity-icons">
                         <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores: <%=seguidores%><img src="images/friends.png"></a></div>
                         <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos: <%=seguidos%><img src="images/friends.png"></a></div>
-                        <div><a href="favs.jsp?rufless=on&&favs=<%=sesion.getAttribute("SIUserNum")%>"><img src="images/star.png"></a></div>
+                        <div><a href="feed.jsp?rufless=on&&favs=<%=sesion.getAttribute("SIUserNum")%>"><img src="images/star.png"></a></div>
                     </div>
                 </div>
                 </a>

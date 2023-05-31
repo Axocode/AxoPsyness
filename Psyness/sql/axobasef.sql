@@ -10,7 +10,9 @@ IUser varchar ( 15 ) ,
 IAge varchar( 2 ) ,
 IEmail varchar ( 40 ) ,
 IPassword varchar (  25  ),
-IImgNum varchar( 20 )
+IImgNum varchar( 20 ),
+IUserSeguidores int default 0,
+IUserSeguidos int default 0
 );
 
 -- Tabla secundaria de  publicaciones
@@ -20,11 +22,23 @@ IImgNum varchar( 20 )
 create table InterPub (
 PubNumId int AUTO_INCREMENT primary key not null,
 PubCont text( 500 ),
-PubMg int
+PubMg int default 0
 );
 
 -- relacion
+create table InterFav(
+FavIdPub int,
+FavIdUser int,
+foreign key (FavIdPub) references InterPub (PubNumId) on delete cascade on update cascade,
+foreign key (FavIdUser) references InterUsers(IUserNum) on delete cascade on update cascade
+);
 
+create table InterFlow (
+FlowSeguidoresID int,
+FlowSeguidoID int,
+foreign key (FlowSeguidoresID) references InterUsers(IUserNum) on delete cascade on update cascade,
+foreign key (FlowSeguidoID) references InterUsers(IUserNum) on delete cascade on update cascade
+);
 
 create table InterUsersPub (
 PubNumId int AUTO_INCREMENT,

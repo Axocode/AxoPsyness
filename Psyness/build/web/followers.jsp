@@ -1,3 +1,7 @@
+<%@page import="org.axocode.dao.service.InterUsersService"%>
+<%@page import="org.axocode.dao.InterUsers"%>
+<%@page import="java.util.List"%>
+<%@page import="org.axocode.helper.InterUsersHelper"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
 <!DOCTYPE html>
@@ -22,6 +26,49 @@
     HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
           else{out.print("<script>location.replace('index.jsp');</script>");}                        
+          int IdS = Integer.parseInt(request.getParameter("id"));
+          String nombreper = null;
+          String seguidormain = null;
+          int postK = 0;
+          InterUsersHelper userHelper = new InterUsersHelper();       
+          String data = (String) sesion.getAttribute("SIImgNum");
+          if (data != null) {}
+                    else{data = "perfilsidebar.png";}
+                    
+        InterUsersService dao = new InterUsersService();
+        List<InterUsers>listita = userHelper.getListT();
+        
+        if( listita != null && listita.size() > 0)
+        {
+        for(InterUsers suko : listita)
+        {
+           
+           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
+           if (interUsers != null) {
+           if ((request.getParameter("id").toString()).equals(interUsers.getIUserNum().toString())) {
+            nombreper = (interUsers.getIUser());
+            postK = interUsers.getIUserNum();
+    }}}}
+     if (nombreper.equals(session.getAttribute("SIUser"))) {
+            seguidormain = "sigue";
+        }
+        
+int seguidores = 0;
+    int seguidos = 0;
+        
+                    if( listita != null && listita.size() > 0)
+        {
+        for(InterUsers suko : listita)
+        {
+           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
+           if (interUsers != null) {
+           if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
+            
+            seguidores = interUsers.getIUserSeguidores();
+            seguidos = interUsers.getIUserSeguidos();
+                
+            
+    }}}}
 %>        
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
@@ -132,167 +179,49 @@
             <!-- main content -->
             <div class="contenedor-central">
                 <div class="card1">
-                    <h1 class="card-header">Seguidores</h1>
+                    <%if (seguidormain != null) {%>
+                    <h1 class="card-header">Tus seguidores</h1>
+                    <%}else{%>
+                    <h1 class="card-header">Seguidos de <a href="profile.jsp?id=<%=postK%>" style="text-decoration: none; color: black;" ><%=nombreper%></a></h1>
+                    <%}%>
                     <div class="card-body scroll">
-                      <div class="card mb-3" style="">
+                      <%
+                InterUsersService interUsersService = new InterUsersService();
+                List<InterUsers> interUsersList = interUsersService.getInterUsersByFollow(IdS);
+                if (!interUsersList.isEmpty()) { 
+                
+                for (InterUsers interUsers : interUsersList) {
+                List<InterUsers>list = userHelper.getListT();                    
+                    if( list != null && list.size() > 0){
+                        
+                    for(InterUsers trows : list){
+                        if (interUsers.getIUser().equals(trows.getIUser())) {  
+                        
+                        String dot = (String) trows.getIImgNum();
+                        if (dot != null) {}
+                            else{dot = "perfilsidebar.png";}
+                      %>
+                        <div class="card mb-3" style="">
                         <div class="row g-0">
                           <div class="col-md-4">
-                              <img src="images/prof1.png" class="img-fluid rounded-start" alt="..." >
+                              <img src="images/<%=dot%>" class="img-fluid rounded-start" alt="..." >
                           </div>
                           <div class="col-md-8">
                             <div class="card-body">
-                              <h3 class="card-title">Nombre</h3>
-
-                              
+                                <a href="profile.jsp?id=<%=trows.getIUserNum()%>"  style="text-decoration: none; color: black;" ><h3 class="card-title"><%=trows.getIUser()%></h3></a>
                             </div>
                           </div>
                         </div>
                       </div>
-                        <br>
-                      <div class="card mb-3" style="">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                              <img src="images/prof1.png" class="img-fluid rounded-start" alt="..." >
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h3 class="card-title">Nombre</h3>
-
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        <br>
-                      <div class="card mb-3" style="">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                              <img src="images/prof1.png" class="img-fluid rounded-start" alt="..." >
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h3 class="card-title">Nombre</h3>
-
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        <br>
-                      <div class="card mb-3" style="">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                              <img src="images/prof1.png" class="img-fluid rounded-start" alt="..." >
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h3 class="card-title">Nombre</h3>
-
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        <br>
-                      <div class="card mb-3" style="">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                              <img src="images/prof1.png" class="img-fluid rounded-start" alt="..." >
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h3 class="card-title">Nombre</h3>
-
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        <br>
-                      <div class="card mb-3" style="">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                              <img src="images/prof1.png" class="img-fluid rounded-start" alt="..." >
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h3 class="card-title">Nombre</h3>
-
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        <br>
-                      <div class="card mb-3" style="">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                              <img src="images/prof1.png" class="img-fluid rounded-start" alt="..." >
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h3 class="card-title">Nombre</h3>
-
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        <br>
-                      <div class="card mb-3" style="">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                              <img src="images/prof1.png" class="img-fluid rounded-start" alt="..." >
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h3 class="card-title">Nombre</h3>
-
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        <br>
-                      <div class="card mb-3" style="">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                              <img src="images/prof1.png" class="img-fluid rounded-start" alt="..." >
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h3 class="card-title">Nombre</h3>
-
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        <br>
-                      <div class="card mb-3" style="">
-                        <div class="row g-0">
-                          <div class="col-md-4">
-                              <img src="images/prof1.png" class="img-fluid rounded-start" alt="..." >
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h3 class="card-title">Nombre</h3>
-
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <%}}}}}%>  
                     </div>
-                </div>
-                
-                
+                </div>   
             </div>
             <div class="right-sidebar" >
             <div class="sidebar-profile">
                 <a href="profile.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="a-perfil" style="text-decoration:none">                     
                 <div class="user-profile">
-                    <img src="images/perfilsidebar.png" id="foton">
+                    <img src="images/<%=data%>" id="foton">
                     <div>
                         <p id="username"><%=sesion.getAttribute("SIUser")%></p>
                         <small><%=sesion.getAttribute("SIUserNum")%></small>
@@ -301,9 +230,9 @@
                 <br>
                 <div class="stats">
                     <div class="activity-icons">
-                        <div><img src="images/heart.png"></a></div>
-                        <div><img src="images/star.png"></a></div>
-                        <div><a href="followers.jsp"><img src="images/friends.png">Seguidores</a></div>
+                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores: <%=seguidores%><img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos: <%=seguidos%><img src="images/friends.png"></a></div>
+                        <div><a href="favs.jsp?rufless=on&&favs=<%=sesion.getAttribute("SIUserNum")%>"><img src="images/star.png"></a></div>
                     </div>
                 </div>
                 </a>

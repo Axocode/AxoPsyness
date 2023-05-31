@@ -335,7 +335,7 @@
 
 
 .write-post-container{
-    width: 100%;
+    width: 90%;
     background: #fff;
     border-radius: 6px;
     padding: 20px;
@@ -382,8 +382,8 @@
 
 
 .post-container{
-    width: 80%;
-    background: #f6f6f6;
+    width: 90%;
+    background: white;
     border-radius: 6px;
     padding: 20px;
     color: #626262;

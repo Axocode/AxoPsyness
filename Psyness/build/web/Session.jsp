@@ -91,6 +91,8 @@
                     InterUsers userR = inter.getUserByInterUsers(request.getParameter("IUser"));
                     Integer SIUserNum = userR.getIUserNum();
                     String SIImgNum = userR.getIImgNum();
+                    Integer SISeguidores = userR.getIUserSeguidores();
+                    Integer SISeguidos = userR.getIUserSeguidos();
             
             
             
@@ -105,6 +107,8 @@
                     
                     sesion.setAttribute("signUp", "crearCuenta"); 
                     sesion.setAttribute("SIUserNum", SIUserNum);
+                    sesion.setAttribute("SISeguidores", SISeguidores);
+                    sesion.setAttribute("SISeguidos", SISeguidos);
                     sesion.setAttribute("SIUser", SIUser);
                     sesion.setAttribute("SIAge", SIAge);
                     sesion.setAttribute("SIEmail", SIEmail);

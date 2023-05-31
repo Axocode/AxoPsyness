@@ -45,6 +45,8 @@ public class InterUsersService extends Conexion<InterUsers>
                 users.setIEmail(resultSet.getString(4));
                 users.setIPassword(resultSet.getString(5));
                 users.setIImgNum(resultSet.getString(6));
+                users.setIUserSeguidores(resultSet.getInt(7));
+                users.setIUserSeguidos(resultSet.getInt(8));
                 usersList.add(users);
             }
             resultSet.close();
@@ -178,8 +180,10 @@ public class InterUsersService extends Conexion<InterUsers>
                         String IEmail = resultSet.getString("IEmail");
                         String IPassword = resultSet.getString("IPassword");
                         String IImgNum = resultSet.getString("IImgNum");
+                        int IUserSeguidores = resultSet.getInt("IUserSeguidores");
+                        int IUserSeguidos = resultSet.getInt("IUserSeguidos");
 
-                        interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum);
+                        interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IUserSeguidores, IUserSeguidos);
                     }
                 }
             }
@@ -190,8 +194,7 @@ public class InterUsersService extends Conexion<InterUsers>
         return interUsers;
     }
     
-    
-    public boolean addInterUsers( InterUsers users )
+        public boolean addInterUsers( InterUsers users )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -224,6 +227,81 @@ public class InterUsersService extends Conexion<InterUsers>
         }
         return false;
     }
+    
+    
+public List<InterUsers> getInterUsersByFollow(int pubNumId) {
+    List<InterUsers> interUsersList = new ArrayList<>();
+
+    try (Connection connection = getConnection()) {
+        String sql = "SELECT INTERUSERS.IUSER, INTERUSERS.IUserNum, INTERUSERS.IAge, INTERUSERS.IEmail, INTERUSERS.IPassword, " +
+                     "INTERUSERS.IImgNum, INTERUSERS.IUserSeguidores, INTERUSERS.IUserSeguidos " +
+                     "FROM INTERUSERS " +
+                     "INNER JOIN INTERFLOW ON INTERUSERS.IUSERNUM = INTERFLOW.FLOWSEGUIDOID " +
+                     "WHERE INTERFLOW.FLOWSEGUIDORESID = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, pubNumId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int IUserNum = resultSet.getInt("IUserNum");
+                    String IUser = resultSet.getString("IUser");
+                    String IAge = resultSet.getString("IAge");
+                    String IEmail = resultSet.getString("IEmail");
+                    String IPassword = resultSet.getString("IPassword");
+                    String IImgNum = resultSet.getString("IImgNum");
+                    int IUserSeguidores = resultSet.getInt("IUserSeguidores");
+                    int IUserSeguidos = resultSet.getInt("IUserSeguidos");
+
+                    InterUsers interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IUserSeguidores, IUserSeguidos);
+                    interUsersList.add(interUsers);
+                }
+            }
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+
+    return interUsersList;
+}
+
+public List<InterUsers> getInterUsersByFollower(int IUserNum) {
+    List<InterUsers> userList = new ArrayList<>();
+
+    try (Connection connection = getConnection()) {
+        String sql = "SELECT INTERUSERS.IUser, INTERUSERS.IUserNum, INTERUSERS.IAge, INTERUSERS.IEmail, " +
+                     "INTERUSERS.IPassword, INTERUSERS.IImgNum, INTERUSERS.IUserSeguidores, INTERUSERS.IUserSeguidos " +
+                     "FROM INTERUSERS " +
+                     "INNER JOIN INTERFLOW ON INTERUSERS.IUserNum = INTERFLOW.FlowSeguidoresID " +
+                     "WHERE INTERFLOW.FlowSeguidoID = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, IUserNum);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int userNum = resultSet.getInt("IUserNum");
+                    String user = resultSet.getString("IUser");
+                    String age = resultSet.getString("IAge");
+                    String email = resultSet.getString("IEmail");
+                    String password = resultSet.getString("IPassword");
+                    String imgNum = resultSet.getString("IImgNum");
+                    int userSeguidores = resultSet.getInt("IUserSeguidores");
+                    int userSeguidos = resultSet.getInt("IUserSeguidos");
+
+                    InterUsers interUsers = new InterUsers(userNum, user, age, email, password, imgNum, userSeguidores, userSeguidos);
+                    userList.add(interUsers);
+                }
+            }
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+
+    return userList;
+}
+
+
     
     public boolean updateUsers( InterUsers users )
     {
@@ -310,6 +388,8 @@ public class InterUsersService extends Conexion<InterUsers>
             aux.setIEmail(resultSet.getString(4));
             aux.setIPassword(resultSet.getString(5));
             aux.setIImgNum(resultSet.getString(6));
+            aux.setIUserSeguidores(resultSet.getInt(7));
+            aux.setIUserSeguidos(resultSet.getInt(8));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -365,6 +445,8 @@ public class InterUsersService extends Conexion<InterUsers>
             aux.setIEmail(resultSet.getString(4));
             aux.setIPassword(resultSet.getString(5));
             aux.setIImgNum(resultSet.getString(6));
+            aux.setIUserSeguidores(resultSet.getInt(7));
+            aux.setIUserSeguidos(resultSet.getInt(8));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -430,4 +512,134 @@ public class InterUsersService extends Conexion<InterUsers>
     }
 
 
+    public boolean updateFlowSeguidoresNum( InterUsers interUsers )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDORES = IUSERSEGUIDORES + 1 WHERE IUSERNUM = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setInt(1, interUsers.getIUserNum());
+            
+            
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+
+        public boolean updateFlowSeguidoNum( InterUsers interUsers )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDOS = IUSERSEGUIDOS + 1 WHERE IUSERNUM = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setInt(1, interUsers.getIUserNum());
+            
+            
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+        
+        
+            public boolean unFlowSeguidoresNum( InterUsers interUsers )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDORES = IUSERSEGUIDORES - 1 WHERE IUSERNUM = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setInt(1, interUsers.getIUserNum());
+            
+            
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+
+        public boolean unFlowSeguidoNum( InterUsers interUsers )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDOS = IUSERSEGUIDOS - 1 WHERE IUSERNUM = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setInt(1, interUsers.getIUserNum());
+            
+            
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

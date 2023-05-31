@@ -3,6 +3,10 @@
     Created on : 21 may. 2023, 13:57:14
     Author     : Admin
 --%>
+<%@page import="org.axocode.dao.service.InterUsersService"%>
+<%@page import="java.util.List"%>
+<%@page import="org.axocode.dao.InterUsers"%>
+<%@page import="org.axocode.helper.InterUsersHelper"%>
 <%@page session="true"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,6 +37,26 @@
           String data = (String) sesion.getAttribute("SIImgNum");
                 if (data != null) {}
                     else{data = "perfilsidebar.png";}
+                    
+    int seguidores = 0;
+    int seguidos = 0;
+                InterUsersHelper userHelper = new InterUsersHelper();
+        List<InterUsers>listita = userHelper.getListT();
+        
+                    if( listita != null && listita.size() > 0)
+        {
+        for(InterUsers suko : listita)
+        {
+           InterUsersService dao = new InterUsersService();
+           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
+           if (interUsers != null) {
+           if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
+            
+            seguidores = interUsers.getIUserSeguidores();
+            seguidos = interUsers.getIUserSeguidos();
+                
+            
+    }}}}
 %>    
     <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
@@ -169,20 +193,12 @@
             <div class="write-post-container">
                    
                 <div class="user-profile">                   
-                    <img src="images/<%=data%>">
                     <div>
-                        <p id="username"><%=sesion.getAttribute("SIUser")%></p>
-                        <small><%=sesion.getAttribute("SIAge")%></small>
+                        <p id="username">Listado de temas</p>
                     </div> 
-
                 </div>
-                <br>
                 <div class="post-input-container">
-                    <div class="checkbox">
-                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
-                          ¿Ver mas Publicaciones?
-                        </button>
-                    </div>
+
 
                         <!--MODAL-->
                               
@@ -277,7 +293,7 @@
         <!-----------------------------------right-sidebar(VERGAS)------------------------------------------------------------------------->
         <div class="right-sidebar">
             <div class="sidebar-profile">
-                <a href="profile.jsp" class="a-perfil" style="text-decoration:none">                    
+                <a href="profile.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="a-perfil" style="text-decoration:none">                    
                 <div class="user-profile">
                     <img src="images/<%=data%>" id="foton">
                     <div>
@@ -288,9 +304,9 @@
                 <br>
                 <div class="stats">
                     <div class="activity-icons">
-                        <div><a href="#"><img src="images/heart.png"></a></div>
-                        <div><a href="#"><img src="images/star.png"></a></div>
-                        <div><a href="followers.jsp"><img src="images/friends.png">Seguidores</a></div>
+                        <div><a href="followers.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidores: <%=seguidores%><img src="images/friends.png"></a></div>
+                        <div><a href="follows.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">Seguidos: <%=seguidos%><img src="images/friends.png"></a></div>
+                        <div><a href="favs.jsp?rufless=on&&favs=<%=sesion.getAttribute("SIUserNum")%>"><img src="images/star.png"></a></div>
                     </div>
                 </div>
                 </a>
