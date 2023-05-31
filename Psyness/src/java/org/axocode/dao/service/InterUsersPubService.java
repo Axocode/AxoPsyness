@@ -41,7 +41,7 @@ public class InterUsersPubService extends Conexion<InterUsersPub>{
             if (statement == null) {
                 return null;
             }
-            resultSet = statement.executeQuery("SELECT * FROM INTERUSERSPUB");
+            resultSet = statement.executeQuery("select * from interuserspub");
             if (resultSet == null) 
             {
                 return null;
@@ -69,7 +69,7 @@ public class InterUsersPubService extends Conexion<InterUsersPub>{
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO INTERUSERSPUB( IUSERNUM ) VALUES( ? )";
+        String sql = "insert into interuserspub( iusernum ) values( ? )";
         int row = 0;
         try 
         {
@@ -104,7 +104,7 @@ public class InterUsersPubService extends Conexion<InterUsersPub>{
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM INTERUSERSPUB WHERE PUBNUMID = ? AND IUSERSNUM = ?";
+        String sql = "deelete from interuserspub where pubnumid = ? and iusernum = ?";
         int row = 0;
         try 
         {
@@ -142,7 +142,7 @@ public class InterUsersPubService extends Conexion<InterUsersPub>{
         if (connection == null) {
             return null;
         }
-            preparedStatement = connection.prepareStatement("SELECT IUSERNUM FROM INTERUSERSPUB WHERE PUBNUMID = ? " );
+            preparedStatement = connection.prepareStatement("select iusernum from interuserspub where pubnumid = ? " );
             preparedStatement.setInt(1,  PubNumId);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) 

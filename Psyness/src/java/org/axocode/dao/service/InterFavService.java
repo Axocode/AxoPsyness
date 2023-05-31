@@ -23,7 +23,7 @@ public class InterFavService extends Conexion<InterFav>
             return null;
         }
 
-        String sql = "SELECT * FROM INTERFAV WHERE FAVIDUSER = ?";
+        String sql = "select * from interfav where faviduser = ?";
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, userId);
         resultSet = preparedStatement.executeQuery();
@@ -35,8 +35,8 @@ public class InterFavService extends Conexion<InterFav>
         favList = new ArrayList<>();
         while (resultSet.next()) {
             InterFav fav = new InterFav();
-            fav.setFavIdPub(resultSet.getInt("FAVIDPUB"));
-            fav.setFavIdUser(resultSet.getInt("FAVIDUSER"));
+            fav.setFavIdPub(resultSet.getInt("favidpub"));
+            fav.setFavIdUser(resultSet.getInt("faviduser"));
             favList.add(fav);
         }
 
@@ -79,7 +79,7 @@ public class InterFavService extends Conexion<InterFav>
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO INTERFAV (FAVIDPUB, FAVIDUSER) VALUES ( ? , ? )";
+        String sql = "insert into interfav (favidpub, faviduser) values ( ? , ? )";
         int row = 0;
         try 
         {
@@ -110,7 +110,7 @@ public class InterFavService extends Conexion<InterFav>
     public boolean unfollowFav(InterFav fav) {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
-    String sql = "DELETE FROM INTERFAV WHERE FAVIDPUB = ? AND FAVIDUSER = ?";
+    String sql = "delete from interfav where favidpub = ? and faviduser = ?";
     int row = 0;
     try {
         connection = getConnection();
@@ -151,7 +151,7 @@ public class InterFavService extends Conexion<InterFav>
             return favoritedPublications;
         }
         
-        String sql = "SELECT * FROM INTERFAV WHERE FAVIUSER = ?";
+        String sql = "select * from interfav where faviduser = ?";
         
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, userNum);
@@ -160,8 +160,8 @@ public class InterFavService extends Conexion<InterFav>
         
         while (resultSet.next()) {
             InterFav interFav = new InterFav();
-            interFav.setFavIdPub(resultSet.getInt("FavIdPub"));
-            interFav.setFavIdUser(resultSet.getInt("FavIdUser"));
+            interFav.setFavIdPub(resultSet.getInt("faviduser"));
+            interFav.setFavIdUser(resultSet.getInt("favidpub"));
             
             favoritedPublications.add(interFav);
         }
@@ -199,7 +199,7 @@ public boolean isUserFav(int IPub, int IUser) {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
-    String sql = "SELECT COUNT(*) FROM INTERFAV WHERE FAVIDPUB = ? AND FAVIDUSER = ?";
+    String sql = "select count(*) from interfav where favidpub = ? and faviduser = ?";
 
     try {
         connection = getConnection();

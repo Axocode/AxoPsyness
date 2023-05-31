@@ -30,7 +30,7 @@ public class InterUsersService extends Conexion<InterUsers>
             if (statement == null) {
                 return null;
             }
-            resultSet = statement.executeQuery("SELECT * FROM INTERUSERS");
+            resultSet = statement.executeQuery("select * from interusers");
             if (resultSet == null) 
             {
                 return null;
@@ -72,7 +72,7 @@ public class InterUsersService extends Conexion<InterUsers>
 
         try {
             connection = getConnection();
-            String query = "SELECT * FROM INTERUSERS WHERE IUSER = ? AND IPASSWORD = ?";
+            String query = "select * from interusers where iuser = ? and ipassword = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, IUser);
             statement.setString(2, IPassword);
@@ -118,7 +118,7 @@ public class InterUsersService extends Conexion<InterUsers>
        
         connection = getConnection();
         
-        String query = "SELECT COUNT(*) FROM INTERUSERS WHERE IUSER = ?";
+        String query = "select count(*) from interusers where iuser = ?";
         statement = connection.prepareStatement(query);
         statement.setString(1, IUser);
         
@@ -163,10 +163,10 @@ public class InterUsersService extends Conexion<InterUsers>
         InterUsers interUsers = null;
 
         try (Connection connection = getConnection()) {
-            String sql = "SELECT INTERUSERS.* " +
-                         "FROM INTERUSERS " +
-                         "INNER JOIN INTERUSERSPUB ON INTERUSERS.IUserNum = INTERUSERSPUB.IUserNum " +
-                         "WHERE INTERUSERSPUB.PubNumId = ?";
+            String sql = "select interusers.* " +
+                         "from interusers " +
+                         "inner join interuserspub on interusers.iusernum = interuserspub.iusernum " +
+                         "where interuserspub.pubnumid = ?";
             
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, pubNumId);
@@ -174,14 +174,14 @@ public class InterUsersService extends Conexion<InterUsers>
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
                         // Obtener los datos del resultado y construir un objeto InterUsers
-                        int IUserNum = resultSet.getInt("IUserNum");
-                        String IUser = resultSet.getString("IUser");
-                        String IAge = resultSet.getString("IAge");
-                        String IEmail = resultSet.getString("IEmail");
-                        String IPassword = resultSet.getString("IPassword");
-                        String IImgNum = resultSet.getString("IImgNum");
-                        int IUserSeguidores = resultSet.getInt("IUserSeguidores");
-                        int IUserSeguidos = resultSet.getInt("IUserSeguidos");
+                        int IUserNum = resultSet.getInt("iusernum");
+                        String IUser = resultSet.getString("iuser");
+                        String IAge = resultSet.getString("iage");
+                        String IEmail = resultSet.getString("iemail");
+                        String IPassword = resultSet.getString("ipassword");
+                        String IImgNum = resultSet.getString("iimgnum");
+                        int IUserSeguidores = resultSet.getInt("iuserseguidores");
+                        int IUserSeguidos = resultSet.getInt("iuserseguidos");
 
                         interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IUserSeguidores, IUserSeguidos);
                     }
@@ -198,7 +198,7 @@ public class InterUsersService extends Conexion<InterUsers>
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO INTERUSERS( IUSER , IAGE , IEMAIL , IPASSWORD ) VALUES( ? , ? , ? , ? )";
+        String sql = "insert into interusers( iuser , iage , iemail , ipassword ) values( ? , ? , ? , ? )";
         int row = 0;
         try 
         {
@@ -233,25 +233,25 @@ public List<InterUsers> getInterUsersByFollow(int pubNumId) {
     List<InterUsers> interUsersList = new ArrayList<>();
 
     try (Connection connection = getConnection()) {
-        String sql = "SELECT INTERUSERS.IUSER, INTERUSERS.IUserNum, INTERUSERS.IAge, INTERUSERS.IEmail, INTERUSERS.IPassword, " +
-                     "INTERUSERS.IImgNum, INTERUSERS.IUserSeguidores, INTERUSERS.IUserSeguidos " +
-                     "FROM INTERUSERS " +
-                     "INNER JOIN INTERFLOW ON INTERUSERS.IUSERNUM = INTERFLOW.FLOWSEGUIDOID " +
-                     "WHERE INTERFLOW.FLOWSEGUIDORESID = ?";
+        String sql = "select interusers.iuser, interusers.iusernum, interusers.iage, interusers.iemail, interusers.ipassword, " +
+                     "interusers.iimgnum, interusers.iuserseguidores, interusers.iuserseguidos " +
+                     "from interusers " +
+                     "inner join interflow on interusers.iusernum = interflow.flowseguidoid " +
+                     "where interflow.flowseguidoresid = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, pubNumId);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    int IUserNum = resultSet.getInt("IUserNum");
-                    String IUser = resultSet.getString("IUser");
-                    String IAge = resultSet.getString("IAge");
-                    String IEmail = resultSet.getString("IEmail");
-                    String IPassword = resultSet.getString("IPassword");
-                    String IImgNum = resultSet.getString("IImgNum");
-                    int IUserSeguidores = resultSet.getInt("IUserSeguidores");
-                    int IUserSeguidos = resultSet.getInt("IUserSeguidos");
+                    int IUserNum = resultSet.getInt("iusernum");
+                    String IUser = resultSet.getString("iuser");
+                    String IAge = resultSet.getString("iage");
+                    String IEmail = resultSet.getString("iemail");
+                    String IPassword = resultSet.getString("ipassword");
+                    String IImgNum = resultSet.getString("iimgnum");
+                    int IUserSeguidores = resultSet.getInt("iuserseguidores");
+                    int IUserSeguidos = resultSet.getInt("iuserseguidos");
 
                     InterUsers interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IUserSeguidores, IUserSeguidos);
                     interUsersList.add(interUsers);
@@ -269,25 +269,25 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
     List<InterUsers> userList = new ArrayList<>();
 
     try (Connection connection = getConnection()) {
-        String sql = "SELECT INTERUSERS.IUser, INTERUSERS.IUserNum, INTERUSERS.IAge, INTERUSERS.IEmail, " +
-                     "INTERUSERS.IPassword, INTERUSERS.IImgNum, INTERUSERS.IUserSeguidores, INTERUSERS.IUserSeguidos " +
-                     "FROM INTERUSERS " +
-                     "INNER JOIN INTERFLOW ON INTERUSERS.IUserNum = INTERFLOW.FlowSeguidoresID " +
-                     "WHERE INTERFLOW.FlowSeguidoID = ?";
+        String sql = "select interusers.iuser, interusers.iusernum, interusers.iage, interusers.iemail, " +
+                     "interusers.ipassword, interusers.iimgnum, interusers.iuserseguidores, interusers.iuserseguidos " +
+                     "from interusers " +
+                     "inner join interflow on interusers.iusernum = interflow.flowseguidoresid " +
+                     "where interflow.flowseguidoid = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, IUserNum);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    int userNum = resultSet.getInt("IUserNum");
-                    String user = resultSet.getString("IUser");
-                    String age = resultSet.getString("IAge");
-                    String email = resultSet.getString("IEmail");
-                    String password = resultSet.getString("IPassword");
-                    String imgNum = resultSet.getString("IImgNum");
-                    int userSeguidores = resultSet.getInt("IUserSeguidores");
-                    int userSeguidos = resultSet.getInt("IUserSeguidos");
+                    int userNum = resultSet.getInt("iusernum");
+                    String user = resultSet.getString("iuser");
+                    String age = resultSet.getString("iage");
+                    String email = resultSet.getString("iemail");
+                    String password = resultSet.getString("ipassword");
+                    String imgNum = resultSet.getString("iimgnum");
+                    int userSeguidores = resultSet.getInt("iuserseguidores");
+                    int userSeguidos = resultSet.getInt("iuserseguidos");
 
                     InterUsers interUsers = new InterUsers(userNum, user, age, email, password, imgNum, userSeguidores, userSeguidos);
                     userList.add(interUsers);
@@ -307,7 +307,7 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "update INTERUSERS SET IIMGNUM WHERE IUserNum = ?";
+        String sql = "update interusers set iimgnum where iusernum = ?";
         int row = 0;
         try 
         {
@@ -338,7 +338,7 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "DELETE FROM InterUsers WHERE IUserNum = ?";
+        String sql = "delete from interusers where iusernum = ?";
         int row = 0;
         try 
         {
@@ -376,7 +376,7 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
             return null;
         }
         
-        preparedStatement = connection.prepareStatement("SELECT * FROM INTERUSERS WHERE IUSER = ?");
+        preparedStatement = connection.prepareStatement("select * from interusers where iuser = ?");
         preparedStatement.setString(1, IUser);
         
         resultSet = preparedStatement.executeQuery();
@@ -433,7 +433,7 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
             return null;
         }
         
-        preparedStatement = connection.prepareStatement("SELECT * FROM INTERUSERS WHERE IUSERNUM = ?");
+        preparedStatement = connection.prepareStatement("select * from interusers where iusernum = ?");
         preparedStatement.setInt(1, IUserNum);
         
         resultSet = preparedStatement.executeQuery();
@@ -482,7 +482,7 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "update INTERUSERS SET IIMGNUM = ? WHERE IUSERNUM = ?";
+        String sql = "update interusers set iimgnum = ? where iusernum = ?";
         int row = 0;
         try 
         {
@@ -516,7 +516,7 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDORES = IUSERSEGUIDORES + 1 WHERE IUSERNUM = ?";
+        String sql = "update interusers set iuserseguidores = iuserseguidores + 1 where iusernum = ?";
         int row = 0;
         try 
         {
@@ -549,7 +549,7 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDOS = IUSERSEGUIDOS + 1 WHERE IUSERNUM = ?";
+        String sql = "update interusers set iuserseguidos = iuserseguidos + 1 where iusernum = ?";
         int row = 0;
         try 
         {
@@ -582,7 +582,7 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDORES = IUSERSEGUIDORES - 1 WHERE IUSERNUM = ?";
+        String sql = "update interusers set iuserseguidores = iuserseguidores - 1 where iusernum = ?";
         int row = 0;
         try 
         {
@@ -615,7 +615,7 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE INTERUSERS SET IUSERSEGUIDOS = IUSERSEGUIDOS - 1 WHERE IUSERNUM = ?";
+        String sql = "update interusers set iuserseguidos = iuserseguidos - 1 where iusernum = ?";
         int row = 0;
         try 
         {

@@ -29,7 +29,7 @@ public class InterFlowService extends Conexion<InterFlow>
             if (statement == null) {
                 return null;
             }
-            resultSet = statement.executeQuery("SELECT * FROM INTERFLOW");
+            resultSet = statement.executeQuery("select * from interflow");
             if (resultSet == null) 
             {
                 return null;
@@ -60,7 +60,7 @@ public class InterFlowService extends Conexion<InterFlow>
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO INTERFLOW (FLOWSEGUIDORESID, FLOWSEGUIDOID) VALUES ( ? , ? )";
+        String sql = "insert into interflow (flowseguidoresid, flowseguidoid) values ( ? , ? )";
         int row = 0;
         try 
         {
@@ -91,7 +91,7 @@ public class InterFlowService extends Conexion<InterFlow>
 public boolean unfollowUser(InterFlow flow) {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
-    String sql = "DELETE FROM INTERFLOW WHERE FLOWSEGUIDORESID = ? AND FLOWSEGUIDOID = ?";
+    String sql = "delete from interflow where flowseguidoresid = ? and flowseguidoid = ?";
     int row = 0;
     try {
         connection = getConnection();
@@ -127,7 +127,7 @@ public boolean isUserFollowing(int seguidoresID, int seguidorID) {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
-    String sql = "SELECT COUNT(*) FROM INTERFLOW WHERE FLOWSEGUIDORESID = ? AND FLOWSEGUIDOID = ?";
+    String sql = "select count(*) from interflow where flowseguidoresid = ? and flowseguidoid = ?";
 
     try {
         connection = getConnection();

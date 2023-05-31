@@ -39,7 +39,7 @@ public class InterPubService extends Conexion<InterPub>
             if (statement == null) {
                 return null;
             }
-            resultSet = statement.executeQuery("SELECT * FROM INTERPUB");
+            resultSet = statement.executeQuery("select * from interpub");
             if (resultSet == null) 
             {
                 return null;
@@ -70,7 +70,7 @@ public class InterPubService extends Conexion<InterPub>
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "INSERT INTO INTERPUB( PUBCONT ) VALUES( ? )";
+        String sql = "insert into interpub( pubcont ) values( ? )";
         int row = 0;
         try 
         {
@@ -100,7 +100,7 @@ public class InterPubService extends Conexion<InterPub>
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "UPDATE INTERPUB SET PUBMG = PUBMG + 1 WHERE PUBNUMID = ?";
+        String sql = "update interpub set pubmg = pubmg + 1 where pubnumid = ?";
         int row = 0;
         try 
         {
@@ -140,7 +140,7 @@ public class InterPubService extends Conexion<InterPub>
             return null;
         }
         
-        preparedStatement = connection.prepareStatement("SELECT * FROM INTERPUB WHERE PUBNUMID = ?");
+        preparedStatement = connection.prepareStatement("select * from interpub where pubnumid = ?");
         preparedStatement.setInt(1, PubNumId);
         
         resultSet = preparedStatement.executeQuery();
