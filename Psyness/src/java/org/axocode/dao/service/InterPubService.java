@@ -178,7 +178,35 @@ public class InterPubService extends Conexion<InterPub>
     
     return aux;
 }
-
+public boolean deleteUsers( InterPub pub )
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        String sql = "delete from interpub where pubnumid = ?";
+        int row = 0;
+        try 
+        {
+            connection = getConnection( );
+            if( connection == null )
+            {
+                return false;
+            }
+            preparedStatement = connection.prepareStatement(sql);
+            if( preparedStatement == null )
+            {
+                return false;
+            }
+            preparedStatement.setInt(1, pub.getPubNumId());
+            row = preparedStatement.executeUpdate();
+            closeConnection(connection);
+            return row == 1;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return false;
+    }
     
     
 }

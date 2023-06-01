@@ -14,6 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema axobase
 -- -----------------------------------------------------
+DROP DATABASE IF EXISTS `axobase`;
 CREATE SCHEMA IF NOT EXISTS `axobase` DEFAULT CHARACTER SET utf8;
 USE `axobase` ;
 
@@ -26,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interpub` (
   `pubmg` INT NULL DEFAULT '0',
   PRIMARY KEY (`pubnumid`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -44,18 +45,18 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interusers` (
   `iuserseguidos` INT NULL DEFAULT '0',
   PRIMARY KEY (`iusernum`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
-
+insert into interusers(iuser,iage,iemail,ipassword) values('Axocode','99','axocode0@gmail.como','losquieromuchoaxocode');
 -- -----------------------------------------------------
 -- Table `axobase`.`interfav`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `axobase`.`interfav` (
   `favidpub` INT NULL DEFAULT NULL,
   `faviduser` INT NULL DEFAULT NULL,
-  INDEX `favidpub` (`favidpub` ASC) VISIBLE,
-  INDEX `faviduser` (`faviduser` ASC) VISIBLE,
+  INDEX `favidpub` (`favidpub` ASC) ,
+  INDEX `faviduser` (`faviduser` ASC) ,
   CONSTRAINT `interfav_ibfk_1`
     FOREIGN KEY (`favidpub`)
     REFERENCES `axobase`.`interpub` (`pubnumid`)
@@ -76,8 +77,8 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `axobase`.`interflow` (
   `flowseguidoresid` INT NULL DEFAULT NULL,
   `flowseguidoid` INT NULL DEFAULT NULL,
-  INDEX `flowseguidoresid` (`flowseguidoresid` ASC) VISIBLE,
-  INDEX `flowseguidoid` (`flowseguidoid` ASC) VISIBLE,
+  INDEX `flowseguidoresid` (`flowseguidoresid` ASC) ,
+  INDEX `flowseguidoid` (`flowseguidoid` ASC) ,
   CONSTRAINT `interflow_ibfk_1`
     FOREIGN KEY (`flowseguidoresid`)
     REFERENCES `axobase`.`interusers` (`iusernum`)
@@ -98,8 +99,8 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `axobase`.`interuserspub` (
   `pubnumid` INT NOT NULL AUTO_INCREMENT,
   `iusernum` INT NULL DEFAULT NULL,
-  INDEX `pubnumid` (`pubnumid` ASC) VISIBLE,
-  INDEX `iusernum` (`iusernum` ASC) VISIBLE,
+  INDEX `pubnumid` (`pubnumid` ASC) ,
+  INDEX `iusernum` (`iusernum` ASC) ,
   CONSTRAINT `interuserspub_ibfk_1`
     FOREIGN KEY (`pubnumid`)
     REFERENCES `axobase`.`interpub` (`pubnumid`)
@@ -111,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `axobase`.`interuserspub` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
 

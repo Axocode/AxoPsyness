@@ -280,10 +280,6 @@
                         </div>
                       </div>
                         <!--FIN MODAL-->
-                    <div class="add-post-links">
-                        <a href="#"><img src="images/camera.png">Agregar Img</a>
-                        <a href="#"><img src="images/upload.png">Subir Imagen</a>
-                    </div>
                 </div>
             </div>
 <%
@@ -345,9 +341,9 @@
                             boolean seguir = flowww.isUserFollowing(interUsers.getIUserNum(), FlowSeguidorID );        
                             if (seguir == true ) {
                         %>
-                        <div><a href="seguirnt.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=rufless"><img src="images/follow.png">Dejar de Seguir</a></div>
+                        <div><a href="seguirnt.jsp?id=<%=interUsers.getIUserNum()%>&&chest=rufless&&u=<%=u%>"><img src="images/follow.png">Dejar de Seguir</a></div>
                         <%}else{%>
-                        <div><a href="seguir.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=rufless"><img src="images/follow.png">Seguir</a></div>
+                        <div><a href="seguir.jsp?id=<%=interUsers.getIUserNum()%>&&chest=rufless&&u=<%=u%>"><img src="images/follow.png">Seguir</a></div>
                         <%}}%>
                         
                     </div>

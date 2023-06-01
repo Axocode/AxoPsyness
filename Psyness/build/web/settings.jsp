@@ -153,7 +153,7 @@
                         <h1>Tu Información</h1>
                     </div>
                     <div class="cont-pfp">
-                        <img src="images/prof1.png" class="pfp">
+                        <img src="images/<%=sesion.getAttribute("SIImgNum")%>" class="pfp">
                         
                             <div class="overlay">
                                 <div class="editar">                         
@@ -163,28 +163,18 @@
 
                     </div>
                     <div class="info">
-                        <form class="row g-3">
-                        <div class="col-md-6">
-                          <label for="inputEmail4" class="form-label">Nombre de usuario</label>
-                          <input type="email" class="form-control" id="inputEmail4" >
-                        </div>
-                        <div class="col-md-6">
-                          <label for="inputPassword4" class="form-label">Contraseña</label>
-                          <input type="password" class="form-control" id="inputPassword4" >
-                        </div>  
-                        <div class="col-12">
-                          <label for="inputAddress" class="form-label">Correo</label>
-                          <input type="text" class="form-control" id="inputAddress" >
-                        </div>
-                                                
-                        <div class="col-md-2">
-                          <label for="inputZip" class="form-label">Edad</label>
-                          <input type="text" class="form-control" id="inputZip" >
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                        
-                      </form>
+                        <form class="row g-3" action="actualizarUser.jsp" method="POST">
+                            <div class="col-md-6">
+                                <label for="inputEmail4" class="form-label">Nombre de usuario</label>
+                                <input type="text" name="nombre" value="<%=sesion.getAttribute("SIUser") %>" class="form-control" id="inputEmail4" required>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="inputZip" class="form-label">Edad</label>
+                                <input type="text" name="edad" value="<%=sesion.getAttribute("SIAge") %>" class="form-control" id="inputZip" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </form>
+
                     </div>
                 </div>
             </div>

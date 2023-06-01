@@ -108,7 +108,27 @@ public class InterUsersService extends Conexion<InterUsers>
     }
 
 
+public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEdad) {
+    try (Connection connection = getConnection();
+         PreparedStatement statement = connection.prepareStatement("update interusers set iuser = ?, iage = ? where iusernum = ?")) {
+        
+        statement.setString(1, nuevoNombre);
+        statement.setString(2, nuevaEdad);
+        statement.setInt(3, IUserNum);
 
+        int rowsAffected = statement.executeUpdate();
+        if (rowsAffected > 0) {
+            System.out.println("El usuario ha sido modificado exitosamente.");
+            return true;
+        } else {
+            System.out.println("No se encontró el usuario con el número " + IUserNum);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    
+    return false;
+}
 
     public boolean verificarUserExistente(String IUser) {
         Connection connection = null;

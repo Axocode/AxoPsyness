@@ -87,7 +87,33 @@
             response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);
             
             }
+            
 
+            if (request.getParameter("chest").equals("rufless")) {
+                int FlowSeguidoresID = Integer.parseInt(request.getParameter("id"));
+                int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
+
+
+                InterFlowService flower = new InterFlowService();
+                InterFlow flow = new InterFlow();
+                flow.setFlowSeguidoresID(FlowSeguidoresID);
+                flow.setFlowSeguidorID(FlowSeguidorID);
+                
+                boolean successs = flower.unfollowUser(flow);
+
+                InterUsersService usersService = new InterUsersService();
+                InterUsers user = new InterUsers();
+
+                user.setIUserNum((FlowSeguidoresID));
+                usersService.unFlowSeguidoresNum(user);
+        
+                InterUsers userr = new InterUsers();
+                userr.setIUserNum(FlowSeguidorID);
+                usersService.unFlowSeguidoNum(userr);
+        
+            response.sendRedirect("favs.jsp?rufless=on&favs="+request.getParameter("u"));
+            
+            }
 
         %>
     </body>

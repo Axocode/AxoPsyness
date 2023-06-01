@@ -58,7 +58,7 @@
         int si = 0;
         conn = DriverManager.getConnection(dbURL, dbUsername, dbPassword);
         
-        String query = "UPDATE INTERUSERS SET IUser =?, IAge =?, IEmail =?, IPassword =?, IImgNum=?  WHERE IUserNum =?";
+        String query = "update interusers set iuser =?, iage =?, iemail =?, ipassword =?, iimgnum = ?  where iusernum =?";
         stmt = conn.prepareStatement(query);
         stmt.setString(1, iUser);
         stmt.setString(2, iAge);

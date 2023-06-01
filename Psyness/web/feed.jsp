@@ -3,6 +3,7 @@
     Created on : 7 may. 2023, 20:33:13
     Author     : Admin
 --%>
+<%@page session="true"%>
 <%@page import="org.axocode.dao.InterFav"%>
 <%@page import="org.axocode.helper.InterFavHelper"%>
 <%@page import="org.axocode.dao.service.InterFavService"%>
@@ -21,7 +22,6 @@
 <%@page import="org.axocode.helper.InterPubHelper"%>
 <%@page import="java.util.Collections"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page session="true"%>
 <!DOCTYPE html>
 
 
@@ -48,6 +48,7 @@
           HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
           else{out.print("<script>location.replace('index.jsp');</script>");}
+          
                 String data = (String) sesion.getAttribute("SIImgNum");
                 if (data != null) {}
                     else{data = "perfilsidebar.png";}
@@ -267,7 +268,7 @@
                             </div>
                                 <form id="formulario3" method="POST" >
                             <div class="post-input-container">
-                                <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" placeholder="Que estas Pensando,  <%=sesion.getAttribute("SIUser")%>?"></textarea>
+                                <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" maxlength="500" placeholder="Que estas Pensando,  <%=sesion.getAttribute("SIUser")%>?"></textarea>
                                 <input type="hidden" name="IUserNum" id="IUserNum" value="<%=sesion.getAttribute("SIUserNum")%>" />
                             </div>
                             <div class="modal-footer">
@@ -281,8 +282,7 @@
                       </div>
                         <!--FIN MODAL-->
                     <div class="add-post-links">
-                        <a href="#"><img src="images/camera.png">Agregar Img</a>
-                        <a href="#"><img src="images/upload.png">Subir Imagen</a>
+                        
                     </div>
                 </div>
             </div>
@@ -313,7 +313,11 @@
                     </div>
                 </div>
                 <br>
+                <%if (sesion.getAttribute("SIUser").equals("Axocode")) {%>
+                <p class="post-text"><%=trows.getPubCont()%> <a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>">Eliminar</a></p>
+                <%}else{%>
                 <p class="post-text"><%=trows.getPubCont()%></p>
+                <%}%>
                 <div class="post-row">
                     <div class="activity-icons">
                         <div><a href="megusta.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&id=<%=interUsers.getIUserNum()%>"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>

@@ -104,7 +104,7 @@ public class InterUsersPubService extends Conexion<InterUsersPub>{
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "deelete from interuserspub where pubnumid = ? and iusernum = ?";
+        String sql = "delete from interuserspub where pubnumid = ? and iusernum = ?";
         int row = 0;
         try 
         {
