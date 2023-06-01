@@ -83,7 +83,7 @@
                 </li>
                 
                 <li>
-                    <a href="#">
+                    <a href="settings.jsp">
                         <i class="fas fa-cog"></i>
                         <span class="links_name">Settings</span>
                     </a>
