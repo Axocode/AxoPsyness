@@ -30,67 +30,25 @@
     HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
           else{out.print("<script>location.replace('index');</script>");}   
-          
-          
-          
+
         String img = request.getParameter("img");
         
-        if (img != null) {
-                  
-              
+        if (img != null) {         
         int iUserNum = (Integer) sesion.getAttribute("SIUserNum");
-        String iUser = (String) sesion.getAttribute("SIUser");
-        String iAge = (String) sesion.getAttribute("SIAge");
-        String iEmail = (String) sesion.getAttribute("SIEmail");
-        String iPas = (String) sesion.getAttribute("SIPassword");
-        
-
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-    
-    try {
-        Class.forName("com.mysql.jdbc.Driver");
-        String dbURL = "jdbc:mysql://localhost:3306/axobase";
-        String dbUsername = "root";
-        String dbPassword = "1234";
-        int row=0;
-        int si = 0;
-        conn = DriverManager.getConnection(dbURL, dbUsername, dbPassword);
-        
-        String query = "update interusers set iuser =?, iage =?, iemail =?, ipassword =?, iimgnum = ?  where iusernum =?";
-        stmt = conn.prepareStatement(query);
-        stmt.setString(1, iUser);
-        stmt.setString(2, iAge);
-        stmt.setString(3, iEmail);
-        stmt.setString(4, iPas);
-        stmt.setString(5, img);
-        stmt.setInt(6, iUserNum);
-        
-            row = stmt.executeUpdate();
-            si = 1;
-            
-            
-            session.setAttribute("SIImgNum", img);
-            session.setAttribute("signUp", "crearCuenta"); 
-            session.setAttribute("signUp", "crearCuenta"); 
 
             
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        if (rs != null) {
-            rs.close();
-        }
-        if (stmt != null) {
-            stmt.close();
-        }
-        if (conn != null) {
-            conn.close();
-        }
-    }
+           
+            InterUsers Object  = new InterUsers();
+            InterUsersService container = new InterUsersService();
+            Object.setIImgNum(img);
+            Object.setIUserNum(iUserNum);
+            
+            boolean cont = container.updateUsuario(Object);
+            if (cont) {
+                    session.setAttribute("SIImgNum", img);
+                }
 }
-%>        
+%>         
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
         <div class="container" id="container">
