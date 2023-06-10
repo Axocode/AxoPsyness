@@ -46,6 +46,7 @@
             boolean cont = container.updateUsuario(Object);
             if (cont) {
                     session.setAttribute("SIImgNum", img);
+                    response.sendRedirect("profile.jsp?id="+iUserNum);
                 }
 }
 %>         
