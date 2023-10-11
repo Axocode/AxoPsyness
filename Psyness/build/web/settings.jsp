@@ -34,10 +34,11 @@
 <%
     HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
-          else{out.print("<script>location.replace('index.jsp');</script>");}     
-            String data = (String) sesion.getAttribute("SIImgNum");
+          else{out.print("<script>location.replace('index.jsp');</script>");}
+          String data = (String) sesion.getAttribute("SIImgNum");
                 if (data != null) {}
-                    else{data = "perfilsidebar.png";}
+                    else{data = "perfilsidebar.png";} 
+
 %>
         <div id="fb-root"></div>
             <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>

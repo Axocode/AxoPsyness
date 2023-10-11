@@ -34,7 +34,11 @@
 <%
     HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
-          else{out.print("<script>location.replace('index.jsp');</script>");}                        
+          else{out.print("<script>location.replace('index.jsp');</script>");}
+          String data = (String) sesion.getAttribute("SIImgNum");
+                if (data != null) {}
+                    else{data = "perfilsidebar.png";} 
+
 %>
         <div id="fb-root"></div>
             <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
@@ -153,7 +157,7 @@
                         <h1>Tu Información</h1>
                     </div>
                     <div class="cont-pfp">
-                        <img src="images/<%=sesion.getAttribute("SIImgNum")%>" class="pfp">
+                        <img src="images/<%=data%>" class="pfp">
                         
                             <div class="overlay">
                                 <div class="editar">                         
