@@ -35,9 +35,9 @@
     HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
           else{out.print("<script>location.replace('index.jsp');</script>");}
-          String data = (String) sesion.getAttribute("SIImgNum");
+String data = (String) sesion.getAttribute("SIImgNum");
                 if (data != null) {}
-                    else{data = "perfilsidebar.png";} 
+                    else{data = "perfilsidebar.png";}
 
 %>
         <div id="fb-root"></div>
@@ -158,7 +158,7 @@
                     </div>
                     <div class="cont-pfp">
                         <img src="images/<%=data%>" class="pfp">
-                        
+      
                             <div class="overlay">
                                 <div class="editar">                         
                                     <a href="profileimg.jsp"> <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"></path></svg></a>
