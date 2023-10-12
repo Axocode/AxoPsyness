@@ -50,8 +50,7 @@
           else{out.print("<script>location.replace('index.jsp');</script>");}
           
                 String data = (String) sesion.getAttribute("SIImgNum");
-                if (data != null) {}
-                    else{data = "perfilsidebar.png";}
+                if (data == null) {data = "perfilsidebar.png";}
                 Helpers helpers = null;
                 InterPub user = null;
                 String aux = null;
