@@ -16,7 +16,6 @@
     
     </head>
     <body>
-
         <%
         HttpSession sesion = request.getSession();
         if (request.getParameter("cerrar")!= null) {
