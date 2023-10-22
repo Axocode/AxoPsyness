@@ -1,0 +1,143 @@
+.form-control-dark {
+    border-color: var(--bs-gray);
+  }
+  .form-control-dark:focus {
+    border-color: #fff;
+    box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
+  }
+  
+  .text-small {
+    font-size: 85%;
+  }
+  
+  .dropdown-toggle:not(:focus) {
+    outline: 0;
+  }
+
+.logo{
+  height: 100px;
+  width: 200px;
+}
+
+.btn-custom{
+  background-color: #8C52FF;
+  color: #fff;
+  border-color:  #8C52FF !important ;
+}
+
+.btn-custom2{
+  background-color: #ffffff;
+  color: #000000;
+  border-color:  #000000 !important ;
+}
+
+.btn-custom:hover {
+  color: #ffffff;
+  background-color: #8C52FF; 
+}
+
+.btn-custom2:hover {
+  color: #000000;
+  background-color: #ffffff; 
+}
+
+.nav-link{
+  color: #000000;
+}
+
+.nav-link:hover{
+  text-decoration: underline;
+  color: #000000;
+}
+
+.btn-nav-custom:hover{
+  text-decoration: underline;
+}
+
+.btn-nav-custom:focus{
+  outline: none;
+  box-shadow: none;
+}
+
+.cont-main1{
+  height: 560px;
+  width: 500px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.titulo-main1{
+  height: auto;
+  width: 480px;
+  
+}
+
+.btns-main1{
+  padding: 10px;
+}
+
+.btn-log{
+  background-color: #8C52FF;
+  color: #fff;
+  border-color:  #8C52FF !important ;
+}
+
+.btn-log:hover{
+  background-color: #8C52FF;
+  color: #fff;
+}
+
+.btn-log1{
+  background-color: #ffffff;
+  color: #000000;
+  border-color:  #000000 !important ;
+}
+
+.cont-main2{
+  height: 560px;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.titulo-main2{ 
+    height: auto;
+    width: 480px;
+    text-align: center;
+}
+
+#clin { 
+  text-align: left;
+}
+
+.clinicas{
+  padding: 5px;
+}
+
+.cont-main3{
+  height: 560px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+.titulo-main3{
+  height: auto;
+  width: 100%;
+  text-align: left;
+}
+
+#desc{
+  font-size: xx-large
+}
+
+.b-example-divider {
+  width: 100%;
+  height: 3rem;
+  background-color: rgba(0, 0, 0, .1);
+  border: solid rgba(0, 0, 0, .15);
+  border-width: 1px 0;
+  box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, .1), inset 0 0.125em 0.5em rgba(0, 0, 0, .15);
+}
