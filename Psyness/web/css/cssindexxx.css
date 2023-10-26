@@ -81,17 +81,25 @@
   background-color: #8C52FF;
   color: #fff;
   border-color:  #8C52FF !important ;
+  box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
+
 }
 
 .btn-log:hover{
   background-color: #8C52FF;
   color: #fff;
+  transform: scale(1.001);
 }
 
 .btn-log1{
   background-color: #ffffff;
   color: #000000;
   border-color:  #000000 !important ;
+  box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
+}
+
+.btn-log1:hover{
+  transform: scale(1.001);
 }
 
 .cont-main2{
@@ -244,4 +252,45 @@ align-items: center;
 
 .container-fluid.d-flex.flex-wrap{
   padding-top: 100px !important;
+}
+
+.clinics_asociations{
+  background: #e7bffa;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.titulo_clinicas{
+  margin-bottom: 15px;
+    font-size: 45px;
+}
+
+.foot_containt{
+  background: #000000;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.col-2{
+  outline: none;
+}
+
+
+.bi{
+  color: #fff;
+}
+
+.container-fluid{
+  font-size: 20px;
+}
+
+#dropdownMenuButton1{
+  font-size: 20px;
+}
+
+#footer_left_text{
+  display: block;
+  top: 0;
+  left: 0;
+  padding-left: 100px;
 }
