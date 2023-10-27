@@ -44,9 +44,10 @@ public class InterUsersService extends Conexion<InterUsers>
                 users.setIAge(resultSet.getString(3));
                 users.setIEmail(resultSet.getString(4));
                 users.setIPassword(resultSet.getString(5));
-                users.setIImgNum(resultSet.getString(6));
-                users.setIUserSeguidores(resultSet.getInt(7));
-                users.setIUserSeguidos(resultSet.getInt(8));
+                users.setIRol(resultSet.getString(6));
+                users.setIImgNum(resultSet.getString(7));
+                users.setIUserSeguidores(resultSet.getInt(8));
+                users.setIUserSeguidos(resultSet.getInt(9));
                 usersList.add(users);
             }
             resultSet.close();
@@ -199,11 +200,12 @@ public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEd
                         String IAge = resultSet.getString("iage");
                         String IEmail = resultSet.getString("iemail");
                         String IPassword = resultSet.getString("ipassword");
+                        String IRol = resultSet.getString("irol");
                         String IImgNum = resultSet.getString("iimgnum");
                         int IUserSeguidores = resultSet.getInt("iuserseguidores");
                         int IUserSeguidos = resultSet.getInt("iuserseguidos");
 
-                        interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IUserSeguidores, IUserSeguidos);
+                        interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IRol, IUserSeguidores, IUserSeguidos);
                     }
                 }
             }
@@ -218,7 +220,7 @@ public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEd
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "insert into interusers( iuser , iage , iemail , ipassword ) values( ? , ? , ? , ? )";
+        String sql = "insert into interusers( iuser , iage , iemail , ipassword, irol ) values( ? , ? , ? , ? , ?)";
         int row = 0;
         try 
         {
@@ -236,6 +238,7 @@ public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEd
             preparedStatement.setString(2, users.getIAge());
             preparedStatement.setString(3, users.getIEmail());
             preparedStatement.setString(4, users.getIPassword());
+            preparedStatement.setString(5, users.getIRol());
 
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
@@ -269,11 +272,12 @@ public List<InterUsers> getInterUsersByFollow(int pubNumId) {
                     String IAge = resultSet.getString("iage");
                     String IEmail = resultSet.getString("iemail");
                     String IPassword = resultSet.getString("ipassword");
+                    String IRol = resultSet.getString("irol");
                     String IImgNum = resultSet.getString("iimgnum");
                     int IUserSeguidores = resultSet.getInt("iuserseguidores");
                     int IUserSeguidos = resultSet.getInt("iuserseguidos");
 
-                    InterUsers interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IUserSeguidores, IUserSeguidos);
+                    InterUsers interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IRol, IUserSeguidores, IUserSeguidos);
                     interUsersList.add(interUsers);
                 }
             }
@@ -305,11 +309,13 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
                     String age = resultSet.getString("iage");
                     String email = resultSet.getString("iemail");
                     String password = resultSet.getString("ipassword");
+                    String IRol = resultSet.getString("irol");
                     String imgNum = resultSet.getString("iimgnum");
                     int userSeguidores = resultSet.getInt("iuserseguidores");
                     int userSeguidos = resultSet.getInt("iuserseguidos");
+                    
 
-                    InterUsers interUsers = new InterUsers(userNum, user, age, email, password, imgNum, userSeguidores, userSeguidos);
+                    InterUsers interUsers = new InterUsers(userNum, user,IRol, age, email, password, imgNum, userSeguidores, userSeguidos);
                     userList.add(interUsers);
                 }
             }
@@ -407,9 +413,10 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
             aux.setIAge(resultSet.getString(3));
             aux.setIEmail(resultSet.getString(4));
             aux.setIPassword(resultSet.getString(5));
-            aux.setIImgNum(resultSet.getString(6));
-            aux.setIUserSeguidores(resultSet.getInt(7));
-            aux.setIUserSeguidos(resultSet.getInt(8));
+            aux.setIRol(resultSet.getString(6));
+            aux.setIImgNum(resultSet.getString(7));
+            aux.setIUserSeguidores(resultSet.getInt(8));
+            aux.setIUserSeguidos(resultSet.getInt(9));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -464,9 +471,10 @@ public List<InterUsers> getInterUsersByFollower(int IUserNum) {
             aux.setIAge(resultSet.getString(3));
             aux.setIEmail(resultSet.getString(4));
             aux.setIPassword(resultSet.getString(5));
-            aux.setIImgNum(resultSet.getString(6));
-            aux.setIUserSeguidores(resultSet.getInt(7));
-            aux.setIUserSeguidos(resultSet.getInt(8));
+            aux.setIRol(resultSet.getString(6));
+            aux.setIImgNum(resultSet.getString(7));
+            aux.setIUserSeguidores(resultSet.getInt(8));
+            aux.setIUserSeguidos(resultSet.getInt(9));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();

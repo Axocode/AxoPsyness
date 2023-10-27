@@ -34,6 +34,7 @@
             Integer SIUserNum = user.getIUserNum();
             Integer SISeguidores = user.getIUserSeguidores();
             Integer SISeguidos = user.getIUserSeguidos();
+            String SIRol = user.getIRol();
             String SIAge = user.getIAge();
             String SIEmail = user.getIEmail();
             String SIPassword = user.getIPassword();
@@ -43,12 +44,12 @@
                     sesion.setAttribute("SISeguidos", SISeguidos);
                     sesion.setAttribute("SIUserNum", SIUserNum);
                     sesion.setAttribute("SIUser", NombreUsuario);
+                    sesion.setAttribute("SIRol", SIRol);
                     sesion.setAttribute("SIAge", SIAge);
                     sesion.setAttribute("SIEmail", SIEmail);
                     sesion.setAttribute("SIPassword", SIPassword);
                     sesion.setAttribute("SIImgNum", SIImgNum);
 
-            sesion.setAttribute("valido", "creacionValida");
             response.sendRedirect("feed.jsp");
             
 

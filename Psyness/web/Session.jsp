@@ -3,6 +3,10 @@
     Created on : 19 may 2023, 12:51:17
     Author     : alumno
 --%>
+<%@page import="org.axocode.dao.service.InterCodesUsersService"%>
+<%@page import="org.axocode.dao.InterCodes"%>
+<%@page import="org.axocode.dao.InterUsersCodes"%>
+<%@page import="org.axocode.dao.service.InterCodesService"%>
 <%@page session="true"%>
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="org.axocode.helper.InterUsersHelper"%>
@@ -49,6 +53,7 @@
                     user.setIAge("");
                     user.setIEmail("");
                     user.setIPassword("");
+                    user.setIRol("");
                     
                     aux = "Guardar";
                     readonly = "";
@@ -57,11 +62,12 @@
                 
 
         %>
-        <jsp:include page="index.jsp" >
+        <jsp:include page="createCodigo.jsp" >
                     <jsp:param name="IUser" value="<%=user.getIUser()%>" />
                     <jsp:param name="IAge" value="<%=user.getIAge()%>" />
                     <jsp:param name="IEmail" value="<%=user.getIEmail()%>" />
                     <jsp:param name="IPassword" value="<%=user.getIPassword()%>" />
+                    <jsp:param name="IRol" value="<%=user.getIRol()%>" />
                     <jsp:param name="accion" value="<%=aux%>" />
                     <jsp:param name="readonly" value="<%=readonly%>" />
                 </jsp:include>
@@ -85,16 +91,38 @@
                 helpers = new InterUsersHelper( ).addRequest( request );
                 if( "Guardar".equals( accion ) )
                 {
+                    
+                    InterCodesService code = new InterCodesService();   
+                    InterCodesUsersService codeusers = new InterCodesUsersService();
+
+                    
+                            
+                    String opcion = code.getStatusbyCodes(request.getParameter("ICode").toString());
+                    if (opcion.equals("unused")) {
+                            
+                    if (code.modificarCodigo(request.getParameter("ICode"), "Usuario")){
+                    
+                    InterUsersCodes obj = new InterUsersCodes();
+                    InterCodes codes = new InterCodes();
+                    InterUsers usuarios = new InterUsers();
+                        
                     flag = helpers.addT( );
-                  
+
+                    code.modificarCodigo(request.getParameter("ICode"), "Usuario");
                     InterUsersService inter = new InterUsersService();
                     InterUsers userR = inter.getUserByInterUsers(request.getParameter("IUser"));
                     Integer SIUserNum = userR.getIUserNum();
-                    String SIImgNum = userR.getIImgNum();
                     Integer SISeguidores = userR.getIUserSeguidores();
+                    String SIImgNum = userR.getIImgNum();
+                    String SIRol = userR.getIRol();
                     Integer SISeguidos = userR.getIUserSeguidos();
             
-            
+                    codes.setCodescode(request.getParameter("ICode"));
+                    usuarios.setIUserNum(userR.getIUserNum());
+                    obj.setCodesCode(codes);
+                    obj.setIUserNum(usuarios);
+
+                    codeusers.addCodesUsers(obj);
             
             
 
@@ -104,9 +132,9 @@
                     String SIAge = request.getParameter("IAge");
                     String SIEmail = request.getParameter("IEmail");
                     String SIPassword = request.getParameter("IPassword");
-                    
-                    sesion.setAttribute("signUp", "crearCuenta"); 
+                     
                     sesion.setAttribute("SIUserNum", SIUserNum);
+                    sesion.setAttribute("SIRol", SIRol);
                     sesion.setAttribute("SISeguidores", SISeguidores);
                     sesion.setAttribute("SISeguidos", SISeguidos);
                     sesion.setAttribute("SIUser", SIUser);
@@ -114,16 +142,18 @@
                     sesion.setAttribute("SIEmail", SIEmail);
                     sesion.setAttribute("SIPassword", SIPassword);
                     sesion.setAttribute("SIImgNum", SIImgNum);
-                    sesion.setAttribute("valido", "creacionValida");
                     response.sendRedirect("feed.jsp");
                     }else
                         {
                         
                             sesion.setAttribute("invalido", "creacionInvalida");
                             response.sendRedirect("Session.jsp?accion=Nuevo");
-                        } 
-                    
-
+                        }
+                        }
+                    }else{
+                        response.sendRedirect("createCodigo.jsp");
+                        }
+                    }
                 }
                 if( flag )
                 {
@@ -135,9 +165,8 @@
             if( accion == null || "list".equals(accion ))
             {
         %>
-        <jsp:forward page="index.jsp" />
+        <jsp:forward page="createCodigo.jsp" />
         <%
-            }
             }
         %>
         

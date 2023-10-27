@@ -35,7 +35,7 @@
     HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
           else{out.print("<script>location.replace('index.jsp');</script>");}
-     String data = (String) sesion.getAttribute("SIImgNum");
+    String data = (String) sesion.getAttribute("SIImgNum");
                 if (data == null) {data = "perfilsidebar.png";}
 
 %>

@@ -11,11 +11,17 @@ iage varchar( 2 ) ,
 iemail varchar ( 40 ) ,
 ipassword varchar (  25  ),
 iimgnum varchar( 20 ),
+irol varchar ( 20 ),
 iuserseguidores int default 0,
 iuserseguidos int default 0
 );
 
--- Tabla secundaria de  publicaciones
+-- Tabla para configuracion de codigos de ingreso
+
+create table intercodes(
+codescode varchar ( 10 ) primary key,
+codesstatus varchar ( 10 ) default 'unused'
+);
 
 -- Contenido
 
@@ -31,6 +37,13 @@ favidpub int,
 faviduser int,
 foreign key (favidpub) references interpub(pubnumid) on delete cascade on update cascade,
 foreign key (faviduser) references interusers(iusernum) on delete cascade on update cascade
+);
+
+create table interuserscode(
+iusernum int,
+codescode varchar ( 10 ),
+foreign key (iusernum) references interusers(iusernum) on delete cascade on update cascade,
+foreign key (codescode) references intercodes(codescode) on delete cascade on update cascade
 );
 
 create table interflow (
@@ -49,3 +62,9 @@ foreign key (iusernum) references InterUsers (iusernum) on delete cascade on upd
 
 insert into interusers( iuser, iage, iemail, ipassword) values
 ('Axocode','99','axocode0@gmail.com','ladechambearnoselasupo');
+
+insert into intercodes( codescode ) values
+('1234567890'),
+('2345678901'),
+('3456789012'),
+('4567890123');

@@ -10,19 +10,25 @@ public class InterUsers implements Serializable{
     private String IEmail;
     private String IPassword;
     private String IImgNum;
+    private String IRol;
     private Integer IUserSeguidores;
     private Integer IUserSeguidos;
 
-    public InterUsers(Integer IUserNum, String IUser, String IAge, String IEmail, String IPassword, String IImgNum, Integer IUserSeguidores, Integer IUserSeguidos) {
-    this.IUserNum = IUserNum;
-    this.IUser = IUser;
-    this.IAge = IAge;
-    this.IEmail = IEmail;
-    this.IPassword = IPassword;
-    this.IImgNum = IImgNum;
-    this.IUserSeguidores = IUserSeguidores;
-    this.IUserSeguidos = IUserSeguidos;
-}
+    public InterUsers(Integer IUserNum, String IUser, String IAge, String IEmail, String IPassword, String IImgNum, String IRol, Integer IUserSeguidores, Integer IUserSeguidos) {
+        this.IUserNum = IUserNum;
+        this.IUser = IUser;
+        this.IAge = IAge;
+        this.IEmail = IEmail;
+        this.IPassword = IPassword;
+        this.IImgNum = IImgNum;
+        this.IRol = IRol;
+        this.IUserSeguidores = IUserSeguidores;
+        this.IUserSeguidos = IUserSeguidos;
+    }
+
+
+   
+    
     public Integer getIUserSeguidores() {
         return IUserSeguidores;
     }
@@ -95,6 +101,14 @@ public class InterUsers implements Serializable{
 
     public void setIImgNum(String IImgNum) {
         this.IImgNum = IImgNum;
+    }
+
+    public String getIRol() {
+        return IRol;
+    }
+
+    public void setIRol(String IRol) {
+        this.IRol = IRol;
     }
 
 
