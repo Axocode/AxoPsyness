@@ -14,7 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/cssindexxx.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <title>Psyness</title>
+    <link rel="icon" type="image/jpg" href="images/favicon.jpg"/>   
 </head>
 <body>
 <%
@@ -90,18 +91,18 @@
         </div>
       </div>
     <!--/Main Content 1-->
-    <br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><hr>
     <!--Main Content 2-->
       <div class="container-fluid d-flex flex-wrap">
         <div class="col-md-6 mb-2 mb-md-0">
           <div class="container-fluid cont-main2">   
                <div class="container-fluid titulo-main2" >
-                  <h1>Clinicas Asociadas</h1>
+                  <h1 class="titulo_clinicas">Clinicas Asociadas</h1>
                   <div class="img-main container-fluid">
                     <img src="images/imgindex.jpg" class="img-fluid" width="700px">
                  </div>
                  <div class="container-fluid clinicas">
-                  <h4 id="clin">
+                  <h4 id="clin" class="ubi_clinics">
                     Ubicada en Voca 9 <button type="button" class="btn btn-outline-primary me-2 rounded-pill btn-custom">Sitio Web</button><br>
                     <small class="text-muted">Asociada con Psyness</small>
                   </h4>
@@ -109,28 +110,28 @@
                </div>     
           </div>
         </div>
-        <div class="col-md-6 mb-2 mb-md-0">
-          <div class="cont-main3 container-fluid">
-            <div class="titulo-main3 container-fluid">
+          <div class="col-md-6 mb-2 mb-md-0">
+            <div class="cont-main3 container-fluid">
+              <div class="titulo-main3 container-fluid">
                 <h1 class="display-2">
                   Cuenta con código
                   <br>
                   <p id="desc">
                     Para tener Acceso a una de nuestras cuentas con todas las funcionalidades especiales como nuestra <strong>IA Axochat</strong>,
-                     hablar con tus Psicólogos o <strong>realizar publicaciones</strong>, necesitaras de una cuenta con código.<br><br>
+                    hablar con tus Psicólogos o <strong>realizar publicaciones</strong>, necesitaras de una cuenta con código.<br><br>
                     Para poder obtener un código de acceso este deberá ser expedido por una de las clínicas afiliadas a Axocode,nuestra empresa.
                   </p><br>
                 </h1>
+              </div>
             </div>
           </div>
-        </div>
       </div>
       <!--/Main Content 2-->
       <!--No se que es eso-->
       
       <!--/No se-->
       <!--Creadores de Contenido-->
-      <section id="portfolio">
+      <section id="portfolio"><hr>
         <div class="p-5 text-center bg-body-tertiary rounded-3">
         <h1 class="text-body-emphasis">Creadores de contenido</h1>
         </div>
@@ -167,7 +168,7 @@
           </div>
             
         </div>
-        <br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br>
         <div class="filass">
           <div class = "img-back">
           <button type="button" class="btn btn-lg btn-log2"><H4>Contactanos</H4></button><br><br>
@@ -180,50 +181,47 @@
       <!--///Creadores de Contenido-->
 
     
-
-      <!--/Creadores de Contenido-->
-      <div class="b-example-divider"></div>
       <!--Footer-->
-      <div class="container">
-        <footer class="py-5">
-          <div class="row">
+      <div class="foot_containt">
+        
+        <div class="container">
+          <footer class="py-5">
+            <div class="row">
             <div class="col-2">
               <h5>Compania</h5>
               <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="http://axocode.gerdoc.com/" class="nav-link p-0 text-muted">Home</a></li>
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
                 <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
               </ul>
             </div>
-      
-            <div class="col-2">
-              <h5>Links de ayuda</h5>
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-              </ul>
-            </div>
-      
-           
-      
-            
+             
+              <div class="col-2" id="footer_left_text">
+                <h5>Links de ayuda</h5>
+                <ul class="nav flex-column">
+                  <li class="nav-item mb-2"><a href="http://axocode.gerdoc.com/" class="nav-link p-0 text-muted">Home</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                </ul>
+              </div>
+
           </div>
-      
+          
           <div class="d-flex justify-content-between py-4 my-4 border-top">
-            <p>&copy; 2021 Axocode, Inc. All rights reserved.</p>
+            <p>&copy; 2023 Axocode, Inc. All rights reserved.</p>
             <ul class="list-unstyled d-flex">
-              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+              <li class="ms-3"><a class="link-dark" href="https://twitter.com/Axocode1"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+              <li class="ms-3"><a class="link-dark" href="https://www.instagram.com/axocode?igshid=NTdlMDg3MTY%3D"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+              <li class="ms-3"><a class="link-dark" href="https://www.facebook.com/profile.php?id=100033197299590"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
             </ul>
           </div>
         </footer>
       </div>
+    </div>
       <!--/Footer-->
     </div>
     
