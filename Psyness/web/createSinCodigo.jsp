@@ -1,4 +1,3 @@
-<%@page session="true"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
   
@@ -18,13 +17,6 @@
     <body>
         <%
         HttpSession sesion = request.getSession();
-        if (request.getParameter("cerrar")!= null) {
-                    session.invalidate();
-        %>
-                    <script>window.location.href = "feed.jsp";</script>
-                    <%
-                }
-        response.sendRedirect("Session.jsp?accion=Nuevo");
         %>
         <div class="wrapper">
         <div class="container main">
@@ -38,8 +30,8 @@
                 </div>
                 <div class="col-md-6 right">
                      <div class="input-box">
-                        <header>Crear cuenta</header>
-                        <form id="form1" action="Session.jsp" >
+                        <header>Crear cuenta sin codigo</header>
+                        <form id="form1" action="SessionSin.jsp" >
                             <div class="input-field">
                                 <input id="IUser" name="IUser" value="${param.IUser}"${param.readonly} type="text" class="input"  minlength="6" maxlength="13" required/>
                                 <label for="user">Nombre de Usuario</label>
@@ -57,6 +49,7 @@
                                 <label for="pass">Contraseña</label>
                             </div>
                             <div class="input-field">
+                                <input id="IRol" type="hidden" value="Visitante" name="IRol"  class="submit" value="${param.IRol}">
                                 <input id="accion" type="hidden" value="Guardar" name="accion"  class="submit" value="${param.accion}">
                                 <input id="action" type="submit" value="Empezar" name="action" class="submit" value="${param.accion}"> 
                             </div>

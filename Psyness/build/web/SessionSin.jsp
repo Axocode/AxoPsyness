@@ -1,7 +1,8 @@
-<%@page import="org.axocode.dao.service.InterCodesUsersService"%>
-<%@page import="org.axocode.dao.InterCodes"%>
-<%@page import="org.axocode.dao.InterUsersCodes"%>
-<%@page import="org.axocode.dao.service.InterCodesService"%>
+<%-- 
+    Document   : registro
+    Created on : 19 may 2023, 12:51:17
+    Author     : alumno
+--%>
 <%@page session="true"%>
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="org.axocode.helper.InterUsersHelper"%>
@@ -10,7 +11,6 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page session="true"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,7 +58,7 @@
                 
 
         %>
-        <jsp:include page="createCodigo.jsp" >
+        <jsp:include page="createSinCodigo.jsp" >
                     <jsp:param name="IUser" value="<%=user.getIUser()%>" />
                     <jsp:param name="IAge" value="<%=user.getIAge()%>" />
                     <jsp:param name="IEmail" value="<%=user.getIEmail()%>" />
@@ -83,43 +83,31 @@
                         </script>
 <%                       
                     }else{
-                    InterCodesService code = new InterCodesService();   
-                    String opcion = code.getStatusbyCodes(request.getParameter("ICode").toString());
-                   if (opcion.equals("unused")) {
+
                 helpers = new InterUsersHelper( ).addRequest( request );
                 if( "Guardar".equals( accion ) )
-                {    
+                {
                     flag = helpers.addT( );
-
+                  
                     InterUsersService inter = new InterUsersService();
                     InterUsers userR = inter.getUserByInterUsers(request.getParameter("IUser"));
                     Integer SIUserNum = userR.getIUserNum();
-                    Integer SISeguidores = userR.getIUserSeguidores();
-                    String SIImgNum = userR.getIImgNum();
                     String SIRol = userR.getIRol();
+                    String SIImgNum = userR.getIImgNum();
+                    Integer SISeguidores = userR.getIUserSeguidores();
                     Integer SISeguidos = userR.getIUserSeguidos();
+            
+            
+            
+            
 
-
-                    
-                    
-                            
-                    if (code.modificarCodigo(request.getParameter("ICode"), request.getParameter("IUser"))){
-                    InterUsersCodes obj = new InterUsersCodes();
-                    InterCodes codes = new InterCodes();
-                    InterUsers usuarios = new InterUsers();
-                    codes.setCodescode(request.getParameter("ICode"));
-                    usuarios.setIUserNum(userR.getIUserNum());
-                    obj.setCodesCode(codes);
-                    obj.setIUserNum(usuarios);
-                    InterCodesUsersService codeusers = new InterCodesUsersService();        
-                    codeusers.addCodesUsers(obj);
                     if(flag != false){
 
                     String SIUser = request.getParameter("IUser");
                     String SIAge = request.getParameter("IAge");
                     String SIEmail = request.getParameter("IEmail");
                     String SIPassword = request.getParameter("IPassword");
-                     
+                    
                     sesion.setAttribute("SIUserNum", SIUserNum);
                     sesion.setAttribute("SIRol", SIRol);
                     sesion.setAttribute("SISeguidores", SISeguidores);
@@ -130,16 +118,14 @@
                     sesion.setAttribute("SIPassword", SIPassword);
                     sesion.setAttribute("SIImgNum", SIImgNum);
                     response.sendRedirect("feed.jsp");
-                    }}} 
-                    
                     }else
-                        {%>
-                        <script>
-                            alert("Este codigo ya esta en uso o no existe");
-                            window.location.href = "Session.jsp?accion=Nuevo"; 
-                        </script>
-<% 
-                            }
+                        {
+                        
+                            sesion.setAttribute("invalido", "creacionInvalida");
+                            response.sendRedirect("SessionSin.jsp?accion=Nuevo");
+                        } 
+                    
+
                 }
                 if( flag )
                 {
@@ -151,9 +137,11 @@
             if( accion == null || "list".equals(accion ))
             {
         %>
-        <jsp:forward page="createCodigo.jsp" />
+        <jsp:forward page="createSinCodigo.jsp" />
         <%
             }
+            }
         %>
+        
     </body>
 </html>
