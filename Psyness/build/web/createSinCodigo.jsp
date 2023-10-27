@@ -1,4 +1,3 @@
-<%@page session="true"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
   
@@ -18,13 +17,6 @@
     <body>
         <%
         HttpSession sesion = request.getSession();
-        if (request.getParameter("cerrar")!= null) {
-                    session.invalidate();
-        %>
-                    <script>window.location.href = "feed.jsp";</script>
-                    <%
-                }
-        response.sendRedirect("SessionSin.jsp?accion=Nuevo");
         %>
         <div class="wrapper">
         <div class="container main">

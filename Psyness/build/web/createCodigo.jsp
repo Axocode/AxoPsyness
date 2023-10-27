@@ -1,6 +1,6 @@
 <%@page session="true"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page session="true"%>
+
   
 <!DOCTYPE html>
 <html>
@@ -18,13 +18,6 @@
     <body>
         <%
         HttpSession sesion = request.getSession();
-        if (request.getParameter("cerrar")!= null) {
-                    session.invalidate();
-        %>
-                    <script>window.location.href = "feed.jsp";</script>
-                    <%
-                }
-        response.sendRedirect("Session.jsp?accion=Nuevo");
         %>
         <div class="wrapper">
         <div class="container main">
@@ -57,11 +50,11 @@
                                 <label for="pass">Contraseña</label>
                             </div>
                             <div class="input-field">
-                                <input id="ICode" name="ICode" value="${param.Codescode}" type="text" class="input" required maxlength="10"/> 
+                                <input id="ICode" name="ICode" type="text" class="input" required maxlength="10"/> 
                                 <label for="pass">Codigo</label>
                             </div>
                             <div class="input-field">
-                                <input id="IRol" type="hidden" value="Visitante" name="IRol"  class="submit" value="${param.IRol}">
+                                <input id="IRol" type="hidden" value="Cliente" name="IRol"  class="submit" value="${param.IRol}">
                                 <input id="accion" type="hidden" value="Guardar" name="accion"  class="submit" value="${param.accion}">
                                 <input id="action" type="submit" value="Empezar" name="action" class="submit" value="${param.accion}"> 
                             </div>

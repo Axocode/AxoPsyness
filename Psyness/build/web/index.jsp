@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +17,12 @@
     <title>Document</title>
 </head>
 <body>
-
+<%
+        HttpSession sesion = request.getSession();
+        if (request.getParameter("cerrar")!= null) {
+                    session.invalidate();
+                }
+        %>
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewBox="0 0 118 94">
       <title>Bootstrap</title>
