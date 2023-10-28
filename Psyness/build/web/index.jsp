@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,12 +19,7 @@
     <link rel="icon" type="image/jpg" href="images/favicon.jpg"/>   
 </head>
 <body>
-<%
-        HttpSession sesion = request.getSession();
-        if (request.getParameter("cerrar")!= null) {
-                    session.invalidate();
-                }
-        %>
+
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewBox="0 0 118 94">
       <title>Bootstrap</title>
@@ -60,8 +56,8 @@
           </ul>
     
           <div class="col-md-3 text-end">
-              <a href="createSinCodigo.jsp"><button type="button" class="btn btn-outline-primary me-2 rounded-pill btn-custom">Crear Cuenta</button></a>
-              <a href="login.jsp"><button type="button" class="btn btn-primary rounded-pill btn-custom2">Iniciar Sesion</button></a>
+            <a href="createSinCodigo.jsp"><button type="button" class="btn btn-outline-primary me-2 rounded-pill btn-custom">Crear Cuenta</button></a>
+                  <a href="login.jsp"><button type="button" class="btn btn-primary rounded-pill btn-custom2">Iniciar Sesion</button></a>
           </div>
         </header>
       
@@ -80,8 +76,8 @@
                   </h3><br>
                 </h1>
                 <div class="btns-main1 container-fluid">
-                    <a href="createCodigo.jsp"><button type="button" class="btn btn-lg btn-log">¿Tienes un código? Clic aquí</button><br><br></a>
-                    <a href="createSinCodigo.jsp"><button type="button" class="btn btn-lg btn-log1">Iniciar sin código</button></a>
+                  <a href="createCodigo.jsp"><button type="button" class="btn btn-lg btn-log">¿Tienes un código? Clic aquí</button><br><br></a>
+                  <a href="createSinCodigo.jsp"><button type="button" class="btn btn-lg btn-log1">Iniciar sin código</button></a>
                 </div>
             </div>
           </div>
