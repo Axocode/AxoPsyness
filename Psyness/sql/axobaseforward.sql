@@ -110,8 +110,8 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `axobase`.`interuserscode` (
   `iusernum` INT NULL DEFAULT NULL,
   `codescode` VARCHAR(10) NULL DEFAULT NULL,
-  INDEX `iusernum` (`iusernum` ASC) VISIBLE,
-  INDEX `codescode` (`codescode` ASC) VISIBLE,
+  INDEX `iusernum` (`iusernum` ASC) ,
+  INDEX `codescode` (`codescode` ASC) ,
   CONSTRAINT `interuserscode_ibfk_1`
     FOREIGN KEY (`iusernum`)
     REFERENCES `axobase`.`interusers` (`iusernum`)
