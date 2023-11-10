@@ -20,9 +20,9 @@
 }
 
 .btn-custom{
-  background-color: #8C52FF;
+  background-color: #6B64F4;
   color: #fff;
-  border-color:  #8C52FF !important ;
+  border-color:  #6B64F4 !important ;
 }
 
 .btn-custom2{
@@ -33,7 +33,7 @@
 
 .btn-custom:hover {
   color: #ffffff;
-  background-color: #8C52FF; 
+  background-color: #6B64F4; 
 }
 
 .btn-custom2:hover {
@@ -78,15 +78,15 @@
 }
 
 .btn-log{
-  background-color: #8C52FF;
+  background-color: #4FC0E8;
   color: #fff;
-  border-color:  #8C52FF !important ;
+  border-color:  #4FC0E8 !important ;
   box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
 
 }
 
 .btn-log:hover{
-  background-color: #8C52FF;
+  background-color: #4FC0E8;
   color: #fff;
   transform: scale(1.001);
 }
