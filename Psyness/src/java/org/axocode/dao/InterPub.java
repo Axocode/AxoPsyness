@@ -8,6 +8,7 @@ public class InterPub implements Serializable{
     private Integer PubNumId;
     private String PubCont;
     private int PubMg;
+    private String PubDate;
 
     public InterPub(){}
     
@@ -37,6 +38,14 @@ public class InterPub implements Serializable{
 
     public void setPubNumId(Integer PubNumId) {
         this.PubNumId = PubNumId;
+    }
+
+    public String getPubDate() {
+        return PubDate;
+    }
+
+    public void setPubDate(String PubDate) {
+        this.PubDate = PubDate;
     }
     
 }
