@@ -51,6 +51,7 @@ public class InterPubService extends Conexion<InterPub>
                 pub.setPubNumId(resultSet.getInt(1));
                 pub.setPubCont(resultSet.getString(2));
                 pub.setPubMg(resultSet.getInt(3));
+                pub.setPubDate(resultSet.getString(4));
                 
                 pubList.add(pub);
             }
@@ -70,7 +71,7 @@ public class InterPubService extends Conexion<InterPub>
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "insert into interpub( pubcont ) values( ? )";
+        String sql = "insert into interpub( pubcont, pubdate ) values( ?, now() )";
         int row = 0;
         try 
         {
@@ -148,6 +149,7 @@ public class InterPubService extends Conexion<InterPub>
             aux = new InterPub();
             aux.setPubCont(resultSet.getString(1));
             aux.setPubMg(resultSet.getInt(2));
+            aux.setPubDate(resultSet.getString(3));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();

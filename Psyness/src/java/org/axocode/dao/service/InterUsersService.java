@@ -257,7 +257,7 @@ public List<InterUsers> getInterUsersByFollow(int pubNumId) {
 
     try (Connection connection = getConnection()) {
         String sql = "select interusers.iuser, interusers.iusernum, interusers.iage, interusers.iemail, interusers.ipassword, " +
-                     "interusers.iimgnum, interusers.iuserseguidores, interusers.iuserseguidos " +
+                     "interusers.iimgnum, interusers.irol, interusers.iuserseguidores, interusers.iuserseguidos " +
                      "from interusers " +
                      "inner join interflow on interusers.iusernum = interflow.flowseguidoid " +
                      "where interflow.flowseguidoresid = ?";
@@ -272,12 +272,12 @@ public List<InterUsers> getInterUsersByFollow(int pubNumId) {
                     String IAge = resultSet.getString("iage");
                     String IEmail = resultSet.getString("iemail");
                     String IPassword = resultSet.getString("ipassword");
-                    String IRol = resultSet.getString("irol");
                     String IImgNum = resultSet.getString("iimgnum");
-                    int IUserSeguidores = resultSet.getInt("iuserseguidores");
-                    int IUserSeguidos = resultSet.getInt("iuserseguidos");
+                    String IRol = resultSet.getString("irol");
+                    int userSeguidores = resultSet.getInt("iuserseguidores");
+                    int userSeguidos = resultSet.getInt("iuserseguidos");
 
-                    InterUsers interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IRol, IUserSeguidores, IUserSeguidos);
+                    InterUsers interUsers = new InterUsers(IUserNum, IUser,IAge, IEmail, IPassword, IImgNum, IRol, userSeguidores, userSeguidos);
                     interUsersList.add(interUsers);
                 }
             }
@@ -289,33 +289,33 @@ public List<InterUsers> getInterUsersByFollow(int pubNumId) {
     return interUsersList;
 }
 
-public List<InterUsers> getInterUsersByFollower(int IUserNum) {
+public List<InterUsers> getInterUsersByFollower(int ipubnumid) {
     List<InterUsers> userList = new ArrayList<>();
 
     try (Connection connection = getConnection()) {
         String sql = "select interusers.iuser, interusers.iusernum, interusers.iage, interusers.iemail, " +
-                     "interusers.ipassword, interusers.iimgnum, interusers.iuserseguidores, interusers.iuserseguidos " +
+                     "interusers.ipassword, interusers.irol, interusers.iimgnum, interusers.iuserseguidores, interusers.iuserseguidos " +
                      "from interusers " +
                      "inner join interflow on interusers.iusernum = interflow.flowseguidoresid " +
                      "where interflow.flowseguidoid = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, IUserNum);
+            statement.setInt(1, ipubnumid);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    int userNum = resultSet.getInt("iusernum");
-                    String user = resultSet.getString("iuser");
-                    String age = resultSet.getString("iage");
-                    String email = resultSet.getString("iemail");
-                    String password = resultSet.getString("ipassword");
+                    int IUserNum = resultSet.getInt("iusernum");
+                    String IUser = resultSet.getString("iuser");
+                    String IAge = resultSet.getString("iage");
+                    String IEmail = resultSet.getString("iemail");
+                    String IPassword = resultSet.getString("ipassword");
+                    String IImgNum = resultSet.getString("iimgnum");
                     String IRol = resultSet.getString("irol");
-                    String imgNum = resultSet.getString("iimgnum");
                     int userSeguidores = resultSet.getInt("iuserseguidores");
                     int userSeguidos = resultSet.getInt("iuserseguidos");
                     
 
-                    InterUsers interUsers = new InterUsers(userNum, user,IRol, age, email, password, imgNum, userSeguidores, userSeguidos);
+                    InterUsers interUsers = new InterUsers(IUserNum, IUser,IAge, IEmail, IPassword, IImgNum, IRol, userSeguidores, userSeguidos);
                     userList.add(interUsers);
                 }
             }

@@ -301,14 +301,19 @@
             String data1 = interUsers.getIImgNum();
             if (data1 != null) {}
                 else{data1 = "perfilsidebar.png";}
+            String fechaHoraCompleta = trows.getPubDate().toString();
+
+            String[] partes = fechaHoraCompleta.split(" ");
+            String fecha = partes[0];
+            String hora = partes[1].substring(0, 5);
                 
     %>
             <div class="post-container" id="<%=trows.getPubNumId()%>">
                 <div class="user-profile">
                     <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><img src="images/<%=data1%>"></a>
                     <div>
-                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><%=interUsers.getIUser()%></p></a>
-                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small>Public</small></a>
+                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><b><%=interUsers.getIUser()%></b>‎ ‎<%=hora%></p></a>
+                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small><%=fecha%></small></a>
                     </div>
                 </div>
                 <br>
