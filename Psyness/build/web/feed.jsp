@@ -3,6 +3,7 @@
     Created on : 7 may. 2023, 20:33:13
     Author     : Admin
 --%>
+<%@page import="java.time.ZonedDateTime"%>
 <%@page import="java.time.ZoneId"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDateTime"%>
@@ -234,10 +235,10 @@
         
         <!-----------------------------------main-content(EXEL)--------------------------------------------------->
         <%
-        LocalDateTime horaActual = LocalDateTime.now();
-        LocalDateTime horaAjustada = horaActual.atZone(ZoneId.of("America/Mexico_City")).toLocalDateTime();
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        String horaFormateada = horaAjustada.format(formato);
+            ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
+            ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
+            String horaFormateada = horaCiudadMexico.format(formatter);
 
         %>
         <div class="main-content">
