@@ -71,7 +71,7 @@ public class InterPubService extends Conexion<InterPub>
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "insert into interpub( pubcont, pubdate ) values( ?, now() )";
+        String sql = "insert into interpub( pubcont, pubdate ) values( ?, ? )";
         int row = 0;
         try 
         {
@@ -86,6 +86,7 @@ public class InterPubService extends Conexion<InterPub>
                 return false;
             }
             preparedStatement.setString(1, pub.getPubCont());
+            preparedStatement.setString(2, pub.getPubDate());
 
             row = preparedStatement.executeUpdate();
             closeConnection(connection);

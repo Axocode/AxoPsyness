@@ -3,6 +3,9 @@
     Created on : 7 may. 2023, 20:33:13
     Author     : Admin
 --%>
+<%@page import="java.time.ZoneId"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@page session="true"%>
 <%@page import="org.axocode.dao.InterFav"%>
 <%@page import="org.axocode.helper.InterFavHelper"%>
@@ -230,6 +233,13 @@
             
         
         <!-----------------------------------main-content(EXEL)--------------------------------------------------->
+        <%
+        LocalDateTime horaActual = LocalDateTime.now();
+        LocalDateTime horaAjustada = horaActual.atZone(ZoneId.of("America/Mexico_City")).toLocalDateTime();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String horaFormateada = horaAjustada.format(formato);
+
+        %>
         <div class="main-content">
             <div class="write-post-container">
                 <div class="user-profile">
@@ -268,6 +278,7 @@
                             <div class="post-input-container">
                                 <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" maxlength="500" placeholder="Que estas Pensando,  <%=sesion.getAttribute("SIUser")%>?"></textarea>
                                 <input type="hidden" name="IUserNum" id="IUserNum" value="<%=sesion.getAttribute("SIUserNum")%>" />
+                                <input type="hidden" name="PubDate" id="PubDate" value="<%=horaFormateada%>" />
                             </div>
                             <div class="modal-footer">
                                 <div class="d-grid gap-2">

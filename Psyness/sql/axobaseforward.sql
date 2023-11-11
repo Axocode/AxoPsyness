@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `axobasepsy`.`interpub` (
   `pubnumid` INT NOT NULL AUTO_INCREMENT,
   `pubcont` TEXT NULL DEFAULT NULL,
   `pubmg` INT NULL DEFAULT '0',
-  `pubdate` TIMESTAMP,
+  `pubdate` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`pubnumid`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
