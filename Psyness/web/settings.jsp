@@ -32,12 +32,12 @@
     
     <body>
 <%
+    request.setCharacterEncoding("UTF-8");
     HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
           else{out.print("<script>location.replace('index.jsp');</script>");}
     String data = (String) sesion.getAttribute("SIImgNum");
                 if (data == null) {data = "perfilsidebar.png";}
-
 %>
         <div id="fb-root"></div>
             <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
@@ -166,7 +166,7 @@
 
                     </div>
                     <div class="info">
-                        <form class="row g-3" action="actualizarUser.jsp" method="POST">
+                        <form class="row g-3" action="actualizarUser.jsp" method="POST" accept-charset="UTF-8">
                             <div class="col-md-6">
                                 <label for="inputEmail4" class="form-label">Nombre de usuario</label>
                                 <input type="text" name="nombre" value="<%=sesion.getAttribute("SIUser") %>" class="form-control" id="inputEmail4" required>
