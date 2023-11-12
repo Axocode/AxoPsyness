@@ -28,11 +28,12 @@
 <%@page import="org.axocode.helper.InterPubHelper"%>
 <%@page import="java.util.Collections"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Psyness</title>
@@ -50,6 +51,7 @@
 </head>
 <body>
 <%
+          request.setCharacterEncoding("UTF-8");          
           HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
           else{out.print("<script>location.replace('index.jsp');</script>");}
@@ -301,7 +303,7 @@
                                 </div>
                                     
                             </div>
-                                <form id="formulario3" method="POST" >
+                                <form id="formulario3" method="POST" accept-charset="UTF-8" >
                             <div class="post-input-container">
                                 <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" maxlength="500" placeholder="Que estas Pensando,  <%=sesion.getAttribute("SIUser")%>?"></textarea>
                                 <input type="hidden" name="PubDate" id="PubDate" value="<%=horaFormateada%>" />

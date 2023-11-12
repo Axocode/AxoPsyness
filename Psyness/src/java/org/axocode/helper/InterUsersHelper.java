@@ -72,8 +72,6 @@ public class InterUsersHelper extends Helpers<InterUsers> implements Serializabl
         t = new InterUsers();
         t.setIUser(getParameter("IUser"));
         t.setIAge(getParameter("IAge"));
-        t.setIEmail(getParameter("IEmail"));
-        t.setIPassword(getParameter("IPassword"));
         if( isValidaCamposOk( ) )
         {
             return usersService.updateUsers(t );
