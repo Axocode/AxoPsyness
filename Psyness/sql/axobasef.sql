@@ -10,8 +10,8 @@ iuser varchar ( 15 ) ,
 iage varchar( 2 ) ,
 iemail varchar ( 40 ) ,
 ipassword varchar (  25  ),
-iimgnum varchar( 20 ),
 irol varchar ( 20 ),
+iimgnum varchar( 20 ) default null,
 iuserseguidores int default 0,
 iuserseguidos int default 0
 );
@@ -28,7 +28,8 @@ codesstatus varchar ( 10 ) default 'unused'
 create table interpub (
 pubnumid int AUTO_INCREMENT primary key not null,
 pubcont text( 500 ),
-pubmg int default 0
+pubmg int default 0,
+pubdate varchar (50) 
 );
 
 -- relacion
@@ -53,6 +54,7 @@ foreign key (flowseguidoresid) references interusers(iusernum) on delete cascade
 foreign key (flowseguidoid) references interusers(iusernum) on delete cascade on update cascade
 );
 
+
 create table interuserspub (
 pubnumid int auto_increment,
 iusernum int,
@@ -60,8 +62,8 @@ foreign key (pubnumid) references InterPub (pubnumid) on delete cascade on updat
 foreign key (iusernum) references InterUsers (iusernum) on delete cascade on update cascade
 );
 
-insert into interusers( iuser, iage, iemail, ipassword) values
-('Axocode','99','axocode0@gmail.com','ladechambearnoselasupo');
+insert into interusers( iuser, iage, iemail, ipassword, irol) values
+('Axocode','99','axocode0@gmail.com','losquieromuchoaxocode','administrador');
 
 insert into intercodes( codescode ) values
 ('1234567890'),
