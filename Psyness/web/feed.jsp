@@ -3,6 +3,7 @@
     Created on : 7 may. 2023, 20:33:13
     Author     : Admin
 --%>
+<%@page import="org.axocode.dao.service.InterPubService"%>
 <%@page import="java.time.temporal.ChronoUnit"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.time.ZonedDateTime"%>
@@ -85,8 +86,16 @@
                         sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
                         flag = helpers.addT( );
                         if (flag) {
+                        
+                            InterPubService metododefinitivo = new InterPubService();
+                            InterPub objetodefinivo = metododefinitivo.getLastPub();
+                            
+                            int PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString()) + 1;
                             int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
+                            
+                            
                             InterUsersPub contextInterses = new InterUsersPub();
+                            contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
                             contextInterses.setiUserNum(new InterUsers(IUserNum));
                             InterUsersPubService interUsersPubService = new InterUsersPubService();
                             boolean success = interUsersPubService.addUsersPub(contextInterses);
