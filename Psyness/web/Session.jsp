@@ -129,6 +129,7 @@
                     sesion.setAttribute("SIEmail", SIEmail);
                     sesion.setAttribute("SIPassword", SIPassword);
                     sesion.setAttribute("SIImgNum", SIImgNum);
+                    sesion.setAttribute("SILastPub",null);
                     response.sendRedirect("feed.jsp");
                     }}} 
                     

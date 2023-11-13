@@ -302,13 +302,9 @@
             String data1 = interUsers.getIImgNum();
             if (data1 != null) {}
                     else{data1 = "perfilsidebar.png";}
-            String fechaHoraCompleta = trows.getPubDate().toString();
-
-            String[] partes = fechaHoraCompleta.split(" ");
-            String fecha = partes[0];
-            String hora = partes[1].substring(0, 5);
-                   
-               
+             String[] partes = trows.getPubDate().split(" ");
+                String fecha = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                String hora = partes[5].substring(0,5);          
     %>
             <div class="post-container">
                 <div class="user-profile">

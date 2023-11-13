@@ -3,6 +3,9 @@
     Created on : 7 may. 2023, 20:33:13
     Author     : Admin
 --%>
+<%@page import="java.time.temporal.ChronoUnit"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.time.ZonedDateTime"%>
 <%@page import="java.time.ZoneId"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.LocalDateTime"%>
@@ -25,11 +28,12 @@
 <%@page import="org.axocode.helper.InterPubHelper"%>
 <%@page import="java.util.Collections"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Psyness</title>
@@ -47,6 +51,7 @@
 </head>
 <body>
 <%
+          request.setCharacterEncoding("UTF-8");          
           HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
           else{out.print("<script>location.replace('index.jsp');</script>");}
@@ -64,24 +69,55 @@
                 int seguidores = 0;
                 int seguidos = 0;
                 helpers = new InterPubHelper( ).addRequest( request );
+                ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
+                ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
+                String horaFormateada = horaCiudadMexico.format(formatter);
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
+                String horaFormateada2 = horaCiudadMexico.format(formatter2);
                 
                 
                 user = new InterPub(); 
                 user.setPubCont("");    
 
-                if(  "Submit".equals( guardar ) )
-                {
-                    flag = helpers.addT( );
-                    int IUserNum = Integer.parseInt(request.getParameter("IUserNum"));
-
-                    InterUsersPub contextInterses = new InterUsersPub();
-                    contextInterses.setiUserNum(new InterUsers(IUserNum));
-
-                InterUsersPubService interUsersPubService = new InterUsersPubService();
-                boolean success = interUsersPubService.addUsersPub(contextInterses);
-                
-                   response.sendRedirect("error.jsp"); 
+                if(  "Submit".equals( guardar ) ){
+                    if (sesion.getAttribute("SILastPub") == null) {
+                        sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
+                        flag = helpers.addT( );
+                        if (flag) {
+                            int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
+                            InterUsersPub contextInterses = new InterUsersPub();
+                            contextInterses.setiUserNum(new InterUsers(IUserNum));
+                            InterUsersPubService interUsersPubService = new InterUsersPubService();
+                            boolean success = interUsersPubService.addUsersPub(contextInterses);
+                            response.sendRedirect("error.jsp");     
+                            }
+                        }else{
+                            LocalDateTime horaAct = LocalDateTime.parse(horaFormateada2, formatter2);
+                            String horaLastPubliString = (String) sesion.getAttribute("SILastPub");
+                            LocalDateTime horaLastPubli = LocalDateTime.parse(horaLastPubliString, formatter2);
+                            long totalToAccesss = ChronoUnit.SECONDS.between(horaLastPubli, horaAct);
+                            if (totalToAccesss > 5) {
+                                sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
+                                flag = helpers.addT( );
+                                if (flag) {
+                                    int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
+                                    InterUsersPub contextInterses = new InterUsersPub();
+                                    contextInterses.setiUserNum(new InterUsers(IUserNum));
+                                    InterUsersPubService interUsersPubService = new InterUsersPubService();
+                                    boolean success = interUsersPubService.addUsersPub(contextInterses);
+                                    response.sendRedirect("error.jsp");
+                                }   
+                                }else {%>
+                                        <script>
+                                         var valor = '<%= 5 - totalToAccesss %>';
+                                         if (valor === 1) {alert('Espera '+ valor +' segundo volver a publicar');
+                                         window.location.href = "feed.jsp";}else 
+                                         alert('Espera '+ valor +' segundos volver a publicar'); window.location.href = "feed.jsp"; 
+                                         </script><%}
+                        }
                     }
+                    
                     
                     
         InterUsersHelper userHelper = new InterUsersHelper();
@@ -233,13 +269,6 @@
             
         
         <!-----------------------------------main-content(EXEL)--------------------------------------------------->
-        <%
-        LocalDateTime horaActual = LocalDateTime.now();
-        LocalDateTime horaAjustada = horaActual.atZone(ZoneId.of("America/Mexico_City")).toLocalDateTime();
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        String horaFormateada = horaAjustada.format(formato);
-
-        %>
         <div class="main-content">
             <div class="write-post-container">
                 <div class="user-profile">
@@ -274,10 +303,9 @@
                                 </div>
                                     
                             </div>
-                                <form id="formulario3" method="POST" >
+                                <form id="formulario3" method="POST" accept-charset="UTF-8" >
                             <div class="post-input-container">
                                 <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" maxlength="500" placeholder="Que estas Pensando,  <%=sesion.getAttribute("SIUser")%>?"></textarea>
-                                <input type="hidden" name="IUserNum" id="IUserNum" value="<%=sesion.getAttribute("SIUserNum")%>" />
                                 <input type="hidden" name="PubDate" id="PubDate" value="<%=horaFormateada%>" />
                             </div>
                             <div class="modal-footer">
@@ -311,11 +339,12 @@
             String data1 = interUsers.getIImgNum();
             if (data1 != null) {}
                 else{data1 = "perfilsidebar.png";}
-            String fechaHoraCompleta = trows.getPubDate().toString();
+            
+                
+                String[] partes = trows.getPubDate().split(" ");
+                String fecha = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                String hora = partes[5].substring(0,5);
 
-            String[] partes = fechaHoraCompleta.split(" ");
-            String fecha = partes[0];
-            String hora = partes[1].substring(0, 5);
                 
     %>
             <div class="post-container" id="<%=trows.getPubNumId()%>">

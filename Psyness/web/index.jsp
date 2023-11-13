@@ -19,7 +19,7 @@
     <link rel="icon" type="image/jpg" href="images/favicon.jpg"/>   
 </head>
 <body>
-
+    
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewBox="0 0 118 94">
       <title>Bootstrap</title>
