@@ -69,6 +69,7 @@
                 String guardar = request.getParameter("guardar");
                 int seguidores = 0;
                 int seguidos = 0;
+                int PubNumIdefinitivo;
                 helpers = new InterPubHelper( ).addRequest( request );
                 ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
                 ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
@@ -77,6 +78,12 @@
                 DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
                 String horaFormateada2 = horaCiudadMexico.format(formatter2);
                 
+                InterPubService metododefinitivo = new InterPubService();
+                            InterPub objetodefinivo = metododefinitivo.getLastPub();
+                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
+                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString()) + 1;
+                                } else {
+                                PubNumIdefinitivo = 1;}
                 
                 user = new InterPub(); 
                 user.setPubCont("");    
@@ -87,10 +94,7 @@
                         flag = helpers.addT( );
                         if (flag) {
                         
-                            InterPubService metododefinitivo = new InterPubService();
-                            InterPub objetodefinivo = metododefinitivo.getLastPub();
                             
-                            int PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString()) + 1;
                             int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
                             
                             
@@ -110,12 +114,17 @@
                                 sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
                                 flag = helpers.addT( );
                                 if (flag) {
-                                    int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                                    InterUsersPub contextInterses = new InterUsersPub();
-                                    contextInterses.setiUserNum(new InterUsers(IUserNum));
-                                    InterUsersPubService interUsersPubService = new InterUsersPubService();
-                                    boolean success = interUsersPubService.addUsersPub(contextInterses);
-                                    response.sendRedirect("error.jsp");
+                                
+                                
+                                int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
+
+
+                                InterUsersPub contextInterses = new InterUsersPub();
+                                contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
+                                contextInterses.setiUserNum(new InterUsers(IUserNum));
+                                InterUsersPubService interUsersPubService = new InterUsersPubService();
+                                boolean success = interUsersPubService.addUsersPub(contextInterses);
+                                response.sendRedirect("error.jsp");
                                 }   
                                 }else {%>
                                         <script>
@@ -177,7 +186,7 @@
                 <li>
                     <a href="feed.jsp">
                         <i class="fa-sharp fa-solid fa-house"></i>
-                        <span class="links_name">Inicio</span>
+                        <span class="links_name">Incio</span>
                     </a>
                     <!---<span class="links_name">Inicio</span>---->
                 </li> 
