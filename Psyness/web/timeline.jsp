@@ -207,7 +207,6 @@
                             <div class="profile_avatar_holder"> 
                                 <img src="assets/images/avatars/prof1.png" alt="">
                             </div>
-                            <div class="user_status status_online"></div>
                             <div class="icon_change_photo" hidden> <ion-icon name="camera" class="text-xl"></ion-icon> </div>
                         </div>
 
