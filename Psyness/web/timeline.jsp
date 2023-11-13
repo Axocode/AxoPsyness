@@ -17,7 +17,7 @@
 
     <!-- Basic Page Needs
         ================================================== -->
-    <title>Socialite Template</title>
+    <title>Perfil</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Socialite is - Professional A unique and beautiful collection of UI elements">
@@ -207,7 +207,6 @@
                             <div class="profile_avatar_holder"> 
                                 <img src="assets/images/avatars/prof1.png" alt="">
                             </div>
-                            <div class="user_status status_online"></div>
                             <div class="icon_change_photo" hidden> <ion-icon name="camera" class="text-xl"></ion-icon> </div>
                         </div>
 
