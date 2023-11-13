@@ -181,6 +181,63 @@ public class InterPubService extends Conexion<InterPub>
     
     return aux;
 }
+    
+    
+    public InterPub getLastPub() {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String sql = "select * from interpub order by pubnumid desc limit 1";
+        
+        try {
+            connection = getConnection(); // Implementa tu propio método para obtener la conexión
+            if (connection == null) {
+                return null;
+            }
+
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                // Crear un objeto InterPub con los datos del resultado
+                InterPub lastPub = new InterPub();
+                lastPub.setPubNumId(resultSet.getInt("pubnumid"));
+                // Añadir el resto de los campos según la estructura de tu clase InterPub
+
+                return lastPub;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+        // Cerrar los recursos en el orden inverso
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        }
+
+        return null;
+    }
+    
 public boolean deleteUsers( InterPub pub )
     {
         Connection connection = null;
