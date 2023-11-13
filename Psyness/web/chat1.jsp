@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="css/tailwindcss-colors.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/stylechat.css">
     <title>Chat</title>
 </head>
 <body>
@@ -24,11 +24,14 @@
             <aside class="chat-sidebar">
                 <a href="feed2.html" class="chat-sidebar-logo">
                     <i class="ri-arrow-left-line"></i> 
-                               </a>
+                </a>
                 <ul class="chat-sidebar-menu">
                     <li class="active"><a href="#" data-title="Chats"><i class="ri-chat-3-line"></i></a></li>
                     <li class="chat-sidebar-profile">
                         <button type="button" class="chat-sidebar-profile-toggle">
+                            <img src="images/prof1.png" alt="">
+                             
+
                         </button>
                         
                     </li>
