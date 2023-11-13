@@ -3,38 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/AxoPsyness/Psyness/web/css/CTA.png</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/index.jsp</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/feed2.html</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/css/tailwindcss-colors.css</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/settings.jsp</file>
-            <file>file:/D:/AxoPsyness/Psyness/src/java/org/axocode/dao/service/InterFavService.java</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/script.js</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/datacenter.jsp</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/css/cssindexxx.css</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/Session.jsp</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/feed.jsp</file>
             <file>file:/D:/AxoPsyness/Psyness/web/css/stylesfeed.css</file>
-            <file>file:/D:/AxoPsyness/Psyness/src/java/org/axocode/dao/InterFlow.java</file>
-            <file>file:/D:/AxoPsyness/Psyness/src/java/org/axocode/dao/service/InterCodesUsersService.java</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/css/style.css</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/profileimg.jsp</file>
+            <file>file:/D:/AxoPsyness/Psyness/web/assets/css/uikit.css</file>
+            <file>file:/D:/AxoPsyness/Psyness/web/assets/css/icons.css</file>
+            <file>file:/D:/AxoPsyness/Psyness/web/pages-setting.jsp</file>
+            <file>file:/D:/AxoPsyness/Psyness/web/css/stylechat.css</file>
+            <file>file:/D:/AxoPsyness/Psyness/web/pages.jsp</file>
+            <file>file:/D:/AxoPsyness/Psyness/web/assets/css/style.css</file>
+            <file>file:/D:/AxoPsyness/Psyness/web/css/cssindexxx.css</file>
+            <file>file:/D:/AxoPsyness/Psyness/web/timeline.jsp</file>
             <file>file:/D:/AxoPsyness/Psyness/web/chat1.jsp</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/chat.html</file>
             <file>file:/D:/AxoPsyness/Psyness/web/profile.jsp</file>
-            <file>file:/D:/AxoPsyness/Psyness/src/java/org/axocode/dao/InterPub.java</file>
             <file>file:/D:/AxoPsyness/Psyness/src/java/org/axocode/dao/service/Conexion.java</file>
-=======
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/web/SessionSin.jsp</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/web/createSinCodigo.jsp</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/web/Session.jsp</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/web/feed.jsp</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/src/java/org/axocode/dao/service/Conexion.java</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/web/index.jsp</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/web/settings.jsp</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/web/profile.jsp</file>
->>>>>>> fcde52efa85c6b19132faec69c2c3404209118ff
         </group>
     </open-files>
 </project-private>
