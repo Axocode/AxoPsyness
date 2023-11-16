@@ -14,6 +14,7 @@
     </head>
     <body>
         <%  
+          request.setCharacterEncoding("UTF-8"); 
           HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
           else{out.print("<script>location.replace('index.jsp');</script>");}
