@@ -1,6 +1,7 @@
 <%@page import="org.axocode.dao.service.InterFavService"%>
 <%@page import="org.axocode.dao.service.InterFlowService"%>
 <%@page import="org.axocode.helper.InterUsersHelper"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="org.axocode.dao.InterUsers"%>
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="java.util.Collections"%>
@@ -29,9 +30,11 @@
     <body>
 <<<<<<< HEAD
 <%
-    HttpSession sesion = request.getSession();
-    if (sesion.getAttribute("SIUser") != null){}
-    else{out.print("<script>location.replace('index.jsp');</script>");}                        
+    HttpSession sesion = request.getSession(); 
+    Object siUserNumAttribute = sesion.getAttribute("SIUserNum");
+    if (siUserNumAttribute == null) {
+            out.print("<script>location.replace('index.jsp');</script>");
+        }
     String nombre =null;
     String edad = null;
     String data = null;
@@ -81,6 +84,7 @@
            InterUsersService dao = new InterUsersService();
            InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
            if (interUsers != null) {
+           
            if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
             
             seguidores1 = interUsers.getIUserSeguidores();
@@ -202,16 +206,16 @@
                 <div class="user-profile-top">
                     <div class="contenedor-imagen">
                         <img src="images/<%=data%>" class="">
+                                <%if (nombre.equals(sesion.getAttribute("SIUser"))) {%>
                         <div class="overlay">
                             <div class="editar">
-                                <%if (nombre.equals(sesion.getAttribute("SIUser"))) {%>
                                 <a href="profileimg.jsp"> <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"></path></svg></a>
-                                <%}%>
                             </div>
                         </div>
+                                <%}%>
                     </div>
                     <div>
-                        <h1><%=nombre%><br><span class="badge bg-secondary"><%=edad%></span></h1>                       
+                        <h1><c:out value='<%=nombre%>'/><br><span class="badge bg-secondary"><c:out value='<%=edad%>'/></span></h1>                       
                     </div>
 
                 </div>
@@ -310,12 +314,12 @@
                 <div class="user-profile">
                     <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><img src="images/<%=data1%>"></a>
                     <div>
-                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><b><%=interUsers.getIUser()%></b>‎ ‎<%=hora%></p></a>
+                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><b><c:out value='<%=interUsers.getIUser()%>'/></b>‎ ‎<%=hora%></p></a>
                         <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small><%=fecha%></small></a>
                     </div>
                 </div>
                 <br>
-                <p class="post-text"><%=trows.getPubCont()%></p>
+                <p class="post-text"><c:out value='<%=trows.getPubCont()%>'/></p>
                 <div class="post-row">
                     <div class="activity-icons">
                         <div><a href="megusta.jsp?pub=<%=trows.getPubNumId()%>&&chest=profile&&id=<%=interUsers.getIUserNum()%>"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
@@ -356,7 +360,7 @@
                 <div class="user-profile">
                     <img src="images/<%=data3%>" id="foton">
                     <div>
-                        <p id="username"><%=sesion.getAttribute("SIUser")%></p>
+                        <p id="username"><c:out value='<%=sesion.getAttribute("SIUser")%>'/></p>
                         <small><%=sesion.getAttribute("SIAge")%></small>
                     </div>   
                 </div>

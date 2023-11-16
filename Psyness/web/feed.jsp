@@ -14,6 +14,7 @@
 <%@page import="org.axocode.dao.InterFav"%>
 <%@page import="org.axocode.helper.InterFavHelper"%>
 <%@page import="org.axocode.dao.service.InterFavService"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="org.axocode.dao.service.InterFlowService"%>
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="java.util.Comparator"%>
@@ -54,8 +55,6 @@
 <%
           request.setCharacterEncoding("UTF-8");          
           HttpSession sesion = request.getSession();
-          if (sesion.getAttribute("SIUser") != null){}
-          else{out.print("<script>location.replace('index.jsp');</script>");}
           
                 String data = (String) sesion.getAttribute("SIImgNum");
                 if (data == null) {data = "perfilsidebar.png";}
@@ -78,12 +77,7 @@
                 DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
                 String horaFormateada2 = horaCiudadMexico.format(formatter2);
                 
-                InterPubService metododefinitivo = new InterPubService();
-                            InterPub objetodefinivo = metododefinitivo.getLastPub();
-                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
-                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString()) + 1;
-                                } else {
-                                PubNumIdefinitivo = 1;}
+                
                 
                 user = new InterPub(); 
                 user.setPubCont("");    
@@ -96,7 +90,12 @@
                         
                             
                             int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                            
+                            InterPubService metododefinitivo = new InterPubService();
+                            InterPub objetodefinivo = metododefinitivo.getLastPub();
+                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
+                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
+                                } else {
+                                PubNumIdefinitivo = 1;}
                             
                             InterUsersPub contextInterses = new InterUsersPub();
                             contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
@@ -110,14 +109,19 @@
                             String horaLastPubliString = (String) sesion.getAttribute("SILastPub");
                             LocalDateTime horaLastPubli = LocalDateTime.parse(horaLastPubliString, formatter2);
                             long totalToAccesss = ChronoUnit.SECONDS.between(horaLastPubli, horaAct);
-                            if (totalToAccesss > 5) {
+                            if (totalToAccesss > 10) {
                                 sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
                                 flag = helpers.addT( );
                                 if (flag) {
                                 
                                 
                                 int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-
+                                InterPubService metododefinitivo = new InterPubService();
+                            InterPub objetodefinivo = metododefinitivo.getLastPub();
+                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
+                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
+                                } else {
+                                PubNumIdefinitivo = 1;}
 
                                 InterUsersPub contextInterses = new InterUsersPub();
                                 contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
@@ -128,7 +132,7 @@
                                 }   
                                 }else {%>
                                         <script>
-                                         var valor = '<%= 5 - totalToAccesss %>';
+                                         var valor = '<%= 10 - totalToAccesss %>';
                                          if (valor === 1) {alert('Espera '+ valor +' segundo volver a publicar');
                                          window.location.href = "feed.jsp";}else 
                                          alert('Espera '+ valor +' segundos volver a publicar'); window.location.href = "feed.jsp"; 
@@ -148,6 +152,7 @@
            InterUsersService dao = new InterUsersService();
            InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
            if (interUsers != null) {
+            
            if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
             
             seguidores = interUsers.getIUserSeguidores();
@@ -292,7 +297,7 @@
                 <div class="user-profile">
                     <img src="images/<%=data%>">
                     <div>
-                        <p><%=sesion.getAttribute("SIUser")%></p>
+                        <p><c:out value='<%=sesion.getAttribute("SIUser")%>'/></p>
                         <small>Public</small>
                     </div>
 
@@ -315,15 +320,15 @@
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="user-profile-modal">
-                                <img src="images/<%=data%>">
+                                <img src="images/<c:out value='<%=data%>'/>">
                                 <div>
-                                    <p><%=sesion.getAttribute("SIUser")%></p>
+                                    <p><c:out value='<%=sesion.getAttribute("SIUser")%>'/></p>
                                 </div>
                                     
                             </div>
                                 <form id="formulario3" method="POST" accept-charset="UTF-8" >
                             <div class="post-input-container">
-                                <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" maxlength="500" placeholder="Que estas Pensando,  <%=sesion.getAttribute("SIUser")%>?"></textarea>
+                                <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" maxlength="500" placeholder="Que estas Pensando,  <c:out value='<%=sesion.getAttribute("SIUser")%>'/>"></textarea>
                                 <input type="hidden" name="PubDate" id="PubDate" value="<%=horaFormateada%>" />
                             </div>
                             <div class="modal-footer">
@@ -369,16 +374,21 @@
                 <div class="user-profile">
                     <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><img src="images/<%=data1%>"></a>
                     <div>
-                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><b><%=interUsers.getIUser()%></b>‎ ‎<%=hora%></p></a>
+                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><b><c:out value='<%=interUsers.getIUser()%>'/></b>‎ ‎<%=hora%></p></a>
                         <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small><%=fecha%></small></a>
                     </div>
                 </div>
-                <br>
-                <%if (sesion.getAttribute("SIUser").equals("Axocode")) {%>
-                <p class="post-text"><%=trows.getPubCont()%> <a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>">Eliminar</a></p>
+                <br>                
+                <%if (sesion.getAttribute("SIUser").equals(interUsers.getIUser())) {%>
+                <p class="post-text"><c:out value='<%=trows.getPubCont()%>'/></p>
+                <p class="post-text">(<a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>">Eliminar</a>)</p>
+                <%}else if (sesion.getAttribute("SIRol").equals("Administrador")) {%>
+                <p class="post-text"><c:out value='<%=trows.getPubCont()%>'/></p>
+                <p class="post-text">(<a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>">Eliminar</a>)</p>
                 <%}else{%>
-                <p class="post-text"><%=trows.getPubCont()%></p>
+                <p class="post-text"><c:out value='<%=trows.getPubCont()%>'/></p>
                 <%}%>
+
                 <div class="post-row">
                     <div class="activity-icons">
                         <div><a href="megusta.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&id=<%=interUsers.getIUserNum()%>"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
@@ -421,7 +431,7 @@
                 <div class="user-profile">
                     <img src="images/<%=data%>" id="foton">
                     <div>
-                        <p id="username"><%=sesion.getAttribute("SIUser")%></p>
+                        <p id="username"><c:out value='<%=sesion.getAttribute("SIUser")%>'/></p>
                         <small><%=sesion.getAttribute("SIUserNum")%></small>
                     </div>   
                 </div>

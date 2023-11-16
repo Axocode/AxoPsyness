@@ -6,6 +6,7 @@
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="java.util.List"%>
 <%@page import="org.axocode.dao.InterUsers"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="org.axocode.helper.InterUsersHelper"%>
 <%@page session="true"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -190,53 +191,7 @@
         
         <!-----------------------------------main-content(EXEL)--------------------------------------------------->
         <div class="main-content">
-            <div class="write-post-container">
-                   
-                <div class="user-profile">                   
-                    <div>
-                        <p id="username">Listado de temas</p>
-                    </div> 
-                </div>
-                <div class="post-input-container">
-
-
-                        <!--MODAL-->
-                              
-                        <!--  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel"><center>Crear publicacion</center></h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="user-profile-modal">
-                                <img src="images/perfilsidebar.png">
-                                <div>
-                                    <p>JASNA</p>
-                                </div>
-                                    
-                            </div>
-                                <form id="formulario3" method="POST">
-                            <div class="post-input-container">
-                                <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" placeholder="Que estas Pensando,  JAFNA?"></textarea>
-                            </div>
-                            <button type="button" class="btn btn-outline-light"><span><i class="fa-regular fa-file-plus" style="color: #000000;"></i>
-                                </span>Agregar Imagen</button>
-                            <div class="modal-footer">
-                                <div class="d-grid gap-2">
-                                    <input class="btn btn-primary" type="submit" id="guardar"  class="submit"/>
-                                    
-                                </div>                            
-                                </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div><!-- comment -->
-                        <!--FIN MODAL-->
-                    
-                </div>
-            </div>
-            
+        
             
             
             
@@ -297,7 +252,7 @@
                 <div class="user-profile">
                     <img src="images/<%=data%>" id="foton">
                     <div>
-                        <p id="username"><%=sesion.getAttribute("SIUser")%></p>
+                        <p id="username"><c:out value='<%=sesion.getAttribute("SIUser")%>'/></p>
                         <small><%=sesion.getAttribute("SIAge")%></small>
                     </div>   
                 </div>

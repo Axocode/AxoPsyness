@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="org.axocode.dao.InterUsers"%>
 <%@page import="org.axocode.dao.service.InterUsersService"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="org.axocode.helper.InterUsersHelper"%>
 <%@page session="true"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -197,7 +198,7 @@
                     <%if (seguidormain != null) {%>
                     <h1 class="card-header">Tus seguidos</h1>
                     <%}else{%>
-                    <h1 class="card-header">Seguidos de <a href="profile.jsp?id=<%=postK%>" style="text-decoration: none; color: black;"><%=nombreper%></a></h1>
+                    <h1 class="card-header">Seguidos de <a href="profile.jsp?id=<%=postK%>" style="text-decoration: none; color: black;"><c:out value='<%=nombreper%>'/></a></h1>
                     <%}%>
                     <div class="card-body scroll">
                       <%
@@ -223,7 +224,7 @@
                           </div>
                           <div class="col-md-8">
                             <div class="card-body">
-                              <a href="profile.jsp?id=<%=trows.getIUserNum()%>"  style="text-decoration: none; color: black;" ><h3 class="card-title"><%=trows.getIUser()%></h3></a>
+                                <a href="profile.jsp?id=<%=trows.getIUserNum()%>"  style="text-decoration: none; color: black;" ><h3 class="card-title"><c:out value='<%=trows.getIUser()%>'/></h3></a>
                             </div>
                           </div>
                         </div>
@@ -240,7 +241,7 @@
                 <div class="user-profile">
                     <img src="images/<%=data%>" id="foton">
                     <div>
-                        <p id="username"><%=sesion.getAttribute("SIUser")%></p>
+                        <p id="username"><c:out value='<%=sesion.getAttribute("SIUser")%>'/></p>
                         <small><%=sesion.getAttribute("SIUserNum")%></small>
                     </div>   
                 </div>

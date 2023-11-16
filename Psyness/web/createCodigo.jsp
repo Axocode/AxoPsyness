@@ -54,7 +54,7 @@
                                 <label for="pass">Codigo</label>
                             </div>
                             <div class="input-field">
-                                <input id="IRol" type="hidden" value="Cliente" name="IRol"  class="submit" value="${param.IRol}">
+                                <input id="IRol" type="hidden" value="Administrador" name="IRol"  class="submit" value="${param.IRol}">
                                 <input id="accion" type="hidden" value="Guardar" name="accion"  class="submit" value="${param.accion}">
                                 <input id="action" type="submit" value="Empezar" name="action" class="submit" value="${param.accion}"> 
                             </div>
