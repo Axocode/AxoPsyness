@@ -60,7 +60,7 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
-insert into interusers(iuser,iage,iemail,ipassword,irol) values('Axocode','99','axocode0@gmail.como','avjygA0612','Administrador');
+insert into interusers(iuser,iage,iemail,ipassword,irol) values('Axocode','99','axocode0@gmail.como','losquieromuchoaxocode','Administrador');
 -- -----------------------------------------------------
 -- Table `axobasepsy`.`interfav`
 -- -----------------------------------------------------
