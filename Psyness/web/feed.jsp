@@ -52,6 +52,11 @@
     
 </head>
 <body>
+<script>
+    function doPub() {
+      document.getElementById("guardadito").disabled = true;
+    }
+</script>
 <%
           request.setCharacterEncoding("UTF-8");          
           HttpSession sesion = request.getSession();
@@ -326,14 +331,15 @@
                                 </div>
                                     
                             </div>
-                                <form id="formulario3" method="POST" accept-charset="UTF-8" >
+                                <form id="formulario3" method="POST" accept-charset="UTF-8" onsubmit="doPub();" >
                             <div class="post-input-container">
                                 <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" maxlength="500" placeholder="Que estas Pensando,  <c:out value='<%=sesion.getAttribute("SIUser")%>'/>"></textarea>
                                 <input type="hidden" name="PubDate" id="PubDate" value="<%=horaFormateada%>" />
                             </div>
                             <div class="modal-footer">
                                 <div class="d-grid gap-2">
-                                    <input class="btn btn-primary" type="submit" id="guardar" name="guardar" value="Submit" />
+                                    <input class="btn btn-primary" type="hidden" id="guardar" name="guardar" value="Submit" />
+                                    <input class="btn btn-primary" type="submit" id="guardadito" name="guardar" value="Submit" />
                                 </div>                            
                                 </form>
                             </div>
@@ -404,7 +410,7 @@
                         <%}}%>
                         <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                             InterFlowService flowww = new InterFlowService();
-                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");;
+                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
                             boolean seguir = flowww.isUserFollowing(interUsers.getIUserNum(), FlowSeguidorID );        
                             if (seguir == true ) {
                         %>

@@ -107,6 +107,34 @@ public class InterFavService extends Conexion<InterFav>
         return false;
     }
     
+    public boolean checkIfFavExists(InterFav fav) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return false;
+            }
+
+            String sql = "select * from interfav where favidpub = ? and faviduser = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, fav.getFavIdPub());
+            preparedStatement.setInt(2, fav.getFavIdUser());
+
+            resultSet = preparedStatement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+
+        return false;
+    }
+    
     public boolean unfollowFav(InterFav fav) {
     Connection connection = null;
     PreparedStatement preparedStatement = null;

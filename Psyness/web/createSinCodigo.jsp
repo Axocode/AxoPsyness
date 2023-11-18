@@ -31,7 +31,7 @@
                 <div class="col-md-6 right">
                      <div class="input-box">
                         <header>Crear cuenta sin codigo</header>
-                        <form id="form1" action="SessionSin.jsp" >
+                        <form id="form1" action="SessionSin.jsp" onsubmit="subir()" >
                             <div class="input-field">
                                 <input id="IUser" name="IUser" value="${param.IUser}"${param.readonly} type="text" class="input"  minlength="6" maxlength="13" required/>
                                 <label for="user">Nombre de Usuario</label>
@@ -51,7 +51,8 @@
                             <div class="input-field">
                                 <input id="IRol" type="hidden" value="Visitante" name="IRol"  class="submit" value="${param.IRol}">
                                 <input id="accion" type="hidden" value="Guardar" name="accion"  class="submit" value="${param.accion}">
-                                <input id="action" type="submit" value="Empezar" name="action" class="submit" value="${param.accion}"> 
+                                <input id="action" type="hidden" value="Empezar" name="action" class="submit" value="${param.accion}"> 
+                                <input id="actionsita" type="submit" value="Empezar" name="action" class="submit" value="${param.accion}"> 
                             </div>
                             <div class="signin">
                                 <span>Ya tienes una cuenta? <a href="login.jsp">Iniciar Sesion</a></span>
@@ -96,7 +97,11 @@
         }
         -->
     </script>
-        
+  <script>
+    function subir() {
+      document.getElementById("actionsita").disabled = true;
+    }
+  </script>
          <script>
             function validar(correo){
                  var expReg= /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;

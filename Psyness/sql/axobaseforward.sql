@@ -22,7 +22,7 @@ USE `axobasepsy` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `axobasepsy`.`intercodes` (
   `codescode` VARCHAR(10) NOT NULL,
-  `codesstatus` VARCHAR(10) NULL DEFAULT 'unused',
+  `codesstatus` VARCHAR(15) NULL DEFAULT 'unused',
   PRIMARY KEY (`codescode`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;

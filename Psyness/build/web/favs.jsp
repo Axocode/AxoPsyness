@@ -52,6 +52,11 @@
     
 </head>
 <body>
+<script>
+    function doPub() {
+      document.getElementById("guardadito").disabled = true;
+    }
+</script>
 <%
           request.setCharacterEncoding("UTF-8");          
           HttpSession sesion = request.getSession();
@@ -331,7 +336,8 @@
                             </div>
                             <div class="modal-footer">
                                 <div class="d-grid gap-2">
-                                    <input class="btn btn-primary" type="submit" id="guardar" name="guardar" value="Submit" />
+                                    <input class="btn btn-primary" type="hidden" id="guardar" name="guardar" value="Submit" />
+                                    <input class="btn btn-primary" type="submit" id="guardadito" name="guardar" value="Submit" />
                                 </div>                            
                                 </form>
                             </div>
