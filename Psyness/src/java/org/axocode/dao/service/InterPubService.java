@@ -52,6 +52,7 @@ public class InterPubService extends Conexion<InterPub>
                 pub.setPubCont(resultSet.getString(2));
                 pub.setPubMg(resultSet.getInt(3));
                 pub.setPubDate(resultSet.getString(4));
+                pub.setPubHour(resultSet.getString(5));
                 
                 pubList.add(pub);
             }
@@ -71,7 +72,7 @@ public class InterPubService extends Conexion<InterPub>
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "insert into interpub( pubcont, pubdate ) values( ?, ? )";
+        String sql = "insert into interpub( pubcont, pubdate, pubhour ) values( ?, ?, ? )";
         int row = 0;
         try 
         {
@@ -87,6 +88,7 @@ public class InterPubService extends Conexion<InterPub>
             }
             preparedStatement.setString(1, pub.getPubCont());
             preparedStatement.setString(2, pub.getPubDate());
+            preparedStatement.setString(3, pub.getPubHour());
 
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
@@ -98,6 +100,9 @@ public class InterPubService extends Conexion<InterPub>
         }
         return false;
     }
+    
+
+    
         public boolean updateMgWithPubNum( InterPub exp )
     {
         Connection connection = null;
@@ -151,6 +156,7 @@ public class InterPubService extends Conexion<InterPub>
             aux.setPubCont(resultSet.getString(1));
             aux.setPubMg(resultSet.getInt(2));
             aux.setPubDate(resultSet.getString(3));
+            aux.setPubHour(resultSet.getString(4));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -182,6 +188,111 @@ public class InterPubService extends Conexion<InterPub>
     return aux;
 }
     
+    public boolean getPubLateDay(String pubdate) {
+    InterPub aux = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return false;  
+        }
+        
+        preparedStatement = connection.prepareStatement("select * from interpub where pubdate = ?");
+        preparedStatement.setString(1, pubdate);
+        
+        resultSet = preparedStatement.executeQuery();
+        
+        if (resultSet.next()) {
+            aux = new InterPub();
+            aux.setPubCont(resultSet.getString("pubcont"));
+            aux.setPubMg(resultSet.getInt("pubmg"));
+            aux.setPubDate(resultSet.getString("pubdate"));
+            
+        
+            System.out.println("Publicación encontrada: " + aux.getPubCont());
+            
+        
+            return true;
+        } else {
+        
+            System.out.println("No se encontró ninguna publicación para la fecha: " + pubdate);
+            
+        
+            return false;
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        return false;
+    } finally {
+        
+        try {
+            if (resultSet != null) resultSet.close();
+            if (preparedStatement != null) preparedStatement.close();
+            if (connection != null) connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+    public InterPub getMostLikedPubByDate(String pubdate) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+
+    String sql = "select * from interpub where pubdate = ? order by pubmg desc limit 1";
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return null;
+        }
+
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, pubdate);
+        resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            InterPub mostLikedPub = new InterPub();
+            mostLikedPub.setPubNumId(resultSet.getInt("pubnumid"));
+            mostLikedPub.setPubCont(resultSet.getString("pubcont"));
+            mostLikedPub.setPubMg(resultSet.getInt("pubmg"));
+            mostLikedPub.setPubDate(resultSet.getString("pubdate"));
+            mostLikedPub.setPubHour(resultSet.getString("pubhour"));
+
+            return mostLikedPub;
+        }
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    return null;
+}
     
     public InterPub getLastPub() {
         Connection connection = null;

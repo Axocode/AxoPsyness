@@ -62,7 +62,7 @@
           HttpSession sesion = request.getSession();
           
                 String data = (String) sesion.getAttribute("SIImgNum");
-                if (data == null) {data = "perfilsidebar.png";}
+                if (data == null) {data = "profilesidebar3.png";}
                 Helpers helpers = null;
                 InterPub user = null;
                 String aux = null;
@@ -79,6 +79,8 @@
                 ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
                 String horaFormateada = horaCiudadMexico.format(formatter);
+                
+                
                 DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
                 String horaFormateada2 = horaCiudadMexico.format(formatter2);
                 
@@ -329,12 +331,17 @@
                                 <div>
                                     <p><c:out value='<%=sesion.getAttribute("SIUser")%>'/></p>
                                 </div>
-                                    
+                            <%
+                            String[] partes =horaFormateada.split(" ");
+                            String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                            String hora12 = partes[5];
+                            %>      
                             </div>
                                 <form id="formulario3" method="POST" accept-charset="UTF-8" onsubmit="doPub();" >
                             <div class="post-input-container">
                                 <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" maxlength="500" placeholder="Que estas Pensando,  <c:out value='<%=sesion.getAttribute("SIUser")%>'/>"></textarea>
-                                <input type="hidden" name="PubDate" id="PubDate" value="<%=horaFormateada%>" />
+                                <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
+                                <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
                             </div>
                             <div class="modal-footer">
                                 <div class="d-grid gap-2">
@@ -357,22 +364,24 @@
         InterPubHelper pubHelper = new InterPubHelper();
         List<InterPub>list = pubHelper.getListT();
         Collections.reverse(list);
+        int Cantidad = 0;
+        int tamano = list.size();
         if( list != null && list.size() > 0)
         {
         for(InterPub trows : list)
-        {
+        {       
+           Cantidad++;
            InterUsersService dao = new InterUsersService();
            InterUsers interUsers = dao.getInterUsersByPubNumId(trows.getPubNumId());
 
             if (interUsers != null) {
             String data1 = interUsers.getIImgNum();
+            
             if (data1 != null) {}
                 else{data1 = "perfilsidebar.png";}
-            
                 
-                String[] partes = trows.getPubDate().split(" ");
-                String fecha = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-                String hora = partes[5].substring(0,5);
+        String horita = trows.getPubHour().substring(0, 5);
+            
 
                 
     %>
@@ -380,8 +389,8 @@
                 <div class="user-profile">
                     <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><img src="images/<%=data1%>"></a>
                     <div>
-                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><b><c:out value='<%=interUsers.getIUser()%>'/></b>‎ ‎<%=hora%></p></a>
-                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small><%=fecha%></small></a>
+                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><b><c:out value='<%=interUsers.getIUser()%>'/></b>‎ ‎<%=horita%></p></a>
+                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small><%=trows.getPubDate()%></small></a>
                     </div>
                 </div>
                 <br>                
@@ -485,60 +494,53 @@
                         </div>
                       </div>
                     </div>
-                    
                     <div class="accordion-item">
                       <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                          Materiales
+                          <b>Wave diaria</b>
                         </button>
                       </h2>
                       <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
                         <div class="accordion-body">
                             <div class="card" style="width: 18rem;">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><img src="images/sdbr3.jpg"/><!-- <i class="far fa-check-circle"></i> --> <a href="https://www.ipn.mx/assets/files/ccs/docs/gaceta-extraordinaria/2019/12/1519-gaceta-protocolo-genero.pdf" target="blank" ><b>Protocolo</b></a> </li>
-                                <li class="list-group-item"><img src="images/sdbr4.jpg"/><!-- <i class="far fa-check-circle"></i> --> <a href="https://www.ipn.mx/assets/files/cecyt9/docs/11-red-genero/ACUERDO-PRESIDENCIAL.pdf" target="blank"><br><b>Acuerdo Presidencia</b></a> </li>
+                                <ul class="list-group list-group-flush">
+                                    <%
+                              /*WAVE*/
+
+                            ZonedDateTime ayer = horaCiudadMexico.minusDays(1);
+                            String horaFormateadaWave = ayer.format(formatter);
+                            String []partesWave = horaFormateadaWave.split(" ");
+                            String fechaWave = partesWave[0] + " " + partesWave[1] + " " + partesWave[2] + " " + partesWave[3] + " " + partes[4];
+
+                            InterPubService horas = new InterPubService();
+                            boolean empezarWave = horas.getPubLateDay(fechaWave);
+
+                                if (empezarWave) {
+                                    InterPub wave = new InterPub();
+                                    InterUsers waveUsers = new InterUsers();
+                                    InterUsersService persona = new InterUsersService();
+                                    wave = horas.getMostLikedPubByDate(fechaWave);
+                                    waveUsers = persona.getInterUsersByPubNumId(wave.getPubNumId());
+                                    String imagenWave = (String) waveUsers.getIImgNum();
+                                    if (imagenWave == null) {imagenWave = "perfilsidebar.png";}
+                                    
+                                    
+                                    
+    %>
+    <li class="list-group-item">
+        <a href="profile.jsp?id=<%=waveUsers.getIUserNum()%>" style="text-decoration:none; color: black;"><p><small><%=wave.getPubDate()%></small></p></a>
+        <a href="profile.jsp?id=<%=waveUsers.getIUserNum()%>" style="text-decoration:none; color: black;"><p><b><c:out value='<%=waveUsers.getIUser()%>'/></b>‎</p></a>
+        <a href="profile.jsp?id=<%=waveUsers.getIUserNum()%>" style="text-decoration:none; color: black;"><%=wave.getPubCont()%></a><br><br>
+        <a href="profile.jsp?id=<%=waveUsers.getIUserNum()%>" style="text-decoration:none; color: black;">Likes: <%=wave.getPubMg()%></a>
+    </li>
+                                <%}%>
                             </ul>
-                          </div>
+                          </div>   
                         </div>
                       </div>
                     </div>
                   </div>
             </div>
-            
-            <div class="trends">
-                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                          <a href="https://www.cecyt9.ipn.mx/red-genero-jdb.html" target="blank"><img src="images/reddegen.png" class="d-block w-100"></a>
-                      </div>
-                      <div class="carousel-item">
-                          <a href="https://unesdoc.unesco.org/ark:/48223/pf0000368125" target="blank"><img src="images/violgen.png" class="d-block w-100" alt="..."></a>
-                      </div>
-                      <div class="carousel-item">
-                          <a href="https://neuro-class.com/salud-mental-prevencion-del-suicidio-en-la-adolescencia/" target="blank"> <img src="images/suic.jpg" class="d-block w-100" alt="..."></a>
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-            </div>
-            <div class="cont-feis">
-                <div class="feisbuk">
-                    <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100083354409895" data-tabs="timeline" data-width="340" data-height="" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
-                        <blockquote cite="https://www.facebook.com/profile.php?id=100083354409895" class="fb-xfbml-parse-ignore">
-                            <a href="https://www.facebook.com/profile.php?id=100083354409895">Red de Género Bátiz</a>
-                        </blockquote>       
-                   </div>
-                </div>
-            </div>
-            
         </div>
     </div>
 </body>

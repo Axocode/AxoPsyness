@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `axobasepsy`.`interpub` (
   `pubcont` TEXT NULL DEFAULT NULL,
   `pubmg` INT NULL DEFAULT '0',
   `pubdate` TEXT NULL DEFAULT NULL,
+  `pubhour` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`pubnumid`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
@@ -52,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `axobasepsy`.`interusers` (
   `iemail` VARCHAR(40) NULL DEFAULT NULL,
   `ipassword` VARCHAR(25) NULL DEFAULT NULL,
   `irol` VARCHAR(20) NULL DEFAULT NULL,
-  `iimgnum` VARCHAR(20) NULL DEFAULT NULL,
+  `iimgnum` VARCHAR(20) NULL DEFAULT 'profilesidebar3.png',
   `iuserseguidores` INT NULL DEFAULT '0',
   `iuserseguidos` INT NULL DEFAULT '0',
   PRIMARY KEY (`iusernum`))

@@ -327,12 +327,17 @@
                                 <div>
                                     <p><c:out value='<%=sesion.getAttribute("SIUser")%>'/></p>
                                 </div>
-                                    
+                                  <%
+                            String[] partes =horaFormateada.split(" ");
+                            String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                            String hora12 = partes[5];
+                            %>    
                             </div>
                                 <form id="formulario3" method="POST" accept-charset="UTF-8" >
                             <div class="post-input-container">
                                 <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" maxlength="500" placeholder="Que estas Pensando,  <c:out value='<%=sesion.getAttribute("SIUser")%>'/>"></textarea>
-                                <input type="hidden" name="PubDate" id="PubDate" value="<%=horaFormateada%>" />
+                                <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
+                                <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
                             </div>
                             <div class="modal-footer">
                                 <div class="d-grid gap-2">
@@ -376,9 +381,7 @@
                 
                   if (interFav.getFavIdPub().equals(trows.getPubNumId())) {
                           
-            String[] partes = trows.getPubDate().split(" ");
-                String fecha = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-                String hora = partes[5].substring(0,5);   
+            String horita = trows.getPubHour().substring(0,5);
       
                     
     %>
@@ -386,8 +389,8 @@
                 <div class="user-profile">
                     <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><img src="images/<%=data1%>"></a>
                     <div>
-                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><b><c:out value='<%=interUsers.getIUser()%>'/></b>‎<%=hora%></p></a>
-                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small><%=fecha%></small></a>
+                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><b><c:out value='<%=interUsers.getIUser()%>'/></b>‎<%=horita%></p></a>
+                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small><%=trows.getPubDate()%></small></a>
                     </div>
                 </div>
                 <br>

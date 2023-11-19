@@ -27,7 +27,8 @@ public class InterPubHelper extends Helpers<InterPub> implements Serializable
     public boolean isValidaCamposOk( )
     {
         return isNotNullAndNotEmpity( t.getPubCont()) 
-                && isNotNullAndNotEmpity( t.getPubDate()) ;
+                && isNotNullAndNotEmpity( t.getPubDate())
+                && isNotNullAndNotEmpity( t.getPubHour());
     }
 
     @Override
@@ -39,6 +40,7 @@ public class InterPubHelper extends Helpers<InterPub> implements Serializable
         
         t.setPubCont(getParameter("PubCont"));
         t.setPubDate(getParameter("PubDate"));
+        t.setPubHour(getParameter("PubHour"));
         if( isValidaCamposOk( ) )
         {
             return pubService.addInterPub(t );
