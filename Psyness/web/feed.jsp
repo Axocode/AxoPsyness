@@ -411,7 +411,7 @@
                             InterLoveService loveeee = new InterLoveService();
                             int LoveID = (Integer) sesion.getAttribute("SIUserNum");
                             boolean seguirLove = loveeee.isUserLove(interUsers.getIUserNum(), LoveID );        
-                            if (seguirLove == true ) {
+                            if (seguirLove) {
                         %>
                         <div><a href="loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Lovent"><%=trows.getPubMg()%> <img src="images/heart.png">Quitar amor</a></div>
                         <%}else{%>
