@@ -322,9 +322,9 @@
                 <div class="post-row">
                     <div class="activity-icons">
                         <%  
-                            InterLoveService loveeee = new InterLoveService();
+                            InterLoveService lovee = new InterLoveService();
                             int LoveID = (Integer) sesion.getAttribute("SIUserNum");
-                            boolean seguirLove = loveeee.isUserLove(interUsers.getIUserNum(), LoveID );        
+                            boolean seguirLove = lovee.isUserLove(trows.getPubNumId(), LoveID );        
                             if (seguirLove == true ) {
                         %>
                         <div><a href="loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=profile&&action1=Lovent"><%=trows.getPubMg()%> <img src="images/heart.png">Quitar amor</a></div>

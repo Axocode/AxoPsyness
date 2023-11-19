@@ -236,21 +236,20 @@ public boolean isUserLove(int IPub, int IUser) {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
-    String sql = "select count(*) from interlove where loveidpub = ? and loveiduser = ?";
+    String sql = "select 1 from interlove where loveidpub = ? and loveiduser = ? limit 1";
 
     try {
         connection = getConnection();
         if (connection == null) {
             return false;
         }
+
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, IPub);
         preparedStatement.setInt(2, IUser);
         resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            int count = resultSet.getInt(1);
-            return count > 0;
-        }
+
+        return resultSet.next(); // Retorna true si hay al menos una fila, false si no hay ninguna
     } catch (SQLException ex) {
         ex.printStackTrace();
     } finally {
