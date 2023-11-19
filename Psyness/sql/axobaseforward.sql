@@ -83,7 +83,6 @@ CREATE TABLE IF NOT EXISTS `axobasepsy`.`interfav` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-
 -- -----------------------------------------------------
 -- Table `axobasepsy`.`interflow`
 -- -----------------------------------------------------
@@ -148,6 +147,26 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Table `axobasepsy`.`interlove`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `axobasepsy`.`interlove` (
+  `loveidpub` INT NULL DEFAULT NULL,
+  `loveiduser` INT NULL DEFAULT NULL,
+  INDEX `loveidpub` (`loveidpub` ASC) ,
+  INDEX `loveiduser` (`loveiduser` ASC) ,
+  CONSTRAINT `interlove_ibfk_1`
+    FOREIGN KEY (`loveidpub`)
+    REFERENCES `axobasepsy`.`interpub` (`pubnumid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `interlove_ibfk_2`
+    FOREIGN KEY (`loveiduser`)
+    REFERENCES `axobasepsy`.`interusers` (`iusernum`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

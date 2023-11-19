@@ -1,3 +1,4 @@
+<%@page import="org.axocode.dao.service.InterLoveService"%>
 <%@page import="org.axocode.dao.service.InterFavService"%>
 <%@page import="org.axocode.dao.service.InterFlowService"%>
 <%@page import="org.axocode.helper.InterUsersHelper"%>
@@ -28,7 +29,6 @@
         <link rel="icon" type="image/jpg" href="images/favicon.jpg"/>    
     </head>
     <body>
-<<<<<<< HEAD
 <%
     HttpSession sesion = request.getSession(); 
     Object siUserNumAttribute = sesion.getAttribute("SIUserNum");
@@ -89,7 +89,7 @@
             
             seguidores1 = interUsers.getIUserSeguidores();
             seguidos1 = interUsers.getIUserSeguidos();
-                
+   
             
     }}}}
 %>  
@@ -321,7 +321,16 @@
                 <p class="post-text"><c:out value='<%=trows.getPubCont()%>'/></p>
                 <div class="post-row">
                     <div class="activity-icons">
-                        <div><a href="megusta.jsp?pub=<%=trows.getPubNumId()%>&&chest=profile&&id=<%=interUsers.getIUserNum()%>"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
+                        <%  
+                            InterLoveService loveeee = new InterLoveService();
+                            int LoveID = (Integer) sesion.getAttribute("SIUserNum");
+                            boolean seguirLove = loveeee.isUserLove(interUsers.getIUserNum(), LoveID );        
+                            if (seguirLove == true ) {
+                        %>
+                        <div><a href="loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=profile&&action1=Lovent"><%=trows.getPubMg()%> <img src="images/heart.png">Quitar amor</a></div>
+                        <%}else{%>
+                        <div><a href="loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=profile&&action1=Love"><%=trows.getPubMg()%> <img src="images/heart.png">Dar amor</a></div>
+                        <%}%>
                         <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                             InterFavService fav = new InterFavService();
                             int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");

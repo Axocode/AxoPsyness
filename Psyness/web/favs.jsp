@@ -3,6 +3,7 @@
     Created on : 7 may. 2023, 20:33:13
     Author     : Admin
 --%>
+<%@page import="org.axocode.dao.service.InterLoveService"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.time.temporal.ChronoUnit"%>
 <%@page import="org.axocode.dao.service.InterPubService"%>
@@ -397,7 +398,16 @@
                 <p class="post-text"><c:out value='<%=trows.getPubCont()%>'/></p>
                 <div class="post-row">
                     <div class="activity-icons">
-                        <div><a href="megusta.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&id=<%=interUsers.getIUserNum()%>"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
+                        <%  
+                            InterLoveService loveeee = new InterLoveService();
+                            int LoveID = (Integer) sesion.getAttribute("SIUserNum");
+                            boolean seguirLove = loveeee.isUserLove(interUsers.getIUserNum(), LoveID );        
+                            if (seguirLove == true ) {
+                        %>
+                        <div><a href="loveService.jsp?u=<%=u%>&&id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=rufless&&action1=Lovent"><%=trows.getPubMg()%> <img src="images/heart.png">Quitar amor</a></div>
+                        <%}else{%>
+                        <div><a href="loveService.jsp?u=<%=u%>&&id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=rufless&&action1=Love"><%=trows.getPubMg()%> <img src="images/heart.png">Dar amor</a></div>
+                        <%}%>
                         <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                             InterFavService fav = new InterFavService();
                             int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
