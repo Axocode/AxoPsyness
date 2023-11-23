@@ -532,11 +532,6 @@
                                     InterUsersService persona = new InterUsersService();
                                     wave = horas.getMostLikedPubByDate(fechaWave);
                                     waveUsers = persona.getInterUsersByPubNumId(wave.getPubNumId());
-                                    String imagenWave = (String) waveUsers.getIImgNum();
-                                    if (imagenWave == null) {imagenWave = "perfilsidebar.png";}
-                                    
-                                    
-                                    
     %>
     <li class="list-group-item">
         <a href="profile.jsp?id=<%=waveUsers.getIUserNum()%>" style="text-decoration:none; color: black;"><p><small><%=wave.getPubDate()%></small></p></a>
