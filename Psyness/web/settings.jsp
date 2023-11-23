@@ -1,5 +1,4 @@
 <%@page session="true"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="org.axocode.dao.service.InterFavService"%>
 <%@page import="org.axocode.dao.service.InterFlowService"%>
 <%@page import="org.axocode.helper.InterUsersHelper"%>
@@ -10,6 +9,7 @@
 <%@page import="java.util.List"%>
 <%@page import="org.axocode.helper.InterPubHelper"%>
 <%@page session="true"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -32,12 +32,13 @@
     
     <body>
 <%
-    request.setCharacterEncoding("UTF-8");
     HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
           else{out.print("<script>location.replace('index.jsp');</script>");}
     String data = (String) sesion.getAttribute("SIImgNum");
                 if (data == null) {data = "perfilsidebar.png";}
+                
+    request.setCharacterEncoding("UTF-8");
 %>
         <div id="fb-root"></div>
             <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
@@ -169,11 +170,11 @@
                         <form class="row g-3" action="actualizarUser.jsp" method="POST" accept-charset="UTF-8">
                             <div class="col-md-6">
                                 <label for="inputEmail4" class="form-label">Nombre de usuario</label>
-                                <input type="text" name="nombre" value="<%=sesion.getAttribute("SIUser") %>" class="form-control" id="inputEmail4" required>
+                                <input type="text" name="nombre" value="<%=sesion.getAttribute("SIUser") %>" class="form-control" id="inputEmail4" minlength="6" maxlength="13" required>
                             </div>
                             <div class="col-md-2">
                                 <label for="inputZip" class="form-label">Edad</label>
-                                <input type="text" name="edad" value="<%=sesion.getAttribute("SIAge") %>" class="form-control" id="inputZip" required>
+                                <input type="text" name="edad" value="<%=sesion.getAttribute("SIAge") %>" class="form-control" id="inputZip" maxlength="2" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                         </form>

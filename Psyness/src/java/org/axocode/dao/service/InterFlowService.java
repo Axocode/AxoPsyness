@@ -162,5 +162,44 @@ public boolean isUserFollowing(int seguidoresID, int seguidorID) {
     return false;
 }
 
+public boolean isUserFollowing(InterFlow flow) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    String sql = "select * from interflow where flowseguidoresid = ? and flowseguidoid = ?";
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return false;
+        }
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, flow.getFlowSeguidoresID());
+        preparedStatement.setInt(2, flow.getFlowSeguidorID());
+        resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            int count = resultSet.getInt(1);
+            return count > 0;
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return false;
+}
+
 
 }

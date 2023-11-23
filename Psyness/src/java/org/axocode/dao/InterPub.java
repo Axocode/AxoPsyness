@@ -9,6 +9,7 @@ public class InterPub implements Serializable{
     private String PubCont;
     private int PubMg;
     private String PubDate;
+    private String PubHour;
 
     public InterPub(){}
     
@@ -46,6 +47,14 @@ public class InterPub implements Serializable{
 
     public void setPubDate(String PubDate) {
         this.PubDate = PubDate;
+    }
+
+    public String getPubHour() {
+        return PubHour;
+    }
+
+    public void setPubHour(String PubHour) {
+        this.PubHour = PubHour;
     }
     
 }

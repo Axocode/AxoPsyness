@@ -34,7 +34,7 @@
         else{out.print("<script>location.replace('index.jsp');</script>");}
         
         
-        
+
     if (request.getParameter("chest").equals("feed")) {
         String pub = request.getParameter("pub");
         int pubInt = Integer.parseInt(pub);
@@ -48,8 +48,12 @@
                 InterFlow flow = new InterFlow();
                 flow.setFlowSeguidoresID(FlowSeguidoresID);
                 flow.setFlowSeguidorID(FlowSeguidorID);
-                
+                boolean exist = flower.isUserFollowing(flow);
+                if (!exist) {     
         boolean successs = flower.addInterFlow(flow);
+        
+        if (successs) {
+                
 
         InterUsersService usersService = new InterUsersService();
         InterUsers user = new InterUsers();
@@ -62,7 +66,7 @@
         usersService.updateFlowSeguidoNum(userr);
         
             response.sendRedirect("feed.jsp#"+pubInt);
-          }
+          }}else{response.sendRedirect("feed.jsp#"+pubInt);}}
           
           
           
@@ -76,10 +80,13 @@
                 InterFlow flow = new InterFlow();
                 flow.setFlowSeguidoresID(FlowSeguidoresID);
                 flow.setFlowSeguidorID(FlowSeguidorID);
+                boolean exist = flower.isUserFollowing(flow);
+                if (!exist) {
+                        
                 
         boolean successs = flower.addInterFlow(flow);
-    
-
+        if (successs) {
+                
 
         InterUsersService usersService = new InterUsersService();
         InterUsers user = new InterUsers();
@@ -92,7 +99,7 @@
         usersService.updateFlowSeguidoNum(userr);
         
             response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);
-              }
+              }}else{response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);}}
               
             if (request.getParameter("chest").equals("rufless")) {
         
@@ -104,11 +111,15 @@
                 InterFlow flow = new InterFlow();
                 flow.setFlowSeguidoresID(FlowSeguidoresID);
                 flow.setFlowSeguidorID(FlowSeguidorID);
+                boolean exist = flower.isUserFollowing(flow);
+                if (!exist) {
+                        
                 
         boolean successs = flower.addInterFlow(flow);
     
-
-
+        if (successs) {
+        
+    
         InterUsersService usersService = new InterUsersService();
         InterUsers user = new InterUsers();
 
@@ -120,7 +131,7 @@
         usersService.updateFlowSeguidoNum(userr);
         
             response.sendRedirect("favs.jsp?rufless=on&&favs="+request.getParameter("u"));
-              }
+              }}else{response.sendRedirect("favs.jsp?rufless=on&&favs="+request.getParameter("u"));}}
 
 %>
     </body>

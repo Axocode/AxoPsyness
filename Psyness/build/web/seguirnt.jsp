@@ -42,11 +42,12 @@
                 InterFlow flow = new InterFlow();
                 flow.setFlowSeguidoresID(FlowSeguidoresID);
                 flow.setFlowSeguidorID(FlowSeguidorID);
-                
+                boolean exist = flower.isUserFollowing(flow);
+                if (exist) {
+                        
         boolean successs = flower.unfollowUser(flow);
-    
-
-
+        if (successs) {
+                
         InterUsersService usersService = new InterUsersService();
         InterUsers user = new InterUsers();
 
@@ -58,7 +59,7 @@
         usersService.unFlowSeguidoNum(userr);
         
             response.sendRedirect("feed.jsp#"+pubInt);
-            }
+            }}else{response.sendRedirect("feed.jsp#"+pubInt);}}
 
             
             
@@ -71,9 +72,13 @@
                 InterFlow flow = new InterFlow();
                 flow.setFlowSeguidoresID(FlowSeguidoresID);
                 flow.setFlowSeguidorID(FlowSeguidorID);
-                
+                boolean exist = flower.isUserFollowing(flow);
+                if (exist) {
+                        
                 boolean successs = flower.unfollowUser(flow);
-
+                if (successs) {
+                        
+                    
                 InterUsersService usersService = new InterUsersService();
                 InterUsers user = new InterUsers();
 
@@ -86,7 +91,7 @@
         
             response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);
             
-            }
+            }}else{response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);}}
             
 
             if (request.getParameter("chest").equals("rufless")) {
@@ -98,9 +103,13 @@
                 InterFlow flow = new InterFlow();
                 flow.setFlowSeguidoresID(FlowSeguidoresID);
                 flow.setFlowSeguidorID(FlowSeguidorID);
-                
+                boolean exist = flower.isUserFollowing(flow);
+                if (exist) {
+                                        
                 boolean successs = flower.unfollowUser(flow);
-
+                
+                if (successs) {
+                        
                 InterUsersService usersService = new InterUsersService();
                 InterUsers user = new InterUsers();
 
@@ -113,7 +122,7 @@
         
             response.sendRedirect("favs.jsp?rufless=on&favs="+request.getParameter("u"));
             
-            }
+            }}else{response.sendRedirect("favs.jsp?rufless=on&favs="+request.getParameter("u"));}}
 
         %>
     </body>
