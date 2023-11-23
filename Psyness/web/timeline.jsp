@@ -684,7 +684,7 @@ nose                                    </div>
                                     <img src="assets/images/avatars/prof1.png" class="bg-gray-200 border border-white rounded-full w-10 h-10">
                                 </a>
                                 <div class="flex-1 font-semibold capitalize">
-                                    <a href="#" class="text-black dark:text-gray-100"> Axelito mix </a>
+                                    <a href="#" class="text-black dark:text-gray-100">  Axelito Mix  </a>
                                     <div class="text-gray-700 flex items-center space-x-2"> 5 <span> hrs </span> <ion-icon name="people"></ion-icon></div>
                                 </div>
                             </div>
@@ -732,7 +732,7 @@ nose                                    </div>
             
                         <div class="p-5 pt-0 border-b dark:border-gray-700">
             
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim laoreet dolore magna aliquam erat volutpat
+                            publicacion de fav?, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim laoreet dolore magna aliquam erat volutpat
             
                         </div>
                         
@@ -795,8 +795,6 @@ nose                                    </div>
                             </div>
             
                         </div>
-            
-                    </div>  
                 </div>
             </div>
         </div>
