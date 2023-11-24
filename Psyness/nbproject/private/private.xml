@@ -3,26 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/seguir.jsp</file>
-            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/pages.jsp</file>
-            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/assets/css/style.css</file>
-            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/seguirnt.jsp</file>
-            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/profile.jsp</file>
-            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/feed2.html</file>
-            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/assets/css/icons.css</file>
-            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/timeline.jsp</file>
-            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/chat1.jsp</file>
-            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/css/stylesfeed.css</file>
-            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/profileimg.jsp</file>
-=======
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/src/java/org/axocode/dao/service/InterUsersService.java</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/src/java/org/axocode/dao/InterUsers.java</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/web/profile.jsp</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/web/profileimg.jsp</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/web/feed.jsp</file>
-            <file>file:/C:/Users/chump/Escritorio/AxoPsyness/Psyness/src/java/org/axocode/dao/service/Conexion.java</file>
->>>>>>> 9a61797b003e1aae29f934678ca3bbd795c55e26
+            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/searching.jsp</file>
+            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/profile-new.jsp</file>
+            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/feed-new.jsp</file>
+            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/assets/css/cambios.css</file>
+            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/settings-new.jsp</file>
+            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/follow-new.jsp</file>
+            <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/Psyness/web/pagenotfound.jsp</file>
         </group>
     </open-files>
 </project-private>
