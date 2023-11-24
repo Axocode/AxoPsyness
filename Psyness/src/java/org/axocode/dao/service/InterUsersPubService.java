@@ -69,7 +69,7 @@ public class InterUsersPubService extends Conexion<InterUsersPub>{
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "insert into interuserspub( iusernum ) values( ? )";
+        String sql = "insert into interuserspub(pubnumid , iusernum ) values( ? , ?)";
         int row = 0;
         try 
         {
@@ -83,7 +83,8 @@ public class InterUsersPubService extends Conexion<InterUsersPub>{
             {
                 return false;
             }
-            preparedStatement.setInt(1, contextInterses.getiUserNum().getIUserNum());
+            preparedStatement.setInt(1, contextInterses.getPubNumId().getPubNumId());
+            preparedStatement.setInt(2, contextInterses.getiUserNum().getIUserNum());
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
             return row == 1;

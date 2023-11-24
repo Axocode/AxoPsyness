@@ -3,6 +3,8 @@
     Created on : 7 may. 2023, 20:33:13
     Author     : Admin
 --%>
+<%@page import="org.axocode.dao.service.InterLoveService"%>
+<%@page import="org.axocode.dao.service.InterPubService"%>
 <%@page import="java.time.temporal.ChronoUnit"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.time.ZonedDateTime"%>
@@ -13,6 +15,7 @@
 <%@page import="org.axocode.dao.InterFav"%>
 <%@page import="org.axocode.helper.InterFavHelper"%>
 <%@page import="org.axocode.dao.service.InterFavService"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="org.axocode.dao.service.InterFlowService"%>
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="java.util.Comparator"%>
@@ -50,14 +53,17 @@
     
 </head>
 <body>
+<script>
+    function doPub() {
+      document.getElementById("guardadito").disabled = true;
+    }
+</script>
 <%
           request.setCharacterEncoding("UTF-8");          
           HttpSession sesion = request.getSession();
-          if (sesion.getAttribute("SIUser") != null){}
-          else{out.print("<script>location.replace('index.jsp');</script>");}
           
                 String data = (String) sesion.getAttribute("SIImgNum");
-                if (data == null) {data = "perfilsidebar.png";}
+                if (data == null) {data = "profilesidebar3.png";}
                 Helpers helpers = null;
                 InterPub user = null;
                 String aux = null;
@@ -68,13 +74,17 @@
                 String guardar = request.getParameter("guardar");
                 int seguidores = 0;
                 int seguidos = 0;
+                int PubNumIdefinitivo;
                 helpers = new InterPubHelper( ).addRequest( request );
                 ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
                 ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
                 String horaFormateada = horaCiudadMexico.format(formatter);
+                
+                
                 DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
                 String horaFormateada2 = horaCiudadMexico.format(formatter2);
+                
                 
                 
                 user = new InterPub(); 
@@ -85,8 +95,18 @@
                         sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
                         flag = helpers.addT( );
                         if (flag) {
+                        
+                            
                             int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
+                            InterPubService metododefinitivo = new InterPubService();
+                            InterPub objetodefinivo = metododefinitivo.getLastPub();
+                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
+                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
+                                } else {
+                                PubNumIdefinitivo = 1;}
+                            
                             InterUsersPub contextInterses = new InterUsersPub();
+                            contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
                             contextInterses.setiUserNum(new InterUsers(IUserNum));
                             InterUsersPubService interUsersPubService = new InterUsersPubService();
                             boolean success = interUsersPubService.addUsersPub(contextInterses);
@@ -97,20 +117,30 @@
                             String horaLastPubliString = (String) sesion.getAttribute("SILastPub");
                             LocalDateTime horaLastPubli = LocalDateTime.parse(horaLastPubliString, formatter2);
                             long totalToAccesss = ChronoUnit.SECONDS.between(horaLastPubli, horaAct);
-                            if (totalToAccesss > 5) {
+                            if (totalToAccesss > 10) {
                                 sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
                                 flag = helpers.addT( );
                                 if (flag) {
-                                    int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                                    InterUsersPub contextInterses = new InterUsersPub();
-                                    contextInterses.setiUserNum(new InterUsers(IUserNum));
-                                    InterUsersPubService interUsersPubService = new InterUsersPubService();
-                                    boolean success = interUsersPubService.addUsersPub(contextInterses);
-                                    response.sendRedirect("error.jsp");
+                                
+                                
+                                int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
+                                InterPubService metododefinitivo = new InterPubService();
+                            InterPub objetodefinivo = metododefinitivo.getLastPub();
+                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
+                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
+                                } else {
+                                PubNumIdefinitivo = 1;}
+
+                                InterUsersPub contextInterses = new InterUsersPub();
+                                contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
+                                contextInterses.setiUserNum(new InterUsers(IUserNum));
+                                InterUsersPubService interUsersPubService = new InterUsersPubService();
+                                boolean success = interUsersPubService.addUsersPub(contextInterses);
+                                response.sendRedirect("error.jsp");
                                 }   
                                 }else {%>
                                         <script>
-                                         var valor = '<%= 5 - totalToAccesss %>';
+                                         var valor = '<%= 10 - totalToAccesss %>';
                                          if (valor === 1) {alert('Espera '+ valor +' segundo volver a publicar');
                                          window.location.href = "feed.jsp";}else 
                                          alert('Espera '+ valor +' segundos volver a publicar'); window.location.href = "feed.jsp"; 
@@ -130,6 +160,7 @@
            InterUsersService dao = new InterUsersService();
            InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
            if (interUsers != null) {
+            
            if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
             
             seguidores = interUsers.getIUserSeguidores();
@@ -168,7 +199,7 @@
                 <li>
                     <a href="feed.jsp">
                         <i class="fa-sharp fa-solid fa-house"></i>
-                        <span class="links_name">Inicio</span>
+                        <span class="links_name">Incio</span>
                     </a>
                     <!---<span class="links_name">Inicio</span>---->
                 </li> 
@@ -274,7 +305,7 @@
                 <div class="user-profile">
                     <img src="images/<%=data%>">
                     <div>
-                        <p><%=sesion.getAttribute("SIUser")%></p>
+                        <p><c:out value='<%=sesion.getAttribute("SIUser")%>'/></p>
                         <small>Public</small>
                     </div>
 
@@ -297,20 +328,26 @@
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="user-profile-modal">
-                                <img src="images/<%=data%>">
+                                <img src="images/<c:out value='<%=data%>'/>">
                                 <div>
-                                    <p><%=sesion.getAttribute("SIUser")%></p>
+                                    <p><c:out value='<%=sesion.getAttribute("SIUser")%>'/></p>
                                 </div>
-                                    
+                            <%
+                            String[] partes =horaFormateada.split(" ");
+                            String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                            String hora12 = partes[5];
+                            %>      
                             </div>
-                                <form id="formulario3" method="POST" accept-charset="UTF-8" >
+                                <form id="formulario3" method="POST" accept-charset="UTF-8" onsubmit="doPub();" >
                             <div class="post-input-container">
-                                <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" maxlength="500" placeholder="Que estas Pensando,  <%=sesion.getAttribute("SIUser")%>?"></textarea>
-                                <input type="hidden" name="PubDate" id="PubDate" value="<%=horaFormateada%>" />
+                                <textarea id="PubCont" name="PubCont" value="67" class="input" rows="3" maxlength="500" placeholder="Que estas Pensando,  <c:out value='<%=sesion.getAttribute("SIUser")%>'/>"></textarea>
+                                <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
+                                <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
                             </div>
                             <div class="modal-footer">
                                 <div class="d-grid gap-2">
-                                    <input class="btn btn-primary" type="submit" id="guardar" name="guardar" value="Submit" />
+                                    <input class="btn btn-primary" type="hidden" id="guardar" name="guardar" value="Submit" />
+                                    <input class="btn btn-primary" type="submit" id="guardadito" name="guardar" value="Submit" />
                                 </div>                            
                                 </form>
                             </div>
@@ -328,22 +365,24 @@
         InterPubHelper pubHelper = new InterPubHelper();
         List<InterPub>list = pubHelper.getListT();
         Collections.reverse(list);
+        int Cantidad = 0;
+        int tamano = list.size();
         if( list != null && list.size() > 0)
         {
         for(InterPub trows : list)
-        {
+        {       
+           Cantidad++;
            InterUsersService dao = new InterUsersService();
            InterUsers interUsers = dao.getInterUsersByPubNumId(trows.getPubNumId());
 
             if (interUsers != null) {
             String data1 = interUsers.getIImgNum();
+            
             if (data1 != null) {}
                 else{data1 = "perfilsidebar.png";}
-            
                 
-                String[] partes = trows.getPubDate().split(" ");
-                String fecha = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-                String hora = partes[5].substring(0,5);
+        String horita = trows.getPubHour().substring(0, 5);
+            
 
                 
     %>
@@ -351,19 +390,34 @@
                 <div class="user-profile">
                     <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><img src="images/<%=data1%>"></a>
                     <div>
-                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><b><%=interUsers.getIUser()%></b>‎ ‎<%=hora%></p></a>
-                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small><%=fecha%></small></a>
+                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><p><b><c:out value='<%=interUsers.getIUser()%>'/></b>‎ ‎<%=horita%></p></a>
+                        <a href="profile.jsp?id=<%=interUsers.getIUserNum()%>" style="text-decoration:none"><small><%=trows.getPubDate()%></small></a>
                     </div>
                 </div>
-                <br>
-                <%if (sesion.getAttribute("SIUser").equals("Axocode")) {%>
-                <p class="post-text"><%=trows.getPubCont()%> <a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>">Eliminar</a></p>
+                <br>                
+                <%if (sesion.getAttribute("SIUser").equals(interUsers.getIUser())) {%>
+                <p class="post-text"><c:out value='<%=trows.getPubCont()%>'/></p>
+                <p class="post-text">(<a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>">Eliminar</a>)</p>
+                <%}else if (sesion.getAttribute("SIRol").equals("Administrador")) {%>
+                <p class="post-text"><c:out value='<%=trows.getPubCont()%>'/></p>
+                <p class="post-text">(<a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>">Eliminar</a>)</p>
                 <%}else{%>
-                <p class="post-text"><%=trows.getPubCont()%></p>
+                <p class="post-text"><c:out value='<%=trows.getPubCont()%>'/></p>
                 <%}%>
+
                 <div class="post-row">
                     <div class="activity-icons">
-                        <div><a href="megusta.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&id=<%=interUsers.getIUserNum()%>"><img src="images/heart.png"><%=trows.getPubMg()%></a></div>
+                         <%  
+                            InterLoveService lovee = new InterLoveService();
+                            int LoveID = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
+                            boolean seguirLove = lovee.isUserLove(trows.getPubNumId(), LoveID );        
+                            if (seguirLove) {
+                        %>
+                        <div><a href="loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Lovent"><%=trows.getPubMg()%> <img src="images/heart.png">Quitar amor</a></div>
+                        <%}else{%>
+                        <div><a href="loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Love"><%=trows.getPubMg()%> <img src="images/heart.png">Dar amor</a></div>
+                        <%}%>
+                        
                         <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                             InterFavService fav = new InterFavService();
                             int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
@@ -376,7 +430,7 @@
                         <%}}%>
                         <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                             InterFlowService flowww = new InterFlowService();
-                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");;
+                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
                             boolean seguir = flowww.isUserFollowing(interUsers.getIUserNum(), FlowSeguidorID );        
                             if (seguir == true ) {
                         %>
@@ -403,7 +457,7 @@
                 <div class="user-profile">
                     <img src="images/<%=data%>" id="foton">
                     <div>
-                        <p id="username"><%=sesion.getAttribute("SIUser")%></p>
+                        <p id="username"><c:out value='<%=sesion.getAttribute("SIUser")%>'/></p>
                         <small><%=sesion.getAttribute("SIUserNum")%></small>
                     </div>   
                 </div>
@@ -451,60 +505,48 @@
                         </div>
                       </div>
                     </div>
-                    
                     <div class="accordion-item">
                       <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                          Materiales
+                          <b>Wave diaria</b>
                         </button>
                       </h2>
                       <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
                         <div class="accordion-body">
                             <div class="card" style="width: 18rem;">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><img src="images/sdbr3.jpg"/><!-- <i class="far fa-check-circle"></i> --> <a href="https://www.ipn.mx/assets/files/ccs/docs/gaceta-extraordinaria/2019/12/1519-gaceta-protocolo-genero.pdf" target="blank" ><b>Protocolo</b></a> </li>
-                                <li class="list-group-item"><img src="images/sdbr4.jpg"/><!-- <i class="far fa-check-circle"></i> --> <a href="https://www.ipn.mx/assets/files/cecyt9/docs/11-red-genero/ACUERDO-PRESIDENCIAL.pdf" target="blank"><br><b>Acuerdo Presidencia</b></a> </li>
+                                <ul class="list-group list-group-flush">
+                                    <%
+                              /*WAVE*/
+
+                            ZonedDateTime ayer = horaCiudadMexico.minusDays(1);
+                            String horaFormateadaWave = ayer.format(formatter);
+                            String []partesWave = horaFormateadaWave.split(" ");
+                            String fechaWave = partesWave[0] + " " + partesWave[1] + " " + partesWave[2] + " " + partesWave[3] + " " + partes[4];
+
+                            InterPubService horas = new InterPubService();
+                            boolean empezarWave = horas.getPubLateDay(fechaWave);
+
+                                if (empezarWave) {
+                                    InterPub wave = new InterPub();
+                                    InterUsers waveUsers = new InterUsers();
+                                    InterUsersService persona = new InterUsersService();
+                                    wave = horas.getMostLikedPubByDate(fechaWave);
+                                    waveUsers = persona.getInterUsersByPubNumId(wave.getPubNumId());
+    %>
+    <li class="list-group-item">
+        <a href="profile.jsp?id=<%=waveUsers.getIUserNum()%>" style="text-decoration:none; color: black;"><p><small><%=wave.getPubDate()%></small></p></a>
+        <a href="profile.jsp?id=<%=waveUsers.getIUserNum()%>" style="text-decoration:none; color: black;"><p><b><c:out value='<%=waveUsers.getIUser()%>'/></b>‎</p></a>
+        <a href="profile.jsp?id=<%=waveUsers.getIUserNum()%>" style="text-decoration:none; color: black;"><%=wave.getPubCont()%></a><br><br>
+        <a href="profile.jsp?id=<%=waveUsers.getIUserNum()%>" style="text-decoration:none; color: black;">Likes: <%=wave.getPubMg()%></a>
+    </li>
+                                <%}%>
                             </ul>
-                          </div>
+                          </div>   
                         </div>
                       </div>
                     </div>
                   </div>
             </div>
-            
-            <div class="trends">
-                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                          <a href="https://www.cecyt9.ipn.mx/red-genero-jdb.html" target="blank"><img src="images/reddegen.png" class="d-block w-100"></a>
-                      </div>
-                      <div class="carousel-item">
-                          <a href="https://unesdoc.unesco.org/ark:/48223/pf0000368125" target="blank"><img src="images/violgen.png" class="d-block w-100" alt="..."></a>
-                      </div>
-                      <div class="carousel-item">
-                          <a href="https://neuro-class.com/salud-mental-prevencion-del-suicidio-en-la-adolescencia/" target="blank"> <img src="images/suic.jpg" class="d-block w-100" alt="..."></a>
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-            </div>
-            <div class="cont-feis">
-                <div class="feisbuk">
-                    <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=100083354409895" data-tabs="timeline" data-width="340" data-height="" data-small-header="false" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
-                        <blockquote cite="https://www.facebook.com/profile.php?id=100083354409895" class="fb-xfbml-parse-ignore">
-                            <a href="https://www.facebook.com/profile.php?id=100083354409895">Red de Género Bátiz</a>
-                        </blockquote>       
-                   </div>
-                </div>
-            </div>
-            
         </div>
     </div>
 </body>

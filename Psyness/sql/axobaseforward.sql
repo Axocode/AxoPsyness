@@ -22,7 +22,7 @@ USE `axobasepsy` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `axobasepsy`.`intercodes` (
   `codescode` VARCHAR(10) NOT NULL,
-  `codesstatus` VARCHAR(10) NULL DEFAULT 'unused',
+  `codesstatus` VARCHAR(15) NULL DEFAULT 'unused',
   PRIMARY KEY (`codescode`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `axobasepsy`.`interpub` (
   `pubcont` TEXT NULL DEFAULT NULL,
   `pubmg` INT NULL DEFAULT '0',
   `pubdate` TEXT NULL DEFAULT NULL,
+  `pubhour` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`pubnumid`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
@@ -52,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `axobasepsy`.`interusers` (
   `iemail` VARCHAR(40) NULL DEFAULT NULL,
   `ipassword` VARCHAR(25) NULL DEFAULT NULL,
   `irol` VARCHAR(20) NULL DEFAULT NULL,
-  `iimgnum` VARCHAR(20) NULL DEFAULT NULL,
+  `iimgnum` VARCHAR(20) NULL DEFAULT 'profilesidebar3.png',
   `iuserseguidores` INT NULL DEFAULT '0',
   `iuserseguidos` INT NULL DEFAULT '0',
   PRIMARY KEY (`iusernum`))
@@ -81,7 +82,6 @@ CREATE TABLE IF NOT EXISTS `axobasepsy`.`interfav` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
 
 -- -----------------------------------------------------
 -- Table `axobasepsy`.`interflow`
@@ -147,6 +147,26 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Table `axobasepsy`.`interlove`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `axobasepsy`.`interlove` (
+  `loveidpub` INT NULL DEFAULT NULL,
+  `loveiduser` INT NULL DEFAULT NULL,
+  INDEX `loveidpub` (`loveidpub` ASC) ,
+  INDEX `loveiduser` (`loveiduser` ASC) ,
+  CONSTRAINT `interlove_ibfk_1`
+    FOREIGN KEY (`loveidpub`)
+    REFERENCES `axobasepsy`.`interpub` (`pubnumid`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `interlove_ibfk_2`
+    FOREIGN KEY (`loveiduser`)
+    REFERENCES `axobasepsy`.`interusers` (`iusernum`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

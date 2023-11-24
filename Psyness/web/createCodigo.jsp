@@ -1,4 +1,4 @@
-<%@page session="true"%>
+    <%@page session="true"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
   
@@ -32,7 +32,7 @@
                 <div class="col-md-6 right">
                      <div class="input-box">
                         <header>Crear cuenta con codigo</header>
-                        <form id="form1" action="Session.jsp" >
+                        <form id="form1" action="Session.jsp" onsubmit="subir()" >
                             <div class="input-field">
                                 <input id="IUser" name="IUser" value="${param.IUser}"${param.readonly} type="text" class="input"  minlength="6" maxlength="13" required/>
                                 <label for="user">Nombre de Usuario</label>
@@ -54,9 +54,10 @@
                                 <label for="pass">Codigo</label>
                             </div>
                             <div class="input-field">
-                                <input id="IRol" type="hidden" value="Cliente" name="IRol"  class="submit" value="${param.IRol}">
+                                <input id="IRol" type="hidden" value="Administrador" name="IRol"  class="submit" value="${param.IRol}">
                                 <input id="accion" type="hidden" value="Guardar" name="accion"  class="submit" value="${param.accion}">
-                                <input id="action" type="submit" value="Empezar" name="action" class="submit" value="${param.accion}"> 
+                                <input id="action" type="hidden" value="Empezar" name="action" class="submit" value="${param.accion}"> 
+                                <input id="actionsita" type="submit" value="Empezar" name="action" class="submit" value="${param.accion}"> 
                             </div>
                             <div class="signin">
                                 <span>Ya tienes una cuenta? <a href="login.jsp">Iniciar Sesion</a></span>
@@ -101,7 +102,6 @@
         }
         -->
     </script>
-        
          <script>
             function validar(correo){
                  var expReg= /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -113,5 +113,10 @@
                     }
             }
         </script>
+              <script>
+    function subir() {
+      document.getElementById("actionsita").disabled = true;
+    }
+  </script>
     </body>
 </html>
