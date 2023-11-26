@@ -49,16 +49,11 @@
                 
         boolean successs = love.addInterLove(lov);
         if (successs) {
-                
-
         InterPubService pubService = new InterPubService();
-        InterPub pub = new InterPub();
-
-        pub.setPubNumId((pubInt));
-        pubService.updateLovePubNum(pub);
+        pubService.actLove(pubInt);
           
         pubInt = pubInt + 1;
-        response.sendRedirect("feed.jsp#"+pubInt);}}else {pubInt = pubInt + 1;response.sendRedirect("feed.jsp#"+pubInt);}}
+        response.sendRedirect("feed-new.jsp#"+pubInt);}}else {pubInt = pubInt + 1;response.sendRedirect("feed-new.jsp#"+pubInt);}}
           
           
           
@@ -74,10 +69,9 @@
         
         if (successs) {
         InterPubService pubService = new InterPubService();
-        InterPub pub = new InterPub();
-
-        pub.setPubNumId((pubInt));
-        pubService.updateLovePubNum(pub);    
+        pubService.actLove(pubInt);;    
+        
+        
         response.sendRedirect("profile.jsp?id="+pre);
             }}else response.sendRedirect("profile.jsp?id="+pre);}
          
@@ -94,10 +88,7 @@
         boolean successs = love.addInterLove(lov);
         if (successs) {
         InterPubService pubService = new InterPubService();
-        InterPub pub = new InterPub();
-
-        pub.setPubNumId((pubInt));
-        pubService.updateLovePubNum(pub);
+        pubService.actLove(pubInt);
             
         response.sendRedirect("favs.jsp?rufless=on&&favs="+request.getParameter("u"));
               }}else{response.sendRedirect("favs.jsp?rufless=on&&favs="+request.getParameter("u"));}}
@@ -119,13 +110,10 @@
         if (successs) {
         
         InterPubService pubService = new InterPubService();
-        InterPub pub = new InterPub();
-
-        pub.setPubNumId((pubInt));
-        pubService.unLovePubNum(pub); 
+        pubService.actLove(pubInt); 
         
         pubInt = pubInt + 1;
-        response.sendRedirect("feed.jsp#"+pubInt);}}else{pubInt = pubInt + 1; response.sendRedirect("feed.jsp#"+pubInt);}}
+        response.sendRedirect("feed-new.jsp#"+pubInt);}}else{pubInt = pubInt + 1; response.sendRedirect("feed-new.jsp#"+pubInt);}}
           
           
           
@@ -143,10 +131,7 @@
         
         if (successs) {
         InterPubService pubService = new InterPubService();
-        InterPub pub = new InterPub();
-
-        pub.setPubNumId((pubInt));
-        pubService.unLovePubNum(pub); 
+        pubService.actLove(pubInt);
             
         response.sendRedirect("profile.jsp?id="+rooot);
               }}else{response.sendRedirect("profile.jsp?id="+rooot);}}
@@ -163,10 +148,7 @@
         boolean successs = love.unfollowLove(lov);
         if (successs) {
         InterPubService pubService = new InterPubService();
-        InterPub pub = new InterPub();
-
-        pub.setPubNumId((pubInt));
-        pubService.unLovePubNum(pub); 
+        pubService.actLove(pubInt); 
             
         
         response.sendRedirect("favs.jsp?rufless=on&&favs="+request.getParameter("u"));}}else{response.sendRedirect("favs.jsp?rufless=on&&favs="+request.getParameter("u"));}}

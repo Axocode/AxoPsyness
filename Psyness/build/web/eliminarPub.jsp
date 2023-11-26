@@ -31,15 +31,14 @@
           else{out.print("<script>location.replace('index.jsp');</script>");}                        
 %>
 
-<%
+<%              
         int cont = Integer.parseInt(request.getParameter("eliminar"));
         int con2 = cont + 1;
         InterPub publicTDelete = new InterPub();
         publicTDelete.setPubNumId(cont);
         InterPubService borrar = new InterPubService();
-        borrar.deleteUsers(publicTDelete);
-        
-        response.sendRedirect("feed.jsp#"+con2);
+        borrar.deleteUsers(publicTDelete);    
+        response.sendRedirect("feed-new.jsp#"+con2);
 %>
     </body>
 </html>

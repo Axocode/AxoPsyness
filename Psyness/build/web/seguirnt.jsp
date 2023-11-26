@@ -35,7 +35,7 @@
         pubInt = pubInt + 1;
         
         int FlowSeguidoresID = Integer.parseInt(request.getParameter("id"));
-    int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
+        int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
 
 
                 InterFlowService flower = new InterFlowService();
@@ -49,14 +49,8 @@
         if (successs) {
                 
         InterUsersService usersService = new InterUsersService();
-        InterUsers user = new InterUsers();
-
-        user.setIUserNum((FlowSeguidoresID));
-        usersService.unFlowSeguidoresNum(user);
-        
-        InterUsers userr = new InterUsers();
-        userr.setIUserNum(FlowSeguidorID);
-        usersService.unFlowSeguidoNum(userr);
+        usersService.actSeguidores(FlowSeguidoresID);
+        usersService.actSeguidos(FlowSeguidorID);
         
             response.sendRedirect("feed.jsp#"+pubInt);
             }}else{response.sendRedirect("feed.jsp#"+pubInt);}}
@@ -78,16 +72,9 @@
                 boolean successs = flower.unfollowUser(flow);
                 if (successs) {
                         
-                    
                 InterUsersService usersService = new InterUsersService();
-                InterUsers user = new InterUsers();
-
-                user.setIUserNum((FlowSeguidoresID));
-                usersService.unFlowSeguidoresNum(user);
-        
-                InterUsers userr = new InterUsers();
-                userr.setIUserNum(FlowSeguidorID);
-                usersService.unFlowSeguidoNum(userr);
+                usersService.actSeguidores(FlowSeguidoresID);
+                usersService.actSeguidos(FlowSeguidorID);;
         
             response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);
             
@@ -111,14 +98,8 @@
                 if (successs) {
                         
                 InterUsersService usersService = new InterUsersService();
-                InterUsers user = new InterUsers();
-
-                user.setIUserNum((FlowSeguidoresID));
-                usersService.unFlowSeguidoresNum(user);
-        
-                InterUsers userr = new InterUsers();
-                userr.setIUserNum(FlowSeguidorID);
-                usersService.unFlowSeguidoNum(userr);
+                usersService.actSeguidores(FlowSeguidoresID);
+                usersService.actSeguidos(FlowSeguidorID);
         
             response.sendRedirect("favs.jsp?rufless=on&favs="+request.getParameter("u"));
             

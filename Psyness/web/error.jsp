@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <script>window.location.href = "feed.jsp";</script>
+        <script>window.location.href = "feed-new.jsp";</script>
     </body>
 </html>

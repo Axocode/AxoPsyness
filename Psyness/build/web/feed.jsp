@@ -516,7 +516,6 @@
                             <div class="card" style="width: 18rem;">
                                 <ul class="list-group list-group-flush">
                                     <%
-                              /*WAVE*/
 
                             ZonedDateTime ayer = horaCiudadMexico.minusDays(1);
                             String horaFormateadaWave = ayer.format(formatter);

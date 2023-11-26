@@ -50,7 +50,7 @@
         boolean successs = favorite.addInterFav(fav);
         if (successs) {
         pubInt = pubInt + 1;
-        response.sendRedirect("feed.jsp#"+pubInt);}}else {pubInt = pubInt + 1;response.sendRedirect("feed.jsp#"+pubInt);}}
+        response.sendRedirect("feed-new.jsp#"+pubInt);}}else {pubInt = pubInt + 1;response.sendRedirect("feed-new.jsp#"+pubInt);}}
           
           
           
@@ -96,7 +96,7 @@
         boolean successs = favorite.unfollowFav(fav);
         if (successs) {
         pubInt = pubInt + 1;
-        response.sendRedirect("feed.jsp#"+pubInt);}}else{pubInt = pubInt + 1; response.sendRedirect("feed.jsp#"+pubInt);}}
+        response.sendRedirect("feed-new.jsp#"+pubInt);}}else{pubInt = pubInt + 1; response.sendRedirect("feed-new.jsp#"+pubInt);}}
           
           
           

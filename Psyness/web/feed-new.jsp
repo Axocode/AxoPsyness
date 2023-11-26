@@ -4,11 +4,38 @@
     Author     : admin
 --%>
 
+<%@page import="org.axocode.dao.service.InterLoveService"%>
+<%@page import="org.axocode.dao.service.InterPubService"%>
+<%@page import="java.time.temporal.ChronoUnit"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.time.ZonedDateTime"%>
+<%@page import="java.time.ZoneId"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page session="true"%>
+<%@page import="org.axocode.dao.InterFav"%>
+<%@page import="org.axocode.helper.InterFavHelper"%>
+<%@page import="org.axocode.dao.service.InterFavService"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="org.axocode.dao.service.InterFlowService"%>
+<%@page import="org.axocode.dao.service.InterUsersService"%>
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.List"%>
+<%@page import="org.axocode.dao.InterUsers"%>
+<%@page import="org.axocode.helper.InterUsersHelper"%>
+<%@page import="org.axocode.dao.service.InterUsersPubService"%>
+<%@page import="org.axocode.helper.InterUsersPubHelper"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="org.axocode.dao.InterPub"%>
+<%@page import="org.axocode.dao.InterUsersPub"%>
+<%@page import="org.axocode.helper.Helpers"%>
+<%@page import="org.axocode.helper.InterPubHelper"%>
+<%@page import="java.util.Collections"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Socialite is - Professional A unique and beautiful collection of UI elements">
@@ -45,7 +72,122 @@
     </head>
 
 <body>
+<script>
+    function doPub() {
+      document.getElementById("guardadito").disabled = true;
+    }
+</script>
+<%
+          request.setCharacterEncoding("UTF-8");          
+          HttpSession sesion = request.getSession();
+          
+                String data = (String) sesion.getAttribute("SIImgNum");
+                if (data == null) {data = "profilesidebar3.png";}
+                Helpers helpers = null;
+                InterPub user = null;
+                String aux = null;
+                boolean flag = false;
+                String readonly = null;
+                aux = "Guardar";
+                readonly = "";
+                String guardar = request.getParameter("guardar");
+                int seguidores = 0;
+                int seguidos = 0;
+                int PubNumIdefinitivo;
+                helpers = new InterPubHelper( ).addRequest( request );
+                ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
+                ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
+                String horaFormateada = horaCiudadMexico.format(formatter);
+                
+                
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
+                String horaFormateada2 = horaCiudadMexico.format(formatter2);
+                
+                
+                
+                user = new InterPub(); 
+                user.setPubCont("");    
 
+                if(  "Submit".equals( guardar ) ){
+                    if (sesion.getAttribute("SILastPub") == null) {
+                        sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
+                        flag = helpers.addT( );
+                        if (flag) {
+                        
+                            
+                            int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
+                            InterPubService metododefinitivo = new InterPubService();
+                            InterPub objetodefinivo = metododefinitivo.getLastPub();
+                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
+                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
+                                } else {
+                                PubNumIdefinitivo = 1;}
+                            
+                            InterUsersPub contextInterses = new InterUsersPub();
+                            contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
+                            contextInterses.setiUserNum(new InterUsers(IUserNum));
+                            InterUsersPubService interUsersPubService = new InterUsersPubService();
+                            boolean success = interUsersPubService.addUsersPub(contextInterses);
+                            response.sendRedirect("error.jsp");     
+                            }
+                        }else{
+                            LocalDateTime horaAct = LocalDateTime.parse(horaFormateada2, formatter2);
+                            String horaLastPubliString = (String) sesion.getAttribute("SILastPub");
+                            LocalDateTime horaLastPubli = LocalDateTime.parse(horaLastPubliString, formatter2);
+                            long totalToAccesss = ChronoUnit.SECONDS.between(horaLastPubli, horaAct);
+                            if (totalToAccesss > 10) {
+                                sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
+                                flag = helpers.addT( );
+                                if (flag) {
+                                
+                                
+                                int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
+                                InterPubService metododefinitivo = new InterPubService();
+                            InterPub objetodefinivo = metododefinitivo.getLastPub();
+                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
+                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
+                                } else {
+                                PubNumIdefinitivo = 1;}
+
+                                InterUsersPub contextInterses = new InterUsersPub();
+                                contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
+                                contextInterses.setiUserNum(new InterUsers(IUserNum));
+                                InterUsersPubService interUsersPubService = new InterUsersPubService();
+                                boolean success = interUsersPubService.addUsersPub(contextInterses);
+                                response.sendRedirect("error.jsp");
+                                }   
+                                }else {%>
+                                        <script>
+                                         var valor = '<%= 10 - totalToAccesss %>';
+                                         if (valor === 1) {alert('Espera '+ valor +' segundo volver a publicar');
+                                         window.location.href = "feed-new.jsp";}else 
+                                         alert('Espera '+ valor +' segundos volver a publicar'); window.location.href = "feed-new.jsp"; 
+                                         </script><%}
+                        }
+                    }
+                    
+                    
+                    
+        InterUsersHelper userHelper = new InterUsersHelper();
+        List<InterUsers>listita = userHelper.getListT();
+        
+                    if( listita != null && listita.size() > 0)
+        {
+        for(InterUsers suko : listita)
+        {
+           InterUsersService dao = new InterUsersService();
+           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
+           if (interUsers != null) {
+            
+           if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
+            
+            seguidores = interUsers.getIUserSeguidores();
+            seguidos = interUsers.getIUserSeguidos();
+                
+            
+    }}}}
+%>
     <div id="wrapper">
 
     <!-- Header -->
@@ -102,17 +244,17 @@
 
                         <!-- Message de Bolita - Perfil -->
                         <a href="#D">
-                            <img src="assets/images/avatars/prof2.png" class="is_avatar" alt="">
+                            <img src="assets/images/avatars/<%=data%>" class="is_avatar" alt="">
                         </a>
                         <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
 
                             <a href="profile-new.jsp" class="user">
                                 <div class="user_avatar">
-                                    <img src="assets/images/avatars/prof2.png" alt="">
+                                    <img src="assets/images/avatars/<%=data%>" alt="">
                                 </div>
                                 <div class="user_name">
-                                    <div> Axel5136 </div>
-                                    <span> Axelitomix</span>
+                                    <div> <c:out value='<%=sesion.getAttribute("SIUser")%>'/> </div>
+                                    <span> <%=sesion.getAttribute("SIAge")%></span>
                                 </div>
                             </a>
                            
@@ -136,7 +278,7 @@
                                     <span class="uk-switch-button"></span>
                                 </span>
                             </a>
-                            <a href="form-login.html">
+                            <a href="index.jsp?cerrar=true">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                                 </svg>
@@ -321,7 +463,6 @@
         <!-- Main Contents -->
                 <div class="main_content">
                     <div class="mcontainer">
-          
                             <!-- Perfil -->
                         <div class="md:flex md:space-x-6 lg:mx-16">
                             <div class="space-y-5 flex-shrink-0 md:w-7/12">
@@ -329,8 +470,8 @@
                                    <!-- Crear publiccion  -->
                                    <div class="card lg:mx-0 p-4" uk-toggle="target: #create-post-modal" id="card_posting">
                                        <div class="flex space-x-3">
-                                           <img src="assets/images/avatars/prof1.png" class="w-10 h-10 rounded-full">
-                                           <input placeholder="Que estas pensando" class="bg-gray-100 hover:bg-gray-200 flex-1 h-10 px-6 rounded-full"> 
+                                           <img src="assets/images/avatars/<%=data%>" class="w-10 h-10 rounded-full">
+                                           <input placeholder="¿Tienes algo que compartir?" class="bg-gray-100 hover:bg-gray-200 flex-1 h-10 px-6 rounded-full"> 
                                        </div>
                                        <div class="grid grid-flow-col pt-3 -mx-1 -mb-1 font-semibold text-sm">
                                             <div class="hover:bg-gray-100 flex items-center p-1.5 rounded-md cursor-pointer"> 
@@ -347,19 +488,46 @@
                                             </div>
                                        </div> 
                                    </div>
+<%
+
+                    InterPubHelper pubHelper = new InterPubHelper();
+                    List<InterPub>list = pubHelper.getListT();
+                    Collections.reverse(list);
+                    int Cantidad = 0;
+                    int tamano = list.size();
+                    if( list != null && list.size() > 0)
+                    {
+                    for(InterPub trows : list)
+                    {       
+                       Cantidad++;
+                       InterUsersService dao = new InterUsersService();
+                       InterUsers interUsers = dao.getInterUsersByPubNumId(trows.getPubNumId());
+
+                        if (interUsers != null) {
+                        String data1 = interUsers.getIImgNum();
+
+                        if (data1 != null) {}
+                            else{data1 = "perfilsidebar.png";}
+
+                    String horita = trows.getPubHour().substring(0, 5);
 
 
+
+%>
                                     <!-- post header-->
                                 <div class="card lg:mx-0 uk-animation-slide-bottom-small" id="posts_feed">
                            
-                                    <div class="flex justify-between items-center lg:p-4 p-2.5">
+                                    <div class="flex justify-between items-center lg:p-4 p-2.5" id="<%=trows.getPubNumId()%>">
+                                        
                                         <div class="flex flex-1 items-center space-x-4">
                                             <a href="#">
-                                                <img src="assets/images/avatars/prof3.png" class="bg-gray-200 border border-white rounded-full w-10 h-10">
+                                                <img src="assets/images/avatars/<%=data1%>" class="bg-gray-200 border border-white rounded-full w-10 h-10">
                                             </a>
                                             <div class="flex-1 font-semibold capitalize">
-                                                <a href="#" class="text-black dark:text-gray-100">  Ferdinand Vs  </a>
-                                                <div class="text-gray-700 flex items-center space-x-2"> 5 <span> hrs </span> <ion-icon name="people"></ion-icon></div>
+                                                
+                                                <a href="#" class="text-black dark:text-gray-100">  <c:out value='<%=interUsers.getIUser()%>'/>  <span class="text-gray-700"><%=horita%>hrs</span></a>
+                                                <div class="text-gray-700 flex items-center space-x-2"><%=trows.getPubDate()%> <ion-icon name="people"></ion-icon></div>
+                                                
                                             </div>
                                         </div>
                                       <div>
@@ -367,44 +535,42 @@
                                         <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" 
                                         uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
                                       
-                                            <ul class="space-y-1">
+                                            <ul class="space-y-0">
+                                              <% if (sesion.getAttribute("SIUser").equals(interUsers.getIUser())) {%>  
                                               <li> 
                                                   <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                   <i class="uil-share-alt mr-1"></i> Share
+                                                   <i class="uil-edit-alt mr-1"></i>  Editar publicacion
                                                   </a> 
                                               </li>
                                               <li> 
                                                   <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                   <i class="uil-edit-alt mr-1"></i>  Edit Post 
-                                                  </a> 
-                                              </li>
-                                              <li> 
-                                                  <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                   <i class="uil-comment-slash mr-1"></i>   Disable comments
+                                                   <i class="uil-comment-slash mr-1"></i>  Desactivar
                                                   </a> 
                                               </li> 
-                                              <li> 
-                                                  <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                   <i class="uil-favorite mr-1"></i>  Add favorites 
-                                                  </a> 
-                                              </li>
                                               <li>
                                                 <hr class="-mx-2 my-2 dark:border-gray-800">
                                               </li>
+                                              <%} if (sesion.getAttribute("SIUser").equals(interUsers.getIUser())  ||  sesion.getAttribute("SIRol").equals("Administrador")) {%>
                                               <li> 
-                                                  <a href="#" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
-                                                   <i class="uil-trash-alt mr-1"></i>  Delete
+                                                  <a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
+                                                   <i class="uil-trash-alt mr-1"></i>  Eliminar
                                                   </a> 
                                               </li>
+                                              <%}if (!sesion.getAttribute("SIUser").equals(interUsers.getIUser())) {%>
+                                              <li> 
+                                                  <a href="#" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
+                                                      <i class="icon-feather-alert-circle mr-1"></i>  Reportar
+                                                  </a> 
+                                              </li>
+                                              <%}%>
                                             </ul>
-                                        
                                         </div>
                                       </div>
                                     </div>                       
                         
-                                    <div class="p-5 pt-0 border-b dark:border-gray-700">
+                                    <div class="p-4 pt-0 border-b dark:border-gray-700">
                         
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim laoreet dolore magna aliquam erat volutpat
+                                        <p class="post-text"><c:out value='<%=trows.getPubCont()%>'/></p>
                         
                                     </div>
                                     
@@ -412,33 +578,81 @@
                                     <div class="p-4 space-y-3"> 
                                        
                                         <div class="flex space-x-4 lg:font-bold">
-                                            <a href="#" class="flex items-center space-x-2">
-                                                <div class="p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600 ">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
-                                                        <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                                        <%  
+                                            InterLoveService lovee = new InterLoveService();
+                                            int LoveID = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
+                                            boolean seguirLove = lovee.isUserLove(trows.getPubNumId(), LoveID );        
+                                            if (seguirLove) {
+                                        %>
+                                            <a href="loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Lovent" 
+                                                class="flex items-center space-x-2" 
+                                                style="color: #6B64F4;">
+                                                 <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
+                                                     <span style="color: #6B64F4;"> <%=trows.getPubMg()%></span>
+                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100" style="fill: #6B64F4;">
+                                                         <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                                                     </svg>
+                                                 </div>
+                                                 <div> Quitar amor</div>
+                                             </a>
+                        <%}else{%>
+                                            <a href="loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Love" 
+                                                class="flex items-center space-x-2"
+                                                onmouseover="this.style.color='#6B64F4'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4'); this.querySelector('span').style.color = '#6B64F4';" 
+                                                onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = ''); this.querySelector('span').style.color = '';">
+                                                <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
+                                                    <span><%=trows.getPubMg()%></span>
+                                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
+                                                      <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                                                   </svg>
+                                                </div>
+                                                <div> Dar amor</div>
+                                             </a>
+                        <%}%>
+                        
+                                        <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
+                                            InterFavService fav = new InterFavService();
+                                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
+                                            boolean seguir = fav.isUserFav(trows.getPubNumId(), FlowSeguidorID );        
+                                            if (seguir == true ) {
+                                        %>
+                                            <a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favoritont" 
+                                                class="flex items-center space-x-2"
+                                                style="color: #EB74DB;">
+                                                <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100" style="fill: #EB74DB;">
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                                                     </svg>
                                                 </div>
-                                                <div> Like</div>
+                                                <div>Eliminar Favorito</div>
                                             </a>
-                                            <a href="#" class="flex items-center space-x-2">
-                                                <div class="p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600">
+                        <%}else{%>             
+                                            <a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favorito" 
+                                            class="flex items-center space-x-2"
+                                            onmouseover="this.style.color='#EB74DB'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB')" 
+                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
+                                                <div class="flex items-center p-2 rounded-full p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
-                                                        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </div>
-                                                <div> Comentario</div>
-                                            </a>
-                                            <a href="#" class="flex items-center space-x-2 flex-1 justify-end">
-                                                <div class="p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
-                                                        <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                                                     </svg>
                                                 </div>
                                                 <div> Favorito</div>
                                             </a>
+                        <%}}%>
+                                            <a href="#" class="flex items-center space-x-2 flex-1 justify-end" 
+                                            onmouseover="this.style.color='#4FC0E8'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#4FC0E8')" 
+                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
+                                                <div class="flex items-center p-2 rounded-full p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
+                                                        <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                                <div> Comentario</div>
+                                            </a>
+                                            
                                         </div>
                                         
-                        
+                                        <!--  
                                         <div class="border-t py-4 space-y-4 dark:border-gray-600">
                                             <div class="flex">
                                                 <div class="w-10 h-10 rounded-full relative flex-shrink-0">
@@ -464,150 +678,45 @@
                                                  
                                             </div>
                                         </div>
+                                        -->
                                     </div>
-                                </div>   
-                                
-
-                                    <!-- post header-->
-                                <div class="card lg:mx-0 uk-animation-slide-bottom-small">
-                           
-                                    <div class="flex justify-between items-center lg:p-4 p-2.5">
-                                        <div class="flex flex-1 items-center space-x-4">
-                                            <a href="#">
-                                                <img src="assets/images/avatars/prof5.png" class="bg-gray-200 border border-white rounded-full w-10 h-10">
-                                            </a>
-                                            <div class="flex-1 font-semibold capitalize">
-                                                <a href="#" class="text-black dark:text-gray-100">  Axelito Mix  </a>
-                                                <div class="text-gray-700 flex items-center space-x-2"> 5 <span> hrs </span> <ion-icon name="people"></ion-icon></div>
-                                            </div>
-                                        </div>
-                                      <div id="burguer_posts">
-                                        <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i> </a>
-                                        <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" 
-                                        uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
-                                      
-                                            <ul class="space-y-1">
-                                              <li> 
-                                                  <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                   <i class="uil-share-alt mr-1"></i> Share
-                                                  </a> 
-                                              </li>
-                                              <li> 
-                                                  <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                   <i class="uil-edit-alt mr-1"></i>  Edit Post 
-                                                  </a> 
-                                              </li>
-                                              <li> 
-                                                  <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                   <i class="uil-comment-slash mr-1"></i>   Disable comments
-                                                  </a> 
-                                              </li> 
-                                              <li> 
-                                                  <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                   <i class="uil-favorite mr-1"></i>  Add favorites 
-                                                  </a> 
-                                              </li>
-                                              <li>
-                                                <hr class="-mx-2 my-2 dark:border-gray-800">
-                                              </li>
-                                              <li> 
-                                                  <a href="#" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
-                                                   <i class="uil-trash-alt mr-1"></i>  Delete
-                                                  </a> 
-                                              </li>
-                                            </ul>
-                                        
-                                        </div>
-                                      </div>
-                                    </div>
-                                    
-                                    <div class="p-5 pt-0 border-b dark:border-gray-700">
-                        
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim laoreet dolore magna aliquam erat volutpat
-                        
-                                    </div>
-                                  
-                                    <div class="p-4 space-y-3"> 
-                                       
-                                        <div class="flex space-x-4 lg:font-bold">
-                                            <a href="#" class="flex items-center space-x-2">
-                                                <div class="p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600 ">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
-                                                        <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
-                                                    </svg>
-                                                </div>
-                                                <div> Like</div>
-                                            </a>
-                                            <a href="#" class="flex items-center space-x-2">
-                                                <div class="p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
-                                                        <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </div>
-                                                <div> Comentario</div>
-                                            </a>
-                                            <a href="#" class="flex items-center space-x-2 flex-1 justify-end">
-                                                <div class="p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
-                                                        <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-                                                    </svg>
-                                                </div>
-                                                <div> Favorito</div>
-                                            </a>
-                                        </div>
-                                        
-                                        <div class="border-t py-4 space-y-4 dark:border-gray-600">
-                                            <div class="flex">
-                                                <div class="w-10 h-10 rounded-full relative flex-shrink-0">
-                                                    <img src="assets/images/avatars/prof1.png" alt="" class="absolute h-full rounded-full">
-                                                </div>
-                                                <div>
-                                                    <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
-                                                        <p class="leading-6">Un comentario <urna class="i uil-heart"></urna> <i
-                                                                class="uil-grin-tongue-wink"> </i> </p>
-                                                        <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
-                                                    </div>
-                                                    <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
-                                                        <a href="#" class="text-red-600"> <i class="uil-heart"></i> Love </a>
-                                                        <a href="#"> Replay </a>
-                                                        <span> 3d </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-gray-100 rounded-full relative dark:bg-gray-800 border-t">
-                                            <input placeholder="Agregar un comentario" class="bg-transparent max-h-10 shadow-none px-5">
-                                            <div class="-m-0.5 absolute bottom-0 flex items-center right-3 text-xl">
-                                                 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>   
+                                </div>      
+                                    <%
+                                        }}}
+                                    %>
                             </div>
-                        </div>
-    
             
+                        </div>
+
                             <!-- Craete post modal -->
                             <div id="create-post-modal" class="create-post" uk-modal>
                                 <div
                                     class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
                             
                                     <div class="text-center py-4 border-b">
-                                        <h3 class="text-lg font-semibold"> Crear post </h3>
+                                        <h3 class="text-lg font-semibold"> Cuentanos tu pensamiento <c:out value='<%=sesion.getAttribute("SIUser")%>'/> </h3>
+                                        <%
+                                        String[] partes =horaFormateada.split(" ");
+                                        String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                                        String hora12 = partes[5];
+                                        %>   
                                         <button class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 m-1 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
                                     </div>
+                                        <form id="formulario3" method="POST" accept-charset="UTF-8" onsubmit="doPub();" >
                                     <div class="flex flex-1 items-start space-x-4 p-5">
-                                        <img src="assets/images/avatars/prof1.png"
+                                        <img src="assets/images/avatars/<c:out value='<%=data%>'/>"
                                             class="bg-gray-200 border border-white rounded-full w-11 h-11">
                                         <div class="flex-1 pt-2">
-                                            <textarea class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5"
-                                                placeholder="Escribe"></textarea>
+                                        <textarea id="PubCont" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?"></textarea>
+                                        <input type="hidden" id="guardar" name="guardar" value="Submit" />
+                                        <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
+                                        <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
                                         </div>
                             
                                     </div>
                                     <div class="bsolute bottom-0 p-4 space-x-4 w-full">
                                         <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
-                                            <button type="button" class="button bg-blue-700"> Publicar </button>
+                                            <button type="submit" class="button bg-blue-700" id="guardadito"> Publicar </button>
                                             <div class="flex flex-1 items-center lg:justify-end justify-center space-x-2">
                                             
                                                 <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -620,7 +729,8 @@
                                             
                                             </div>
                                         </div>
-                                    </div>    
+                                    </div>   
+                                        </form>
                                 </div>
                             </div>
 
@@ -671,21 +781,21 @@
                                         <div class="boxesita_rights_feed">
 
                                             <a href="#">
-                                                <img src="assets/images/avatars/prof3.png" class="bg-gray-200 border border-white rounded-full w-14 h-14">
+                                                <img src="assets/images/avatars/<%=data%>" class="bg-gray-200 border border-white rounded-full w-14 h-14">
                                             </a>
                                             <div class="flex-1 font-semibold capitalize">
-                                                <a href="#" class="text-black dark:text-gray-100"> Yorch1234  </a>
-                                                <div class="text-gray-500 flex items-center space-x-2"><span>Yorch</span></div>
+                                                <a href="#" class="text-black dark:text-gray-100"><c:out value='<%=sesion.getAttribute("SIUser")%>'/></a>
+                                                <div class="text-gray-500 flex items-center space-x-2"><span><%=sesion.getAttribute("SIAge")%></span></div>
                                             </div>
                                         </div>
                                         <ul class="text-gray-600 space-y-3 mt-3">
                                             <li class="flex items-center space-x-2"> 
                                                 <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
-                                                Seguidores <strong> 777  </strong>
+                                                Seguidores <strong> <%=seguidores%>  </strong>
                                             </li>
                                             <li class="flex items-center space-x-2"> 
                                                 <ion-icon name="globe" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
-                                                Seguidos <strong> 777 </strong>
+                                                Seguidos <strong> <%=seguidos%> </strong>
                                             </li>                                         
                                         </ul>
                                     </div>                    
@@ -711,29 +821,45 @@
                                         </span>
                                       </button>
                                       <div uk-drop="mode: click;offset:5" class=" py-0 pl-15 pr-12 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">  
+                                <%
+                                  ZonedDateTime ayer = horaCiudadMexico.minusDays(1);
+                                  String horaFormateadaWave = ayer.format(formatter);
+                                  String []partesWave = horaFormateadaWave.split(" ");
+                                  String fechaWave = partesWave[0] + " " + partesWave[1] + " " + partesWave[2] + " " + partesWave[3] + " " + partes[4];
+
+                                  InterPubService horas = new InterPubService();
+                                  boolean empezarWave = horas.getPubLateDay(fechaWave);
+
+                                      if (empezarWave) {
+                                          InterPub wave = new InterPub();
+                                          InterUsers waveUsers = new InterUsers();
+                                          InterUsersService persona = new InterUsersService();
+                                          wave = horas.getMostLikedPubByDate(fechaWave);
+                                          waveUsers = persona.getInterUsersByPubNumId(wave.getPubNumId());
+                                %>
                                         <ul class="absolute z-10 mt-1 max-h-56 overflow-auto rounded-md bg-white py-0 text-base shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-3">
                                                 
                                             <div class="space-y-6">                   
                                                 <div class="card lg:mx-0 p-9" id="contenedor_side_right">
                                                     <div class="boxesita_rights_feed  border-b">
                                                         <a href="#">
-                                                            <img src="assets/images/avatars/prof4.png" class="bg-gray-200 border border-white rounded-full w-14 h-14">
+                                                            <img src="assets/images/avatars/<%=waveUsers.getIImgNum()%>" class="bg-gray-200 border border-white rounded-full w-14 h-14">
                                                         </a>
                                                         <div class="flex-1 font-semibold capitalize ">
-                                                            <a href="#" class="text-black dark:text-gray-100"> Yorch1234  </a>
-                                                            <div class="text-gray-500 flex items-center space-x-2 ">5<span>Hrs</span></div>
+                                                            <a href="#" class="text-black dark:text-gray-100"> <%=waveUsers.getIUser()%>  </a>
+                                                            <div class="text-gray-500 flex items-center space-x-2 "><%=wave.getPubDate()%></div>
                                                         </div>
                                                     </div>
 
                                                     <div class="segunda_boxesita_rights_feed" id="second_box_right_feed">
                                                         <div class="p-2 pt-1 border-b dark:border-gray-700" id="texto_feed_wave">                      
-                                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim laoreet dolore magna aliquam erat volutpat
+                                                            <%=wave.getPubCont()%>
                                                         </div>
 
                                                         <ul class="text-gray-600 space-y-3 mt-3">
                                                             <li class="flex items-center space-x-2"> 
                                                                 <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
-                                                                Likes <strong> 777  </strong>
+                                                                Amor <strong> <%=wave.getPubMg()%>  </strong>
                                                             </li>                                      
                                                         </ul>
                                                     </div>  
@@ -741,6 +867,7 @@
                                                 </div>                    
                                             </div>
                                         </ul>
+                                        <%}%>
                                       </div>  
                                     </div>
                                 </div>

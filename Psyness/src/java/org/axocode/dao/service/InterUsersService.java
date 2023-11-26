@@ -539,136 +539,89 @@ public List<InterUsers> getInterUsersByFollower(int ipubnumid) {
         return false;
     }
 
-
-    public boolean updateFlowSeguidoresNum( InterUsers interUsers )
-    {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        String sql = "update interusers set iuserseguidores = iuserseguidores + 1 where iusernum = ?";
-        int row = 0;
-        try 
-        {
-            connection = getConnection( );
-            if( connection == null )
-            {
-                return false;
-            }
-            preparedStatement = connection.prepareStatement(sql);
-            if( preparedStatement == null )
-            {
-                return false;
-            }
-            preparedStatement.setInt(1, interUsers.getIUserNum());
-            
-            
-            row = preparedStatement.executeUpdate();
-            closeConnection(connection);
-            return row == 1;
-        } 
-        catch (SQLException ex) 
-        {
-            ex.printStackTrace();
-        }
-        return false;
-    }
-
-
-        public boolean updateFlowSeguidoNum( InterUsers interUsers )
-    {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        String sql = "update interusers set iuserseguidos = iuserseguidos + 1 where iusernum = ?";
-        int row = 0;
-        try 
-        {
-            connection = getConnection( );
-            if( connection == null )
-            {
-                return false;
-            }
-            preparedStatement = connection.prepareStatement(sql);
-            if( preparedStatement == null )
-            {
-                return false;
-            }
-            preparedStatement.setInt(1, interUsers.getIUserNum());
-            
-            
-            row = preparedStatement.executeUpdate();
-            closeConnection(connection);
-            return row == 1;
-        } 
-        catch (SQLException ex) 
-        {
-            ex.printStackTrace();
-        }
-        return false;
-    }
+       
         
         
-            public boolean unFlowSeguidoresNum( InterUsers interUsers )
-    {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        String sql = "update interusers set iuserseguidores = iuserseguidores - 1 where iusernum = ?";
-        int row = 0;
-        try 
-        {
-            connection = getConnection( );
-            if( connection == null )
-            {
-                return false;
-            }
-            preparedStatement = connection.prepareStatement(sql);
-            if( preparedStatement == null )
-            {
-                return false;
-            }
-            preparedStatement.setInt(1, interUsers.getIUserNum());
-            
-            
-            row = preparedStatement.executeUpdate();
-            closeConnection(connection);
-            return row == 1;
-        } 
-        catch (SQLException ex) 
-        {
-            ex.printStackTrace();
+            public boolean actSeguidores(int seguidores) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    String sql = "update interusers SET iuserseguidores = (select count(*) from interflow where flowseguidoresid = ?) where iusernum = ?";
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return false;
         }
-        return false;
+
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, seguidores); // ID del usuario para contar los seguidores
+        preparedStatement.setInt(2, seguidores); // ID del usuario para actualizar en interusers
+
+        int row = preparedStatement.executeUpdate();
+        closeConnection(connection);
+        return row == 1;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
+    return false;
+}
 
-        public boolean unFlowSeguidoNum( InterUsers interUsers )
-    {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        String sql = "update interusers set iuserseguidos = iuserseguidos - 1 where iusernum = ?";
-        int row = 0;
-        try 
-        {
-            connection = getConnection( );
-            if( connection == null )
-            {
-                return false;
-            }
-            preparedStatement = connection.prepareStatement(sql);
-            if( preparedStatement == null )
-            {
-                return false;
-            }
-            preparedStatement.setInt(1, interUsers.getIUserNum());
-            
-            
-            row = preparedStatement.executeUpdate();
-            closeConnection(connection);
-            return row == 1;
-        } 
-        catch (SQLException ex) 
-        {
-            ex.printStackTrace();
+
+
+        public boolean actSeguidos(int seguido) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    String sql = "update interusers set iuserseguidos = (select count(*) from interflow where flowseguidoid = ?) where iusernum = ?";
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return false;
         }
-        return false;
+
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, seguido); // ID del usuario para contar los seguido
+        preparedStatement.setInt(2, seguido); // ID del usuario para actualizar en interusers
+
+        int row = preparedStatement.executeUpdate();
+        closeConnection(connection);
+        return row == 1;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
+
+    return false;
+}
         
 }

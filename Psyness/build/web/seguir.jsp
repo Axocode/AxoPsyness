@@ -56,14 +56,8 @@
                 
 
         InterUsersService usersService = new InterUsersService();
-        InterUsers user = new InterUsers();
-
-        user.setIUserNum((FlowSeguidoresID));
-        usersService.updateFlowSeguidoresNum(user);
-        
-        InterUsers userr = new InterUsers();
-        userr.setIUserNum(FlowSeguidorID);
-        usersService.updateFlowSeguidoNum(userr);
+        usersService.actSeguidores(FlowSeguidoresID);
+        usersService.actSeguidos(FlowSeguidorID);
         
             response.sendRedirect("feed.jsp#"+pubInt);
           }}else{response.sendRedirect("feed.jsp#"+pubInt);}}
@@ -89,14 +83,8 @@
                 
 
         InterUsersService usersService = new InterUsersService();
-        InterUsers user = new InterUsers();
-
-        user.setIUserNum((FlowSeguidoresID));
-        usersService.updateFlowSeguidoresNum(user);
-        
-        InterUsers userr = new InterUsers();
-        userr.setIUserNum(FlowSeguidorID);
-        usersService.updateFlowSeguidoNum(userr);
+        usersService.actSeguidores(FlowSeguidoresID);
+        usersService.actSeguidos(FlowSeguidorID);
         
             response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);
               }}else{response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);}}
@@ -121,14 +109,8 @@
         
     
         InterUsersService usersService = new InterUsersService();
-        InterUsers user = new InterUsers();
-
-        user.setIUserNum((FlowSeguidoresID));
-        usersService.updateFlowSeguidoresNum(user);
-        
-        InterUsers userr = new InterUsers();
-        userr.setIUserNum(FlowSeguidorID);
-        usersService.updateFlowSeguidoNum(userr);
+        usersService.actSeguidores(FlowSeguidoresID);
+        usersService.actSeguidos(FlowSeguidorID);
         
             response.sendRedirect("favs.jsp?rufless=on&&favs="+request.getParameter("u"));
               }}else{response.sendRedirect("favs.jsp?rufless=on&&favs="+request.getParameter("u"));}}
