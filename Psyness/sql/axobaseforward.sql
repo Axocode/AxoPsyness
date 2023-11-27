@@ -33,7 +33,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `axobasepsy`.`interpub` (
   `pubnumid` INT NOT NULL AUTO_INCREMENT,
-  `pubcont` TEXT NULL DEFAULT NULL,
+  `pubcont` TEXT(1250) NULL DEFAULT NULL,
   `pubmg` INT NULL DEFAULT '0',
   `pubdate` TEXT NULL DEFAULT NULL,
   `pubhour` TEXT NULL DEFAULT NULL,

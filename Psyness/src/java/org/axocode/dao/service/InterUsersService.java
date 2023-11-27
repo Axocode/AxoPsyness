@@ -61,7 +61,53 @@ public class InterUsersService extends Conexion<InterUsers>
         return null;
     }
     
-    
+    public List<InterUsers> getInterUsersListByTerm(String searchTerm) {
+    List<InterUsers> usersList = new ArrayList<>();
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    InterUsers users = null;
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return null;
+        }
+        String query = "select * from interusers where iuser like ? limit 10";
+        preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, "%" + searchTerm + "%");
+        resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            users = new InterUsers();
+                users.setIUserNum(resultSet.getInt(1));
+                users.setIUser(resultSet.getString(2));
+                users.setIAge(resultSet.getString(3));
+                users.setIEmail(resultSet.getString(4));
+                users.setIPassword(resultSet.getString(5));
+                users.setIRol(resultSet.getString(6));
+                users.setIImgNum(resultSet.getString(7));
+                users.setIUserSeguidores(resultSet.getInt(8));
+                users.setIUserSeguidos(resultSet.getInt(9));
+                usersList.add(users);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        return null;
+    } finally {
+        // Cerrar los recursos en un bloque finally
+        try {
+            if (resultSet != null) resultSet.close();
+            if (preparedStatement != null) preparedStatement.close();
+            if (connection != null) closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    return usersList;
+}
+
  
 
 

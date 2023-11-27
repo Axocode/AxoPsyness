@@ -63,8 +63,8 @@
         boolean exist = favorite.checkIfFavExists(fav);
         if (!exist) {     
         boolean successs = favorite.addInterFav(fav);
-        response.sendRedirect("profile.jsp?id="+pre);
-            }else response.sendRedirect("profile.jsp?id="+pre);}
+        response.sendRedirect("profile-new.jsp?id="+pre);
+            }else response.sendRedirect("profile-new.jsp?id="+pre);}
          
         if (request.getParameter("chest").equals("rufless")) {
         int pre = Integer.parseInt(request.getParameter("id"));
@@ -112,8 +112,8 @@
                 
         boolean successs = favorite.unfollowFav(fav);
         
-        response.sendRedirect("profile.jsp?id="+rooot);
-              }else{response.sendRedirect("profile.jsp?id="+rooot);}}
+        response.sendRedirect("profile-new.jsp?id="+rooot);
+              }else{response.sendRedirect("profile-new.jsp?id="+rooot);}}
          
         if (request.getParameter("chest").equals("rufless")) {
         String pre = request.getParameter("id");

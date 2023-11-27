@@ -72,6 +72,7 @@
     </head>
 
 <body>
+
 <script>
     function doPub() {
       document.getElementById("guardadito").disabled = true;
@@ -129,7 +130,7 @@
                             contextInterses.setiUserNum(new InterUsers(IUserNum));
                             InterUsersPubService interUsersPubService = new InterUsersPubService();
                             boolean success = interUsersPubService.addUsersPub(contextInterses);
-                            response.sendRedirect("error.jsp");     
+                            response.sendRedirect("error.jsp?direct=0");     
                             }
                         }else{
                             LocalDateTime horaAct = LocalDateTime.parse(horaFormateada2, formatter2);
@@ -155,7 +156,7 @@
                                 contextInterses.setiUserNum(new InterUsers(IUserNum));
                                 InterUsersPubService interUsersPubService = new InterUsersPubService();
                                 boolean success = interUsersPubService.addUsersPub(contextInterses);
-                                response.sendRedirect("error.jsp");
+                                response.sendRedirect("error.jsp?direct=0");
                                 }   
                                 }else {%>
                                         <script>
@@ -304,7 +305,7 @@
 
 
         <nav>
-            <button>
+            <button onclick="location.href='feed-new.jsp'">
                 <span>
                     <i class='bx bxs-home'></i>
                     <span>Inicio</span>
@@ -347,12 +348,12 @@
                 </button>
             -->
 
-            <button>
-                <span>
-                    <img src="images/prof3.png" alt="" class="profile-img">
-                    <span>Perfil</span>
-                </span>
-            </button>
+            <button onclick="location.href='profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>'">
+                    <span>
+                        <img src="images/<%=sesion.getAttribute("SIImgNum")%>" alt="" class="profile-img">
+                        <span>Perfil</span>
+                    </span>
+                </button>
             
             <button>
                 <span>
@@ -372,7 +373,7 @@
         </div>
 
         <nav>
-            <input class="box-search" type="text" placeholder="Buscar">
+            <input id="campoBusqueda" type="text" onkeyup="enviarTexto()" placeholder="Buscar">
         </nav>
 
         <nav class="profiles_search"><hr>
@@ -383,75 +384,24 @@
                 </p>
             </div>
 
-            <div class="box_profile_search">
-                <img src="images/prof3.png" class="img_search">
-                    <p>Yorch1342
-                        <span>Yorch</span>
+<%
+    String searchTerm = request.getParameter("term");
+    List<InterUsers> usersList = new InterUsersService().getInterUsersListByTerm(searchTerm);
+    if (usersList != null && usersList.size() > 0) {
+            
+    for( InterUsers lista : usersList){
+    
+%>
+            <div  class="box_profile_search" onclick="location.href='profile-new.jsp?id=<%=lista.getIUserNum()%>'">
+                <img src="images/<%=lista.getIImgNum()%>" class="img_search">
+                    <p><%=lista.getIUser()%>
+                        <span><%=lista.getIAge()%></span>
                     </p>
                 <div class="icons_X">
                     <i class='bx bx-x'></i>
                 </div> 
             </div>
-
-            <div class="box_profile_search">
-                <img src="images/prof2.png" class="img_search">
-                    <p>Vargas1341
-                        <span>FerVargas</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div> 
-
-            <div class="box_profile_search">
-                <img src="images/prof1.png" class="img_search">
-                    <p>JohanUwW
-                        <span>Yohan</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div>
-
-            <div class="box_profile_search">
-                <img src="images/prof4.png" class="img_search">
-                    <p>Axel42891
-                        <span>Nextle</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div>
-
-            <div class="box_profile_search">
-                <img src="images/prof5.png" class="img_search">
-                    <p>Perro_NAOH
-                        <span>Doggy</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div>
-
-            <div class="box_profile_search">
-                <img src="images/prof6.png" class="img_search">
-                    <p>Dylan41331
-                        <span>Dylan</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div>
-
-            <div class="box_profile_search">
-                <img src="images/prof7.png" class="img_search">
-                    <p>Yael48392
-                        <span>Valentain</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div>
+  <%}}%>
 
         </nav>
     </nav>
@@ -471,7 +421,7 @@
                                    <div class="card lg:mx-0 p-4" uk-toggle="target: #create-post-modal" id="card_posting">
                                        <div class="flex space-x-3">
                                            <img src="assets/images/avatars/<%=data%>" class="w-10 h-10 rounded-full">
-                                           <input placeholder="¿Tienes algo que compartir?" class="bg-gray-100 hover:bg-gray-200 flex-1 h-10 px-6 rounded-full"> 
+                                           <div class="bg-gray-100 hover:bg-gray-200 flex-1 h-10 px-6 rounded-full" style="display: flex; align-items: center; color: #b0b0b0; height: 40px; border: none; font-size: 15px;">¿Tienes algo que compartir?</div>
                                        </div>
                                        <div class="grid grid-flow-col pt-3 -mx-1 -mb-1 font-semibold text-sm">
                                             <div class="hover:bg-gray-100 flex items-center p-1.5 rounded-md cursor-pointer"> 
@@ -520,18 +470,18 @@
                                     <div class="flex justify-between items-center lg:p-4 p-2.5" id="<%=trows.getPubNumId()%>">
                                         
                                         <div class="flex flex-1 items-center space-x-4">
-                                            <a href="#">
+                                            <a href="profile-new.jsp?id=<%=interUsers.getIUserNum()%>">
                                                 <img src="assets/images/avatars/<%=data1%>" class="bg-gray-200 border border-white rounded-full w-10 h-10">
                                             </a>
                                             <div class="flex-1 font-semibold capitalize">
                                                 
-                                                <a href="#" class="text-black dark:text-gray-100">  <c:out value='<%=interUsers.getIUser()%>'/>  <span class="text-gray-700"><%=horita%>hrs</span></a>
+                                                <a href="profile-new.jsp?id=<%=interUsers.getIUserNum()%>" class="text-black dark:text-gray-100">  <c:out value='<%=interUsers.getIUser()%>'/>  <span class="text-gray-700"><%=horita%>hrs</span></a>
                                                 <div class="text-gray-700 flex items-center space-x-2"><%=trows.getPubDate()%> <ion-icon name="people"></ion-icon></div>
                                                 
                                             </div>
                                         </div>
                                       <div>
-                                        <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i> </a>
+                                        <a href=""> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i></a>
                                         <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" 
                                         uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
                                       
@@ -552,7 +502,7 @@
                                               </li>
                                               <%} if (sesion.getAttribute("SIUser").equals(interUsers.getIUser())  ||  sesion.getAttribute("SIRol").equals("Administrador")) {%>
                                               <li> 
-                                                  <a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
+                                                  <a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>&per=<%=interUsers.getIUserNum()%>&direct=0" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
                                                    <i class="uil-trash-alt mr-1"></i>  Eliminar
                                                   </a> 
                                               </li>
@@ -593,7 +543,7 @@
                                                          <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                                                      </svg>
                                                  </div>
-                                                 <div> Quitar amor</div>
+                                                 <div> - Amor</div>
                                              </a>
                         <%}else{%>
                                             <a href="loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Love" 
@@ -606,7 +556,7 @@
                                                       <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                                                    </svg>
                                                 </div>
-                                                <div> Dar amor</div>
+                                                <div> + Amor</div>
                                              </a>
                         <%}%>
                         
@@ -618,26 +568,55 @@
                                         %>
                                             <a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favoritont" 
                                                 class="flex items-center space-x-2"
-                                                style="color: #EB74DB;">
+                                                style="color: #F6CE2F;">
                                                 <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100" style="fill: #EB74DB;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100" style="fill: #F6CE2F;">
                                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                                                     </svg>
                                                 </div>
-                                                <div>Eliminar Favorito</div>
+                                                <div>- Favorito</div>
                                             </a>
                         <%}else{%>             
                                             <a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favorito" 
                                             class="flex items-center space-x-2"
-                                            onmouseover="this.style.color='#EB74DB'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB')" 
+                                            onmouseover="this.style.color='#F6CE2F'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F')" 
                                             onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
                                                 <div class="flex items-center p-2 rounded-full p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
                                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                                                     </svg>
                                                 </div>
-                                                <div> Favorito</div>
+                                                <div>+ Favorito</div>
                                             </a>
+                        <%}}%>
+                                        <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
+                                            InterFlowService flowww = new InterFlowService();
+                                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
+                                            boolean seguir = flowww.isUserFollowing(interUsers.getIUserNum(), FlowSeguidorID );        
+                                            if (seguir == true ) {
+                                        %>
+                                            <a href="seguirnt.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed" 
+                                            class="flex items-center space-x-2 flex-1 justify-end" 
+                                            style="color: #EB74DB;">
+                                                <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" style="fill: #EB74DB;" class="dark:text-gray-100">
+                                                        <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                                <div> - Seguir </div>
+                                            </a>
+                        <%}else{%>
+                                            <a href="seguir.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed" class="flex items-center space-x-2 flex-1 justify-end" 
+                                            onmouseover="this.style.color='#EB74DB'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB')" 
+                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
+                                                <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
+                                                        <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                                <div> + Seguir </div>
+                                            </a>
+                                            
                         <%}}%>
                                             <a href="#" class="flex items-center space-x-2 flex-1 justify-end" 
                                             onmouseover="this.style.color='#4FC0E8'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#4FC0E8')" 
@@ -707,7 +686,7 @@
                                         <img src="assets/images/avatars/<c:out value='<%=data%>'/>"
                                             class="bg-gray-200 border border-white rounded-full w-11 h-11">
                                         <div class="flex-1 pt-2">
-                                        <textarea id="PubCont" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?"></textarea>
+                                            <textarea id="PubCont" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?" maxlength="1250"></textarea>
                                         <input type="hidden" id="guardar" name="guardar" value="Submit" />
                                         <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
                                         <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
@@ -780,18 +759,18 @@
                                     <div class="card lg:mx-0 p-9" id="contenedor_side_right_pf">
                                         <div class="boxesita_rights_feed">
 
-                                            <a href="#">
+                                            <a href="profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>">
                                                 <img src="assets/images/avatars/<%=data%>" class="bg-gray-200 border border-white rounded-full w-14 h-14">
                                             </a>
                                             <div class="flex-1 font-semibold capitalize">
-                                                <a href="#" class="text-black dark:text-gray-100"><c:out value='<%=sesion.getAttribute("SIUser")%>'/></a>
+                                                <a href="profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="text-black dark:text-gray-100"><c:out value='<%=sesion.getAttribute("SIUser")%>'/></a>
                                                 <div class="text-gray-500 flex items-center space-x-2"><span><%=sesion.getAttribute("SIAge")%></span></div>
                                             </div>
                                         </div>
                                         <ul class="text-gray-600 space-y-3 mt-3">
                                             <li class="flex items-center space-x-2"> 
                                                 <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
-                                                Seguidores <strong> <%=seguidores%>  </strong>
+                                                Seguidores <strong> <%=request.getParameter("textoIngresado")%>  </strong>
                                             </li>
                                             <li class="flex items-center space-x-2"> 
                                                 <ion-icon name="globe" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>

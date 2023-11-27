@@ -28,17 +28,31 @@
 <%
     HttpSession sesion = request.getSession();
           if (sesion.getAttribute("SIUser") != null){}
-          else{out.print("<script>location.replace('index.jsp');</script>");}                        
-%>
-
-<%              
-        int cont = Integer.parseInt(request.getParameter("eliminar"));
-        int con2 = cont + 1;
-        InterPub publicTDelete = new InterPub();
-        publicTDelete.setPubNumId(cont);
-        InterPubService borrar = new InterPubService();
-        borrar.deleteUsers(publicTDelete);    
-        response.sendRedirect("feed-new.jsp#"+con2);
+          else{out.print("<script>location.replace('index.jsp');</script>");} 
+          int id = Integer.parseInt(request.getParameter("per"));
+          int sesionsita = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
+          
+   
+    if (id == sesionsita || (sesion.getAttribute("SIRol").toString()).equals("Administrador")) {
+    
+         if (request.getParameter("direct").equals("0")) {
+            int cont = Integer.parseInt(request.getParameter("eliminar"));
+            int con2 = cont + 1;
+            InterPub publicTDelete = new InterPub();
+            publicTDelete.setPubNumId(cont);
+            InterPubService borrar = new InterPubService();
+            borrar.deleteUsers(publicTDelete);    
+            response.sendRedirect("feed-new.jsp#"+con2);
+            } else if (request.getParameter("direct").equals("1")) {
+                int cont = Integer.parseInt(request.getParameter("eliminar"));
+                int con2 = cont + 1;
+                InterPub publicTDelete = new InterPub();
+                publicTDelete.setPubNumId(cont);
+                InterPubService borrar = new InterPubService();
+                borrar.deleteUsers(publicTDelete);    
+                response.sendRedirect("profile-new.jsp?id="+id+"#"+con2);
+                 }
+        }
 %>
     </body>
 </html>

@@ -170,7 +170,7 @@
                         <form class="row g-3" action="actualizarUser.jsp" method="POST" accept-charset="UTF-8">
                             <div class="col-md-6">
                                 <label for="inputEmail4" class="form-label">Nombre de usuario</label>
-                                <input type="text" name="nombre" value="<%=sesion.getAttribute("SIUser") %>" class="form-control" id="inputEmail4" minlength="6" maxlength="13" required>
+                                <input type="text" name="nombre" value="<%=sesion.getAttribute("SIUser") %>" class="form-control" id="inputEmail4" minlength="6" maxlength="15" required>
                             </div>
                             <div class="col-md-2">
                                 <label for="inputZip" class="form-label">Edad</label>

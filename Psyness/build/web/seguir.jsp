@@ -59,8 +59,8 @@
         usersService.actSeguidores(FlowSeguidoresID);
         usersService.actSeguidos(FlowSeguidorID);
         
-            response.sendRedirect("feed.jsp#"+pubInt);
-          }}else{response.sendRedirect("feed.jsp#"+pubInt);}}
+            response.sendRedirect("feed-new.jsp#"+pubInt);
+          }}else{response.sendRedirect("feed-new.jsp#"+pubInt);}}
           
           
           
@@ -86,8 +86,8 @@
         usersService.actSeguidores(FlowSeguidoresID);
         usersService.actSeguidos(FlowSeguidorID);
         
-            response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);
-              }}else{response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);}}
+            response.sendRedirect("profile-new.jsp?id="+FlowSeguidoresID);
+              }}else{response.sendRedirect("profile-new.jsp?id="+FlowSeguidoresID);}}
               
             if (request.getParameter("chest").equals("rufless")) {
         
