@@ -44,8 +44,8 @@
             boolean cont = container.updateUsuario(Object);
             if (cont) {
                     session.setAttribute("SIImgNum", img);
-                    response.sendRedirect("profile.jsp?id="+iUserNum);
-                }}else response.sendRedirect("profile.jsp?id="+iUserNum);
+                    response.sendRedirect("settings-new.jsp");
+                }}else response.sendRedirect("setttings-new.jsp");
         }
 %>         
         <div id="fb-root"></div>
@@ -74,7 +74,7 @@
                     </li>
 
                     <li>
-                        <a href="feed.jsp">
+                        <a href="feed-new.jsp">
                             <i class="fa-sharp fa-solid fa-house"></i>
                             <span class="links_name">Inicio</span>
                         </a>

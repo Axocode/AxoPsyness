@@ -111,7 +111,6 @@
         if (exist) {
                 
         boolean successs = favorite.unfollowFav(fav);
-        
         response.sendRedirect("profile-new.jsp?id="+rooot);
               }else{response.sendRedirect("profile-new.jsp?id="+rooot);}}
          

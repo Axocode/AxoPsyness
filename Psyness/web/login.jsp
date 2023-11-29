@@ -50,7 +50,7 @@
                     sesion.setAttribute("SIImgNum", SIImgNum);
                     sesion.setAttribute("SILastPub",null);
 
-            response.sendRedirect("feed.jsp");
+            response.sendRedirect("feed-new.jsp");
             
 
             

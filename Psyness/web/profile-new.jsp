@@ -4,6 +4,7 @@
     Author     : admin
 --%>
 
+<%@page import="org.axocode.dao.InterFav"%>
 <%@page import="org.axocode.dao.service.InterFlowService"%>
 <%@page import="org.axocode.dao.service.InterLoveService"%>
 <%@page import="org.axocode.dao.service.InterFavService"%>
@@ -290,7 +291,7 @@
                         </a>
                         <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
 
-                            <a href="profile-new.jsp" class="user">
+                            <a href="profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="user">
                                 <div class="user_avatar">
                                     <img src="assets/images/avatars/<%=data3%>" alt="">
                                 </div>
@@ -302,7 +303,7 @@
                            
                             <a href="settings-new.jsp">
                                 <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
-                                Perfil 
+                                Editar 
                             </a>
                             <a href="follow-new.jsp">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -396,13 +397,13 @@
                         <span>Perfil</span>
                     </span>
                 </button>
-                
-                <button>
-                    <span>
-                        <i class='bx bx-cog' ></i>  
-                        <span>Settings</span>
-                    </span>
-                </button>
+            
+                        <button onclick="location.href='settings-new.jsp'">
+                <span>
+                    <i class='bx bx-cog' ></i>  
+                    <span>Settings</span>
+                </span>
+            </button>
             </nav>
         </aside>
     
@@ -533,9 +534,10 @@
                         <div class="flex justify-between lg:border-t border-gray-100 flex-col-reverse lg:flex-row pt-2">
                             <nav class="responsive-nav pl-3">
                                 <ul  uk-switcher="connect: #timeline-tab; animation: uk-animation-fade">
-                                    <li><a href="#">Perfil</a></li>
-                                    <li><a href="#">Pubs Favoritas <span></span> </a></li>
-                                    
+                                    <li><a href="">Perfil</a></li>
+                                    <%if ((request.getParameter("id")).equals(sesion.getAttribute("SIUserNum").toString())) {%>
+                                    <li><a href="">Pubs Favoritas <span></span> </a></li>
+                                    <%}%>
                                 </ul>
                             </nav>
     
@@ -697,7 +699,7 @@
                                             boolean seguir = fav.isUserFav(trows.getPubNumId(), FlowSeguidorID );        
                                             if (seguir == true ) {
                                         %>
-                                            <a href="favService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=profile&&action1=Favoritont"
+                                            <a href="favService.jsp?id=<%=request.getParameter("id")%>&&pub=<%=trows.getPubNumId()%>&&chest=profile&&action1=Favoritont"
                                                 class="flex items-center space-x-2"
                                                 style="color: #F6CE2F;">
                                                 <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
@@ -708,7 +710,7 @@
                                                 <div>- Favorito</div>
                                             </a>
                         <%}else{%>             
-                                            <a href="favService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=profile&&action1=Favorito" 
+                                            <a href="favService.jsp?id=<%=request.getParameter("id")%>&&pub=<%=trows.getPubNumId()%>&&chest=profile&&action1=Favorito" 
                                             class="flex items-center space-x-2"
                                             onmouseover="this.style.color='#F6CE2F'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F')" 
                                             onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
@@ -866,40 +868,49 @@
 
 
                         <!-- PUBS FAVS  -->
-                     <%
-        if( list != null && list.size() > 0)
-        {
-        for(InterPub trows : list)
-        {
-           InterUsersService dao = new InterUsersService();
-           InterUsers interUsers = dao.getInterUsersByPubNumId(trows.getPubNumId());
-
-           if (interUsers != null) {
-           if ((request.getParameter("id").toString()).equals(interUsers.getIUserNum().toString())) {
-            String data1 = interUsers.getIImgNum();
-            if (data1 != null) {}
-                    else{data1 = "perfilsidebar.png";}
-                    String horita = trows.getPubHour().substring(0, 5);
-                    
-    %>                   
                                 <!-- post header-->
+                 <%
+    int u = Integer.parseInt(request.getParameter("id"));                       
+        InterFavService favService = new InterFavService();
+        List<InterFav>cont = favService.getInterFavList(u);
+
+    if (cont != null && cont.size() > 0) {
+    for (InterFav interFav : cont) {
+
+    List<InterPub>liste = pubHelper.getListT();
+    if( list != null && list.size() > 0)
+    {
+    for(InterPub trows : list)
+    {
+       InterUsersService dao = new InterUsersService();
+       InterUsers interUsers = dao.getInterUsersByPubNumId(trows.getPubNumId());
+
+        if (interUsers != null) {
+        String data1 = interUsers.getIImgNum();
+        if (data1 != null) {}
+            else{data1 = "perfilsidebar.png";}
+
+              if (interFav.getFavIdPub().equals(trows.getPubNumId())) {
+
+        String horita = trows.getPubHour().substring(0,5);
+
+%>                   
                             <div class="card lg:mx-0 uk-animation-slide-bottom-small" id="posts_feed">
-                           
-                                    <div class="flex justify-between items-center lg:p-4 p-2.5" id="<%=trows.getPubNumId()%>">
+                                    <div class="flex justify-between items-center lg:p-4 p-2.5">
                                         
                                         <div class="flex flex-1 items-center space-x-4">
-                                            <a href="#">
+                                            <a href="profile-new.jsp?id=<%=interUsers.getIUserNum()%>">
                                                 <img src="assets/images/avatars/<%=data1%>" class="bg-gray-200 border border-white rounded-full w-10 h-10">
                                             </a>
                                             <div class="flex-1 font-semibold capitalize">
                                                 
-                                                <a href="#" class="text-black dark:text-gray-100">  <c:out value='<%=interUsers.getIUser()%>'/>  <span class="text-gray-700"><%=horita%>hrs</span></a>
+                                                <a href="profile-new.jsp?id=<%=interUsers.getIUserNum()%>" class="text-black dark:text-gray-100">  <c:out value='<%=interUsers.getIUser()%>'/>  <span class="text-gray-700"><%=horita%>hrs</span></a>
                                                 <div class="text-gray-700 flex items-center space-x-2"><%=trows.getPubDate()%> <ion-icon name="people"></ion-icon></div>
                                                 
                                             </div>
                                         </div>
                                       <div>
-                                        <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i> </a>
+                                        <a href=""> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i> </a>
                                         <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" 
                                         uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
                                       
@@ -920,7 +931,7 @@
                                               </li>
                                               <%} if (sesion.getAttribute("SIUser").equals(interUsers.getIUser())  ||  sesion.getAttribute("SIRol").equals("Administrador")) {%>
                                               <li> 
-                                                  <a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>&per=<%=interUsers.getIUserNum()%>&direct=0" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
+                                                  <a href="eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>&per=<%=interUsers.getIUserNum()%>&direct=1" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
                                                    <i class="uil-trash-alt mr-1"></i>  Eliminar
                                                   </a> 
                                               </li>
@@ -984,7 +995,7 @@
                                             boolean seguir = fav.isUserFav(trows.getPubNumId(), FlowSeguidorID );        
                                             if (seguir == true ) {
                                         %>
-                                            <a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favoritont" 
+                                            <a href="favService.jsp?id=<%=request.getParameter("id")%>&&pub=<%=trows.getPubNumId()%>&&chest=profile&&action1=Favoritont" 
                                                 class="flex items-center space-x-2"
                                                 style="color: #F6CE2F;">
                                                 <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
@@ -995,7 +1006,7 @@
                                                 <div>- Favorito</div>
                                             </a>
                         <%}else{%>             
-                                            <a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favorito" 
+                                            <a href="favService.jsp?id=<%=request.getParameter("id")%>&&pub=<%=trows.getPubNumId()%>&&chest=profile&&action1=Favorito" 
                                             class="flex items-center space-x-2"
                                             onmouseover="this.style.color='#F6CE2F'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F')" 
                                             onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
@@ -1077,11 +1088,10 @@
                                         </div>
                                         -->
                                     </div>
-                                </div> 
-                            
-                                                                       <%
-                }}}}
-            %> 
+                    <%
+                        }}}}}}
+                    %> 
+                        </div>       
                     </div>
                 </div>
             </div>

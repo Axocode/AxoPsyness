@@ -249,7 +249,7 @@
                         </a>
                         <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
 
-                            <a href="profile-new.jsp" class="user">
+                            <a href="profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="user">
                                 <div class="user_avatar">
                                     <img src="assets/images/avatars/<%=data%>" alt="">
                                 </div>
@@ -261,7 +261,7 @@
                            
                             <a href="settings-new.jsp">
                                 <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
-                                Perfil 
+                                Editar 
                             </a>
                             <a href="follow-new.jsp">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -355,7 +355,7 @@
                     </span>
                 </button>
             
-            <button>
+                        <button onclick="location.href='settings-new.jsp'">
                 <span>
                     <i class='bx bx-cog' ></i>  
                     <span>Settings</span>
@@ -371,11 +371,19 @@
         <div class="search-header">
             <p>Buscar</p>
         </div>
-
+        <%
+    String searchTerm = request.getParameter("term");
+    if (searchTerm == null) {
+            
+        %>
         <nav>
-            <input id="campoBusqueda" type="text" onkeyup="enviarTexto()" placeholder="Buscar">
+            <input id="campoBusqueda" type="text" onkeydown="buscarEnEnter(event)" placeholder="Buscar" autofocus>
         </nav>
-
+        <%}else{%>
+        <nav>
+            <input id="campoBusqueda" type="text" onkeydown="buscarEnEnter(event)" placeholder="Buscar" value="<%=searchTerm%>" autofocus>
+        </nav>
+        <%}%>
         <nav class="profiles_search"><hr>
 
             <div class="subtitle_search">
@@ -385,7 +393,6 @@
             </div>
 
 <%
-    String searchTerm = request.getParameter("term");
     List<InterUsers> usersList = new InterUsersService().getInterUsersListByTerm(searchTerm);
     if (usersList != null && usersList.size() > 0) {
             
@@ -537,7 +544,7 @@
                                             <a href="loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Lovent" 
                                                 class="flex items-center space-x-2" 
                                                 style="color: #6B64F4;">
-                                                 <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
+                                                 <div id="likesito" class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
                                                      <span style="color: #6B64F4;"> <%=trows.getPubMg()%></span>
                                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100" style="fill: #6B64F4;">
                                                          <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
@@ -550,7 +557,7 @@
                                                 class="flex items-center space-x-2"
                                                 onmouseover="this.style.color='#6B64F4'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4'); this.querySelector('span').style.color = '#6B64F4';" 
                                                 onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = ''); this.querySelector('span').style.color = '';">
-                                                <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
+                                                <div id="likesito" class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
                                                     <span><%=trows.getPubMg()%></span>
                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
                                                       <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
@@ -686,7 +693,7 @@
                                         <img src="assets/images/avatars/<c:out value='<%=data%>'/>"
                                             class="bg-gray-200 border border-white rounded-full w-11 h-11">
                                         <div class="flex-1 pt-2">
-                                            <textarea id="PubCont" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?" maxlength="1250"></textarea>
+                                            <textarea id="PubCont" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?" maxlength="1250" autofocus></textarea>
                                         <input type="hidden" id="guardar" name="guardar" value="Submit" />
                                         <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
                                         <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
@@ -770,7 +777,7 @@
                                         <ul class="text-gray-600 space-y-3 mt-3">
                                             <li class="flex items-center space-x-2"> 
                                                 <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
-                                                Seguidores <strong> <%=request.getParameter("textoIngresado")%>  </strong>
+                                                Seguidores <strong> <%=seguidores%>  </strong>
                                             </li>
                                             <li class="flex items-center space-x-2"> 
                                                 <ion-icon name="globe" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
@@ -857,6 +864,21 @@
         </div>
 
 </body>
+<script>
+  function buscarEnEnter(event) {
+    if (event.key === "Enter") {
+      buscarEnTiempoReal();
+    }
+  }
+
+  function buscarEnTiempoReal() {
+    var campoBusqueda = document.getElementById("campoBusqueda");
+    var valor = campoBusqueda.value;
+
+    location.href = "feed-new.jsp?term=" + encodeURIComponent(valor);
+  }
+</script>
+
 
 <script>
     $(document).ready(function () {

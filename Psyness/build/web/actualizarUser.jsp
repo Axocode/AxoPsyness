@@ -31,7 +31,7 @@
             %>
         <script>
         alert("Cambiado con exito");
-        location.replace('settings.jsp');
+        location.replace('settings-new.jsp');
         </script>
 <%      sesion.setAttribute("SIUser", nombre);
         sesion.setAttribute("SIAge", edad);
@@ -43,7 +43,7 @@
 %>
         <script>
         alert("Ya existe este nombre de usuario");
-        location.replace('settings.jsp');
+        location.replace('settings-new.jsp');
         </script>
 <%
     } else {
@@ -53,7 +53,7 @@
             %>
         <script>
         alert("Cambiado con exito");
-        location.replace('settings.jsp');
+        location.replace('settings-new.jsp');
         </script>
 <%      sesion.setAttribute("SIUser", nombre);
         sesion.setAttribute("SIAge", edad);
