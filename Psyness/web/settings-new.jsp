@@ -181,18 +181,19 @@
         <aside class="sidebar_feed">
 
             <div class="sidebar_header">
-                <img src="images/sololetras.svg" class="logo-img_sidebar">
+                <!--<img src="images/sololetras.svg" class="logo-img_sidebar">-->
+                <h1>Psyness</h1>
                 <img src="images/Icono.svg" class="logo-icon_sidebar">
             </div>
     
     
             <nav>
                 <button onclick="location.href='feed-new.jsp'">
-                <span>
-                    <i class='bx bxs-home'></i>
-                    <span>Inicio</span>
-                </span>
-                </button>
+                    <span>
+                         <i class='bx bx-home' ></i>
+                        <span>Inicio</span>
+                    </span>
+                </button>    
     
                 <button id="button_search">
                     <span>
@@ -203,7 +204,7 @@
     
                 <button>
                     <span>
-                        <i class='bx bx-compass' ></i>
+                        <i class='bx bx-user-voice' ></i>
                         <span>Datacenter</span>
                     </span>
                 </button>
@@ -236,13 +237,20 @@
                         <span>Perfil</span>
                     </span>
                 </button>
-            
-                        <button onclick="location.href='settings-new.jsp'">
+                
+                <button onclick="location.href='settings-new.jsp'">
+                    <span>
+                        <i class='bx bx-cog' ></i>  
+                        <span>Configuración</span>
+                    </span>
+                </button>
+                
+                <button>
                 <span>
-                    <i class='bx bx-cog' ></i>  
-                    <span>Configuración</span>
-                </span>
-            </button>
+                    <i class='bx bx-log-out'></i>
+                    <span>Log Out</span>
+            
+                
             </nav>
         </aside>
     

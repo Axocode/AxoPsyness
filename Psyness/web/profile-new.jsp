@@ -345,7 +345,8 @@
         <aside class="sidebar_feed">
 
             <div class="sidebar_header">
-                <img src="images/sololetras.svg" class="logo-img_sidebar">
+                <!--<img src="images/sololetras.svg" class="logo-img_sidebar">-->
+                <h1>Psyness</h1>
                 <img src="images/Icono.svg" class="logo-icon_sidebar">
             </div>
     
@@ -353,7 +354,7 @@
             <nav>
                 <button onclick="location.href='feed-new.jsp'">
                     <span>
-                        <i class='bx bxs-home'></i>
+                         <i class='bx bx-home' ></i>
                         <span>Inicio</span>
                     </span>
                 </button>
@@ -367,7 +368,7 @@
     
                 <button>
                     <span>
-                        <i class='bx bx-compass' ></i>
+                        <i class='bx bx-user-voice' ></i>
                         <span>Datacenter</span>
                     </span>
                 </button>
@@ -400,13 +401,20 @@
                         <span>Perfil</span>
                     </span>
                 </button>
-            
-                        <button onclick="location.href='settings-new.jsp'">
-                <span>
-                    <i class='bx bx-cog' ></i>  
-                    <span>Configuración</span>
-                </span>
-            </button>
+                
+                <button onclick="location.href='settings-new.jsp'">
+                    <span>
+                        <i class='bx bx-cog' ></i>  
+                        <span>Configuración</span>
+                    </span>
+                </button>
+                
+                <button>
+                    <span>
+                        <i class='bx bx-log-out'></i>
+                        <span>Log Out</span>
+                    </span>
+                </button>
             </nav>
         </aside>
     
@@ -594,7 +602,7 @@
                                       
                                             <ul class="space-y-0">
                                               <% if (sesion.getAttribute("SIUser").equals(interUsers.getIUser())) {%>  
-                                              <li> 
+                                              <li uk-toggle="target: #create-post-modal-edit"> 
                                                   <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
                                                    <i class="uil-edit-alt mr-1"></i>  Editar publicacion
                                                   </a> 
@@ -765,6 +773,87 @@
                                             </div>
                                         </div>
                                         -->
+                                        
+                                        
+                                        <!-------------------------IMPORTANTE - CAMBIOS - COMMENTS-------------------------------->
+
+
+
+                                        <div id="main-container" class="container-comentarios  border-b cursor-pointer py-2">
+                                            <p class="px-4 sm:flex sm:flex-row-reverse hover:text-blue-600" onclick="toggleContainer()">Ver Comentarios </p>
+
+                                            <div id="inner-container" class="inner-container">
+                                                <div class="border-t py-4 space-y-4 dark:border-gray-600">
+                                                    <div class="flex">
+                                                        <div class="w-10 h-10 rounded-full relative flex-shrink-0">
+                                                            <img src="assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
+                                                        </div>
+                                                        <div>
+                                                            <div class="flex-1 font-semibold capitalize px-4">
+                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
+                                                            </div>
+                                                            
+                                                            <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
+                                                                <p class="leading-6">Un comentario </p>
+                                                                <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
+                                                            </div>
+                                                            <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
+                                                                <a href="#" class="text-red-600 hover:text-red-700"><span>5</span> <i class="uil-heart"></i> Love </a>
+                                                                <span> 3d </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex">
+                                                        <div class="w-10 h-10 rounded-full relative flex-shrink-0">
+                                                            <img src="assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
+                                                        </div>
+                                                        <div>
+                                                            <div class="flex-1 font-semibold capitalize px-4">
+                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
+                                                            </div>
+                                                            
+                                                            <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
+                                                                <p class="leading-6">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem inventore adipisci, libero voluptatibus non porro dolorem praesentium doloremque ex mollitia!</p>
+                                                                <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
+                                                            </div>
+                                                            <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
+                                                                <a href="#" class="text-red-600 hover:text-red-700"><span>5</span> <i class="uil-heart"></i> Love </a>
+                                                                <span> 3d </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex">
+                                                        <div class="w-10 h-10 rounded-full relative flex-shrink-0">
+                                                            <img src="assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
+                                                        </div>
+                                                        <div>
+                                                            <div class="flex-1 font-semibold capitalize px-4">
+                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
+                                                            </div>
+                                                            
+                                                            <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
+                                                                <p class="leading-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta vitae sint iure eveniet facere veritatis quidem illo, expedita numquam aut ducimus, magni ex tenetur fuga qui! Unde minus est quam. </p>
+                                                                <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
+                                                            </div>
+                                                            <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
+                                                                <a href="#" class="text-red-600 hover:text-red-700"><span>5</span> <i class="uil-heart"></i> Love </a>
+                                                                <span> 3d </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <script>
+                                            function toggleContainer() {
+                                                var innerContainer = document.getElementById('inner-container');
+                                                innerContainer.style.display = (innerContainer.style.display === 'none' || innerContainer.style.display === '') ? 'block' : 'none';
+                                            }
+                                        </script>
+                                        
+                                        
+                                        
                                     </div>
                                 </div> 
                             
@@ -1052,12 +1141,52 @@
             </div>
         </div>
     </div>
+                        
+                        
+                        
+                        
+                                
+                                         <!-------------------------IMPORTANTE - CAMBIOS - Editar-------------------------------->
+                               <!----------- Edit modal-------------->
+                               <div id="create-post-modal-edit" class="create-post" uk-modal>
+                                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
+                                    
+                                    <div class="text-center py-4 border-b">
+                                        <h3 class="text-lg font-semibold"> Editar post </h3>
+                                        <button class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 m-1 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
+                                    </div>
+                                    <div class="lg:mx-0 uk-animation-slide-bottom-small" id="posts_feed">
+                           
+                                        <div class="flex justify-between items-center lg:p-4 p-2.5">
+                                            <div class="flex flex-1 items-center space-x-4">
+                                                <a href="#">
+                                                    <img src="assets/images/avatars/prof3.png" class="bg-gray-200 border border-white rounded-full w-10 h-10">
+                                                </a>
+                                                <div class="flex-1 font-semibold capitalize">
+                                                    <a href="#" class="text-black dark:text-gray-100" id="name_user_tittle">  Ferdinand Vs  </a>
+                                                    <div class="text-gray-700 flex items-center space-x-2"> 5 <span> hrs </span> <ion-icon name="people"></ion-icon></div>
+                                                </div>
+                                            </div>
+                                        </div>   
+
+                                        <div class="p-5 pt-0 dark:border-gray-700 border-b">
+                                            <!--Imput para editar texto-->
+                                            <input class="uk-textare text-gray-700 shadow-none"
+                                            value="Lorem ipsum dolor sit amet, consectetuer adipiscing elit">                       
+                                        </div>
+                                       
+                                        <div class="px-4 sm:flex sm:flex-row-reverse ">
+                                            <button type="button" class="button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Publicar </button>
+                                        </div>                    
+                                    </div>       
+                                </div>
+                            </div>
 
     
     
     
 
-    <!-- Craete post modal -->
+                         <!-- Craete post modal -->
                             <div id="create-post-modal" class="create-post" uk-modal>
                                 <div
                                     class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
