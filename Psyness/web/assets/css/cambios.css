@@ -39,6 +39,16 @@ body{
     margin-bottom: 44px;
 }
 
+.sidebar_header h1{
+    margin-left: 55px;
+    margin-top: 20px;
+    align-items: center;
+    height: 50px;
+    font-family: monospace ;
+    font-size: 31px;
+    font-weight: 400;
+}
+
 .logo-icon_sidebar{
     display: none;
     font-size: 28px;
@@ -622,8 +632,48 @@ body{
 }
 
 
+/*Etiquetas*/
+
+.tag {
+    display: inline-block;
+    background-color: #0570e2;
+    color: #fff;
+    padding: 8px 10px;
+    margin: 5px;
+    border-radius: 15px;
+}
+
+.tag:hover{
+    cursor: pointer;
+    background-color: #1e7de4;
+} 
+
+.close-btn {
+    cursor: pointer;
+    margin-left: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #3391f5;
+    border-radius: 60%;
+    padding: 5px;
+}
+
+/*COMENTARIOS*/
+
+.container-comentarios {
+    cursor: pointer;
+}
+
+.inner-container {
+    display: none;
+}
+
 @media screen and (max-width: 1200px){
     .sidebar_feed .logo-img_sidebar{
+        display: none;
+    }
+    
+    .sidebar_feed .sidebar_header h1{
         display: none;
     }
 
