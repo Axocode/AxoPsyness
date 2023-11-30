@@ -59,8 +59,8 @@
         usersService.actSeguidores(FlowSeguidoresID);
         usersService.actSeguidos(FlowSeguidorID);
         
-            response.sendRedirect("feed.jsp#"+pubInt);
-          }}else{response.sendRedirect("feed.jsp#"+pubInt);}}
+            response.sendRedirect("feed-new.jsp#"+pubInt);
+          }}else{response.sendRedirect("feed-new.jsp#"+pubInt);}}
           
           
           
@@ -86,13 +86,14 @@
         usersService.actSeguidores(FlowSeguidoresID);
         usersService.actSeguidos(FlowSeguidorID);
         
-            response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);
-              }}else{response.sendRedirect("profile.jsp?id="+FlowSeguidoresID);}}
+            response.sendRedirect("profile-new.jsp?id="+FlowSeguidoresID);
+              }}else{response.sendRedirect("profile-new.jsp?id="+FlowSeguidoresID);}}
               
-            if (request.getParameter("chest").equals("rufless")) {
+            if (request.getParameter("chest").equals("follows")) {
         
         int FlowSeguidoresID = Integer.parseInt(request.getParameter("id"));
         int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
+        int flowi = Integer.parseInt(request.getParameter("follows"));
 
 
                 InterFlowService flower = new InterFlowService();
@@ -112,8 +113,9 @@
         usersService.actSeguidores(FlowSeguidoresID);
         usersService.actSeguidos(FlowSeguidorID);
         
-            response.sendRedirect("favs.jsp?rufless=on&&favs="+request.getParameter("u"));
-              }}else{response.sendRedirect("favs.jsp?rufless=on&&favs="+request.getParameter("u"));}}
+        response.sendRedirect("follow-new.jsp?follows="+flowi);
+            
+            }}else{response.sendRedirect("follow-new.jsp?follows="+flowi);}}
 
 %>
     </body>

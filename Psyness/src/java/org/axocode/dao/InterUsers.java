@@ -13,8 +13,9 @@ public class InterUsers implements Serializable{
     private String IRol;
     private Integer IUserSeguidores;
     private Integer IUserSeguidos;
+    private String IUserDescription;
 
-    public InterUsers(Integer IUserNum, String IUser, String IAge, String IEmail, String IPassword, String IImgNum, String IRol, Integer IUserSeguidores, Integer IUserSeguidos) {
+    public InterUsers(Integer IUserNum, String IUser, String IAge, String IEmail, String IPassword, String IImgNum, String IRol, Integer IUserSeguidores, Integer IUserSeguidos, String IUserDescription) {
         this.IUserNum = IUserNum;
         this.IUser = IUser;
         this.IAge = IAge;
@@ -24,6 +25,7 @@ public class InterUsers implements Serializable{
         this.IRol = IRol;
         this.IUserSeguidores = IUserSeguidores;
         this.IUserSeguidos = IUserSeguidos;
+        this.IUserDescription = IUserDescription;
     }
 
 
@@ -109,6 +111,14 @@ public class InterUsers implements Serializable{
 
     public void setIRol(String IRol) {
         this.IRol = IRol;
+    }
+
+    public String getIUserDescription() {
+        return IUserDescription;
+    }
+
+    public void setIUserDescription(String IUserDescription) {
+        this.IUserDescription = IUserDescription;
     }
 
 

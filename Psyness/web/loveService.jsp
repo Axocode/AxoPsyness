@@ -72,8 +72,8 @@
         pubService.actLove(pubInt);;    
         
         
-        response.sendRedirect("profile.jsp?id="+pre);
-            }}else response.sendRedirect("profile.jsp?id="+pre);}
+        response.sendRedirect("profile-new.jsp?id="+pre);
+            }}else response.sendRedirect("profile-new.jsp?id="+pre);}
          
             
         if (request.getParameter("chest").equals("rufless")) {
@@ -133,8 +133,8 @@
         InterPubService pubService = new InterPubService();
         pubService.actLove(pubInt);
             
-        response.sendRedirect("profile.jsp?id="+rooot);
-              }}else{response.sendRedirect("profile.jsp?id="+rooot);}}
+        response.sendRedirect("profile-new.jsp?id="+rooot);
+              }}else{response.sendRedirect("profile-new.jsp?id="+rooot);}}
          
         if (request.getParameter("chest").equals("rufless")) {
         String pre = request.getParameter("id");

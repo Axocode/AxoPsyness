@@ -383,7 +383,7 @@ body {
     margin-right: 4px;
 }
 .conversation-user-status.online::before {
-    background-color: var(--purple-50);
+    background-color: var(--white);
 }
 .conversation-buttons {
     display: flex;
@@ -472,8 +472,7 @@ body {
     margin-right: 32px;
 }
 .conversation-item.me .conversation-item-text {
-    background-color: var(--purple-200);
-    box-shadow: 0 2px 12px -2px var(--purple-200);
+    box-shadow: 0 2px 12px -2px var(--white);
     color: rgba(0, 0, 0, 0.8);
 }
 .conversation-item-time {

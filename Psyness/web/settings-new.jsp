@@ -4,7 +4,13 @@
     Author     : admin
 --%>
 
+<%@page import="org.axocode.dao.service.InterUsersService"%>
+<%@page import="org.axocode.dao.InterUsers"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page session="true"%>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +24,7 @@
 
     <!-- Basic Page Needs
         ================================================== -->
-    <title>Settings</title>
+        <title>Configuración</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Socialite is - Professional A unique and beautiful collection of UI elements">
@@ -53,7 +59,15 @@
 
 
 <body>
-   
+   <%
+    HttpSession sesion = request.getSession();
+          if (sesion.getAttribute("SIUser") != null){}
+          else{out.print("<script>location.replace('index.jsp');</script>");}
+    String data = (String) sesion.getAttribute("SIImgNum");
+                if (data == null) {data = "perfilsidebar.png";}
+                
+    request.setCharacterEncoding("UTF-8");
+%>
 
     <div id="wrapper">
 
@@ -111,25 +125,25 @@
 
                         <!-- Message de Bolita - Perfil -->
                         <a href="#D">
-                            <img src="assets/images/avatars/prof2.png" class="is_avatar" alt="">
+                            <img src="assets/images/avatars/<%=sesion.getAttribute("SIImgNum")%>" class="is_avatar" alt="">
                         </a>
                         <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
 
-                            <a href="profile-new.jsp" class="user">
+                            <a href="profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="user">
                                 <div class="user_avatar">
-                                    <img src="assets/images/avatars/prof2.png" alt="">
+                                    <img src="assets/images/avatars/<%=sesion.getAttribute("SIImgNum")%>" alt="">
                                 </div>
                                 <div class="user_name">
-                                    <div> Axel5136 </div>
-                                    <span> Axelitomix</span>
+                                    <div> <c:out value='<%=sesion.getAttribute("SIUser")%>'/> </div>
+                                    <span> <%=sesion.getAttribute("SIAge")%></span>
                                 </div>
                             </a>
                            
                             <a href="settings-new.jsp">
                                 <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
-                                Perfil 
+                                Configuración 
                             </a>
-                            <a href="follow-new.jsp">
+                            <a href="follow-new.jsp?follows=<%=sesion.getAttribute("SIUserNum")%>">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z"  clip-rule="evenodd" />
                                 </svg>
@@ -145,7 +159,7 @@
                                     <span class="uk-switch-button"></span>
                                 </span>
                             </a>
-                            <a href="form-login.html">
+                            <a href="index.jsp?cerrar=true">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                                 </svg>
@@ -174,11 +188,19 @@
     
     
             <nav>
+<<<<<<< HEAD
                 <button>
                     <span>
                          <i class='bx bx-home' ></i>
                         <span>Inicio</span>
                     </span>
+=======
+                <button onclick="location.href='feed-new.jsp'">
+                <span>
+                    <i class='bx bxs-home'></i>
+                    <span>Inicio</span>
+                </span>
+>>>>>>> 7de6ef2bce2334891aad1ed925863c6bfe728144
                 </button>
     
                 <button id="button_search">
@@ -217,12 +239,13 @@
                     </button>
                 -->
     
-                <button>
+                <button onclick="location.href='profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>'">
                     <span>
-                        <img src="images/prof3.png" alt="" class="profile-img">
+                        <img src="images/<%=sesion.getAttribute("SIImgNum")%>" alt="" class="profile-img">
                         <span>Perfil</span>
                     </span>
                 </button>
+<<<<<<< HEAD
                 
                 <button>
                     <span>
@@ -235,6 +258,13 @@
                 <span>
                     <i class='bx bx-log-out'></i>
                     <span>Log Out</span>
+=======
+            
+                        <button onclick="location.href='settings-new.jsp'">
+                <span>
+                    <i class='bx bx-cog' ></i>  
+                    <span>Configuración</span>
+>>>>>>> 7de6ef2bce2334891aad1ed925863c6bfe728144
                 </span>
             </button>
             </nav>
@@ -243,95 +273,51 @@
             <!---------------SIDEBAR BUSCAR----------------->
     
         <nav class="sidebar-search">
-    
-            <div class="search-header">
-                <p>Buscar</p>
-            </div>
-    
-            <nav>
-                <input class="box-search" type="text" placeholder="Buscar">
-            </nav>
-    
-            <nav class="profiles_search"><hr>
-    
-                <div class="subtitle_search">
-                    <p>Recientes
-                        <span>Borrar todo</span>
-                    </p>
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof3.png" class="img_search">
-                        <p>Yorch1342
-                            <span>Yorch</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof2.png" class="img_search">
-                        <p>Vargas1341
-                            <span>FerVargas</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div> 
-    
-                <div class="box_profile_search">
-                    <img src="images/prof1.png" class="img_search">
-                        <p>JohanUwW
-                            <span>Yohan</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof4.png" class="img_search">
-                        <p>Axel42891
-                            <span>Nextle</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof5.png" class="img_search">
-                        <p>Perro_NAOH
-                            <span>Doggy</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof6.png" class="img_search">
-                        <p>Dylan41331
-                            <span>Dylan</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof7.png" class="img_search">
-                        <p>Yael48392
-                            <span>Valentain</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-            </nav>
+
+        <div class="search-header">
+            <p>Buscar</p>
+        </div>
+        <%
+    String searchTerm = request.getParameter("term");
+    if (searchTerm == null) {
+            
+        %>
+        <nav>
+            <input id="campoBusqueda" type="text" onkeydown="buscarEnEnter(event)" placeholder="Buscar" autofocus>
         </nav>
+        <%}else{%>
+        <nav>
+            <input id="campoBusqueda" type="text" onkeydown="buscarEnEnter(event)" placeholder="Buscar" value="<%=searchTerm%>" autofocus>
+        </nav>
+        <%}%>
+        <nav class="profiles_search"><hr>
+
+            <div class="subtitle_search">
+                <p>Recientes
+                    <span>Borrar todo</span>
+                </p>
+            </div>
+
+<%
+    List<InterUsers> usersList = new InterUsersService().getInterUsersListByTerm(searchTerm);
+    if (usersList != null && usersList.size() > 0) {
+            
+    for( InterUsers lista : usersList){
+    
+%>
+            <div  class="box_profile_search" onclick="location.href='profile-new.jsp?id=<%=lista.getIUserNum()%>'">
+                <img src="images/<%=lista.getIImgNum()%>" class="img_search">
+                    <p><%=lista.getIUser()%>
+                        <span><%=lista.getIAge()%></span>
+                    </p>
+                <div class="icons_X">
+                    <i class='bx bx-x'></i>
+                </div> 
+            </div>
+  <%}}%>
+
+        </nav>
+    </nav>
     
     
 
@@ -357,7 +343,7 @@
 
                         <div class="card" style="width: 18rem;">
                             <a href="profileimg.jsp">
-                            <img src="assets/images/avatars/prof2.png" class="card-img-top" alt="...">
+                            <img src="assets/images/avatars/<%=sesion.getAttribute("SIImgNum")%>" class="card-img-top" alt="...">
                         </a>
                             <div class="card-body">
                             <h3 >Selecciona una imagen</h3>
@@ -368,28 +354,27 @@
 
 
                         <div class="bg-white rounded-md lg:shadow-md shadow col-span-2 lg:mx-16">
-            
+                            <form action="actualizarUser.jsp" method="POST" accept-charset="UTF-8">
                             <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
                                 <div>
-                                    <label for=""> Nombre de Usuario</label>
-                                    <input type="text" placeholder="" class="shadow-none with-border">
+                                    <label for="">Nombre de Usuario</label>
+                                    <input type="text" name="nombre"value="<c:out value='<%=sesion.getAttribute("SIUser")%>'/>" placeholder="Ingresa Algo" class="shadow-none with-border" minlength="6" maxlength="15" required>
                                 </div>
                                 
                                 <div>
                                     <label for=""> Edad</label>
-                                    <input type="text" placeholder="" class="shadow-none with-border">
+                                    <input type="text" name="edad" value="<c:out value='<%=sesion.getAttribute("SIAge")%>'/>" maxlength="2" required placeholder="Ingresa Algo" class="shadow-none with-border">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="about">Descripcion</label>  
-                                    <textarea id="about" name="about" rows="3"  class="with-border"></textarea>
-                                </div> 
+                                    <label for="about"> Descripcion</label>
+                                    <input type="text" name="descripcion" value="<c:out value='<%=sesion.getAttribute("SIUserDescription")%>'/>" minlength="5" maxlength="100" required placeholder="Ingresa Algo" class="with-border">
+                                </div>
                             </div> 
         
                             <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
-                                <button class="p-2 px-4 rounded bg-gray-50 text-red-500"> Cancel </button>
-                                <button type="button" class="button bg-blue-700"> Save </button>
+                                <button type="submit" class="button bg-blue-700"> Modificar </button>
                             </div>
-        
+                            </form>
                         </div>
         
                     </div>
@@ -463,5 +448,18 @@
     <script src="../../unpkg.com/ionicons%405.2.3/dist/ionicons.js"></script>
 
 </body>
+<script>
+  function buscarEnEnter(event) {
+    if (event.key === "Enter") {
+      buscarEnTiempoReal();
+    }
+  }
 
+  function buscarEnTiempoReal() {
+    var campoBusqueda = document.getElementById("campoBusqueda");
+    var valor = campoBusqueda.value;
+
+    location.href = "settings-new.jsp?term=" + encodeURIComponent(valor);
+  }
+</script>
 </html>
