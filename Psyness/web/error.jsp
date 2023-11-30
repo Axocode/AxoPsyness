@@ -12,6 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <script>window.location.href = "feed.jsp";</script>
+        <%if (request.getParameter("direct").equals("0")) {response.sendRedirect("feed-new.jsp");}
+        else if (request.getParameter("direct").equals("1")) {response.sendRedirect("profile-new.jsp?id="+request.getParameter("perf"));
+        }%>
     </body>
 </html>

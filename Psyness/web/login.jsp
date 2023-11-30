@@ -38,6 +38,7 @@
             String SIEmail = user.getIEmail();
             String SIPassword = user.getIPassword();
             String SIImgNum = user.getIImgNum();
+            String SIUserDescription = user.getIUserDescription();
                     
                     sesion.setAttribute("SISeguidores", SISeguidores);
                     sesion.setAttribute("SISeguidos", SISeguidos);
@@ -49,8 +50,9 @@
                     sesion.setAttribute("SIPassword", SIPassword);
                     sesion.setAttribute("SIImgNum", SIImgNum);
                     sesion.setAttribute("SILastPub",null);
+                    sesion.setAttribute("SIUserDescription", SIUserDescription);
 
-            response.sendRedirect("feed.jsp");
+            response.sendRedirect("feed-new.jsp");
             
 
             

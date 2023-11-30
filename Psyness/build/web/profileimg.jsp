@@ -32,23 +32,21 @@
           else{out.print("<script>location.replace('index');</script>");}   
 
         String img = request.getParameter("img");
+        int iUserNum = (Integer) sesion.getAttribute("SIUserNum");
         
         if (img != null) {         
-        int iUserNum = (Integer) sesion.getAttribute("SIUserNum");
-
-            
-           
+            if (img.equals("profilesidebar3.png" ) || img.equals("prof1.png") || img.equals("prof2.png") || img.equals("prof3.png") 
+            || img.equals("prof4.png") || img.equals("prof5.png") || img.equals("prof6.png") || img.equals("prof7.png") || img.equals("prof8.png")){
             InterUsers Object  = new InterUsers();
             InterUsersService container = new InterUsersService();
             Object.setIImgNum(img);
             Object.setIUserNum(iUserNum);
-            
             boolean cont = container.updateUsuario(Object);
             if (cont) {
                     session.setAttribute("SIImgNum", img);
-                    response.sendRedirect("profile.jsp?id="+iUserNum);
-                }
-}
+                    response.sendRedirect("settings-new.jsp");
+                }}else response.sendRedirect("setttings-new.jsp");
+        }
 %>         
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v16.0" nonce="RJPKicjE"></script>
@@ -76,7 +74,7 @@
                     </li>
 
                     <li>
-                        <a href="feed.jsp">
+                        <a href="feed-new.jsp">
                             <i class="fa-sharp fa-solid fa-house"></i>
                             <span class="links_name">Inicio</span>
                         </a>

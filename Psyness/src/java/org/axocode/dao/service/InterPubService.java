@@ -379,68 +379,43 @@ public boolean deleteUsers( InterPub pub )
         return false;
     }
     
-public boolean updateLovePubNum( InterPub interPub )
-    {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        String sql = "update interpub set pubmg = pubmg + 1 where pubnumid = ?";
-        int row = 0;
-        try 
-        {
-            connection = getConnection( );
-            if( connection == null )
-            {
-                return false;
-            }
-            preparedStatement = connection.prepareStatement(sql);
-            if( preparedStatement == null )
-            {
-                return false;
-            }
-            preparedStatement.setInt(1, interPub.getPubNumId());
-            
-            
-            row = preparedStatement.executeUpdate();
-            closeConnection(connection);
-            return row == 1;
-        } 
-        catch (SQLException ex) 
-        {
-            ex.printStackTrace();
+public boolean actLove(int pub) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+
+    String sql = "update interpub set pubmg = (select count(*) from interlove where loveidpub = ?) where pubnumid = ?";
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return false;
         }
-        return false;
-    }
-        
-    public boolean unLovePubNum( InterPub interPub )
-    {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        String sql = "update interpub set pubmg = pubmg - 1 where pubnumid = ?";
-        int row = 0;
-        try 
-        {
-            connection = getConnection( );
-            if( connection == null )
-            {
-                return false;
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, pub); 
+        preparedStatement.setInt(2, pub); 
+
+        int row = preparedStatement.executeUpdate();
+
+        return row > 0;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            preparedStatement = connection.prepareStatement(sql);
-            if( preparedStatement == null )
-            {
-                return false;
-            }
-            preparedStatement.setInt(1, interPub.getPubNumId());
-            
-            
-            row = preparedStatement.executeUpdate();
-            closeConnection(connection);
-            return row == 1;
-        } 
-        catch (SQLException ex) 
-        {
-            ex.printStackTrace();
         }
-        return false;
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
+    return false;
+}
     
 }

@@ -50,7 +50,7 @@
         boolean successs = favorite.addInterFav(fav);
         if (successs) {
         pubInt = pubInt + 1;
-        response.sendRedirect("feed.jsp#"+pubInt);}}else {pubInt = pubInt + 1;response.sendRedirect("feed.jsp#"+pubInt);}}
+        response.sendRedirect("feed-new.jsp#"+pubInt);}}else {pubInt = pubInt + 1;response.sendRedirect("feed-new.jsp#"+pubInt);}}
           
           
           
@@ -63,8 +63,8 @@
         boolean exist = favorite.checkIfFavExists(fav);
         if (!exist) {     
         boolean successs = favorite.addInterFav(fav);
-        response.sendRedirect("profile.jsp?id="+pre);
-            }else response.sendRedirect("profile.jsp?id="+pre);}
+        response.sendRedirect("profile-new.jsp?id="+pre);
+            }else response.sendRedirect("profile-new.jsp?id="+pre);}
          
         if (request.getParameter("chest").equals("rufless")) {
         int pre = Integer.parseInt(request.getParameter("id"));
@@ -96,7 +96,7 @@
         boolean successs = favorite.unfollowFav(fav);
         if (successs) {
         pubInt = pubInt + 1;
-        response.sendRedirect("feed.jsp#"+pubInt);}}else{pubInt = pubInt + 1; response.sendRedirect("feed.jsp#"+pubInt);}}
+        response.sendRedirect("feed-new.jsp#"+pubInt);}}else{pubInt = pubInt + 1; response.sendRedirect("feed-new.jsp#"+pubInt);}}
           
           
           
@@ -111,9 +111,8 @@
         if (exist) {
                 
         boolean successs = favorite.unfollowFav(fav);
-        
-        response.sendRedirect("profile.jsp?id="+rooot);
-              }else{response.sendRedirect("profile.jsp?id="+rooot);}}
+        response.sendRedirect("profile-new.jsp?id="+rooot);
+              }else{response.sendRedirect("profile-new.jsp?id="+rooot);}}
          
         if (request.getParameter("chest").equals("rufless")) {
         String pre = request.getParameter("id");
