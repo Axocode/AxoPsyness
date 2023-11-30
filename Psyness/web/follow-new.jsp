@@ -4,7 +4,14 @@
     Author     : admin
 --%>
 
+<%@page import="org.axocode.helper.InterUsersHelper"%>
+<%@page import="org.axocode.dao.service.InterFlowService"%>
+<%@page import="org.axocode.dao.InterUsers"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
+<%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +55,32 @@
 </head> 
 <body>
 
-
+<%        request.setCharacterEncoding("UTF-8");          
+          HttpSession sesion = request.getSession();
+          String nombreper = null;
+          String seguidormain = null;
+          InterUsersHelper userHelper = new InterUsersHelper();       
+          int IdS = Integer.parseInt(request.getParameter("follows"));
+          InterUsersService dao = new InterUsersService();
+          List<InterUsers>listita = userHelper.getListT();
+          int postK = 0;
+        
+        if( listita != null && listita.size() > 0)
+        {
+        for(InterUsers suko : listita)
+        {
+           
+           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
+           if (interUsers != null) {
+           if ((request.getParameter("follows").toString()).equals(interUsers.getIUserNum().toString())) {
+            nombreper = (interUsers.getIUser());
+            postK = interUsers.getIUserNum();
+    }}}}
+     if (nombreper.equals(session.getAttribute("SIUser"))) {
+            seguidormain = "sigue";
+        }
+%>
+          
 
 
     <div id="wrapper">
@@ -107,25 +139,25 @@
 
                         <!-- Message de Bolita - Perfil -->
                         <a href="#D">
-                            <img src="assets/images/avatars/prof2.png" class="is_avatar" alt="">
+                            <img src="assets/images/avatars/<%=sesion.getAttribute("SIImgNum")%>" class="is_avatar" alt="">
                         </a>
                         <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
 
-                            <a href="profile-new.jsp" class="user">
+                            <a href="profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="user">
                                 <div class="user_avatar">
-                                    <img src="assets/images/avatars/prof2.png" alt="">
+                                    <img src="assets/images/avatars/<%=sesion.getAttribute("SIImgNum")%>" alt="">
                                 </div>
                                 <div class="user_name">
-                                    <div> Axel5136 </div>
-                                    <span> Axelitomix</span>
+                                    <div> <c:out value='<%=sesion.getAttribute("SIUser")%>'/> </div>
+                                    <span> <%=sesion.getAttribute("SIAge")%></span>
                                 </div>
                             </a>
                            
                             <a href="settings-new.jsp">
                                 <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
-                                Perfil 
+                                Configuración 
                             </a>
-                            <a href="follow-new.jsp">
+                            <a href="follow-new.jsp?follows=<%=sesion.getAttribute("SIUserNum")%>">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z"  clip-rule="evenodd" />
                                 </svg>
@@ -141,7 +173,7 @@
                                     <span class="uk-switch-button"></span>
                                 </span>
                             </a>
-                            <a href="form-login.html">
+                            <a href="index?cerrar=true">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                                 </svg>
@@ -168,7 +200,7 @@
 
 
         <nav>
-            <button>
+            <button onclick="location.href='feed-new.jsp'">
                 <span>
                     <i class='bx bxs-home'></i>
                     <span>Inicio</span>
@@ -211,17 +243,17 @@
                 </button>
             -->
 
-            <button>
-                <span>
-                    <img src="images/prof3.png" alt="" class="profile-img">
-                    <span>Perfil</span>
-                </span>
+            <button onclick="location.href='profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>'">
+                    <span>
+                        <img src="images/<%=sesion.getAttribute("SIImgNum")%>" alt="" class="profile-img">
+                        <span>Perfil</span>
+                    </span>
             </button>
             
-            <button>
+            <button onclick="location.href='settings-new.jsp'">
                 <span>
                     <i class='bx bx-cog' ></i>  
-                    <span>Settings</span>
+                    <span>Configuración</span>
                 </span>
             </button>
         </nav>
@@ -229,16 +261,24 @@
 
         <!---------------SIDEBAR BUSCAR----------------->
 
-    <nav class="sidebar-search">
+    <<nav class="sidebar-search">
 
         <div class="search-header">
             <p>Buscar</p>
         </div>
-
+        <%
+    String searchTerm = request.getParameter("term");
+    if (searchTerm == null) {
+            
+        %>
         <nav>
-            <input class="box-search" type="text" placeholder="Buscar">
+            <input id="campoBusqueda" type="text" onkeydown="buscarEnEnter(event)" placeholder="Buscar" autofocus>
         </nav>
-
+        <%}else{%>
+        <nav>
+            <input id="campoBusqueda" type="text" onkeydown="buscarEnEnter(event)" placeholder="Buscar" value="<%=searchTerm%>" autofocus>
+        </nav>
+        <%}%>
         <nav class="profiles_search"><hr>
 
             <div class="subtitle_search">
@@ -247,75 +287,23 @@
                 </p>
             </div>
 
-            <div class="box_profile_search">
-                <img src="images/prof3.png" class="img_search">
-                    <p>Yorch1342
-                        <span>Yorch</span>
+<%
+    List<InterUsers> usersListi = new InterUsersService().getInterUsersListByTerm(searchTerm);
+    if (usersListi != null && usersListi.size() > 0) {
+            
+    for( InterUsers lista : usersListi){
+    
+%>
+            <div  class="box_profile_search" onclick="location.href='profile-new.jsp?id=<%=lista.getIUserNum()%>'">
+                <img src="images/<%=lista.getIImgNum()%>" class="img_search">
+                    <p><%=lista.getIUser()%>
+                        <span><%=lista.getIAge()%></span>
                     </p>
                 <div class="icons_X">
                     <i class='bx bx-x'></i>
                 </div> 
             </div>
-
-            <div class="box_profile_search">
-                <img src="images/prof2.png" class="img_search">
-                    <p>Vargas1341
-                        <span>FerVargas</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div> 
-
-            <div class="box_profile_search">
-                <img src="images/prof1.png" class="img_search">
-                    <p>JohanUwW
-                        <span>Yohan</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div>
-
-            <div class="box_profile_search">
-                <img src="images/prof4.png" class="img_search">
-                    <p>Axel42891
-                        <span>Nextle</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div>
-
-            <div class="box_profile_search">
-                <img src="images/prof5.png" class="img_search">
-                    <p>Perro_NAOH
-                        <span>Doggy</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div>
-
-            <div class="box_profile_search">
-                <img src="images/prof6.png" class="img_search">
-                    <p>Dylan41331
-                        <span>Dylan</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div>
-
-            <div class="box_profile_search">
-                <img src="images/prof7.png" class="img_search">
-                    <p>Yael48392
-                        <span>Valentain</span>
-                    </p>
-                <div class="icons_X">
-                    <i class='bx bx-x'></i>
-                </div> 
-            </div>
+  <%}}%>
 
         </nav>
     </nav>
@@ -343,7 +331,11 @@
                             <br>
                             <div class="my-2 flex items-center justify-between pb-3">
                                 <div>
+                                    <%if (seguidormain != null) {%>
                                     <h2 class="text-xl font-semibold"> Tus Seguidores</h2>
+                                    <%}else{%>
+                                    <h1 class="text-xl font-semibold">Seguidores de <a href="profile-new.jsp?id=<%=postK%>" style="text-decoration: none; color: black;" ><c:out value='<%=nombreper%>'/></a></h1>
+                                    <%}%>
                                 </div>
                                 
                             </div>
@@ -351,53 +343,37 @@
                             <div class="relative" uk-slider="finite: true">
                                 <div class="uk-slider-container px-1 py-3">
                                     <ul class="uk-slider-items uk-child-width-1-3@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-small uk-grid">
-
+                      <%
+                InterUsersService interUsersService = new InterUsersService();
+                List<InterUsers> interUsersList = interUsersService.getInterUsersByFollow(IdS);
+                if (!interUsersList.isEmpty()) { 
+                
+                for (InterUsers interUsers : interUsersList) {
+                List<InterUsers>list = userHelper.getListT();                    
+                    if( list != null && list.size() > 0){
+                        
+                    for(InterUsers trows : list){
+                        if (interUsers.getIUser().equals(trows.getIUser())) {  
+                        
+                        String dot = (String) trows.getIImgNum();
+                        if (dot != null) {}
+                            else{dot = "perfilsidebar.png";}
+                      %>
                                         <li>
-                                            <a href="timeline.html" class="uk-link-reset">
+                                            <a href="profile-new.jsp?id=<%=trows.getIUserNum()%>" class="uk-link-reset"
+                                            onmouseover="this.style.color='#141414'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#141414')" 
+                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
                                                 <div class="card">
-                                                    <img src="assets/images/avatars/prof1.png" class="h-44 object-cover rounded-t-md shadow-sm w-full">
+                                                    <img src="assets/images/avatars/<%=dot%>" class="h-44 object-cover rounded-t-md shadow-sm w-full">
                                                     <div class="p-4">
-                                                        <h4 class="text-base font-semibold mb-1"> Axel42891 </h4>
-                                                        <p class="font-medium text-sm">n seguirdores
+                                                        <h4 class="text-base font-semibold mb-1"> <c:out value='<%=trows.getIUser()%>'/> </h4>
+                                                        <p class="font-medium text-sm">Seguidores: <c:out value='<%=trows.getIUserSeguidores()%>'/>
                                                         </p>
                                                     </div>
                                                 </div>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="timeline.html">
-                                                <div class="card">
-                                                    <img src="assets/images/avatars/prof2.png" class="h-44 object-cover rounded-t-md shadow-sm w-full">
-                                                    <div class="p-4">
-                                                        <h4 class="text-base font-semibold mb-1">Yorch1234 </h4>
-                                                        <p class="font-medium text-sm">n seguidores </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="timeline.html">
-                                                <div class="card">
-                                                    <img src="assets/images/avatars/prof3.png" class="h-44 object-cover rounded-t-md shadow-sm w-full">
-                                                    <div class="p-4">
-                                                        <h4 class="text-base font-semibold mb-1"> Vargas1341</h4>
-                                                        <p class="font-medium text-sm">n seguidores </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="timeline.html">
-                                                <div class="card">
-                                                    <img src="assets/images/avatars/prof1.png" class="h-44 object-cover rounded-t-md shadow-sm w-full">
-                                                    <div class="p-4">
-                                                        <h4 class="text-base font-semibold mb-1"> YohanUwu </h4>
-                                                        <p class="font-medium text-sm">10 seguidores jaja</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        
+                    <%}}}}}%>  
                                     </ul>
 
                                     <a class="absolute bg-white bottom-1/2 flex items-center justify-center p-2 -left-4 rounded-full shadow-md text-xl w-9 z-10 dark:bg-gray-800 dark:text-white"
@@ -412,58 +388,48 @@
 
                             <div class="my-2 flex items-center justify-between pb-3">
                             <div>
-                                <h2 class="text-xl font-semibold"> Tus Seguidos</h2>
+                                <%if (seguidormain != null) {%>
+                                    <h2 class="text-xl font-semibold"> Tus Seguidos</h2>
+                                    <%}else{%>
+                                    <h1 class="text-xl font-semibold">Seguidos de <a href="profile-new.jsp?id=<%=postK%>" style="text-decoration: none; color: black;" ><c:out value='<%=nombreper%>'/></a></h1>
+                                    <%}%>
                             </div>
                             </div>
 
                             <div class="relative" uk-slider="finite: true">
                                 <div class="uk-slider-container px-1 py-3">
                                     <ul class="uk-slider-items uk-child-width-1-3@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-small uk-grid">
+                <%
+                InterUsersService interUsersServicee = new InterUsersService();
+                List<InterUsers> interUsersListe = interUsersServicee.getInterUsersByFollower(IdS);
+                if (!interUsersListe.isEmpty()) { 
+                
+                for (InterUsers interUsers : interUsersListe) {
+                List<InterUsers>list = userHelper.getListT();                    
+                    if( list != null && list.size() > 0){
+                        
+                    for(InterUsers trows : list){
+                        if (interUsers.getIUser().equals(trows.getIUser())) {  
+                        
+                        String dot = (String) trows.getIImgNum();
+                        if (dot != null) {}
+                            else{dot = "perfilsidebar.png";}
+                      %>
                                         <li>
-                                            <a href="timeline.html" class="uk-link-reset">
+                                            <a href="profile-new.jsp?id=<%=trows.getIUserNum()%>" class="uk-link-reset"
+                                            onmouseover="this.style.color='#141414'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#141414')" 
+                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
                                                 <div class="card">
-                                                    <img src="assets/images/avatars/prof3.png" class="h-44 object-cover rounded-t-md shadow-sm w-full">
+                                                    <img src="assets/images/avatars/<%=dot%>" class="h-44 object-cover rounded-t-md shadow-sm w-full">
                                                     <div class="p-4">
-                                                        <h4 class="text-base font-semibold mb-1"> Yael48392 </h4>
-                                                        <p class="font-medium text-sm">843K Following </p>
+                                                        <h4 class="text-base font-semibold mb-1"> <c:out value='<%=trows.getIUser()%>'/> </h4>
+                                                        <p class="font-medium text-sm">Seguidores: <c:out value='<%=trows.getIUserSeguidores()%>'/>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="timeline.html">
-                                                <div class="card">
-                                                    <img src="assets/images/avatars/prof4.png" class="h-44 object-cover rounded-t-md shadow-sm w-full">
-                                                    <div class="p-4">
-                                                        <h4 class="text-base font-semibold mb-1"> Dylan41331 </h4>
-                                                        <p class="font-medium text-sm">843K Following  </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="timeline.html">
-                                                <div class="card">
-                                                    <img src="assets/images/avatars/prof8.png" class="h-44 object-cover rounded-t-md shadow-sm w-full">
-                                                    <div class="p-4">
-                                                        <h4 class="text-base font-semibold mb-1">Doggy  </h4>
-                                                        <p class="font-medium text-sm">843K Following </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="timeline.html">
-                                                <div class="card">
-                                                    <img src="assets/images/avatars/prof3.png" class="h-44 object-cover rounded-t-md shadow-sm w-full">
-                                                    <div class="p-4">
-                                                        <h4 class="text-base font-semibold mb-1">Jesse Stevens </h4>
-                                                        <p class="font-medium text-sm">843K Following </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        
+                <%}}}}}%>  
                                     
                                     </ul>
 
@@ -485,57 +451,77 @@
                             
                                 <div class="border-b flex items-center justify-between p-4">
                                     <div>
-                                        <h2 class="text-lg font-semibold">Usuarios Activos</h2>
+                                        <h2 class="text-lg font-semibold">Usuarios más seguidos</h2>
                                     </div>
-                                    <a href="busqueda.html" class="text-blue-500"> Ver mas </a>
                                 </div>
                             
                                 <div class="p-4 -mt-1.5">
-                            
+                            <%
+                            InterUsersService masFav=  new InterUsersService();
+                            List<InterUsers>list = masFav.getInterUsersMoreFav();
+                            if (list!=null && list.size() > 0) {
+                                    for(InterUsers usersList : list ){
+                                  if (!usersList.getIUser().equals(sesion.getAttribute("SIUser"))) {
+                                            InterFlowService flowww = new InterFlowService();
+                                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
+                                            boolean seguir = flowww.isUserFollowing(usersList.getIUserNum(), FlowSeguidorID );        
+                                            if (seguir == true ) {
+                                        %>
                                     <div class="flex items-center space-x-4 rounded-md -mx-2 p-2 hover:bg-gray-50">
-                                        <a href="timeline.html" href="timeline.html"iv class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
-                                            <img src="assets/images/avatars/prof3.png" class="absolute w-full h-full inset-0 " alt="">
+                                        <a href="profile-new.jsp?id=<%=usersList.getIUserNum()%>" class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
+                                            <img src="assets/images/avatars/<%=usersList.getIImgNum()%>" class="absolute w-full h-full inset-0 " alt="">
                                         </a>
                                         <div class="flex-1">
-                                            <a href="timeline.html" class="text-base font-semibold capitalize"> U1</a>
-                                            <div class="text-sm text-gray-500 mt-0.5"> 845K Following</div>
+                                            <a href="profile-new.jsp?id=<%=usersList.getIUserNum()%>" class="text-base font-semibold capitalize"
+                                            onmouseover="this.style.color='#6B64F4'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4')" 
+                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')"> 
+                                            <%=usersList.getIUser()%></a>
+                                            <div class="text-sm text-gray-500 mt-0.5"><%=usersList.getIUserSeguidores()%> Seguidores</div>
                                         </div>
-                                        <a href="timeline.html"
-                                            class="flex items-center justify-center h-8 px-3 rounded-md text-sm border font-semibold">
-                                            Follow
-                                        </a>
-                                    </div>
-                                    <div class="flex items-center space-x-4 rounded-md -mx-2 p-2 hover:bg-gray-50">
-                                        <a href="timeline.html" class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
-                                            <img src="assets/images/avatars/prof2.png" class="absolute w-full h-full inset-0 " alt="">
-                                        </a>
-                                        <div class="flex-1">
-                                            <a href="timeline.html" class="text-base font-semibold capitalize"> U2 </a>
-                                            <div class="text-sm text-gray-500 mt-0.5"> 356k Following </div>
-                                        </div>
-                                        <a href="timeline.html"
-                                            class="flex items-center justify-center h-8 px-3 rounded-md text-sm border font-semibold">
-                                            Follow
-                                        </a>
-                                    </div>
-                                    <div class="flex items-center space-x-4 rounded-md -mx-2 p-2 hover:bg-gray-50">
-                                        <a href="timeline.html" class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
-                                            <img src="assets/images/avatars/prof7.png" class="absolute w-full h-full inset-0" alt="">
-                                        </a>
-                                        <div class="flex-1">
-                                            <a href="timeline.html" class="text-base font-semibold capitalize">U3</a>
-                                            <div class="text-sm text-gray-500 mt-0.5"> 845K Following</div>
-                                        </div>
-                                        <a href="timeline.html"
-                                            class="flex items-center justify-center h-8 px-3 rounded-md text-sm border font-semibold">
-                                            Follow
+                                            <a href="seguirnt.jsp?follows=<%=request.getParameter("follows")%>&&id=<%=usersList.getIUserNum()%>&&chest=follows&&idP=<%=sesion.getAttribute("SIUserNum")%>"
+                                           class="flex items-center justify-center h-8 px-3 rounded-md text-sm border font-semibold" style="color:#EB74DB;">
+                                            Siguiendo   
                                         </a>
                                     </div>
                                     
+                                    <%}else{%>
+                                    
+                                    <div class="flex items-center space-x-4 rounded-md -mx-2 p-2 hover:bg-gray-50">
+                                        <a href="" class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
+                                           <img src="assets/images/avatars/<%=usersList.getIImgNum()%>" class="absolute w-full h-full inset-0 " alt="">
+                                        </a>
+                                        <div class="flex-1">
+                                            <a href="profile-new.jsp?follows=<%=request.getParameter("follows")%>&&id=<%=usersList.getIUserNum()%>" class="text-base font-semibold capitalize"
+                                            onmouseover="this.style.color='#6B64F4'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4')" 
+                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')"> 
+                                            <%=usersList.getIUser()%></a>
+                                            <div class="text-sm text-gray-500 mt-0.5"><%=usersList.getIUserSeguidores()%> Seguidores</div>
+                                        </div>
+                                        <a href="seguir.jsp?follows=<%=request.getParameter("follows")%>&&id=<%=usersList.getIUserNum()%>&&chest=follows&&idP=<%=sesion.getAttribute("SIUserNum")%>"
+                                            class="flex items-center justify-center h-8 px-3 rounded-md text-sm border font-semibold"
+                                            onmouseover="this.style.color='#EB74DB'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB')" 
+                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')"> 
+                                            Seguir   
+                                        </a>
+                                    </div>
+                                    
+                                    <%}} if (usersList.getIUserNum().toString().equals(sesion.getAttribute("SIUserNum").toString())) {%>
+                            
+                                    <div class="flex items-center space-x-4 rounded-md -mx-2 p-2 hover:bg-gray-50">
+                                        <a href="profile-new.jsp?id=<%=usersList.getIUserNum()%>" href="timeline.html"iv class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
+                                            <img src="assets/images/avatars/<%=usersList.getIImgNum()%>" class="absolute w-full h-full inset-0 " alt="">
+                                        </a>
+                                        <div class="flex-1">
+                                            <a href="profile-new.jsp?id=<%=usersList.getIUserNum()%>" class="text-base font-semibold capitalize"
+                                            onmouseover="this.style.color='#6B64F4'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4')" 
+                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')"><%=usersList.getIUser()%></a>
+                                            <div class="text-sm text-gray-500 mt-0.5"><%=usersList.getIUserSeguidores()%> Seguidores</div>
+                                        </div>
+                                    </div>
+                            
+                                    <%}}}%>                                   
                             
                                 </div>
-                            
-                                <a href="busqueda.html" class="block text-center pb-4 font-medium text-blue-500"> See all </a>
                             
                             </div>
                         </div>
@@ -617,6 +603,19 @@
     <!-- att: Yorch  -->
 
 </body>
+<script>
+  function buscarEnEnter(event) {
+    if (event.key === "Enter") {
+      buscarEnTiempoReal();
+    }
+  }
 
+  function buscarEnTiempoReal() {
+    var campoBusqueda = document.getElementById("campoBusqueda");
+    var valor = campoBusqueda.value;
+
+    location.href = "follow-new.jsp?follows=<%=request.getParameter("follows")%>&&term=" + encodeURIComponent(valor);
+  }
+</script>
 </html>
 

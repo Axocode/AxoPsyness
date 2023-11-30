@@ -261,9 +261,9 @@
                            
                             <a href="settings-new.jsp">
                                 <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
-                                Editar 
+                                Configuración 
                             </a>
-                            <a href="follow-new.jsp">
+                            <a href="follow-new.jsp?follows=<%=sesion.getAttribute("SIUserNum")%>">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z"  clip-rule="evenodd" />
                                 </svg>
@@ -353,12 +353,12 @@
                         <img src="images/<%=sesion.getAttribute("SIImgNum")%>" alt="" class="profile-img">
                         <span>Perfil</span>
                     </span>
-                </button>
+            </button>
             
-                        <button onclick="location.href='settings-new.jsp'">
+            <button onclick="location.href='settings-new.jsp'">
                 <span>
                     <i class='bx bx-cog' ></i>  
-                    <span>Settings</span>
+                    <span>Configuración</span>
                 </span>
             </button>
         </nav>
@@ -774,6 +774,9 @@
                                                 <div class="text-gray-500 flex items-center space-x-2"><span><%=sesion.getAttribute("SIAge")%></span></div>
                                             </div>
                                         </div>
+                                        <a href="follow-new.jsp?follows=<%=sesion.getAttribute("SIUserNum")%>"
+                                        onmouseover="this.style.color='#141414'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#141414')" 
+                                        onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
                                         <ul class="text-gray-600 space-y-3 mt-3">
                                             <li class="flex items-center space-x-2"> 
                                                 <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
@@ -784,6 +787,7 @@
                                                 Seguidos <strong> <%=seguidos%> </strong>
                                             </li>                                         
                                         </ul>
+                                        </a>
                                     </div>                    
                                 </div>
 
@@ -828,11 +832,11 @@
                                             <div class="space-y-6">                   
                                                 <div class="card lg:mx-0 p-9" id="contenedor_side_right">
                                                     <div class="boxesita_rights_feed  border-b">
-                                                        <a href="#">
+                                                        <a href="profile-new.jsp?id=<%=waveUsers.getIUserNum()%>">
                                                             <img src="assets/images/avatars/<%=waveUsers.getIImgNum()%>" class="bg-gray-200 border border-white rounded-full w-14 h-14">
                                                         </a>
                                                         <div class="flex-1 font-semibold capitalize ">
-                                                            <a href="#" class="text-black dark:text-gray-100"> <%=waveUsers.getIUser()%>  </a>
+                                                            <a href="profile-new.jsp?id=<%=waveUsers.getIUserNum()%>" class="text-black dark:text-gray-100"> <%=waveUsers.getIUser()%>  </a>
                                                             <div class="text-gray-500 flex items-center space-x-2 "><%=wave.getPubDate()%></div>
                                                         </div>
                                                     </div>

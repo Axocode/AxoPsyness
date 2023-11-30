@@ -7553,6 +7553,10 @@ header .header_inner .right_side {
     margin-bottom: 3px !important;
     font-size: 25px !important;
   }
+  .profile .profiles_content .profile_info h2 {
+    margin-bottom: 3px !important;
+    font-size: 25px !important;
+  }
   .profile.is_page .profile_avatar {
     display: none;
   }

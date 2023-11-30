@@ -27,6 +27,7 @@
 <%@page import="org.axocode.helper.InterPubHelper"%>
 <%@page import="org.axocode.dao.InterUsers"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -169,10 +170,11 @@
     Object siUserNumAttribute = sesion.getAttribute("SIUserNum");
     if (siUserNumAttribute == null) {
             out.print("<script>location.replace('index.jsp');</script>");
-        }
+        }   
     String nombre =null;
     String edad = null;
     String data = null;
+    String descripcion = null;
     int seguidores = 0;
     int seguidos = 0;
     int postK = 0;
@@ -196,6 +198,7 @@
            InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
            if (interUsers != null) {
            if ((request.getParameter("id").toString()).equals(interUsers.getIUserNum().toString())) {
+            descripcion = (interUsers.getIUserDescription());
             nombre = (interUsers.getIUser());
             edad = (interUsers.getIAge());
             data = interUsers.getIImgNum();
@@ -303,9 +306,9 @@
                            
                             <a href="settings-new.jsp">
                                 <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
-                                Editar 
+                                Configuración 
                             </a>
-                            <a href="follow-new.jsp">
+                            <a href="follow-new.jsp?follows=<%=sesion.getAttribute("SIUserNum")%>">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z"  clip-rule="evenodd" />
                                 </svg>
@@ -401,7 +404,7 @@
                         <button onclick="location.href='settings-new.jsp'">
                 <span>
                     <i class='bx bx-cog' ></i>  
-                    <span>Settings</span>
+                    <span>Configuración</span>
                 </span>
             </button>
             </nav>
@@ -410,95 +413,51 @@
             <!---------------SIDEBAR BUSCAR----------------->
     
         <nav class="sidebar-search">
-    
-            <div class="search-header">
-                <p>Buscar</p>
-            </div>
-    
-            <nav>
-                <input class="box-search" type="text" placeholder="Buscar">
-            </nav>
-    
-            <nav class="profiles_search"><hr>
-    
-                <div class="subtitle_search">
-                    <p>Recientes
-                        <span>Borrar todo</span>
-                    </p>
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof3.png" class="img_search">
-                        <p>Yorch1342
-                            <span>Yorch</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof2.png" class="img_search">
-                        <p>Vargas1341
-                            <span>FerVargas</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div> 
-    
-                <div class="box_profile_search">
-                    <img src="images/prof1.png" class="img_search">
-                        <p>JohanUwW
-                            <span>Yohan</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof4.png" class="img_search">
-                        <p>Axel42891
-                            <span>Nextle</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof5.png" class="img_search">
-                        <p>Perro_NAOH
-                            <span>Doggy</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof6.png" class="img_search">
-                        <p>Dylan41331
-                            <span>Dylan</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-                <div class="box_profile_search">
-                    <img src="images/prof7.png" class="img_search">
-                        <p>Yael48392
-                            <span>Valentain</span>
-                        </p>
-                    <div class="icons_X">
-                        <i class='bx bx-x'></i>
-                    </div> 
-                </div>
-    
-            </nav>
+
+        <div class="search-header">
+            <p>Buscar</p>
+        </div>
+        <%
+    String searchTerm = request.getParameter("term");
+    if (searchTerm == null) {
+            
+        %>
+        <nav>
+            <input id="campoBusqueda" type="text" onkeydown="buscarEnEnter(event)" placeholder="Buscar" autofocus>
         </nav>
+        <%}else{%>
+        <nav>
+            <input id="campoBusqueda" type="text" onkeydown="buscarEnEnter(event)" placeholder="Buscar" value="<%=searchTerm%>" autofocus>
+        </nav>
+        <%}%>
+        <nav class="profiles_search"><hr>
+
+            <div class="subtitle_search">
+                <p>Recientes
+                    <span>Borrar todo</span>
+                </p>
+            </div>
+
+<%
+    List<InterUsers> usersList = new InterUsersService().getInterUsersListByTerm(searchTerm);
+    if (usersList != null && usersList.size() > 0) {
+            
+    for( InterUsers lista : usersList){
+    
+%>
+            <div  class="box_profile_search" onclick="location.href='profile-new.jsp?id=<%=lista.getIUserNum()%>'">
+                <img src="images/<%=lista.getIImgNum()%>" class="img_search">
+                    <p><%=lista.getIUser()%>
+                        <span><%=lista.getIAge()%></span>
+                    </p>
+                <div class="icons_X">
+                    <i class='bx bx-x'></i>
+                </div> 
+            </div>
+  <%}}%>
+
+        </nav>
+    </nav>
     
 
 
@@ -524,11 +483,26 @@
                                 </div>
                                 <div class="icon_change_photo" hidden> <ion-icon name="camera" class="text-xl"></ion-icon> </div>
                             </div>
-
                             <div class="profile_info">
                                 <h1> <c:out value='<%=nombre%>'/> </h1>
                             </div>
-
+                            
+                            <div class="profile_info">
+                                <p> <c:out value='<%=descripcion%>'/> </p>
+                            </div>
+                            
+                            <a href="follow-new.jsp?follows=<%=postK%>"
+                            onmouseover="this.style.color='#141414'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#141414')" 
+                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
+                            <div class="profile_info">
+                                            <li class="flex items-center space-x-2"> 
+                                                <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
+                                                Seguidores: <strong> <%=seguidores%>  </strong>
+                                                <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
+                                                Seguidos: <strong> <%=seguidos%> </strong>
+                                            </li>
+                            </div>
+                            </a>
                         </div>
 
                         <div class="flex justify-between lg:border-t border-gray-100 flex-col-reverse lg:flex-row pt-2">
@@ -800,25 +774,6 @@
                             </div>
                             
                             <div class="right_side_profile">
-                            <!-- Sidebar -->
-                                <div class="w-full space-y-6" id="feauturings_user_perfil">
-                                
-                                    <div class="widget card p-5">
-                                        <h4 class="text-lg font-semibold"> About </h4>
-                                        <ul class="text-gray-600 space-y-3 mt-3">
-                                            <li class="flex items-center space-x-2"> 
-                                                <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
-                                                Seguidores <strong> <%=seguidores%>  </strong>
-                                            </li>
-                                            <li class="flex items-center space-x-2"> 
-                                                <ion-icon name="globe" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
-                                                Seguidos <strong> <%=seguidos%> </strong>
-                                            </li>
-                                                                    
-                                        </ul>
-                                        
-                                    </div>
-                                </div> 
 
                                 <div class="w-full space-y-6" id="feauturings_user_perfil">
 
@@ -1212,5 +1167,18 @@
     <script src="../../unpkg.com/ionicons%405.2.3/dist/ionicons.js"></script>
 
 </body>
+<script>
+  function buscarEnEnter(event) {
+    if (event.key === "Enter") {
+      buscarEnTiempoReal();
+    }
+  }
 
+  function buscarEnTiempoReal() {
+    var campoBusqueda = document.getElementById("campoBusqueda");
+    var valor = campoBusqueda.value;
+
+    location.href = "profile-new.jsp?id=<%=request.getParameter("id")%>&&term=" + encodeURIComponent(valor);
+  }
+</script>
 </html>

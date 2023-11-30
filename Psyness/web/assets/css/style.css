@@ -7439,6 +7439,14 @@ header .header_inner .right_side {
   margin-bottom: 0;
 }
 
+.profile .profiles_content .profile_info h2 {
+  color: #464646;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 26px;
+  margin-bottom: 0;
+}
+
 .profile .profiles_content .profile_info p {
   margin-bottom: 0px;
   color: #9c9c9c;

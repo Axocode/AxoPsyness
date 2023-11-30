@@ -48,6 +48,7 @@ public class InterUsersService extends Conexion<InterUsers>
                 users.setIImgNum(resultSet.getString(7));
                 users.setIUserSeguidores(resultSet.getInt(8));
                 users.setIUserSeguidos(resultSet.getInt(9));
+                users.setIUserDescription(resultSet.getString(10));
                 usersList.add(users);
             }
             resultSet.close();
@@ -107,6 +108,55 @@ public class InterUsersService extends Conexion<InterUsers>
 
     return usersList;
 }
+    
+    public List<InterUsers> getInterUsersMoreFav() {
+    List<InterUsers> usersList = new ArrayList<>();
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    InterUsers users = null;
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return null;
+        }
+        // Consulta para obtener los 5 usuarios con más seguidores
+        String query = "select * from interusers order by iuserseguidores desc limit 5";
+        preparedStatement = connection.prepareStatement(query);
+        
+        resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            users = new InterUsers();
+            users.setIUserNum(resultSet.getInt("iusernum"));
+            users.setIUser(resultSet.getString("iuser"));
+            users.setIAge(resultSet.getString("iage"));
+            users.setIEmail(resultSet.getString("iemail"));
+            users.setIPassword(resultSet.getString("ipassword"));
+            users.setIRol(resultSet.getString("irol"));
+            users.setIImgNum(resultSet.getString("iimgnum"));
+            users.setIUserSeguidores(resultSet.getInt("iuserseguidores"));
+            users.setIUserSeguidos(resultSet.getInt("iuserseguidos"));
+            usersList.add(users);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        return null;
+    } finally {
+        // Cerrar los recursos en un bloque finally
+        try {
+            if (resultSet != null) resultSet.close();
+            if (preparedStatement != null) preparedStatement.close();
+            if (connection != null) closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    return usersList;
+}
+
 
  
 
@@ -155,13 +205,14 @@ public class InterUsersService extends Conexion<InterUsers>
     }
 
 
-public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEdad) {
+public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEdad, String nuevaDescripcion) {
     try (Connection connection = getConnection();
-         PreparedStatement statement = connection.prepareStatement("update interusers set iuser = ?, iage = ? where iusernum = ?")) {
+         PreparedStatement statement = connection.prepareStatement("update interusers set iuser = ?, iage = ?, iuserdescription = ? where iusernum = ?")) {
         
         statement.setString(1, nuevoNombre);
         statement.setString(2, nuevaEdad);
-        statement.setInt(3, IUserNum);
+        statement.setString(3, nuevaDescripcion);
+        statement.setInt(4, IUserNum);
 
         int rowsAffected = statement.executeUpdate();
         if (rowsAffected > 0) {
@@ -250,8 +301,9 @@ public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEd
                         String IImgNum = resultSet.getString("iimgnum");
                         int IUserSeguidores = resultSet.getInt("iuserseguidores");
                         int IUserSeguidos = resultSet.getInt("iuserseguidos");
+                        String IUserDescripion = resultSet.getString("iuserdescription");
 
-                        interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IRol, IUserSeguidores, IUserSeguidos);
+                        interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IRol, IUserSeguidores, IUserSeguidos, IUserDescripion);
                     }
                 }
             }
@@ -303,7 +355,7 @@ public List<InterUsers> getInterUsersByFollow(int pubNumId) {
 
     try (Connection connection = getConnection()) {
         String sql = "select interusers.iuser, interusers.iusernum, interusers.iage, interusers.iemail, interusers.ipassword, " +
-                     "interusers.iimgnum, interusers.irol, interusers.iuserseguidores, interusers.iuserseguidos " +
+                     "interusers.iimgnum, interusers.irol, interusers.iuserseguidores, interusers.iuserseguidos, interusers.iuserdescription " +
                      "from interusers " +
                      "inner join interflow on interusers.iusernum = interflow.flowseguidoid " +
                      "where interflow.flowseguidoresid = ?";
@@ -322,8 +374,9 @@ public List<InterUsers> getInterUsersByFollow(int pubNumId) {
                     String IRol = resultSet.getString("irol");
                     int userSeguidores = resultSet.getInt("iuserseguidores");
                     int userSeguidos = resultSet.getInt("iuserseguidos");
+                    String IUserDescripion = resultSet.getString("iuserdescription");
 
-                    InterUsers interUsers = new InterUsers(IUserNum, IUser,IAge, IEmail, IPassword, IImgNum, IRol, userSeguidores, userSeguidos);
+                    InterUsers interUsers = new InterUsers(IUserNum, IUser,IAge, IEmail, IPassword, IImgNum, IRol, userSeguidores, userSeguidos, IUserDescripion);
                     interUsersList.add(interUsers);
                 }
             }
@@ -340,7 +393,7 @@ public List<InterUsers> getInterUsersByFollower(int ipubnumid) {
 
     try (Connection connection = getConnection()) {
         String sql = "select interusers.iuser, interusers.iusernum, interusers.iage, interusers.iemail, " +
-                     "interusers.ipassword, interusers.irol, interusers.iimgnum, interusers.iuserseguidores, interusers.iuserseguidos " +
+                     "interusers.ipassword, interusers.irol, interusers.iimgnum, interusers.iuserseguidores, interusers.iuserseguidos, interusers.iuserdescription " +
                      "from interusers " +
                      "inner join interflow on interusers.iusernum = interflow.flowseguidoresid " +
                      "where interflow.flowseguidoid = ?";
@@ -359,9 +412,9 @@ public List<InterUsers> getInterUsersByFollower(int ipubnumid) {
                     String IRol = resultSet.getString("irol");
                     int userSeguidores = resultSet.getInt("iuserseguidores");
                     int userSeguidos = resultSet.getInt("iuserseguidos");
-                    
+                    String IUserDescripion = resultSet.getString("iuserdescription");
 
-                    InterUsers interUsers = new InterUsers(IUserNum, IUser,IAge, IEmail, IPassword, IImgNum, IRol, userSeguidores, userSeguidos);
+                    InterUsers interUsers = new InterUsers(IUserNum, IUser,IAge, IEmail, IPassword, IImgNum, IRol, userSeguidores, userSeguidos, IUserDescripion);
                     userList.add(interUsers);
                 }
             }
@@ -463,6 +516,7 @@ public List<InterUsers> getInterUsersByFollower(int ipubnumid) {
             aux.setIImgNum(resultSet.getString(7));
             aux.setIUserSeguidores(resultSet.getInt(8));
             aux.setIUserSeguidos(resultSet.getInt(9));
+            aux.setIUserDescription(resultSet.getString(10));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -521,6 +575,7 @@ public List<InterUsers> getInterUsersByFollower(int ipubnumid) {
             aux.setIImgNum(resultSet.getString(7));
             aux.setIUserSeguidores(resultSet.getInt(8));
             aux.setIUserSeguidos(resultSet.getInt(9));
+            aux.setIUserDescription(resultSet.getString(10));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();

@@ -42,6 +42,22 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Table `axobasepsy`.`interpsico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `axobasepsy`.`interpsico` (
+  `psiconum` INT NULL DEFAULT NULL,
+  `psicodescription` TEXT(1250) NULL DEFAULT NULL,
+  `psicoimg` TEXT NULL DEFAULT NULL,
+  `psicocali` FLOAT NULL DEFAULT 5,
+  INDEX `psiconum` (`psiconum` ASC) ,
+  CONSTRAINT `interpsico_ibfk_1`
+    FOREIGN KEY (`psiconum`)
+    REFERENCES `axobasepsy`.`interusers` (`iusernum`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `axobasepsy`.`interusers`
@@ -56,12 +72,12 @@ CREATE TABLE IF NOT EXISTS `axobasepsy`.`interusers` (
   `iimgnum` VARCHAR(20) NULL DEFAULT 'profilesidebar3.png',
   `iuserseguidores` INT NULL DEFAULT '0',
   `iuserseguidos` INT NULL DEFAULT '0',
+  `iuserdescription` VARCHAR(100) NULL DEFAULT 'Esta es mi descripcion',
   PRIMARY KEY (`iusernum`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
-insert into interusers(iuser,iage,iemail,ipassword,irol) values('Axocode','99','axocode0@gmail.como','losquieromuchoaxocode','Administrador');
 -- -----------------------------------------------------
 -- Table `axobasepsy`.`interfav`
 -- -----------------------------------------------------
@@ -171,5 +187,7 @@ DEFAULT CHARACTER SET = utf8;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+insert into interusers(iuser,iage,iemail,ipassword,irol) values('Axocode','99','axocode0@gmail.como','losquieromuchoaxocode','Administrador');
 
 insert into intercodes(codescode) values('1234567890'),('0123456789'),('9012345678'),('8901234567'),('7890123456')
