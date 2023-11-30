@@ -550,6 +550,10 @@ body{
     
 }
 
+#contenedor_side_right{
+    height: 300px;
+}
+
 #contenedor_side_right_pf{
     margin-bottom: 30px;
 }

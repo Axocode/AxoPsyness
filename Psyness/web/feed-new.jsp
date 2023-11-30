@@ -490,7 +490,7 @@
                                             </a>
                                             <div class="flex-1 font-semibold capitalize">
                                                 
-                                                <a href="profile-new.jsp?id=<%=interUsers.getIUserNum()%>" class="text-black dark:text-gray-100">  <c:out value='<%=interUsers.getIUser()%>'/>  <span class="text-gray-700"><%=horita%>hrs</span></a>
+                                                <a href="profile-new.jsp?id=<%=interUsers.getIUserNum()%>" class="text-black dark:text-white" id="name_user_feed">  <c:out value='<%=interUsers.getIUser()%>'/>  <span class="text-gray-700"><%=horita%>hrs</span></a>
                                                 <div class="text-gray-700 flex items-center space-x-2"><%=trows.getPubDate()%> <ion-icon name="people"></ion-icon></div>
                                                 
                                             </div>
@@ -678,8 +678,8 @@
 
 
 
-                                        <div id="main-container" class="container-comentarios  border-b cursor-pointer py-2" onclick="toggleContainer()">
-                                            <p class="px-4 sm:flex sm:flex-row-reverse hover:text-blue-600">Ver Comentarios </p>
+                                        <div id="main-container" class="container-comentarios  border-b cursor-pointer py-2">
+                                            <p class="px-4 sm:flex sm:flex-row-reverse hover:text-blue-600" onclick="toggleContainer()">Ver Comentarios </p>
 
                                             <div id="inner-container" class="inner-container">
                                                 <div class="border-t py-4 space-y-4 dark:border-gray-600">
@@ -688,6 +688,10 @@
                                                             <img src="assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
                                                         </div>
                                                         <div>
+                                                            <div class="flex-1 font-semibold capitalize px-4">
+                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
+                                                            </div>
+                                                            
                                                             <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
                                                                 <p class="leading-6">Un comentario </p>
                                                                 <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
@@ -703,6 +707,10 @@
                                                             <img src="assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
                                                         </div>
                                                         <div>
+                                                            <div class="flex-1 font-semibold capitalize px-4">
+                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
+                                                            </div>
+                                                            
                                                             <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
                                                                 <p class="leading-6">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem inventore adipisci, libero voluptatibus non porro dolorem praesentium doloremque ex mollitia!</p>
                                                                 <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
@@ -718,6 +726,10 @@
                                                             <img src="assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
                                                         </div>
                                                         <div>
+                                                            <div class="flex-1 font-semibold capitalize px-4">
+                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
+                                                            </div>
+                                                            
                                                             <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
                                                                 <p class="leading-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta vitae sint iure eveniet facere veritatis quidem illo, expedita numquam aut ducimus, magni ex tenetur fuga qui! Unde minus est quam. </p>
                                                                 <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
@@ -1038,7 +1050,7 @@
                                                 <img src="assets/images/avatars/<%=data%>" class="bg-gray-200 border border-white rounded-full w-14 h-14">
                                             </a>
                                             <div class="flex-1 font-semibold capitalize">
-                                                <a href="profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="text-black dark:text-gray-100"><c:out value='<%=sesion.getAttribute("SIUser")%>'/></a>
+                                                <a href="profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="text-black dark:text-white" id="name_user_feed"><c:out value='<%=sesion.getAttribute("SIUser")%>'/></a>
                                                 <div class="text-gray-500 flex items-center space-x-2"><span><%=sesion.getAttribute("SIAge")%></span></div>
                                             </div>
                                         </div>
@@ -1058,15 +1070,77 @@
                                         </a>
                                     </div>                    
                                 </div>
+                                            
+                                            <!-------------------------IMPORTANTE - CAMBIOS-------------------------------->
+                                <!---------------WAVE--------------->
+
+
+                                <div class=" wave_feed">
+                                       <%
+                                  ZonedDateTime ayer = horaCiudadMexico.minusDays(1);
+                                  String horaFormateadaWave = ayer.format(formatter);
+                                  String []partesWave = horaFormateadaWave.split(" ");
+                                  String fechaWave = partesWave[0] + " " + partesWave[1] + " " + partesWave[2] + " " + partesWave[3] + " " + partes[4];
+
+                                  InterPubService horas = new InterPubService();
+                                  boolean empezarWave = horas.getPubLateDay(fechaWave);
+
+                                      if (empezarWave) {
+                                          InterPub wave = new InterPub();
+                                          InterUsers waveUsers = new InterUsers();
+                                          InterUsersService persona = new InterUsersService();
+                                          wave = horas.getMostLikedPubByDate(fechaWave);
+                                          waveUsers = persona.getInterUsersByPubNumId(wave.getPubNumId());
+                                %>
+                                    <div class="w-full space-y-6">
+                    
+                                        <div class="card lg:mx-0 p-9 overflow-auto" id="contenedor_side_right">
+                                            
+                                            <div class="titulo_wave">
+                                                <h3 class="text-center text-lg font-semibold "> WAVE DIARIA </h3>
+                                                <hr class="-mx-2 my-2 dark:border-gray-800">
+                                            </div>
+
+                                            <div class="boxesita_rights_feed ">
+                                                <a href="profile-new.jsp?id=<%=waveUsers.getIUserNum()%>">
+                                                    <img src="assets/images/avatars/<%=waveUsers.getIImgNum()%>" class="bg-gray-200 border border-white rounded-full w-14 h-14">
+                                                </a>
+                                                                                       
+                                                <div class="flex-1 font-semibold capitalize ">
+                                                    <a href="profile-new.jsp?id=<%=waveUsers.getIUserNum()%>" class="text-black dark:text-white" id="name_user_feed"> <%=waveUsers.getIUser()%> </a>
+                                                    <div class="text-gray-500 flex items-center space-x-2 "><%=wave.getPubDate()%></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="segunda_boxesita_rights_feed" id="second_box_right_feed">
+                                                <div class="p-2 pt-1 border-b dark:border-gray-700" id="texto_feed_wave">                      
+                                                    <%=wave.getPubCont()%>
+                                                </div>
+
+                                                <ul class="text-gray-600 space-y-3 mt-3">
+                                                    <li class="flex items-center space-x-2"> 
+                                                        <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
+                                                        Amor <strong> <%=wave.getPubMg()%>  </strong>
+                                                    </li>
+                                                </ul>
+                                            </div>  
+
+                                        </div>                    
+                                            
+                                    </div>
+                                 <%}%>
+                                </div>
+
+                                <!--Fin - Cambios-->
 
                                 
 
 
-                                <!---------------WAVE--------------->
+                                <!---------------WAVE - Antigua
+                                
 
 
                                 <div class="wave_feed">
-                                    <!--<label id="listbox-label" class="block text-sm font-medium leading-6 text-gray-900">Assigned to</label>-->
                                     <div class="relative mt-2">
                                       <button type="button" class="relative w-full cursor-default rounded-md bg-white py-2.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
                                         <span class="flex items-center">
@@ -1129,6 +1203,9 @@
                                       </div>  
                                     </div>
                                 </div>
+                                
+                                --------------->  
+                                      
 
                             </div>
                         </div>           
