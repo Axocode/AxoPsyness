@@ -181,17 +181,26 @@
         <aside class="sidebar_feed">
 
             <div class="sidebar_header">
-                <img src="images/sololetras.svg" class="logo-img_sidebar">
+                <!--<img src="images/sololetras.svg" class="logo-img_sidebar">-->
+                <h1>Psyness</h1>
                 <img src="images/Icono.svg" class="logo-icon_sidebar">
             </div>
     
     
             <nav>
+<<<<<<< HEAD
+                <button>
+                    <span>
+                         <i class='bx bx-home' ></i>
+                        <span>Inicio</span>
+                    </span>
+=======
                 <button onclick="location.href='feed-new.jsp'">
                 <span>
                     <i class='bx bxs-home'></i>
                     <span>Inicio</span>
                 </span>
+>>>>>>> 7de6ef2bce2334891aad1ed925863c6bfe728144
                 </button>
     
                 <button id="button_search">
@@ -203,7 +212,7 @@
     
                 <button>
                     <span>
-                        <i class='bx bx-compass' ></i>
+                        <i class='bx bx-user-voice' ></i>
                         <span>Datacenter</span>
                     </span>
                 </button>
@@ -236,11 +245,26 @@
                         <span>Perfil</span>
                     </span>
                 </button>
+<<<<<<< HEAD
+                
+                <button>
+                    <span>
+                        <i class='bx bx-cog' ></i>  
+                        <span>Settings</span>
+                    </span>
+                </button>
+                
+                <button>
+                <span>
+                    <i class='bx bx-log-out'></i>
+                    <span>Log Out</span>
+=======
             
                         <button onclick="location.href='settings-new.jsp'">
                 <span>
                     <i class='bx bx-cog' ></i>  
                     <span>Configuración</span>
+>>>>>>> 7de6ef2bce2334891aad1ed925863c6bfe728144
                 </span>
             </button>
             </nav>

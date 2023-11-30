@@ -9359,7 +9359,11 @@ body.story-active header .header_widgets .is_link {
 .dark .sidebar_feed span,
 .dark #texto_feed_wave,
 .dark #texto_busqeuda_user,
-.dark #numerito_bola_perfil{
+.dark #numerito_bola_perfil,
+.dark .sidebar_header h1,
+.dark .name_user_tittle,
+.dark #iconito_edit_post,
+.dark #name_user_feed{
   color: #f1f1f1 !important;
 }
 
