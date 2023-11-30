@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="css/tailwindcss-colors.css">
-    <link rel="stylesheet" href="css/stylechat.css">
+    <link rel="stylesheet" href="css/stylechat2.css">
     <title>Chat</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
         <div class="chat-container">
             <!-- start: Sidebar -->
             <aside class="chat-sidebar">
-                <a href="feed2.html" class="chat-sidebar-logo">
+                <a href="feed-new.jsp" class="chat-sidebar-logo">
                     <i class="ri-arrow-left-line"></i> 
                 </a>
                 <ul class="chat-sidebar-menu">
@@ -43,16 +43,13 @@
                 <!-- start: Content side -->
                 <div class="content-sidebar">
                     <div class="content-sidebar-title">Chats</div>
-                    <form action="" class="content-sidebar-form">
-                        <input type="search" class="content-sidebar-input" placeholder="Search...">
-                        <button type="submit" class="content-sidebar-submit"><i class="ri-search-line"></i></button>
-                    </form>
+                    
                     <div class="content-messages">
                         <ul class="content-messages-list">
                             <li class="content-message-title"><span>Recientes</span></li>
                             <li>
                                 <a href="#" data-conversation="#conversation-1">
-                                    <img class="content-message-image" src="images/prof7.png" alt="">
+                                    <img class="content-message-image" src="assets/images/avatars/axos.svg" alt="">
                                     <span class="content-message-info">
                                         <span class="content-message-name">Axochat</span>
                                         <span class="content-message-text">Hi Axo! Todo bien? :0</span>
@@ -111,10 +108,9 @@
                     <div class="conversation-top">
                         <button type="button" class="conversation-back"><i class="ri-arrow-left-line"></i></button>
                         <div class="conversation-user">
-                            <img class="conversation-user-image" src="images/prof7.png" alt="">
+                            <img class="conversation-user-image" src="assets/images/avatars/axos.svg" alt="">
                             <div>
                                 <div class="conversation-user-name">Axo chat</div>
-                                <div class="conversation-user-status online">En linea</div>
                             </div>
                         </div>
                         
@@ -124,7 +120,7 @@
                             <div class="coversation-divider"><span>Hoy</span></div>
                             <li class="conversation-item me">
                                 <div class="conversation-item-side">
-                                    <img class="content-message-image" src="images/prof7.png" alt="">                                </div>
+                                    <img class="content-message-image" src="assets/images/avatars/axos.svg" alt="">                                </div>
                                 <div class="conversation-item-content">
                                     <div class="conversation-item-wrapper">
                                         <div class="conversation-item-box">
@@ -184,7 +180,7 @@
                     </div>
                     <div class="conversation-main">
                         <ul class="conversation-wrapper">
-                            <div class="coversation-divider"><span>Today</span></div>
+                            <div class="coversation-divider"><span>Hoy</span></div>
                             <li class="conversation-item me">
                                 <div class="conversation-item-side">
                                     <img class="conversation-item-image" src="images/prof1.png" alt="">
@@ -193,7 +189,7 @@
                                     <div class="conversation-item-wrapper">
                                         <div class="conversation-item-box">
                                             <div class="conversation-item-text">
-                                                <p>sigo vivo
+                                                <p>sigo vivovovo
                                                     <br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque aliquam consequuntur culpa explicabo, et eveniet saepe ut quidem, eius vero ipsa hic quis facilis sit! Sequi laborum dignissimos mollitia repudiandae?
                                                 </p>
                                                 <div class="conversation-item-time">12:30</div>

@@ -326,7 +326,7 @@
                 </span>
             </button>
 
-            <button>
+            <button onclick="location.href='chat1.jsp'">
                 <span>
                     <i class='bx bxl-telegram' >
                         <!--<span>15</span>-->
