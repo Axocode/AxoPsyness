@@ -1,3 +1,12 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23 nov. 2023, 18:56:01
+    Author     : admin
+*/
 
 
 /* -------------------------------------------------------------- */
@@ -7439,14 +7448,6 @@ header .header_inner .right_side {
   margin-bottom: 0;
 }
 
-.profile .profiles_content .profile_info h2 {
-  color: #464646;
-  text-transform: capitalize;
-  font-weight: 600;
-  font-size: 26px;
-  margin-bottom: 0;
-}
-
 .profile .profiles_content .profile_info p {
   margin-bottom: 0px;
   color: #9c9c9c;
@@ -7549,6 +7550,10 @@ header .header_inner .right_side {
     padding-bottom: 10px;
   }
   .profile .profiles_content .profile_info h1 {
+    margin-bottom: 3px !important;
+    font-size: 25px !important;
+  }
+  .profile .profiles_content .profile_info h2 {
     margin-bottom: 3px !important;
     font-size: 25px !important;
   }
@@ -8171,7 +8176,7 @@ header .header_inner .right_side {
 }
 
 .main_content {
-  padding-top: 65px;
+  padding-top: 30px;
 }
 
 button.button.dark1,
@@ -9350,7 +9355,11 @@ body.story-active header .header_widgets .is_link {
 .dark .uk-accordion-title,
 .dark .uk-accordion-title::before,
 .dark .breadcrumb ul li a,
-.dark .breadcrumb ul li:after {
+.dark .breadcrumb ul li:after,
+.dark .sidebar_feed span,
+.dark #texto_feed_wave,
+.dark #texto_busqeuda_user,
+.dark #numerito_bola_perfil{
   color: #f1f1f1 !important;
 }
 
@@ -9381,6 +9390,8 @@ html.dark,
 .dark .messages-container-inner .message-content,
 .dark .messages-headline,
 .dark .message-time-sign span,
+.dark .sidebar_feed,
+.dark .sidebar-search,
 .dark .contact-list a:hover {
   background-color: #232626 !important;
   border-color: #424242;
@@ -9403,7 +9414,11 @@ html.dark,
 .dark .messages-inbox ul li.active-message,
 .dark .message-bubble .message-text,
 .dark select, .dark textarea, .dark input, .dark input[type="text"],
-.dark input[type="password"], .dark input[type="email"], .dark input[type="number"] {
+.dark input[type="password"], .dark input[type="email"], .dark input[type="number"],
+.dark .sidebar_feed button:hover > span,
+.dark .box_profile_search:hover,
+.dark #busquedas_users_contenedor li:hover,
+.dark #busquedas_users_contenedor_data li:hover {
   background: #333333 !important;
 }
 

@@ -96,6 +96,8 @@
                     String SIImgNum = userR.getIImgNum();
                     Integer SISeguidores = userR.getIUserSeguidores();
                     Integer SISeguidos = userR.getIUserSeguidos();
+                    String SIUserDescription = userR.getIUserDescription();
+                    
             
             
             
@@ -118,7 +120,8 @@
                     sesion.setAttribute("SIPassword", SIPassword);
                     sesion.setAttribute("SIImgNum", SIImgNum);
                     sesion.setAttribute("SILastPub",null);
-                    response.sendRedirect("feed.jsp");
+                    sesion.setAttribute("SIUserDescription", SIUserDescription);
+                    response.sendRedirect("feed-new.jsp");
                     }else
                         {
                         

@@ -1,3 +1,12 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23 nov. 2023, 18:56:30
+    Author     : admin
+*/
 *{
     box-sizing: border-box;
 }
@@ -9,7 +18,7 @@ body{
     font-family: 'Segoe UI';
 }
 
-.sidebar{
+.sidebar_feed{
     position: fixed;
     top: 0;
     left: 0;
@@ -20,16 +29,17 @@ body{
     height: 100%;
     padding: 40px 10px 30px 10px;
     background: #fff;
+    color: #000000;
     border-right: 1px solid #eeeeee;
     transition: 0.3s;
 }
 
-.sidebar-header{
+.sidebar_header{
     width: 100%;
     margin-bottom: 44px;
 }
 
-.logo-icon{
+.logo-icon_sidebar{
     display: none;
     font-size: 28px;
     height: 35px;
@@ -37,13 +47,13 @@ body{
     text-align: center;
 }
 
-.logo-img{
+.logo-img_sidebar{
     margin-left: 55px;
     height: 70px;
     align-items: center;
 }
 
-.sidebar button{
+.sidebar_feed button{
     height: 70px;
     background: transparent;
     border: 0;
@@ -52,7 +62,7 @@ body{
     cursor: pointer;
 }
 
-.sidebar button > span{
+.sidebar_feed button > span{
     display: flex;
     align-items: center;
     gap: 20px;
@@ -62,19 +72,19 @@ body{
     line-height: 1;
 }
 
-.sidebar button:hover > span{
+.sidebar_feed button:hover > span{
     background: #f2f2f2;
 }
 
-.sidebar button:hover > span :is(i, img){
+.sidebar_feed button:hover > span :is(i, img){
     scale: 1.05;
 }
 
-.sidebar button > span > span{
+.sidebar_feed button > span > span{
     transition: 0.3s;
 }
 
-.sidebar button i{
+.sidebar_feed button i{
     position: relative;
     font-size: 28px;
     transition: 0.2s;
@@ -84,11 +94,12 @@ body{
     position: relative;
     font-size: 35px;
     height: 35px;
+    width: 35px;
     border-radius: 100px;
     transition: 0.2s;
 }
 
-.sidebar button i > span{
+.sidebar_feed button i > span{
     background: #ff2f40;
     font-size: 12px;
     display: grid;
@@ -104,7 +115,7 @@ body{
     font-family: 'Segoe UI';
 }
 
-.sidebar button i > em{
+.sidebar_feed button i > em{
     display: block;
     background: #ff2f40;
     width: 10px;
@@ -118,27 +129,37 @@ body{
     font-family: 'Segoe UI';
 }
 
-.sidebar button span{
+.sidebar_feed button span{
     font-size: 17px;
 }
 
-.sidebar > nav{
+.sidebar_feed > nav{
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-.sidebar > nav button:last-child{
+.sidebar_feed > nav button:last-child{
     margin-top: auto;
 }
 
+
+/*NavBar RESPONSIVE*/
+
+.header_widgets i{
+    font-size: 25px;
+}
+
+.header_widgets a:hover{
+    text-decoration: none;
+    color: #262626;
+}
 
 /*SIDEBAR RESPONSIVE*/
 
 .sidebar_responsive{
     display: none;
-
 }
 
 /*SIDEBAR BUSCAR*/
@@ -165,6 +186,7 @@ body{
     width: 100%;
     top: 0;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .search-header p{
@@ -187,7 +209,7 @@ body{
     font-family: inherit;
     font-size: 15px;
     border-radius: 10px;
-    background: #f3f3f3;
+    background: #e0e0e0;
 }
 
 .profiles_search{
@@ -198,7 +220,8 @@ body{
 
 .subtitle_search{
     display: flex;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 0 25px;
 }
 
@@ -265,9 +288,10 @@ body{
 }
 
 
-/*MAIN CONTENT */
+/**/
 
-.mid_center{
+
+.mid_center_____-{
     position: relative;
     top: 0;
     left: 250px;;
@@ -282,12 +306,12 @@ body{
     background: orange;
 }
 
-.main-content{
+.main-content_feed_20{
     width: 100%;
     margin-top: 60px;
 }
 
-.write-post-container{
+.write-post-container____{
     width: 100%;
     height: 200px;
     background: #fff;
@@ -298,35 +322,35 @@ body{
     box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
 }
 
-.user-profile{
+.user-profile_20{
     display: flex;
     align-items: center;
 }
 
-.user-profile img{
+.user-profile_20 img{
     width: 50px;
     border-radius: 50%;
     margin-right: 12px;
     margin-bottom: -12px;
 }
 
-.user-profile p{
+.user-profile_20 p{
     font-weight: 500;
     color: #626262;
     margin-bottom: 2px;
 }
 
-.user-profile small{
+.user-profile_20 small{
     font-size: 12px;
 }
 
-.post-input-container{
+.post-input-_20{
     width: 100%; 
     padding: 20px 15px;
 }
 
 
-.checkbox button{
+.checkbox_20 button{
     height: 40px;
     border: 0;
     padding: 0 35px;
@@ -339,13 +363,13 @@ body{
     transition: all 300ms ease;
 }
 
-.checkbox button:hover{
+.checkbox_20 button:hover{
     transform: scale(1.01);
 }
 
-/*Modal*/
+/*Modal Antigua*/
 
-.modal-place{
+.modal-place_prueba{
     top: 0;
     margin-top: 60px;
 }
@@ -409,106 +433,33 @@ body{
     margin-right: 11px; 
 }
 
-/*Publicaciones*/
 
-.post-container{
-    width: 100%;
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    color: #626262;
+/*MAIN CONTENT */
+
+#card_posting{
     margin-bottom: 30px;
-    box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
 }
 
-.post-text{
-    color: #626262;
-    font-weight: 500;
+#posts_feed{
+    margin-bottom: 30px;
 }
 
-.post-text a{
-    position: relative;
-    display: block;
-    top: -85px;
-    left: 300px;
-    border: 1px solid #fff;
-    width: 105px;
-    height: 38px;
-    font-size: 20px;
-    padding: 0 15px;
-    color: #f9f9f9;
-    border-radius: 10px;
-    background: #6cd1ff;
-    font-family: 'Segoe UI';
-    text-decoration: none;
-}
-
-.post-text a:hover{
-    color: #f9f9f9;
+#burguer_posts{
+    z-index: 200;
 }
 
 
-.post-img{
-    width: 100%;
-    border-radius: 4px;
-    margin-bottom: 5px;
-}
+/*Modal Ofensiva*/
 
-.post-row{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.modal_offensive{
+    visibility: 0;
+    display: none;
+    opacity: 0;
 }
-
-.activity-icons div img{
-    width: 18px;
-    margin-right: 10px;
-}
-
-.activity-icons div{
-    display: inline-flex;
-    align-items: center;
-    margin-right: 30px;
-}
-
-.activity-icons a{
-    text-decoration: none;
-    display:flex;
-    align-items: center;
-    color: #626262;
-    margin-right:6px;
-    font-size: 13px;
-}
-
-.btn-outline-light{
-    color: #000000;
-    padding: 4.375rem 0.75rem;
-}
-
 
 /*PERFILES*/
 
-.lado_derecho{
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    top: 0;
-    left: 68%;;
-    padding: 0 40px;
-    width: 100%;
-    height: 100%;
-    transition: 0.3s;
-    background: red;
-}
-
-.right-sidebar{  
-    position: absolute;
-    width: 350px;
-    margin-top: 60px;
-}
-
-.sidebar-profile{    
+.sidebar-profile_20{    
     width: 100%;
     background: #fff;
     border-radius: 6px;
@@ -519,27 +470,27 @@ body{
 }
 
 
-#username{
+#username_20{
     font-size: 32px;
-    margin-bottom: -5px;
+    margin-bottom: 5px;
 }
 
-.user-profile small{
+.user-profile_20 small{
     color: #626262;
     font-size: 13px;
 }
 
-#foton{
+#foton_20{
     height: 30%;
     width: 30%;
 }
 
-.activity-icons-profile{
+.activity-icons-profile_20{
     display: flex;
     align-items: flex-start;
 }
 
-.activity-icons-profile button{
+.activity-icons-profile_20  button{
     height: 25px;
     background: transparent;
     border: 0;
@@ -550,48 +501,282 @@ body{
     cursor: pointer;
 }
 
-.activity-icons-profile button:hover{
+.activity-icons-profile_20 button:hover{
     background: #f2f2f2;
 }
 
 
+/*RIGHT CORRECTO*/
 
-@media screen and (max-width: 1800px){
-    .sidebar .logo-img{
+.lado_derecho{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    left: 68%;
+    top: 0;
+    width: 100%;
+    padding-left: 60px;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.right_sidebar_feed{  
+    width: 350px;
+    margin-top: 60px;
+}
+
+/*WAVE DIARIA*/
+
+.boxesita_rights_feed{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-left: -10px;
+}
+
+.boxesita_rights_feed a{
+    padding-right: 15px;
+    
+}
+
+#contenedor_side_right_pf{
+    margin-bottom: 30px;
+}
+
+#second_box_right_feed{
+    padding: 10px 0;
+}
+
+
+/*NAVBAR TOP*/
+
+
+.header_wrap{
+    display: none;
+}
+
+
+
+/*Pagina settings*/
+
+
+.contenedor_editperfil{
+    padding-bottom: 20px !important;
+    padding-right: 25px;
+}
+
+/*Pagina Datacenter*/
+
+.contenedor_datacenter{
+    padding-right: 25px;
+    padding-bottom: 20px !important;
+}
+
+#busquedas_users_contenedor_data>li{
+    cursor: pointer;
+    border-radius: 30px;
+    padding: 0 30px;
+        transition: 0.3s;
+}
+
+#busquedas_users_contenedor_data li:hover{
+    background: #fcfbfb;
+    
+}
+
+
+/*Pagina Perfil User*/
+
+.contenerdor_perfiluser{
+    padding-bottom: 20px !important;
+    padding-right: 25px;
+}
+
+#feauturings_user_perfil{
+    padding-bottom: 20px !important;
+    width: 100%;
+}
+
+/*Pagina busqueda moviles*/
+
+#busquedas_users_contenedor>li{
+    cursor: pointer;
+    border-radius: 30px;
+    padding: 0 30px;
+}
+
+#busquedas_users_contenedor li:hover{
+    background: #f2f2f2;
+}
+
+#busquedas_users p{
+    font-size: 17px;
+}
+
+/*Pagina Info User*/
+
+.contenedor_info_user{
+    padding-bottom: 20px !important;
+    padding-right: 25px;
+}
+
+
+@media screen and (max-width: 1200px){
+    .sidebar_feed .logo-img_sidebar{
         display: none;
     }
-    .sidebar .logo-icon{
+
+    .sidebar_feed .logo-icon_sidebar{
         display: block;
     }
-    .sidebar{
+
+    .sidebar_feed{
         width: 72px;
     }
-    .sidebar button > span{
+
+    .sidebar_feed button > span{
         width: 50px;
-    }    
-    .sidebar button > span > span{
+        height: 50px;
+    }   
+
+    .sidebar_feed button > span > span{
         opacity: 0;
         visibility: hidden;
+    }  
+
+
+    .sidebar_feed .profile-img{
+        width: 30px;
+        height: 30px;
     }
+    
+    .main_content{
+        margin-left: 72px;  
+        padding: 10px 5px 0 15px;
+        padding-top: 10px !important;
+        margin-bottom: 50px;
+        margin-top: 15px;
+    }  
+
+    .lado_derecho{
+        padding: 0;
+        left: 66%;
+    }
+
     .sidebar-search{
         left: 72px;
     }
-    .mid_center{
-        left: 72px;        
+    
+    .contenedor_datacenter{
+        padding-right: 0px;
+    }
+
+    .contenedor_editperfil{
+        padding-right: 0px;
+    }
+
+    .contenerdor_perfiluser{
+        padding-right: 0px;
+    }
+
+    .contenedor_info_user{
+        padding-right: 0px;
+    }
+    #feauturings_user_perfil{
+        width: 90%;
+    }
+
+}
+
+@media screen and (max-width: 970px){
+    #feauturings_user_perfil{
+        width: 85%;
     }
 }
 
-@media screen and (max-width: 700px){
-    .sidebar{
-        display: none;
-    }  
+
+@media screen and (max-width: 920px){
+    .lado_derecho{
+        padding: 0;
+        left: 64%;
+    }
+    #feauturings_user_perfil{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 870px){
+    #feauturings_user_perfil{
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 770px){
     .lado_derecho{
         display: none;
     }
 
-    .mid_center{
-        left: 0px;
-        width: 100%;
-        padding: 0 70px;
+    #feauturings_user_perfil{
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .sidebar_feed{
+        display: none;
+    }  
+
+    .lado_derecho{
+        display: none;
+    }
+
+    .main_content{
+        margin-left: 0px;   
+        left: 0;
+        padding-top: 45px !important;
+    }   
+
+    .header_wrap{
+        display: block;
+    }
+
+    .sidebar-search{
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .contenedor_editperfil{
+        padding-top: 20px;
+        padding-bottom: 40px;
+    }
+
+    .contenedor_datacenter{
+        padding-right: 0px;
+    }
+
+    .contenedor_editperfil{
+        padding-right: 0px;
+    }
+
+    .contenerdor_perfiluser{
+        padding-right: 0px;
+    }
+
+    #feauturings_user_perfil{
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+    }
+    .contenedor_info_user{
+        padding-right: 0px;
+    }
+    #sidebar_seguidos{
+        display: none;
+        visibility: hidden;
+        opacity: 0;
     }
 }
