@@ -1130,121 +1130,50 @@
                                     </div>
                                  <%}%>
                                 </div>
+                                
+                                
+                            </div>    
+                        </div>
+                    </div>    
+                </div> 
+            </div>    
 
+                      
                                 <!--Fin - Cambios-->
 
-                                
+                               
+                            <script>
+                              function buscarEnEnter(event) {
+                                if (event.key === "Enter") {
+                                  buscarEnTiempoReal();
+                                }
+                              }
+
+                              function buscarEnTiempoReal() {
+                                var campoBusqueda = document.getElementById("campoBusqueda");
+                                var valor = campoBusqueda.value;
+
+                                location.href = "feed-new.jsp?term=" + encodeURIComponent(valor);
+                              }
+                            </script>
 
 
-                                <!---------------WAVE - Antigua
-                                
+                            <script>
+                                $(document).ready(function () {
+                                    $("#button_search").click(function () {
+                                        $(".sidebar-search").fadeToggle();
+                                    });
+                                });
 
+                                $(document).ready(function () {
+                                    $("#button_close_offensive").click(function () {
+                                        $(".modal_offensive_announce").fadeOut();
+                                    });
+                                });
 
-                                <div class="wave_feed">
-                                    <div class="relative mt-2">
-                                      <button type="button" class="relative w-full cursor-default rounded-md bg-white py-2.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
-                                        <span class="flex items-center">
-                                          <span class="ml-20 block truncate" id="texto_feed_wave">WAVE DIARIA</span>
-                                        </span>
-                                        <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                                          <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path fill-rule="evenodd" d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" clip-rule="evenodd" />
-                                          </svg>
-                                        </span>
-                                      </button>
-                                      <div uk-drop="mode: click;offset:5" class=" py-0 pl-15 pr-12 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">  
-                                <%
-                                  ZonedDateTime ayer = horaCiudadMexico.minusDays(1);
-                                  String horaFormateadaWave = ayer.format(formatter);
-                                  String []partesWave = horaFormateadaWave.split(" ");
-                                  String fechaWave = partesWave[0] + " " + partesWave[1] + " " + partesWave[2] + " " + partesWave[3] + " " + partes[4];
+                            </script>
 
-                                  InterPubService horas = new InterPubService();
-                                  boolean empezarWave = horas.getPubLateDay(fechaWave);
-
-                                      if (empezarWave) {
-                                          InterPub wave = new InterPub();
-                                          InterUsers waveUsers = new InterUsers();
-                                          InterUsersService persona = new InterUsersService();
-                                          wave = horas.getMostLikedPubByDate(fechaWave);
-                                          waveUsers = persona.getInterUsersByPubNumId(wave.getPubNumId());
-                                %>
-                                        <ul class="absolute z-10 mt-1 max-h-56 overflow-auto rounded-md bg-white py-0 text-base shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-3">
-                                                
-                                            <div class="space-y-6">                   
-                                                <div class="card lg:mx-0 p-9" id="contenedor_side_right">
-                                                    <div class="boxesita_rights_feed  border-b">
-                                                        <a href="profile-new.jsp?id=<%=waveUsers.getIUserNum()%>">
-                                                            <img src="assets/images/avatars/<%=waveUsers.getIImgNum()%>" class="bg-gray-200 border border-white rounded-full w-14 h-14">
-                                                        </a>
-                                                        <div class="flex-1 font-semibold capitalize ">
-                                                            <a href="profile-new.jsp?id=<%=waveUsers.getIUserNum()%>" class="text-black dark:text-gray-100"> <%=waveUsers.getIUser()%>  </a>
-                                                            <div class="text-gray-500 flex items-center space-x-2 "><%=wave.getPubDate()%></div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="segunda_boxesita_rights_feed" id="second_box_right_feed">
-                                                        <div class="p-2 pt-1 border-b dark:border-gray-700" id="texto_feed_wave">                      
-                                                            <%=wave.getPubCont()%>
-                                                        </div>
-
-                                                        <ul class="text-gray-600 space-y-3 mt-3">
-                                                            <li class="flex items-center space-x-2"> 
-                                                                <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
-                                                                Amor <strong> <%=wave.getPubMg()%>  </strong>
-                                                            </li>                                      
-                                                        </ul>
-                                                    </div>  
-
-                                                </div>                    
-                                            </div>
-                                        </ul>
-                                        <%}%>
-                                      </div>  
-                                    </div>
-                                </div>
-                                
-                                --------------->  
-                                      
-
-                            </div>
-                        </div>           
-            </div>          
-        </div>
-
-</body>
-<script>
-  function buscarEnEnter(event) {
-    if (event.key === "Enter") {
-      buscarEnTiempoReal();
-    }
-  }
-
-  function buscarEnTiempoReal() {
-    var campoBusqueda = document.getElementById("campoBusqueda");
-    var valor = campoBusqueda.value;
-
-    location.href = "feed-new.jsp?term=" + encodeURIComponent(valor);
-  }
-</script>
-
-
-<script>
-    $(document).ready(function () {
-        $("#button_search").click(function () {
-            $(".sidebar-search").fadeToggle();
-        });
-    });
-
-    $(document).ready(function () {
-        $("#button_close_offensive").click(function () {
-            $(".modal_offensive_announce").fadeOut();
-        });
-    });
-
-</script>
-
-    <!-- Modo oscuro -->
+                        <!-- Modo oscuro -->
     <script>
         (function (window, document, undefined) {
             'use strict';
@@ -1289,5 +1218,6 @@
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/bootstrap-select.min.js"></script>
     <script src="../../unpkg.com/ionicons%405.2.3/dist/ionicons.js"></script>
-
+    
+</body>  
 </html>    

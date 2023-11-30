@@ -188,20 +188,12 @@
     
     
             <nav>
-<<<<<<< HEAD
-                <button>
+                <button onclick="location.href='feed-new.jsp'">
                     <span>
                          <i class='bx bx-home' ></i>
                         <span>Inicio</span>
                     </span>
-=======
-                <button onclick="location.href='feed-new.jsp'">
-                <span>
-                    <i class='bx bxs-home'></i>
-                    <span>Inicio</span>
-                </span>
->>>>>>> 7de6ef2bce2334891aad1ed925863c6bfe728144
-                </button>
+                </button>    
     
                 <button id="button_search">
                     <span>
@@ -245,12 +237,11 @@
                         <span>Perfil</span>
                     </span>
                 </button>
-<<<<<<< HEAD
                 
-                <button>
+                <button onclick="location.href='settings-new.jsp'">
                     <span>
                         <i class='bx bx-cog' ></i>  
-                        <span>Settings</span>
+                        <span>Configuración</span>
                     </span>
                 </button>
                 
@@ -258,15 +249,8 @@
                 <span>
                     <i class='bx bx-log-out'></i>
                     <span>Log Out</span>
-=======
             
-                        <button onclick="location.href='settings-new.jsp'">
-                <span>
-                    <i class='bx bx-cog' ></i>  
-                    <span>Configuración</span>
->>>>>>> 7de6ef2bce2334891aad1ed925863c6bfe728144
-                </span>
-            </button>
+                
             </nav>
         </aside>
     
