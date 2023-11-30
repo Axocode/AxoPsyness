@@ -52,7 +52,7 @@
                             <li class="content-message-title"><span>Recientes</span></li>
                             <li>
                                 <a href="#" data-conversation="#conversation-1">
-                                    <img class="content-message-image" src="images/user-line.png" alt="">
+                                    <img class="content-message-image" src="images/prof7.png" alt="">
                                     <span class="content-message-info">
                                         <span class="content-message-name">Axochat</span>
                                         <span class="content-message-text">Hi Axo! Todo bien? :0</span>
@@ -64,7 +64,7 @@
                             </li>
                             <li>
                                 <a href="#" data-conversation="#conversation-2">
-                                    <img class="content-message-image" src="images/user-5-line.png" alt="">                                    <span class="content-message-info">
+                                    <img class="content-message-image" src="images/prof3.png" alt="">                                    <span class="content-message-info">
                                         <span class="content-message-name">Cebollita</span>
                                         <span class="content-message-text">Hola axocodigos</span>
                                     </span>
@@ -75,7 +75,7 @@
                             </li>
                             <li>
                                 <a href="#" data-conversation="#conversation-2">
-                                    <img class="content-message-image" src="images/user-5-line.png" alt="">                                    <span class="content-message-info">
+                                    <img class="content-message-image" src="images/prof1.png" alt="">                                    <span class="content-message-info">
                                         <span class="content-message-name">Chumpi uwu</span>
                                         <span class="content-message-text">Hi everybody!</span>
                                     </span>
@@ -86,7 +86,7 @@
                             </li>
                             <li>
                                 <a href="#" data-conversation="#conversation-2">
-                                    <img class="content-message-image" src="images/user-5-line.png" alt="">                                    <span class="content-message-info">
+                                    <img class="content-message-image" src="images/prof2.png" alt="">                                    <span class="content-message-info">
                                         <span class="content-message-name">Axel rose</span>
                                         <span class="content-message-text">siuuuu</span>
                                     </span>
@@ -111,7 +111,7 @@
                     <div class="conversation-top">
                         <button type="button" class="conversation-back"><i class="ri-arrow-left-line"></i></button>
                         <div class="conversation-user">
-                            <img class="conversation-user-image" src="images/user-line.png" alt="">
+                            <img class="conversation-user-image" src="images/prof7.png" alt="">
                             <div>
                                 <div class="conversation-user-name">Axo chat</div>
                                 <div class="conversation-user-status online">En linea</div>
@@ -124,7 +124,7 @@
                             <div class="coversation-divider"><span>Hoy</span></div>
                             <li class="conversation-item me">
                                 <div class="conversation-item-side">
-                                    <img class="content-message-image" src="images/user-line.png" alt="">                                </div>
+                                    <img class="content-message-image" src="images/prof7.png" alt="">                                </div>
                                 <div class="conversation-item-content">
                                     <div class="conversation-item-wrapper">
                                         <div class="conversation-item-box">
@@ -176,7 +176,7 @@
                     <div class="conversation-top">
                         <button type="button" class="conversation-back"><i class="ri-arrow-left-line"></i></button>
                         <div class="conversation-user">
-                            <img class="content-message-image" src="images/user-5-line.png" alt="">                            <div>
+                            <img class="content-message-image" src="images/prof1.png" alt="">                            <div>
                                 <div class="conversation-user-name">Cebollita</div>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                             <div class="coversation-divider"><span>Today</span></div>
                             <li class="conversation-item me">
                                 <div class="conversation-item-side">
-                                    <img class="conversation-item-image" src="images/user-5-line.png" alt="">
+                                    <img class="conversation-item-image" src="images/prof1.png" alt="">
                                 </div>
                                 <div class="conversation-item-content">
                                     <div class="conversation-item-wrapper">
@@ -226,7 +226,7 @@
                             </li>
                             <li class="conversation-item">
                                 <div class="conversation-item-side">
-                                    <img class="conversation-item-image" src="images/user-5-line.png" alt="">
+                                    <img class="conversation-item-image" src="images/prof1.png" alt="">
                                 </div>
                                 <div class="conversation-item-content">
                                     <div class="conversation-item-wrapper">
