@@ -215,7 +215,7 @@
                 </span>
             </button>
 
-            <button>
+            <button onclick="location.href='data-new.jsp'">
                 <span>
                     <i class='bx bx-user-voice' ></i>
                     <span>Datacenter</span>

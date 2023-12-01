@@ -591,13 +591,23 @@ body{
     cursor: pointer;
     border-radius: 30px;
     padding: 0 30px;
-        transition: 0.3s;
+    transition: 0.3s;
 }
 
 #busquedas_users_contenedor_data li:hover{
-    background: #fcfbfb;
+    background: #fcfcfc;
+    transition: 0.3s;
     
 }
+
+.boxes_info_public_data{
+    padding-bottom: 5px;
+}
+
+#boxes_datacenter{
+    margin-bottom: 20px;
+}
+
 
 
 /*Pagina Perfil User*/
@@ -634,7 +644,6 @@ body{
     padding-bottom: 20px !important;
     padding-right: 25px;
 }
-
 
 /*Etiquetas*/
 
