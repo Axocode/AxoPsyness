@@ -184,6 +184,30 @@ CREATE TABLE IF NOT EXISTS `axobasepsy`.`interlove` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+
+-- -----------------------------------------------------
+-- Table `axobasepsy`.`intercoment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `axobasepsy`.`intercoment` (
+    `idcoment` INT NOT NULL AUTO_INCREMENT,
+    `comentcontenido` TEXT(500) NULL DEFAULT NULL,
+    `comentlikes` INT NULL DEFAULT 0,
+    `comentdislikes` INT NULL DEFAULT 0,
+	`comentdate` TEXT NULL DEFAULT NULL,
+    `comenthour` TEXT NULL DEFAULT NULL,
+    `iusernum` INT NULL DEFAULT NULL,
+    `pubnumid` INT NULL DEFAULT NULL,
+    INDEX `pubnumid_idx` (`pubnumid` ASC),
+    CONSTRAINT `intercoment_ibfk_1` FOREIGN KEY (`pubnumid`)
+        REFERENCES `axobasepsy`.`interpub` (`pubnumid`)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `intercoment_ibfk_2` FOREIGN KEY (`iusernum`)
+        REFERENCES `axobasepsy`.`interusers` (`iusernum`)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY (`idcoment`)
+)  ENGINE=INNODB DEFAULT CHARACTER SET=UTF8;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

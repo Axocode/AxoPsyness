@@ -4,6 +4,9 @@
     Author     : admin
 --%>
 
+<%@page import="org.axocode.dao.InterComent"%>
+<%@page import="org.axocode.dao.service.InterComentService"%>
+<%@page import="org.axocode.helper.InterComentHelper"%>
 <%@page import="org.axocode.dao.service.InterLoveService"%>
 <%@page import="org.axocode.dao.service.InterPubService"%>
 <%@page import="java.time.temporal.ChronoUnit"%>
@@ -85,6 +88,7 @@
                 String data = (String) sesion.getAttribute("SIImgNum");
                 if (data == null) {data = "profilesidebar3.png";}
                 Helpers helpers = null;
+                Helpers helperss = null;
                 InterPub user = null;
                 String aux = null;
                 boolean flag = false;
@@ -92,10 +96,12 @@
                 aux = "Guardar";
                 readonly = "";
                 String guardar = request.getParameter("guardar");
+                String comentar = request.getParameter("comentar");
                 int seguidores = 0;
                 int seguidos = 0;
                 int PubNumIdefinitivo;
                 helpers = new InterPubHelper( ).addRequest( request );
+                helperss = new InterComentHelper( ).addRequest( request );
                 ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
                 ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
@@ -109,7 +115,12 @@
                 
                 user = new InterPub(); 
                 user.setPubCont("");    
-
+                if ("Submit".equals(comentar)) {
+                        flag = helperss.addT();
+                        response.sendRedirect("error.jsp?direct=2&&place="+request.getParameter("ComentPubNumId"));
+                    }
+                    
+                    
                 if(  "Submit".equals( guardar ) ){
                     if (sesion.getAttribute("SILastPub") == null) {
                         sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
@@ -363,10 +374,10 @@
                 </span>
             </button>
             
-            <button>
+                        <button onclick="location.href='index.jsp?cerrar=true'">
                 <span>
                     <i class='bx bx-log-out'></i>
-                    <span>Log Out</span>
+                    <span>Salir</span>
                 </span>
             </button>
         </nav>
@@ -633,16 +644,6 @@
                                             </a>
                                             
                         <%}}%>
-                                            <a href="#" class="flex items-center space-x-2 flex-1 justify-end" 
-                                            onmouseover="this.style.color='#4FC0E8'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#4FC0E8')" 
-                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
-                                                <div class="flex items-center p-2 rounded-full p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
-                                                        <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-                                                    </svg>
-                                                </div>
-                                                <div> Comentario</div>
-                                            </a>
                                             
                                         </div>
                                         
@@ -677,69 +678,40 @@
                                         <!-------------------------IMPORTANTE - CAMBIOS - COMMENTS-------------------------------->
 
 
-
                                         <div id="main-container" class="container-comentarios  border-b cursor-pointer py-2">
                                             <p class="px-4 sm:flex sm:flex-row-reverse hover:text-blue-600" onclick="toggleContainer()">Ver Comentarios </p>
 
                                             <div id="inner-container" class="inner-container">
                                                 <div class="border-t py-4 space-y-4 dark:border-gray-600">
+                                                    <%
+                                                        InterComentService coment = new InterComentService();
+                                                        List<InterComent>comentarios = coment.getInterComentListWithNum(trows.getPubNumId().toString());
+                                                        if (comentarios != null && comentarios.size() > 0) {
+                                                                for(InterComent comentarito : comentarios){
+                                                                
+                                                                InterUsersService servicio = new InterUsersService();
+                                                                InterUsers persona = new InterUsers();
+                                                                persona  = servicio.getUserByInterUsersNum(comentarito.getComentIUserNum());
+                                                        
+                                                    %>
+
+
                                                     <div class="flex">
                                                         <div class="w-10 h-10 rounded-full relative flex-shrink-0">
-                                                            <img src="assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
+                                                            <img src="assets/images/avatars/<%=persona.getIImgNum()%>" alt="" class="absolute h-full rounded-full">
                                                         </div>
                                                         <div>
                                                             <div class="flex-1 font-semibold capitalize px-4">
-                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
+                                                                <a href="profile-new.jsp?id=<%=comentarito.getComentIUserNum()%>" class="text-black dark:text-white" id="name_user_feed">  <c:out value='<%=persona.getIUser()%>'/>  </a>
                                                             </div>
                                                             
                                                             <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
-                                                                <p class="leading-6">Un comentario </p>
+                                                                <p class="leading-6"><c:out value='<%=comentarito.getComentCont()%>'/></p>
                                                                 <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
-                                                            </div>
-                                                            <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
-                                                                <a href="#" class="text-red-600 hover:text-red-700"><span>5</span> <i class="uil-heart"></i> Love </a>
-                                                                <span> 3d </span>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="flex">
-                                                        <div class="w-10 h-10 rounded-full relative flex-shrink-0">
-                                                            <img src="assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
-                                                        </div>
-                                                        <div>
-                                                            <div class="flex-1 font-semibold capitalize px-4">
-                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
-                                                            </div>
-                                                            
-                                                            <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
-                                                                <p class="leading-6">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem inventore adipisci, libero voluptatibus non porro dolorem praesentium doloremque ex mollitia!</p>
-                                                                <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
-                                                            </div>
-                                                            <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
-                                                                <a href="#" class="text-red-600 hover:text-red-700"><span>5</span> <i class="uil-heart"></i> Love </a>
-                                                                <span> 3d </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex">
-                                                        <div class="w-10 h-10 rounded-full relative flex-shrink-0">
-                                                            <img src="assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
-                                                        </div>
-                                                        <div>
-                                                            <div class="flex-1 font-semibold capitalize px-4">
-                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
-                                                            </div>
-                                                            
-                                                            <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
-                                                                <p class="leading-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta vitae sint iure eveniet facere veritatis quidem illo, expedita numquam aut ducimus, magni ex tenetur fuga qui! Unde minus est quam. </p>
-                                                                <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
-                                                            </div>
-                                                            <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
-                                                                <a href="#" class="text-red-600 hover:text-red-700"><span>5</span> <i class="uil-heart"></i> Love </a>
-                                                                <span> 3d </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <%}}%>
                                                 </div>
                                             </div>
                                         </div>
@@ -753,9 +725,9 @@
 
 
                                         
-                                        <div uk-toggle="target: #create-comment-modal" id="card_posting">
+                                        <div id="card_posting">
                                             <div class="bg-gray-100 rounded-full relative dark:bg-gray-800 border-t">
-                                                <input placeholder="Agrega un comentario" class="bg-transparent max-h-10 shadow-none px-5">
+                                                <div onclick="location.href='feed-new.jsp?coment=<%=trows.getPubNumId()%>#<%=trows.getPubNumId()%>'" class="bg-gray-100 hover:bg-gray-200 flex-1 h-10 px-6 rounded-full" style="display: flex; align-items: center; color: #b0b0b0; height: 40px; border: none; font-size: 15px;">Agregar comentario</div>
                                             </div>
                                         </div>    
                                         <!--FIN - Cambios-->
@@ -770,7 +742,11 @@
                             </div>
             
                         </div>
-                            
+                            <%
+                                        String[] partes =horaFormateada.split(" ");
+                                        String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                                        String hora12 = partes[5];
+                                        %> 
                             <!-------------------------IMPORTANTE - CAMBIOS - Comentarios-------------------------------->
                                <!-- Comment modal -->
                             <div id="create-comment-modal" class="create-post" uk-modal>
@@ -780,12 +756,17 @@
                                         <h3 class="text-lg font-semibold"> Comentar post </h3>
                                         <button class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 m-1 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
                                     </div>
+                                    <form id="formulario3" method="POST" accept-charset="UTF-8" onsubmit="doPub();" >
                                     <div class="flex flex-1 items-start space-x-4 p-5">
-                                        <img src="assets/images/avatars/prof1.png"
+                                        <img src="assets/images/avatars/<c:out value='<%=data%>'/>"
                                             class="bg-gray-200 border border-white rounded-full w-11 h-11">
                                         <div class="flex-1 pt-2">
-                                            <textarea class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5"
-                                                placeholder="Escribe"></textarea>
+                                        <textarea id="ComentCont" name="ComentCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?" maxlength="1250" autofocus></textarea>
+                                        <input type="hidden" id="comentar" name="comentar" value="Submit" />
+                                        <input type="hidden" name="ComentDate" id="ComentDate" value="<%=fecha12%>" />
+                                        <input type="hidden" name="ComentHour" id="ComentHour" value="<%=hora12%>" />
+                                        <input type="hidden" name="ComentPubNumId" id="ComentPubNumId" value="<%=request.getParameter("coment")%>" />
+                                        <input type="hidden" name="ComentIUserNum" id="ComentIUserNum" value="<%=sesion.getAttribute("SIUserNum")%>" />
                                         </div>
                                     </div>
 
@@ -793,7 +774,8 @@
 
                                     <div class="bsolute bottom-0 p-4 space-x-4 w-full">
                                         <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
-                                            <button type="button" class="button bg-blue-700"> Publicar </button>
+                                            <button type="submit" id="guardadito" class="button bg-blue-700"> Publicar </button>
+                                            
                                             <div class="flex flex-1 items-center lg:justify-end justify-center space-x-2">
                                             
                                                 <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -803,7 +785,8 @@
                                                 
                                             </div>
                                         </div>                   
-                                    </div>       
+                                    </div> 
+                                    </form>
                                 </div>
                             </div>
 
@@ -815,12 +798,7 @@
                                     class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
                             
                                     <div class="text-center py-4 border-b">
-                                        <h3 class="text-lg font-semibold"> Cuentanos tu pensamiento <c:out value='<%=sesion.getAttribute("SIUser")%>'/> </h3>
-                                        <%
-                                        String[] partes =horaFormateada.split(" ");
-                                        String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-                                        String hora12 = partes[5];
-                                        %>   
+                                        <h3 class="text-lg font-semibold"> Cuentanos tu pensamiento <c:out value='<%=sesion.getAttribute("SIUser")%>'/> </h3>  
                                         <button class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 m-1 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
                                     </div>
                                         <form id="formulario3" method="POST" accept-charset="UTF-8" onsubmit="doPub();" >
@@ -1220,4 +1198,14 @@
     <script src="../../unpkg.com/ionicons%405.2.3/dist/ionicons.js"></script>
     
 </body>  
+<% String coment = request.getParameter("coment"); %>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        var coment = "<%= coment %>";
+        if (coment !== null && coment !== 'null' && coment.trim() !== '') {
+            UIkit.modal("#create-comment-modal").show();
+        }
+    });
+</script>
+
 </html>    
