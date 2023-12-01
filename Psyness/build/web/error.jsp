@@ -14,6 +14,8 @@
     <body>
         <%if (request.getParameter("direct").equals("0")) {response.sendRedirect("feed-new.jsp");}
         else if (request.getParameter("direct").equals("1")) {response.sendRedirect("profile-new.jsp?id="+request.getParameter("perf"));
-        }%>
+        }else if (request.getParameter("direct").equals("2")) {response.sendRedirect("feed-new.jsp#"+request.getParameter("place"));
+        }
+        %>
     </body>
 </html>
