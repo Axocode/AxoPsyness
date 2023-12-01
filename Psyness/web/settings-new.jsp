@@ -27,7 +27,6 @@
         <title>Configuración</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Socialite is - Professional A unique and beautiful collection of UI elements">
 
     <!-- icons
     ================================================== -->
@@ -202,7 +201,7 @@
                     </span>
                 </button>
     
-                <button>
+                <button onclick="location.href='data-new.jsp'">
                     <span>
                         <i class='bx bx-user-voice' ></i>
                         <span>Datacenter</span>
