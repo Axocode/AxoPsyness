@@ -245,12 +245,12 @@
                     </span>
                 </button>
                 
-                <button>
+                                        <button onclick="location.href='index.jsp?cerrar=true'">
                 <span>
                     <i class='bx bx-log-out'></i>
-                    <span>Log Out</span>
-            
-                
+                    <span>Salir</span>
+                </span>
+            </button>
             </nav>
         </aside>
     

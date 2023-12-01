@@ -199,6 +199,10 @@
                 
             
     }}}}
+                           
+                                        String[] partes =horaFormateada.split(" ");
+                                        String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                                        String hora12 = partes[5]; 
 %>
     <div id="wrapper">
 
@@ -451,16 +455,8 @@
                                        </div>
                                        <div class="grid grid-flow-col pt-3 -mx-1 -mb-1 font-semibold text-sm">
                                             <div class="hover:bg-gray-100 flex items-center p-1.5 rounded-md cursor-pointer"> 
-                                                <svg class="bg-blue-100 h-9 mr-2 p-1.5 rounded-full text-blue-600 w-9 -my-0.5 hidden lg:block" data-tippy-placement="top" title="Tooltip" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                                Photo/Video 
-                                            </div>
-                                            <div class="hover:bg-gray-100 flex items-center p-1.5 rounded-md cursor-pointer"> 
                                                 <svg class="bg-green-100 h-9 mr-2 p-1.5 rounded-full text-green-600 w-9 -my-0.5 hidden lg:block" uk-tooltip="title: Messages ; pos: bottom ;offset:7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" title="" aria-expanded="false"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
                                                 Tags
-                                            </div>
-                                            <div class="hover:bg-gray-100 flex items-center p-1.5 rounded-md cursor-pointer"> 
-                                                <svg class="bg-red-100 h-9 mr-2 p-1.5 rounded-full text-red-600 w-9 -my-0.5 hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                nose                                    
                                             </div>
                                        </div> 
                                    </div>
@@ -502,8 +498,11 @@
                                             <div class="flex-1 font-semibold capitalize">
                                                 
                                                 <a href="profile-new.jsp?id=<%=interUsers.getIUserNum()%>" class="text-black dark:text-white" id="name_user_feed">  <c:out value='<%=interUsers.getIUser()%>'/>  <span class="text-gray-700"><%=horita%>hrs</span></a>
+                                                <%if (trows.getPubDate().equals(fecha12)) {%>
+                                                <div class="text-gray-700 flex items-center space-x-2">hoy <ion-icon name="people"></ion-icon></div>
+                                                <%}else{%>
                                                 <div class="text-gray-700 flex items-center space-x-2"><%=trows.getPubDate()%> <ion-icon name="people"></ion-icon></div>
-                                                
+                                                <%}%>
                                             </div>
                                         </div>
                                       <div>
@@ -569,7 +568,7 @@
                                                          <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                                                      </svg>
                                                  </div>
-                                                 <div> - Amor</div>
+                                                 <div> Amor</div>
                                              </a>
                         <%}else{%>
                                             <a href="loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Love" 
@@ -582,7 +581,7 @@
                                                       <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
                                                    </svg>
                                                 </div>
-                                                <div> + Amor</div>
+                                                <div> Amor</div>
                                              </a>
                         <%}%>
                         
@@ -600,7 +599,7 @@
                                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                                                     </svg>
                                                 </div>
-                                                <div>- Favorito</div>
+                                                <div> Favorito</div>
                                             </a>
                         <%}else{%>             
                                             <a href="favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favorito" 
@@ -612,7 +611,7 @@
                                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                                                     </svg>
                                                 </div>
-                                                <div>+ Favorito</div>
+                                                <div> Favorito</div>
                                             </a>
                         <%}}%>
                                         <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
@@ -629,7 +628,7 @@
                                                         <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                                     </svg>
                                                 </div>
-                                                <div> - Seguir </div>
+                                                <div> Seguir </div>
                                             </a>
                         <%}else{%>
                                             <a href="seguir.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed" class="flex items-center space-x-2 flex-1 justify-end" 
@@ -640,7 +639,7 @@
                                                         <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                                                     </svg>
                                                 </div>
-                                                <div> + Seguir </div>
+                                                <div> Seguir </div>
                                             </a>
                                             
                         <%}}%>
@@ -742,11 +741,6 @@
                             </div>
             
                         </div>
-                            <%
-                                        String[] partes =horaFormateada.split(" ");
-                                        String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-                                        String hora12 = partes[5];
-                                        %> 
                             <!-------------------------IMPORTANTE - CAMBIOS - Comentarios-------------------------------->
                                <!-- Comment modal -->
                             <div id="create-comment-modal" class="create-post" uk-modal>
@@ -806,7 +800,7 @@
                                         <img src="assets/images/avatars/<c:out value='<%=data%>'/>"
                                             class="bg-gray-200 border border-white rounded-full w-11 h-11">
                                         <div class="flex-1 pt-2">
-                                            <textarea id="PubCont" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?" maxlength="1250" autofocus></textarea>
+                                            <textarea id="inputText" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?" maxlength="1250" autofocus></textarea>
                                         <input type="hidden" id="guardar" name="guardar" value="Submit" />
                                         <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
                                         <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
@@ -879,7 +873,14 @@
                                         
                                     <div class="bsolute bottom-0 p-4 space-x-4 w-full">
                                         <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
-                                            <button type="submit" class="button bg-blue-700" id="guardadito"> Publicar </button>
+                                            
+                                            <button type="button" onclick="evaluateText()" class="button bg-blue-700" id="guardadito"> Revisar </button>
+                                            <br>
+                                            <p> ‎ ‎ ‎ ‎ ‎ ‎ </p>
+                                            <p id="result">‎</p>
+                                            <p> ‎ ‎ ‎ ‎ ‎ ‎ </p>
+                                            <br>
+                                            <button type="submit" onclick="evaluateText()" class="button bg-blue-700" id="guardadito"> Publicar </button>
                                             <div class="flex flex-1 items-center lg:justify-end justify-center space-x-2">
                                             
                                                 <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -959,8 +960,8 @@
                                                     <img src="assets/images/avatars/prof3.png" class="bg-gray-200 border border-white rounded-full w-10 h-10">
                                                 </a>
                                                 <div class="flex-1 font-semibold capitalize">
-                                                    <a href="#" class="text-black dark:text-gray-100" id="name_user_tittle">  Ferdinand Vs  </a>
-                                                    <div class="text-gray-700 flex items-center space-x-2"> 5 <span> hrs </span> <ion-icon name="people"></ion-icon></div>
+                                                    <a href="#" class="text-black dark:text-gray-100" id="name_user_tittle">  Axocode  </a>
+                                                    <!-- <div class="text-gray-700 flex items-center space-x-2"> 5 <span> hrs </span> <ion-icon name="people"></ion-icon></div>-->
                                                 </div>
                                             </div>
                                         </div>   
@@ -968,11 +969,11 @@
                                         <div class="p-5 pt-0 dark:border-gray-700 border-b">
                                             <!--Imput para editar texto-->
                                             <input class="uk-textare text-gray-700 shadow-none"
-                                            value="Lorem ipsum dolor sit amet, consectetuer adipiscing elit">                       
+                                            value="Hola">                       
                                         </div>
                                        
                                         <div class="px-4 sm:flex sm:flex-row-reverse ">
-                                            <button type="button" class="button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Publicar </button>
+                                            <button type="button" class="button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Editar </button>
                                         </div>                    
                                     </div>       
                                 </div>
@@ -1048,7 +1049,10 @@
                                         </a>
                                     </div>                    
                                 </div>
-                                            
+
+    <!-- Referencias a TensorFlow.js y tu script JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="ia.js"></script>      
                                             <!-------------------------IMPORTANTE - CAMBIOS-------------------------------->
                                 <!---------------WAVE--------------->
 
@@ -1078,7 +1082,6 @@
                                                 <h3 class="text-center text-lg font-semibold "> WAVE DIARIA </h3>
                                                 <hr class="-mx-2 my-2 dark:border-gray-800">
                                             </div>
-
                                             <div class="boxesita_rights_feed ">
                                                 <a href="profile-new.jsp?id=<%=waveUsers.getIUserNum()%>">
                                                     <img src="assets/images/avatars/<%=waveUsers.getIImgNum()%>" class="bg-gray-200 border border-white rounded-full w-14 h-14">
@@ -1103,8 +1106,7 @@
                                                 </ul>
                                             </div>  
 
-                                        </div>                    
-                                            
+                                        </div>                      
                                     </div>
                                  <%}%>
                                 </div>
@@ -1196,7 +1198,7 @@
     <script src="assets/js/custom.js"></script>
     <script src="assets/js/bootstrap-select.min.js"></script>
     <script src="../../unpkg.com/ionicons%405.2.3/dist/ionicons.js"></script>
-    
+
 </body>  
 <% String coment = request.getParameter("coment"); %>
 <script>
@@ -1207,5 +1209,4 @@
         }
     });
 </script>
-
 </html>    

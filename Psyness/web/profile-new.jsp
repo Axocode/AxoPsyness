@@ -409,12 +409,12 @@
                     </span>
                 </button>
                 
-                <button>
-                    <span>
-                        <i class='bx bx-log-out'></i>
-                        <span>Log Out</span>
-                    </span>
-                </button>
+                                        <button onclick="location.href='index.jsp?cerrar=true'">
+                <span>
+                    <i class='bx bx-log-out'></i>
+                    <span>Salir</span>
+                </span>
+            </button>
             </nav>
         </aside>
     
