@@ -123,7 +123,7 @@
                         </a>
 
                         <!-- Message de Bolita - Perfil -->
-                        <a href="#D">
+                        <a href="">
                             <img src="assets/images/avatars/<%=sesion.getAttribute("SIImgNum")%>" class="is_avatar" alt="">
                         </a>
                         <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
@@ -201,7 +201,7 @@
                     </span>
                 </button>
     
-                <button onclick="location.href='data-new.jsp'">
+                <button onclick="location.href='data-new.jsp?follows=1'">
                     <span>
                         <i class='bx bx-user-voice' ></i>
                         <span>Datacenter</span>
@@ -325,7 +325,7 @@
                     <div class="grid lg:grid-cols-3 mt-12 gap-8">
 
                         <div class="card" style="width: 18rem;">
-                            <a href="profileimg.jsp">
+                            <a href="fotoprofile.jsp">
                             <img src="assets/images/avatars/<%=sesion.getAttribute("SIImgNum")%>" class="card-img-top" alt="...">
                         </a>
                             <div class="card-body">

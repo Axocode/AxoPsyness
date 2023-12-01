@@ -90,7 +90,7 @@
                     </li> 
 
                     <li>
-                        <a href="datacenter.jsp">
+                        <a href="datacenter.jsp?follows=1">
                             <i class="fa-regular fa-file-lines"></i>
                             <span class="links_name">Datacenter</span>
                         </a>

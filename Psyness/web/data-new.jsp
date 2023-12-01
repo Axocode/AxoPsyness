@@ -60,7 +60,6 @@
           String nombreper = null;
           String seguidormain = null;
           InterUsersHelper userHelper = new InterUsersHelper();       
-          int IdS = Integer.parseInt(request.getParameter("follows"));
           InterUsersService dao = new InterUsersService();
           List<InterUsers>listita = userHelper.getListT();
           int postK = 0;
@@ -215,7 +214,7 @@
                 </span>
             </button>
 
-            <button onclick="location.href='data-new.jsp'">
+            <button onclick="location.href='data-new.jsp?follows=1'">
                 <span>
                     <i class='bx bx-user-voice' ></i>
                     <span>Datacenter</span>

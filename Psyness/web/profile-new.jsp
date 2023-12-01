@@ -366,7 +366,7 @@
                     </span>
                 </button>
     
-                <button onclick="location.href='data-new.jsp'">
+                <button onclick="location.href='data-new.jsp?follows=1'">
                     <span>
                         <i class='bx bx-user-voice' ></i>
                         <span>Datacenter</span>

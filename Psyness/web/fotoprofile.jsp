@@ -63,8 +63,24 @@
                 if (data == null) {data = "perfilsidebar.png";}
                 
     request.setCharacterEncoding("UTF-8");
-%>
-   
+    
+        String img = request.getParameter("img");
+        int iUserNum = (Integer) sesion.getAttribute("SIUserNum");
+        
+        if (img != null) {         
+            if (img.equals("profilesidebar3.png" ) || img.equals("prof1.png") || img.equals("prof2.png") || img.equals("prof3.png") 
+            || img.equals("prof4.png") || img.equals("prof5.png") || img.equals("prof6.png") || img.equals("prof7.png") || img.equals("prof8.png")){
+            InterUsers Object  = new InterUsers();
+            InterUsersService container = new InterUsersService();
+            Object.setIImgNum(img);
+            Object.setIUserNum(iUserNum);
+            boolean cont = container.updateUsuario(Object);
+            if (cont) {
+                    session.setAttribute("SIImgNum", img);
+                    response.sendRedirect("settings-new.jsp");
+                }}else response.sendRedirect("setttings-new.jsp");
+        }
+%>    
 
     <div id="wrapper">
 
@@ -194,7 +210,7 @@
                     </span>
                 </button>
     
-                <button>
+                <button onclick="location.href='data-new.jsp?follows=1'">
                     <span>
                         <i class='bx bx-user-voice' ></i>
                         <span>Datacenter</span>
@@ -237,7 +253,7 @@
                     </span>
                 </button>
                 
-                <button>
+                        <button onclick="location.href='index.jsp=cerrar=true'">
                 <span>
                     <i class='bx bx-log-out'></i>
                     <span>Salir</span>
@@ -320,7 +336,7 @@
                                       
                                     </div>
                                 </div> 
-                                <a href="#"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
+                                <a href="fotoprofile.jsp?img=prof1.png"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
                             </div>
                         </div>
                     </div>
@@ -336,7 +352,7 @@
                                       
                                     </div>
                                 </div> 
-                                <a href="#"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
+                                <a href="fotoprofile.jsp?img=prof2.png"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
                             </div>
                         </div>
                     </div>
@@ -352,7 +368,7 @@
                                       
                                     </div>
                                 </div> 
-                                <a href="#"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
+                                <a href="fotoprofile.jsp?img=prof3.png"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
                             </div>
                         </div>
                     </div>
@@ -368,7 +384,7 @@
                                       
                                     </div>
                                 </div> 
-                                <a href="#"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
+                                <a href="fotoprofile.jsp?img=prof4.png"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
                             </div>
                         </div>
                     </div>
@@ -384,7 +400,7 @@
                                       
                                     </div>
                                 </div> 
-                                <a href="#"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
+                                <a href="fotoprofile.jsp?img=prof5.png"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
                             </div>
                         </div>
                     </div>
@@ -400,7 +416,7 @@
                                       
                                     </div>
                                 </div> 
-                                <a href="#"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
+                                <a href="fotoprofile.jsp?img=prof6.png"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
                             </div>
                         </div>
                     </div>
@@ -416,7 +432,7 @@
                                       
                                     </div>
                                 </div> 
-                                <a href="#"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
+                                <a href="fotoprofile.jsp?img=prof7.png"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
                             </div>
                         </div>
                     </div>
@@ -432,7 +448,7 @@
                                       
                                     </div>
                                 </div> 
-                                <a href="#"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
+                                <a href="fotoprofile.jsp?img=prof8.png"><i class="btn-down text-2xl uil-cloud-download px-1"></i></a>
                             </div>
                         </div>
                     </div>
