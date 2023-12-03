@@ -678,9 +678,8 @@
 
 
                                         <div id="main-container" class="container-comentarios  border-b cursor-pointer py-2">
-                                            <p class="px-4 sm:flex sm:flex-row-reverse hover:text-blue-600" onclick="toggleContainer()">Ver Comentarios </p>
-
-                                            <div id="inner-container" class="inner-container">
+                                            <p class="px-4 sm:flex sm:flex-row-reverse hover:text-blue-600" onclick="toggleContainer<%=trows.getPubNumId()%>()">Ver Comentarios </p>
+                                            <div id="inner-container-<%=trows.getPubNumId()%>" class="inner-container">
                                                 <div class="border-t py-4 space-y-4 dark:border-gray-600">
                                                     <%
                                                         InterComentService coment = new InterComentService();
@@ -714,16 +713,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
                                         <script>
-                                            function toggleContainer() {
-                                                var innerContainer = document.getElementById('inner-container');
+                                            function toggleContainer<%=trows.getPubNumId()%>() {
+                                                var vari = "<%= trows.getPubNumId() %>";
+                                                var innerContainer = document.getElementById('inner-container-'+vari);
                                                 innerContainer.style.display = (innerContainer.style.display === 'none' || innerContainer.style.display === '') ? 'block' : 'none';
                                             }
-                                        </script>
-
-
-                                        
+                                        </script>                                                
                                         <div id="card_posting">
                                             <div class="bg-gray-100 rounded-full relative dark:bg-gray-800 border-t">
                                                 <div onclick="location.href='feed-new.jsp?coment=<%=trows.getPubNumId()%>#<%=trows.getPubNumId()%>'" class="bg-gray-100 hover:bg-gray-200 flex-1 h-10 px-6 rounded-full" style="display: flex; align-items: center; color: #b0b0b0; height: 40px; border: none; font-size: 15px;">Agregar comentario</div>
