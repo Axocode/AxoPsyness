@@ -4,6 +4,10 @@
     Author     : Admin
 --%>
 
+<%@page import="org.axocode.dao.service.InterUsersService"%>
+<%@page import="org.axocode.dao.InterUsers"%>
+<%@page import="java.util.List"%>
+<%@page import="org.axocode.helper.InterUsersHelper"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +20,10 @@
     <title>Chat</title>
 </head>
 <body>
-
+    <script src="../../recursos/scripts/websocket.js"></script>
+<%request.setCharacterEncoding("UTF-8");
+                                int hola = 0;
+                                HttpSession sesion = request.getSession();%>
     <!-- start: Chat -->
     <section class="chat-section">
         <div class="chat-container">
@@ -48,51 +55,49 @@
                         <ul class="content-messages-list">
                             <li class="content-message-title"><span>Recientes</span></li>
                             <li>
-                                <a href="#" data-conversation="#conversation-1">
-                                    <img class="content-message-image" src="assets/images/avatars/axos.svg" alt="">
+                                <a href="">
+                                    <img class="content-message-image" src="assets/images/avatars/<%=sesion.getAttribute("SIImgNum")%>" alt="">
                                     <span class="content-message-info">
-                                        <span class="content-message-name">Axochat</span>
-                                        <span class="content-message-text">Hi Axo! Todo bien? :0</span>
+                                        <span class="content-message-name"><%=sesion.getAttribute("SIUser")%> (Tu)</span>
                                     </span>
                                     <span class="content-message-more">
                                         <span class="content-message-unread">2</span>
                                     </span>
                                 </a>
+                                
                             </li>
+                            <%
+                                request.setCharacterEncoding("UTF-8");
+                                InterUsersHelper ola = new InterUsersHelper();
+                                List<InterUsers> usuarios = ola.getListT();
+
+                                if (usuarios != null&&usuarios.size() > 0) {
+                                
+                                
+                                        for(InterUsers uaaaa : usuarios){
+                                        hola++;
+                            %>
                             <li>
-                                <a href="#" data-conversation="#conversation-2">
-                                    <img class="content-message-image" src="images/prof3.png" alt="">                                    <span class="content-message-info">
-                                        <span class="content-message-name">Cebollita</span>
-                                        <span class="content-message-text">Hola axocodigos</span>
+                                <a href="chat1.jsp?a=chat&i=<%=uaaaa.getIUserNum() %>&n=<%=uaaaa.getIUser()%>">
+                                    <img class="content-message-image" src="assets/images/avatars/<%=uaaaa.getIImgNum()%>" alt="">
+                                    <span class="content-message-info">
+                                        <span class="content-message-name">Chat de Depresión</span>
                                     </span>
                                     <span class="content-message-more">
-                                        <span class="content-message-time">12:30</span>
+                                        <span class="content-message-unread">2</span>
                                     </span>
                                 </a>
+                                
                             </li>
-                            <li>
-                                <a href="#" data-conversation="#conversation-2">
-                                    <img class="content-message-image" src="images/prof1.png" alt="">                                    <span class="content-message-info">
-                                        <span class="content-message-name">Chumpi uwu</span>
-                                        <span class="content-message-text">Hi everybody!</span>
-                                    </span>
-                                    <span class="content-message-more">
-                                        <span class="content-message-time">12:30</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" data-conversation="#conversation-2">
-                                    <img class="content-message-image" src="images/prof2.png" alt="">                                    <span class="content-message-info">
-                                        <span class="content-message-name">Axel rose</span>
-                                        <span class="content-message-text">siuuuu</span>
-                                    </span>
-                                    <span class="content-message-more">
-                                        <span class="content-message-time">12:30</span>
-                                    </span>
-                                </a>
-                            </li>
+                            <%
                             
+                                if (hola == 1) {
+                                        break;
+                                    }
+}
+                            }
+
+                            %>
                             
                         </ul>
                         
@@ -100,162 +105,66 @@
                 </div>
                 <!-- end: Content side -->
                 <!-- start: Conversation -->
+                <%
+                    String oli = request.getParameter("i");
+                    if (oli == null) {
+                            
+                        
+                    
+                    %>
                 <div class="conversation conversation-default active">
                     <i class="ri-chat-3-line"></i>
                     <p>Selecciona un chat</p>
                 </div>
-                <div class="conversation" id="conversation-1">
+                
+                <% 
+                    }else{
+                        InterUsers objetito = new InterUsers();
+                        InterUsersService objetitoService = new InterUsersService();
+                        
+                        objetito = objetitoService.getUserByInterUsersNum(Integer.parseInt(oli));
+                            
+
+                %>
+                <div class="conversation active" id="conversation-1">
                     <div class="conversation-top">
                         <button type="button" class="conversation-back"><i class="ri-arrow-left-line"></i></button>
                         <div class="conversation-user">
-                            <img class="conversation-user-image" src="assets/images/avatars/axos.svg" alt="">
+                            <img class="conversation-user-image" src="assets/images/avatars/<%=objetito.getIImgNum()%>" alt="">
                             <div>
-                                <div class="conversation-user-name">Axo chat</div>
+                                <div class="conversation-user-name">Chat grupal sobre depresion</div>
                             </div>
                         </div>
                         
                     </div>
                     <div class="conversation-main">
                         <ul class="conversation-wrapper">
-                            <div class="coversation-divider"><span>Hoy</span></div>
-                            <li class="conversation-item me">
-                                <div class="conversation-item-side">
-                                    <img class="content-message-image" src="assets/images/avatars/axos.svg" alt="">                                </div>
-                                <div class="conversation-item-content">
-                                    <div class="conversation-item-wrapper">
-                                        <div class="conversation-item-box">
-                                            <div class="conversation-item-text">
-                                                <p>Hi axo!</p>
-                                                <div class="conversation-item-time">12:30</div>
-                                            </div>
-                                            <div class="conversation-item-dropdown">
-                                                <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                                <ul class="conversation-item-dropdown-list">
-                                                    <li><a href="#"><i class="ri-share-forward-line"></i> Enviar</a></li>
-                                                    <li><a href="#"><i class="ri-delete-bin-line"></i> Eliminar</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="conversation-item-wrapper">
-                                        <div class="conversation-item-box">
-                                            <div class="conversation-item-text">
-                                                <p>Hi Axo!  Todo bien? :0</p>
-                                                <div class="conversation-item-time">12:30</div>
-                                            </div>
-                                            <div class="conversation-item-dropdown">
-                                                <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                                <ul class="conversation-item-dropdown-list">
-                                                    <li><a href="#"><i class="ri-share-forward-line"></i> Enviar</a></li>
-                                                    <li><a href="#"><i class="ri-delete-bin-line"></i> Eliminar</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            <div class="coversation-divider"><span>Hoy</span>
                             
+                                <div id="output"></div>
                             
-                            
-                        </ul>
-                    </div>
-                    <div class="conversation-form">
-                        <button type="button" class="conversation-form-button"><i class="ri-emotion-line"></i></button>
-                        <div class="conversation-form-group">
-                            <textarea class="conversation-form-input" rows="1" placeholder="Type here..."></textarea>
-                            <button type="button" class="conversation-form-record"></i></button>
-                        </div>
-                        <button type="button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
-                    </div>
-                </div>
-                <div class="conversation" id="conversation-2">
-                    <div class="conversation-top">
-                        <button type="button" class="conversation-back"><i class="ri-arrow-left-line"></i></button>
-                        <div class="conversation-user">
-                            <img class="content-message-image" src="images/prof1.png" alt="">                            <div>
-                                <div class="conversation-user-name">Cebollita</div>
                             </div>
-                        </div>
-                        
-                    </div>
-                    <div class="conversation-main">
-                        <ul class="conversation-wrapper">
-                            <div class="coversation-divider"><span>Hoy</span></div>
-                            <li class="conversation-item me">
-                                <div class="conversation-item-side">
-                                    <img class="conversation-item-image" src="images/prof1.png" alt="">
-                                </div>
-                                <div class="conversation-item-content">
-                                    <div class="conversation-item-wrapper">
-                                        <div class="conversation-item-box">
-                                            <div class="conversation-item-text">
-                                                <p>sigo vivovovo
-                                                    <br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque aliquam consequuntur culpa explicabo, et eveniet saepe ut quidem, eius vero ipsa hic quis facilis sit! Sequi laborum dignissimos mollitia repudiandae?
-                                                </p>
-                                                <div class="conversation-item-time">12:30</div>
-                                            </div>
-                                            <div class="conversation-item-dropdown">
-                                                <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                                <ul class="conversation-item-dropdown-list">
-                                                    <li><a href="#"><i class="ri-share-forward-line"></i> Forward</a></li>
-                                                    <li><a href="#"><i class="ri-delete-bin-line"></i> Delete</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="conversation-item-wrapper">
-                                        <div class="conversation-item-box">
-                                            <div class="conversation-item-text">
-                                                <p>Buenas tardes</p>
-                                                <div class="conversation-item-time">12:30</div>
-                                            </div>
-                                            <div class="conversation-item-dropdown">
-                                                <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                                <ul class="conversation-item-dropdown-list">
-                                                    <li><a href="#"><i class="ri-share-forward-line"></i> Enviar</a></li>
-                                                    <li><a href="#"><i class="ri-delete-bin-line"></i> Eliminar</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="conversation-item">
-                                <div class="conversation-item-side">
-                                    <img class="conversation-item-image" src="images/prof1.png" alt="">
-                                </div>
-                                <div class="conversation-item-content">
-                                    <div class="conversation-item-wrapper">
-                                        <div class="conversation-item-box">
-                                            <div class="conversation-item-text">
-                                                <p>Hasta mañana</p>
-                                                <div class="conversation-item-time">12:30</div>
-                                            </div>
-                                            <div class="conversation-item-dropdown">
-                                                <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                                <ul class="conversation-item-dropdown-list">
-                                                    <li><a href="#"><i class="ri-share-forward-line"></i> Enviar</a></li>
-                                                    <li><a href="#"><i class="ri-delete-bin-line"></i> Eliminar</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                   
-                                </div>
-                            </li>
-                           
+                            
+                            
                         </ul>
                     </div>
                     <div class="conversation-form">
-                        <button type="button" class="conversation-form-button"><i class="ri-emotion-line"></i></button>
+                        <button type="button" class="conversation-form-button" onclick="send()"><i class="ri-emotion-line"></i></button>
                         <div class="conversation-form-group">
-                            <textarea class="conversation-form-input" rows="1" placeholder="Type here..."></textarea>
-                            <button type="button" class="conversation-form-record"></button>
+                            <input hidden id="username_input" placeholder="Your username">
+                            <input id="message_input" type="text">
+                            <input hidden id="message_username" value="<%=sesion.getAttribute("SIUser")%>" type="text">
+                            <input hidden id="message_usernum" value="<%=sesion.getAttribute("SIUser")%>" type="text">
+                            <input hidden id="message_username" value="<%=sesion.getAttribute("SIUser")%>" type="text">
+                            
+                            <button onclick="send()"type="button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
                         </div>
-                        <button type="button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
                     </div>
                 </div>
+                <%
+                    }
+                    %>
+                
                 <!-- end: Conversation -->
             </div>
             <!-- end: Content -->
@@ -263,6 +172,7 @@
     </section>
     <!-- end: Chat -->
     
+        <script src="assets/js/websocket.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
