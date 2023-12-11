@@ -21,7 +21,9 @@
 </head>
 <body>
     <script src="../../recursos/scripts/websocket.js"></script>
-
+<%request.setCharacterEncoding("UTF-8");
+                                int hola = 0;
+                                HttpSession sesion = request.getSession();%>
     <!-- start: Chat -->
     <section class="chat-section">
         <div class="chat-container">
@@ -54,9 +56,9 @@
                             <li class="content-message-title"><span>Recientes</span></li>
                             <li>
                                 <a href="">
-                                    <img class="content-message-image" src="assets/images/avatars/axos.svg" alt="">
+                                    <img class="content-message-image" src="assets/images/avatars/<%=sesion.getAttribute("SIImgNum")%>" alt="">
                                     <span class="content-message-info">
-                                        <span class="content-message-name">Axochat</span>
+                                        <span class="content-message-name"><%=sesion.getAttribute("SIUser")%> (Tu)</span>
                                     </span>
                                     <span class="content-message-more">
                                         <span class="content-message-unread">2</span>
@@ -65,10 +67,7 @@
                                 
                             </li>
                             <%
-                                
                                 request.setCharacterEncoding("UTF-8");
-                                HttpSession sesion = request.getSession();
-                                
                                 InterUsersHelper ola = new InterUsersHelper();
                                 List<InterUsers> usuarios = ola.getListT();
 
@@ -76,12 +75,13 @@
                                 
                                 
                                         for(InterUsers uaaaa : usuarios){
+                                        hola++;
                             %>
                             <li>
                                 <a href="chat1.jsp?a=chat&i=<%=uaaaa.getIUserNum() %>&n=<%=uaaaa.getIUser()%>">
                                     <img class="content-message-image" src="assets/images/avatars/<%=uaaaa.getIImgNum()%>" alt="">
                                     <span class="content-message-info">
-                                        <span class="content-message-name"><%=uaaaa.getIUser()%></span>
+                                        <span class="content-message-name">Chat de Depresión</span>
                                     </span>
                                     <span class="content-message-more">
                                         <span class="content-message-unread">2</span>
@@ -91,7 +91,10 @@
                             </li>
                             <%
                             
-                                }
+                                if (hola == 1) {
+                                        break;
+                                    }
+}
                             }
 
                             %>
@@ -129,51 +132,18 @@
                         <div class="conversation-user">
                             <img class="conversation-user-image" src="assets/images/avatars/<%=objetito.getIImgNum()%>" alt="">
                             <div>
-                                <div class="conversation-user-name"><%=objetito.getIUser()%></div>
+                                <div class="conversation-user-name">Chat grupal sobre depresion</div>
                             </div>
                         </div>
                         
                     </div>
                     <div class="conversation-main">
                         <ul class="conversation-wrapper">
-                            <div class="coversation-divider"><span>Hoy</span></div>
-                            <li class="conversation-item me">
-                                <div class="conversation-item-side">
-                                    <img class="content-message-image" src="assets/images/avatars/axos.svg" alt="">                                </div>
-                                <div class="conversation-item-content">
-                                    <div class="conversation-item-wrapper">
-                                        <div class="conversation-item-box">
-                                            <div class="conversation-item-text">
-                                                <p>Hi axo!</p>
-                                                <div class="conversation-item-time">12:30</div>
-                                            </div>
-                                            <div class="conversation-item-dropdown">
-                                                <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                                <ul class="conversation-item-dropdown-list">
-                                                    <li><a href="#"><i class="ri-share-forward-line"></i> Enviar</a></li>
-                                                    <li><a href="#"><i class="ri-delete-bin-line"></i> Eliminar</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="conversation-item-wrapper">
-                                        <div class="conversation-item-box">
-                                            <div class="conversation-item-text">
-                                                <p>Hi Axo!  Todo bien? :0</p>
-                                                <div class="conversation-item-time">12:30</div>
-                                            </div>
-                                            <div class="conversation-item-dropdown">
-                                                <button type="button" class="conversation-item-dropdown-toggle"><i class="ri-more-2-line"></i></button>
-                                                <ul class="conversation-item-dropdown-list">
-                                                    <li><a href="#"><i class="ri-share-forward-line"></i> Enviar</a></li>
-                                                    <li><a href="#"><i class="ri-delete-bin-line"></i> Eliminar</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            <div class="coversation-divider"><span>Hoy</span>
                             
+                                <div id="output"></div>
+                            
+                            </div>
                             
                             
                         </ul>
@@ -181,10 +151,14 @@
                     <div class="conversation-form">
                         <button type="button" class="conversation-form-button" onclick="send()"><i class="ri-emotion-line"></i></button>
                         <div class="conversation-form-group">
-                            <textarea class="conversation-form-input" rows="1" placeholder="Type here..."></textarea>
-                            <button type="button" class="conversation-form-record"></i></button>
+                            <input hidden id="username_input" placeholder="Your username">
+                            <input id="message_input" type="text">
+                            <input hidden id="message_username" value="<%=sesion.getAttribute("SIUser")%>" type="text">
+                            <input hidden id="message_usernum" value="<%=sesion.getAttribute("SIUser")%>" type="text">
+                            <input hidden id="message_username" value="<%=sesion.getAttribute("SIUser")%>" type="text">
+                            
+                            <button onclick="send()"type="button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
                         </div>
-                        <button type="button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
                     </div>
                 </div>
                 <%
@@ -198,6 +172,7 @@
     </section>
     <!-- end: Chat -->
     
+        <script src="assets/js/websocket.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

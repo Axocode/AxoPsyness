@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package org.axocode.dao.service;
+package org.bm.dao.service;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -12,15 +12,14 @@ import java.util.Date;
 
 /**
  *
- * @author gerdoc
- * @param <T>
+ * @author Evelyn
  */
-public abstract class Conexion<T> implements Serializable 
-{
+public class Conexion <T> implements Serializable
 
+{
     public static String user = "root";
-    public static String password = "1234";
-    public static String db = "axobasepsy";
+    public static String password = "123";
+    public static String db = "KidTaleDB";
     public static String port = "3306";
 
     public boolean testDriver() 
@@ -87,7 +86,7 @@ public abstract class Conexion<T> implements Serializable
         }
     }
     
-    public Date dateSql2DateUtil( java.sql.Date date )
+     public Date dateSql2DateUtil( java.sql.Date date )
     {
         return new Date( date.getTime( ) );
     }
@@ -96,5 +95,8 @@ public abstract class Conexion<T> implements Serializable
     {
         return new java.sql.Date( date.getTime( ) );
     }
-
+    
+    
+    
 }
+

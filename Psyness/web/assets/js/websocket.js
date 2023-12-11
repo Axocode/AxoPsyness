@@ -1,75 +1,59 @@
-var wsURI = "ws://" + document.location.host + document.location.pathname + "chat";
-
+var wsURI = "ws://40.86.11.134:8080/Psyness/chat";
 var websocket = new WebSocket(wsURI);
-
-websocket.onmessage = function(event) {
-    
-    onMessage(event);
-    
-};
+console.log("WebSocket readyState: " + websocket.readyState);
 
 websocket.onopen = function() {
-    
     onOpen();
-    
 };
 
+websocket.onmessage = function(evnt) {
+    onMessage(evnt);
+};
+
+websocket.onerror = function(event) {
+    console.error("WebSocket error:", event.message);
+};
+
+websocket.onclose = onClose;
+
 function onOpen() {
-    
-    console.log("Conexion abierta: " + wsURI);
-    
-    
+    console.log("Opened connection: " + wsURI);
 }
 
 function onClose() {
-    
-    console.log("Conexion cerrada: " + wsURI);
-    
+    console.log("Closed connection: " + wsURI);
 }
 
 function onMessage(event) {
-    
     console.log(event);
     display(event.data);
-    
 }
 
 function display(dataString) {
     var data = JSON.parse(dataString);
-
-    
-    if (data.username === document.getElementById("username_to").value) {
         
-        var contentMessage = "<p>" + data.usernom + ": " + data.content + "</p>";
-        document.getElementById("output").innerHTML += contentMessage + "</br>";
-        
-    }
-    if (data.username === document.getElementById("username_in").value) {
-        
-        var contentMessage = "<p>" + data.usernom + ": " + data.content + "</p>";
-        document.getElementById("output").innerHTML += contentMessage + "</br>";
-        
-    }
-    
+    var contentMessage = "<div class=\"conversation-item-content\">"+ "<div class=\"conversation-item-wrapper\">"+
+                                        "<div class=\"conversation-item-box\"><strong>"+data.userName+
+                                            "</strong><div class=\"conversation-item-text\">"+data.conten+
+                                            "</div>"+
+                                        "</div>"+
+                                    "</div>"+
+                                    "</div>"+"<br>";
+                        
+    document.getElementById("output").innerHTML += contentMessage;
 }
 
 function send() {
-    
-    var userto = document.getElementById("username_to").value;
-    var nomto = document.getElementById("nom_to").value;
-    var message = document.getElementById("message_in").value;
-    var userin = document.getElementById("username_in").value;
-    var nomin = document.getElementById("nom_in").value;
-    
-    var json = {
-        "touser": userto,
-        "tonom": nomto,
-        "content": message,
-        "username": userin,
-        "usernom": nomin
-    };
-    
-    console.log(nomin + " enviando: " + message + " a: " + nomto);
-    websocket.send(JSON.stringify(json));
-    
+    if (websocket.readyState === WebSocket.OPEN) {
+        var message = document.getElementById("message_input").value;
+        var username = document.getElementById("message_username").value;
+        var json = {
+            "conten": message,
+            "userName": username
+        };
+        console.log("Sending"+username+message);
+        websocket.send(JSON.stringify(json));
+    } else {
+        console.error("WebSocket connection is not open.");
+    }
 }

@@ -650,23 +650,23 @@ body {
 }
 .conversation-form-button:hover {
     background-color: var(--slate-100);
-    color: var(--slate-600);
+    color: var(--slate-100);
 }
 .conversation-form-button:active {
     background-color: var(--slate-200);
-    color: var(--slate-600);
+    color: var(--slate-100);
 }
 .conversation-form-submit {
-    background-color: var(--emerald-500);
-    box-shadow: 0 2px 8px -2px var(--emerald-500);
+    background-color: var(--slate-100) !important; 
+    box-shadow: 0 2px 8px -2px var(--slate-100);
     color: var(--white);
 }
 .conversation-form-submit:hover {
-    background-color: var(--emerald-600);
+    background-color: var(--slate-100);
     color: var(--white);
 }
 .conversation-form-submit:active {
-    background-color: var(--emerald-700);
+    background-color: var(--slate-100);
     color: var(--white);
 }
 .conversation-default {
