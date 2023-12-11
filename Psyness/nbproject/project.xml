@@ -28,14 +28,18 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.gson-2.10.1.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.websocket-api.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.gson-2.10.1.jar-1}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.javax.websocket-api-1.1.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.gson-2.10.1.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
