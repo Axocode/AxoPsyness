@@ -139,12 +139,8 @@
                     <div class="conversation-main">
                         <ul class="conversation-wrapper">
                             <div class="coversation-divider"><span>Hoy</span>
-                            
-                                <div id="output"></div>
-                            
                             </div>
-                            
-                            
+                            <div id="output"></div>
                         </ul>
                     </div>
                     <div class="conversation-form">
