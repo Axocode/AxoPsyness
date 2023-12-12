@@ -1,4 +1,7 @@
-var wsURI = "ws://40.86.11.134:8080/Psyness/chat";
+var serverIP = "axocode.gerdoc.com"; 
+var wsURI = "ws://" + serverIP + ":8080/Psyness/chat";
+
+
 var websocket = new WebSocket(wsURI);
 console.log("WebSocket readyState: " + websocket.readyState);
 

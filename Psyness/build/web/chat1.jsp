@@ -8,6 +8,7 @@
 <%@page import="org.axocode.dao.InterUsers"%>
 <%@page import="java.util.List"%>
 <%@page import="org.axocode.helper.InterUsersHelper"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -81,7 +82,7 @@
                                 <a href="chat1.jsp?a=chat&i=<%=uaaaa.getIUserNum() %>&n=<%=uaaaa.getIUser()%>">
                                     <img class="content-message-image" src="assets/images/avatars/<%=uaaaa.getIImgNum()%>" alt="">
                                     <span class="content-message-info">
-                                        <span class="content-message-name">Chat de Depresión</span>
+                                        <span class="content-message-name"><c:out value='<%=uaaaa.getIUser()%>'/> </span>
                                     </span>
                                     <span class="content-message-more">
                                         <span class="content-message-unread">2</span>
@@ -91,9 +92,7 @@
                             </li>
                             <%
                             
-                                if (hola == 1) {
-                                        break;
-                                    }
+                               
 }
                             }
 
@@ -132,7 +131,7 @@
                         <div class="conversation-user">
                             <img class="conversation-user-image" src="assets/images/avatars/<%=objetito.getIImgNum()%>" alt="">
                             <div>
-                                <div class="conversation-user-name">Chat grupal sobre depresion</div>
+                                <div class="conversation-user-name"><c:out value='<%=objetito.getIUser()%>'/></div>
                             </div>
                         </div>
                         
