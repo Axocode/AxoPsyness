@@ -72,7 +72,7 @@
       <div class="container-fluid d-flex flex-wrap">
         <div class="col-md-6 mb-2 mb-md-0">
           <div class="cont-main1 container-fluid">
-            <div class="titulo-main1 container-fluid">
+            <div id="desc" class="titulo-main1 container-fluid">
                 <h1 class="display-2">
                   Una Red Social Orientada a la Psicología
                   <br>
