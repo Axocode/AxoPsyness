@@ -42,4 +42,4 @@ El WhatsApp, me lo estás llenando de mensajes
 Y ya no llames
 Que el amor también se volvió odio, recordé
 
-![nata]([https://imgs.search.brave.com/uMXdU20R2XkoO7Otno8hRpJfjIfNMBC8Q1GnUroThks/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/dGhld2lraWZlZWQu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIyLzA1L25hdGFu/YWVsLWNhbm8tMS0x/LmpwZw,jpg](https://www.thewikifeed.com/wp-content/uploads/2022/05/natanael-cano-1-1.jpg)https://www.thewikifeed.com/wp-content/uploads/2022/05/natanael-cano-1-1.jpg)
+![nata](https://www.thewikifeed.com/wp-content/uploads/2022/05/natanael-cano-1-1.jpg)
