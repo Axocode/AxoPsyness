@@ -37,6 +37,8 @@ Pero te di mi corazón
 Y es más valiosa, la forma en que te trataba
 Y lo superé
 
+![Texto alternativo para la imagen](https://imgs.search.brave.com/uMXdU20R2XkoO7Otno8hRpJfjIfNMBC8Q1GnUroThks/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/dGhld2lraWZlZWQu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIyLzA1L25hdGFu/YWVsLWNhbm8tMS0x/LmpwZw,jpg)
+
 La canción se acaba y tú constante
 El WhatsApp, me lo estás llenando de mensajes
 Y ya no llames
