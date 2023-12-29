@@ -62,8 +62,8 @@
           </ul>
     
           <div class="col-md-3 text-end">
-            <a href="createSinCodigo.jsp"><button type="button" class="btn btn-outline-primary me-2 rounded-pill btn-custom">Crear Cuenta</button></a>
-                  <a href="login.jsp"><button type="button" class="btn btn-primary rounded-pill btn-custom2">Iniciar Sesion</button></a>
+            <a href="zInicio/createSinCodigo.jsp"><button type="button" class="btn btn-outline-primary me-2 rounded-pill btn-custom">Crear Cuenta</button></a>
+                  <a href="zInicio/login.jsp"><button type="button" class="btn btn-primary rounded-pill btn-custom2">Iniciar Sesion</button></a>
           </div>
         </header>
       
@@ -72,7 +72,7 @@
       <div class="container-fluid d-flex flex-wrap">
         <div class="col-md-6 mb-2 mb-md-0">
           <div class="cont-main1 container-fluid">
-            <div class="titulo-main1 container-fluid">
+            <div id="desc" class="titulo-main1 container-fluid">
                 <h1 class="display-2">
                   Una Red Social Orientada a la Psicología
                   <br>
@@ -82,8 +82,8 @@
                   </h3><br>
                 </h1>
                 <div class="btns-main1 container-fluid">
-                  <a href="createCodigo.jsp"><button type="button" class="btn btn-lg btn-log">¿Tienes un código? Clic aquí</button><br><br></a>
-                  <a href="createSinCodigo.jsp"><button type="button" class="btn btn-lg btn-log1">Iniciar sin código</button></a>
+                  <a href="zInicio/createCodigo.jsp"><button type="button" class="btn btn-lg btn-log">¿Tienes un código? Clic aquí</button><br><br></a>
+                  <a href="zInicio/createSinCodigo.jsp"><button type="button" class="btn btn-lg btn-log1">Iniciar sin código</button></a>
                 </div>
             </div>
           </div>
