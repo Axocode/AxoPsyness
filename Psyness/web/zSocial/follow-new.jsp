@@ -85,7 +85,7 @@
 
     <div id="wrapper">
 
-    <jsp:include page="../zAcortadores/sidebar.jsp"/>
+    <jsp:include page="sidebar.jsp"/>
 
         <!-- Main Contents -->
         <div class="main_content">
