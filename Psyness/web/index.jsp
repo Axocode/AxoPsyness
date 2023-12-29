@@ -62,8 +62,8 @@
           </ul>
     
           <div class="col-md-3 text-end">
-            <a href="createSinCodigo.jsp"><button type="button" class="btn btn-outline-primary me-2 rounded-pill btn-custom">Crear Cuenta</button></a>
-                  <a href="login.jsp"><button type="button" class="btn btn-primary rounded-pill btn-custom2">Iniciar Sesion</button></a>
+            <a href="zInicio/createSinCodigo.jsp"><button type="button" class="btn btn-outline-primary me-2 rounded-pill btn-custom">Crear Cuenta</button></a>
+                  <a href="zInicio/login.jsp"><button type="button" class="btn btn-primary rounded-pill btn-custom2">Iniciar Sesion</button></a>
           </div>
         </header>
       
@@ -82,8 +82,8 @@
                   </h3><br>
                 </h1>
                 <div class="btns-main1 container-fluid">
-                  <a href="createCodigo.jsp"><button type="button" class="btn btn-lg btn-log">¿Tienes un código? Clic aquí</button><br><br></a>
-                  <a href="createSinCodigo.jsp"><button type="button" class="btn btn-lg btn-log1">Iniciar sin código</button></a>
+                  <a href="zInicio/createCodigo.jsp"><button type="button" class="btn btn-lg btn-log">¿Tienes un código? Clic aquí</button><br><br></a>
+                  <a href="zInicio/createSinCodigo.jsp"><button type="button" class="btn btn-lg btn-log1">Iniciar sin código</button></a>
                 </div>
             </div>
           </div>
