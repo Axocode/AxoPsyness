@@ -206,8 +206,7 @@
     <div id="wrapper">
 
     
-    <jsp:include page="../zAcortadores/sidebar.jsp"/>
-    
+    <jsp:include page="sidebar.jsp"/>
     
         <!---------------CREAR----------------->
     
