@@ -1,3 +1,7 @@
+bm.java.ws
+bm.java.ws.model
 org.axocode.dao
 org.axocode.dao.service
 org.axocode.helper
+org.axocode.model
+org.bm.dao.service
