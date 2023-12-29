@@ -868,19 +868,5 @@
     <!-- att: Yorch  -->
 
 </body>
-<script>
-  function buscarEnEnter(event) {
-    if (event.key === "Enter") {
-      buscarEnTiempoReal();
-    }
-  }
-
-  function buscarEnTiempoReal() {
-    var campoBusqueda = document.getElementById("campoBusqueda");
-    var valor = campoBusqueda.value;
-
-    location.href = "follow-new.jsp?follows=<%=request.getParameter("follows")%>&&term=" + encodeURIComponent(valor);
-  }
-</script>
 </html>
 

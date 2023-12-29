@@ -422,18 +422,4 @@
     <script src="../assets/js/bootstrap-select.min.js"></script>
 
 </body>
-<script>
-  function buscarEnEnter(event) {
-    if (event.key === "Enter") {
-      buscarEnTiempoReal();
-    }
-  }
-
-  function buscarEnTiempoReal() {
-    var campoBusqueda = document.getElementById("campoBusqueda");
-    var valor = campoBusqueda.value;
-
-    location.href = "settings-new.jsp?term=" + encodeURIComponent(valor);
-  }
-</script>
 </html>
