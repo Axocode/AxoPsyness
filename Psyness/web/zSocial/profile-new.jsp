@@ -4,6 +4,8 @@
     Author     : admin
 --%>
 
+<%@page import="org.axocode.dao.InterComent"%>
+<%@page import="org.axocode.dao.service.InterComentService"%>
 <%@page import="org.axocode.dao.InterFav"%>
 <%@page import="org.axocode.dao.service.InterFlowService"%>
 <%@page import="org.axocode.dao.service.InterLoveService"%>
@@ -772,67 +774,38 @@
 
 
                                         <div id="main-container" class="container-comentarios  border-b cursor-pointer py-2">
-                                            <p class="px-4 sm:flex sm:flex-row-reverse hover:text-blue-600" onclick="toggleContainer()">Ver Comentarios </p>
-
-                                            <div id="inner-container" class="inner-container">
+                                            <p class="px-4 sm:flex sm:flex-row-reverse hover:text-blue-600" onclick="toggleContainer(<%=trows.getPubNumId()%>)">Ver Comentarios </p>
+                                            <div id="inner-container-<%=trows.getPubNumId()%>" class="inner-container">
                                                 <div class="border-t py-4 space-y-4 dark:border-gray-600">
+                                                    <%
+                                                        InterComentService coment = new InterComentService();
+                                                        List<InterComent>comentarios = coment.getInterComentListWithNum(trows.getPubNumId().toString());
+                                                        if (comentarios != null && comentarios.size() > 0) {
+                                                                for(InterComent comentarito : comentarios){
+                                                                
+                                                                InterUsersService servicio = new InterUsersService();
+                                                                InterUsers persona = new InterUsers();
+                                                                persona  = servicio.getUserByInterUsersNum(comentarito.getComentIUserNum());
+                                                        
+                                                    %>
+
+
                                                     <div class="flex">
                                                         <div class="w-10 h-10 rounded-full relative flex-shrink-0">
-                                                            <img src="../assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
+                                                            <img src="../assets/images/avatars/<%=persona.getIImgNum()%>" alt="" class="absolute h-full rounded-full">
                                                         </div>
                                                         <div>
                                                             <div class="flex-1 font-semibold capitalize px-4">
-                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
+                                                                <a href="profile-new.jsp?id=<%=comentarito.getComentIUserNum()%>" class="text-black dark:text-white" id="name_user_feed">  <c:out value='<%=persona.getIUser()%>'/>  </a>
                                                             </div>
                                                             
                                                             <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
-                                                                <p class="leading-6">Un comentario </p>
+                                                                <p class="leading-6"><c:out value='<%=comentarito.getComentCont()%>'/></p>
                                                                 <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
-                                                            </div>
-                                                            <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
-                                                                <a href="#" class="text-red-600 hover:text-red-700"><span>5</span> <i class="uil-heart"></i> Love </a>
-                                                                <span> 3d </span>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="flex">
-                                                        <div class="w-10 h-10 rounded-full relative flex-shrink-0">
-                                                            <img src="../assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
-                                                        </div>
-                                                        <div>
-                                                            <div class="flex-1 font-semibold capitalize px-4">
-                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
-                                                            </div>
-                                                            
-                                                            <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
-                                                                <p class="leading-6">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem inventore adipisci, libero voluptatibus non porro dolorem praesentium doloremque ex mollitia!</p>
-                                                                <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
-                                                            </div>
-                                                            <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
-                                                                <a href="#" class="text-red-600 hover:text-red-700"><span>5</span> <i class="uil-heart"></i> Love </a>
-                                                                <span> 3d </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex">
-                                                        <div class="w-10 h-10 rounded-full relative flex-shrink-0">
-                                                            <img src="../assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
-                                                        </div>
-                                                        <div>
-                                                            <div class="flex-1 font-semibold capitalize px-4">
-                                                                <a href="#" class="text-black dark:text-white" id="name_user_feed">  Ferdinand Vs  </a>
-                                                            </div>
-                                                            
-                                                            <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
-                                                                <p class="leading-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta vitae sint iure eveniet facere veritatis quidem illo, expedita numquam aut ducimus, magni ex tenetur fuga qui! Unde minus est quam. </p>
-                                                                <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
-                                                            </div>
-                                                            <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
-                                                                <a href="#" class="text-red-600 hover:text-red-700"><span>5</span> <i class="uil-heart"></i> Love </a>
-                                                                <span> 3d </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <%}}%>
                                                 </div>
                                             </div>
                                         </div>
@@ -1127,7 +1100,14 @@
                     <%
                         }}}}}}
                     %> 
-                        </div>       
+                        </div>  
+                                        <script>
+                                            function toggleContainer(clave) {
+                                                var vari = clave;
+                                                var innerContainer = document.getElementById('inner-container-' + vari);
+                                                innerContainer.style.display = (innerContainer.style.display === 'none' || innerContainer.style.display === '') ? 'block' : 'none';
+                                            }
+                                        </script>
                     </div>
                 </div>
             </div>
@@ -1287,18 +1267,4 @@
     
 
 </body>
-<script>
-  function buscarEnEnter(event) {
-    if (event.key === "Enter") {
-      buscarEnTiempoReal();
-    }
-  }
-
-  function buscarEnTiempoReal() {
-    var campoBusqueda = document.getElementById("campoBusqueda");
-    var valor = campoBusqueda.value;
-
-    location.href = "profile-new.jsp?id=<%=request.getParameter("id")%>&&term=" + encodeURIComponent(valor);
-  }
-</script>
 </html>
