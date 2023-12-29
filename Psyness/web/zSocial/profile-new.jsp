@@ -236,7 +236,7 @@
 
     <div id="wrapper">
 
-              String data = (String) sesion.getAttribute("SIImgNum");%>
+              
         <!-- Header -->
     <header>
         <div class="header_wrap">
