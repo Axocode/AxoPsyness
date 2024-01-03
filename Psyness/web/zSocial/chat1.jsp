@@ -21,10 +21,12 @@
     <title>Chat</title>
 </head>
 <body>
-    <script src="../../../recursos/scripts/websocket.js"></script>
-<%request.setCharacterEncoding("UTF-8");
-                                int hola = 0;
-                                HttpSession sesion = request.getSession();%>
+<%  
+        request.setCharacterEncoding("UTF-8");
+        HttpSession sesion = request.getSession();
+
+        String accion = request.getParameter("a");
+%>
     <!-- start: Chat -->
     <section class="chat-section">
         <div class="chat-container">
@@ -68,7 +70,6 @@
                                 
                             </li>
                             <%
-                                request.setCharacterEncoding("UTF-8");
                                 InterUsersHelper ola = new InterUsersHelper();
                                 List<InterUsers> usuarios = ola.getListT();
 
@@ -76,7 +77,6 @@
                                 
                                 
                                         for(InterUsers uaaaa : usuarios){
-                                        hola++;
                             %>
                             <li>
                                 <a href="chat1.jsp?a=chat&i=<%=uaaaa.getIUserNum() %>&n=<%=uaaaa.getIUser()%>">
@@ -105,10 +105,11 @@
                 <!-- end: Content side -->
                 <!-- start: Conversation -->
                 <%
-                    String oli = request.getParameter("i");
-                    if (oli == null) {
+                    String o = request.getParameter("i");
+                    String ol = request.getParameter("a");
+                    String oli = request.getParameter("n");
+                    if (o == null || ol == null || oli == null) {
                             
-                        
                     
                     %>
                 <div class="conversation conversation-default active">
@@ -117,11 +118,15 @@
                 </div>
                 
                 <% 
-                    }else{
-                        InterUsers objetito = new InterUsers();
-                        InterUsersService objetitoService = new InterUsersService();
+                    }else if (accion != null) {
+                            if ("chat".equals(accion)) {
+                                
+                                String id_rem = request.getParameter("i");
+                                String nom_rem = request.getParameter("n");
+                                InterUsers objetito = new InterUsers();
+                                InterUsersService objetitoService = new InterUsersService();
                         
-                        objetito = objetitoService.getUserByInterUsersNum(Integer.parseInt(oli));
+                                objetito = objetitoService.getUserByInterUsersNum(Integer.parseInt(o));
                             
 
                 %>
@@ -138,26 +143,25 @@
                     </div>
                     <div class="conversation-main">
                         <ul class="conversation-wrapper">
-                            <div class="coversation-divider"><span>Hoy</span>
-                            </div>
-                            <div id="output"></div>
+                            <div class="coversation-divider"><span></span></div>
+                                <div id="output">
+                                </div>
                         </ul>
                     </div>
                     <div class="conversation-form">
-                        <button type="button" class="conversation-form-button" onclick="send()"><i class="ri-emotion-line"></i></button>
                         <div class="conversation-form-group">
-                            <input hidden id="username_input" placeholder="Your username">
-                            <input id="message_input" type="text">
-                            <input hidden id="message_username" value="<%=sesion.getAttribute("SIUser")%>" type="text">
-                            <input hidden id="message_usernum" value="<%=sesion.getAttribute("SIUser")%>" type="text">
-                            <input hidden id="message_username" value="<%=sesion.getAttribute("SIUser")%>" type="text">
-                            
-                            <button onclick="send()"type="button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
+                            <textarea id="message_in" class="conversation-form-input" rows="1" placeholder="Escribe aqui"></textarea>
+                            <input id="username_to" type="text" value="<%=id_rem%>" hidden>
+                            <input id="nom_to" type="text" value="<%=nom_rem%>" hidden>
+                            <input id="username_in" typse="text" value="<%=sesion.getAttribute("SIUserNum")%>" hidden>
+                            <input id="nom_in" type="text" value="<%=sesion.getAttribute("SIUser")%>" hidden>
+                            <input id="imag" type="text" value="<%=sesion.getAttribute("SIImgNum")%>" hidden>
                         </div>
+                        <button onclick="send()" type="button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
                     </div>
                 </div>
                 <%
-                    }
+                    }}
                     %>
                 
                 <!-- end: Conversation -->

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/cssindexxx.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Psyness</title>
-    <link rel="icon" type="image/jpg" href="images/favicon.jpg"/>   
+    <link href="assets/images/Icono.svg" rel="icon" type="image/png">   
 </head>
 <body>
    <%HttpSession sesion = request.getSession();
