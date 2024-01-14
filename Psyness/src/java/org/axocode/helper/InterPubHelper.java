@@ -55,7 +55,8 @@ public class InterPubHelper extends Helpers<InterPub> implements Serializable
     @Override
     public List<InterPub> getListT() 
     {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        pubService = new InterPubService();
+        return pubService.getInterPubList1();
     }
 
     /**
