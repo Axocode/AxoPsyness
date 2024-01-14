@@ -61,7 +61,52 @@ public class InterPubService extends Conexion<InterPub>
     return null;
 }
 
+public List<InterPub> getInterPubList1() 
+    {
+        List<InterPub> pubList = null;
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        InterPub pub = null;
 
+        try 
+        {
+            connection = getConnection();
+            if (connection == null) 
+            {
+                return null;
+            }
+            statement = connection.createStatement();
+            if (statement == null) {
+                return null;
+            }
+            resultSet = statement.executeQuery("select * from interpub");
+            if (resultSet == null) 
+            {
+                return null;
+            }
+            pubList = new ArrayList<>();
+            while (resultSet.next()) 
+            {
+                pub = new InterPub();
+                pub.setPubNumId(resultSet.getInt(1));
+                pub.setPubCont(resultSet.getString(2));
+                pub.setPubMg(resultSet.getInt(3));
+                pub.setPubDate(resultSet.getString(4));
+                pub.setPubHour(resultSet.getString(5));
+                
+                pubList.add(pub);
+            }
+            resultSet.close();
+            closeConnection(connection);
+            return pubList;
+        } 
+        catch (SQLException ex) 
+        {
+            ex.printStackTrace();
+        }
+        return null;
+    }
     
     public int getTotalPub() {
     Connection connection = null;
