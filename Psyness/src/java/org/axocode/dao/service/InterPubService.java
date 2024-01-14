@@ -20,53 +20,80 @@ import org.axocode.dao.InterPub;
  */
 public class InterPubService extends Conexion<InterPub>
 {
-    public List<InterPub> getInterPubList() 
-    {
-        List<InterPub> pubList = null;
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-        InterPub pub = null;
+    public List<InterPub> getInterPubList(int count) {
+    List<InterPub> pubList = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    InterPub pub = null;
 
-        try 
-        {
-            connection = getConnection();
-            if (connection == null) 
-            {
-                return null;
-            }
-            statement = connection.createStatement();
-            if (statement == null) {
-                return null;
-            }
-            resultSet = statement.executeQuery("select * from interpub");
-            if (resultSet == null) 
-            {
-                return null;
-            }
-            pubList = new ArrayList<>();
-            while (resultSet.next()) 
-            {
-                pub = new InterPub();
-                pub.setPubNumId(resultSet.getInt(1));
-                pub.setPubCont(resultSet.getString(2));
-                pub.setPubMg(resultSet.getInt(3));
-                pub.setPubDate(resultSet.getString(4));
-                pub.setPubHour(resultSet.getString(5));
-                
-                pubList.add(pub);
-            }
-            resultSet.close();
-            closeConnection(connection);
-            return pubList;
-        } 
-        catch (SQLException ex) 
-        {
-            ex.printStackTrace();
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return null;
         }
-        return null;
+
+        // Modifica la consulta SQL para aplicar la paginación
+        String sql = "SELECT * FROM interpub ORDER BY pubnumid DESC LIMIT ?";
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, count);
+
+        resultSet = preparedStatement.executeQuery();
+
+        pubList = new ArrayList<>();
+        while (resultSet.next()) {
+            pub = new InterPub();
+            pub.setPubNumId(resultSet.getInt(1));
+            pub.setPubCont(resultSet.getString(2));
+            pub.setPubMg(resultSet.getInt(3));
+            pub.setPubDate(resultSet.getString(4));
+            pub.setPubHour(resultSet.getString(5));
+
+            pubList.add(pub);
+        }
+
+        resultSet.close();
+        closeConnection(connection);
+        return pubList;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
     }
+    return null;
+}
+
+
     
+    public int getTotalPub() {
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return 0;  // Si no se puede establecer la conexión, retorna 0.
+        }
+        statement = connection.createStatement();
+        if (statement == null) {
+            return 0;  // Si no se puede crear el statement, retorna 0.
+        }
+        resultSet = statement.executeQuery("SELECT COUNT(*) FROM interpub");
+        if (resultSet == null) {
+            return 0;  // Si no se puede ejecutar la consulta, retorna 0.
+        }
+        resultSet.next();  // Mueve el cursor al primer resultado.
+        int totalPublications = resultSet.getInt(1);  // Obtiene el valor del conteo.
+        
+        resultSet.close();
+        closeConnection(connection);
+
+        return totalPublications;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return 0;  // En caso de error, retorna 0.
+}
+
     
     public boolean addInterPub( InterPub pub )
     {

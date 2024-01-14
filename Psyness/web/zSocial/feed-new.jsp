@@ -454,273 +454,9 @@
                                             </div>
                                        </div> 
                                    </div>
-<%
-
-                    InterPubHelper pubHelper = new InterPubHelper();
-                    List<InterPub>list = pubHelper.getListT();
-                    Collections.reverse(list);
-                    int Cantidad = 0;
-                    int tamano = list.size();
-                    if( list != null && list.size() > 0)
-                    {
-                    for(InterPub trows : list)
-                    {       
-                       Cantidad++;
-                       InterUsersService dao = new InterUsersService();
-                       InterUsers interUsers = dao.getInterUsersByPubNumId(trows.getPubNumId());
-
-                        if (interUsers != null) {
-                        String data1 = interUsers.getIImgNum();
-
-                        if (data1 != null) {}
-                            else{data1 = "perfilsidebar.png";}
-
-                    String horita = trows.getPubHour().substring(0, 5);
-
-
-
-%>
-                                    <!-- post header-->
-                                <div class="card lg:mx-0 uk-animation-slide-bottom-small" id="posts_feed">
-                           
-                                    <div class="flex justify-between items-center lg:p-4 p-2.5" id="<%=trows.getPubNumId()%>">
-                                        
-                                        <div class="flex flex-1 items-center space-x-4">
-                                            <a href="profile-new.jsp?id=<%=interUsers.getIUserNum()%>">
-                                                <img src="../assets/images/avatars/<%=data1%>" class="bg-gray-200 border border-white rounded-full w-10 h-10">
-                                            </a>
-                                            <div class="flex-1 font-semibold capitalize">
-                                                
-                                                <a href="profile-new.jsp?id=<%=interUsers.getIUserNum()%>" class="text-black dark:text-white" id="name_user_feed">  <c:out value='<%=interUsers.getIUser()%>'/>  <span class="text-gray-700"><%=horita%>hrs</span></a>
-                                                <%if (trows.getPubDate().equals(fecha12)) {%>
-                                                <div class="text-gray-700 flex items-center space-x-2">hoy <ion-icon name="people"></ion-icon></div>
-                                                <%}else{%>
-                                                <div class="text-gray-700 flex items-center space-x-2"><%=trows.getPubDate()%> <ion-icon name="people"></ion-icon></div>
-                                                <%}%>
-                                            </div>
-                                        </div>
-                                      <div>
-                                        <a href=""> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i></a>
-                                        <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" 
-                                        uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
-                                      
-                                            <ul class="space-y-0">
-                                              <% if (sesion.getAttribute("SIUser").equals(interUsers.getIUser())) {%>  
-                                              <li uk-toggle="target: #create-post-modal-edit" > 
-                                                  <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                   <i class="uil-edit-alt mr-1"></i>  Editar publicacion
-                                                  </a> 
-                                              </li>
-                                              <li> 
-                                                  <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                   <i class="uil-comment-slash mr-1"></i>  Desactivar
-                                                  </a> 
-                                              </li> 
-                                              <li>
-                                                <hr class="-mx-2 my-2 dark:border-gray-800">
-                                              </li>
-                                              <%} if (sesion.getAttribute("SIUser").equals(interUsers.getIUser())  ||  sesion.getAttribute("SIRol").equals("Administrador")) {%>
-                                              <li> 
-                                                  <a href="../zProcesos/eliminarPub.jsp?eliminar=<%=trows.getPubNumId()%>&per=<%=interUsers.getIUserNum()%>&direct=0" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
-                                                   <i class="uil-trash-alt mr-1"></i>  Eliminar
-                                                  </a> 
-                                              </li>
-                                              <%}if (!sesion.getAttribute("SIUser").equals(interUsers.getIUser())) {%>
-                                              <li> 
-                                                  <a href="#" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
-                                                      <i class="icon-feather-alert-circle mr-1"></i>  Reportar
-                                                  </a> 
-                                              </li>
-                                              <%}%>
-                                            </ul>
-                                        </div>
-                                      </div>
-                                    </div>                       
-                        
-                                    <div class="p-4 pt-0 border-b dark:border-gray-700">
-                        
-                                        <p class="post-text"><c:out value='<%=trows.getPubCont()%>'/></p>
-                        
-                                    </div>
-                                    
-                        
-                                    <div class="p-4 space-y-3"> 
-                                       
-                                        <div class="flex space-x-4 lg:font-bold">
-                                        <%  
-                                            InterLoveService lovee = new InterLoveService();
-                                            int LoveID = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                                            boolean seguirLove = lovee.isUserLove(trows.getPubNumId(), LoveID );        
-                                            if (seguirLove) {
-                                        %>
-                                            <a href="../zProcesos/loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Lovent" 
-                                                class="flex items-center space-x-2" 
-                                                style="color: #6B64F4;">
-                                                 <div id="likesito" class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
-                                                     <span style="color: #6B64F4;"> <%=trows.getPubMg()%></span>
-                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100" style="fill: #6B64F4;">
-                                                         <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
-                                                     </svg>
-                                                 </div>
-                                                 <div> Amor</div>
-                                             </a>
-                        <%}else{%>
-                                            <a href="../zProcesos/loveService.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Love" 
-                                                class="flex items-center space-x-2"
-                                                onmouseover="this.style.color='#6B64F4'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4'); this.querySelector('span').style.color = '#6B64F4';" 
-                                                onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = ''); this.querySelector('span').style.color = '';">
-                                                <div id="likesito" class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
-                                                    <span><%=trows.getPubMg()%></span>
-                                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
-                                                      <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
-                                                   </svg>
-                                                </div>
-                                                <div> Amor</div>
-                                             </a>
-                        <%}%>
-                        
-                                        <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
-                                            InterFavService fav = new InterFavService();
-                                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
-                                            boolean seguir = fav.isUserFav(trows.getPubNumId(), FlowSeguidorID );        
-                                            if (seguir == true ) {
-                                        %>
-                                            <a href="../zProcesos/favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favoritont" 
-                                                class="flex items-center space-x-2"
-                                                style="color: #F6CE2F;">
-                                                <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100" style="fill: #F6CE2F;">
-                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                                    </svg>
-                                                </div>
-                                                <div> Favorito</div>
-                                            </a>
-                        <%}else{%>             
-                                            <a href="../zProcesos/favService.jsp?pub=<%=trows.getPubNumId()%>&&chest=feed&&action1=Favorito" 
-                                            class="flex items-center space-x-2"
-                                            onmouseover="this.style.color='#F6CE2F'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F')" 
-                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
-                                                <div class="flex items-center p-2 rounded-full p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
-                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                                    </svg>
-                                                </div>
-                                                <div> Favorito</div>
-                                            </a>
-                        <%}}%>
-                                        <%  if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
-                                            InterFlowService flowww = new InterFlowService();
-                                            int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
-                                            boolean seguir = flowww.isUserFollowing(interUsers.getIUserNum(), FlowSeguidorID );        
-                                            if (seguir == true ) {
-                                        %>
-                                            <a href="../zProcesos/seguirnt.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed" 
-                                            class="flex items-center space-x-2 flex-1 justify-end" 
-                                            style="color: #EB74DB;">
-                                                <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" style="fill: #EB74DB;" class="dark:text-gray-100">
-                                                        <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-                                                    </svg>
-                                                </div>
-                                                <div> Seguir </div>
-                                            </a>
-                        <%}else{%>
-                                            <a href="../zProcesos/seguir.jsp?id=<%=interUsers.getIUserNum()%>&&pub=<%=trows.getPubNumId()%>&&chest=feed" class="flex items-center space-x-2 flex-1 justify-end" 
-                                            onmouseover="this.style.color='#EB74DB'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB')" 
-                                            onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
-                                                <div class="flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="22" height="22" class="dark:text-gray-100">
-                                                        <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-                                                    </svg>
-                                                </div>
-                                                <div> Seguir </div>
-                                            </a>
-                                            
-                        <%}}%>
-                                            
-                                        </div>
-                                        
-                                        <!--  
-                                        <div class="border-t py-4 space-y-4 dark:border-gray-600">
-                                            <div class="flex">
-                                                <div class="w-10 h-10 rounded-full relative flex-shrink-0">
-                                                    <img src="assets/images/avatars/prof6.png" alt="" class="absolute h-full rounded-full">
-                                                </div>
-                                                <div>
-                                                    <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
-                                                        <p class="leading-6">Un comentario <urna class="i uil-heart"></urna> <i
-                                                                class="uil-grin-tongue-wink"> </i> </p>
-                                                        <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
-                                                    </div>
-                                                    <div class="text-sm flex items-center space-x-3 mt-2 ml-5">
-                                                        <a href="#" class="text-red-600"> <i class="uil-heart"></i> Love </a>
-                                                        <a href="#"> Replay </a>
-                                                        <span> 3d </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-gray-100 rounded-full relative dark:bg-gray-800 border-t">
-                                            <input placeholder="Agregar un comentario" class="bg-transparent max-h-10 shadow-none px-5">
-                                            <div class="-m-0.5 absolute bottom-0 flex items-center right-3 text-xl">
-                                                 
-                                            </div>
-                                        </div>
-                                        -->
-                                        
-                                        <!-------------------------IMPORTANTE - CAMBIOS - COMMENTS-------------------------------->
-
-
-                                        <div id="main-container" class="container-comentarios  border-b cursor-pointer py-2">
-                                            <p class="px-4 sm:flex sm:flex-row-reverse hover:text-blue-600" onclick="toggleContainer(<%=trows.getPubNumId()%>)">Ver Comentarios </p>
-                                            <div id="inner-container-<%=trows.getPubNumId()%>" class="inner-container">
-                                                <div class="border-t py-4 space-y-4 dark:border-gray-600">
-                                                    <%
-                                                        InterComentService coment = new InterComentService();
-                                                        List<InterComent>comentarios = coment.getInterComentListWithNum(trows.getPubNumId().toString());
-                                                        if (comentarios != null && comentarios.size() > 0) {
-                                                                for(InterComent comentarito : comentarios){
-                                                                
-                                                                InterUsersService servicio = new InterUsersService();
-                                                                InterUsers persona = new InterUsers();
-                                                                persona  = servicio.getUserByInterUsersNum(comentarito.getComentIUserNum());
-                                                        
-                                                    %>
-
-
-                                                    <div class="flex">
-                                                        <div class="w-10 h-10 rounded-full relative flex-shrink-0">
-                                                            <img src="../assets/images/avatars/<%=persona.getIImgNum()%>" alt="" class="absolute h-full rounded-full">
-                                                        </div>
-                                                        <div>
-                                                            <div class="flex-1 font-semibold capitalize px-4">
-                                                                <a href="profile-new.jsp?id=<%=comentarito.getComentIUserNum()%>" class="text-black dark:text-white" id="name_user_feed">  <c:out value='<%=persona.getIUser()%>'/>  </a>
-                                                            </div>
-                                                            
-                                                            <div class="text-gray-700 py-2 px-3 rounded-md bg-gray-100 relative lg:ml-5 ml-2 lg:mr-12 dark:bg-gray-800 dark:text-gray-100">
-                                                                <p class="leading-6"><c:out value='<%=comentarito.getComentCont()%>'/></p>
-                                                                <div class="absolute w-3 h-3 top-3 -left-1 bg-gray-100 transform rotate-45 dark:bg-gray-800"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <%}}%>
-                                                </div>
-                                            </div>
-                                        </div>                                               
-                                        <div id="card_posting">
-                                            <div class="bg-gray-100 rounded-full relative dark:bg-gray-800 border-t">
-                                                <div onclick="location.href='feed-new.jsp?coment=<%=trows.getPubNumId()%>#<%=trows.getPubNumId()%>'" class="bg-gray-100 hover:bg-gray-200 flex-1 h-10 px-6 rounded-full" style="display: flex; align-items: center; color: #b0b0b0; height: 40px; border: none; font-size: 15px;">Agregar comentario</div>
-                                            </div>
-                                        </div>    
-                                        <!--FIN - Cambios-->
-                                        
-                                        
-                                        
-                                    </div>
-                                </div>      
-                                    <%
-                                        }}}
-                                    %>
+                                           <div id ="hiAxo0">
+                                               
+                                           </div>
                             </div>
                                         <script>
                                             function toggleContainer(clave) {
@@ -1183,4 +919,73 @@
         }
     });
 </script>
+<script>
+    var hola = 0;
+    var esperandoRespuesta = false;
+
+    function descargarPublicaciones(TotalCiclos) {
+        // Asegúrate de que la URL sea correcta
+        var url = '/Psyness/PublicacionesServlet';
+
+        // Realizar solicitud AJAX solo si no se ha ejecutado previamente y no se está esperando una respuesta
+        if (!esperandoRespuesta) {
+            esperandoRespuesta = true;
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    key1: TotalCiclos
+                },
+                success: function (data) {
+                    $('#hiAxo0').html(data);
+                    console.log("Ciclo anterior" + hola);
+                    hola = hola + 1;
+                    console.log("Nuevo ciclo" + hola);
+
+                    // Marcar que la función se ha ejecutado
+                    esperandoRespuesta = false;
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error en la solicitud AJAX:", status, error);
+                    console.log(xhr.responseText);
+
+                    // Asegurarse de que también se marque si hay un error en la solicitud
+                    esperandoRespuesta = false;
+                }
+            });
+        }
+    }
+
+    // Función para verificar si el usuario ha llegado al final de la página
+    function verificarFinalDePagina() {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+        const clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+
+        // Verificar si el usuario ha llegado al final de la página
+        if (scrollTop + clientHeight >= scrollHeight - 10) {
+            if (!esperandoRespuesta) {
+                // Esperar 5 segundos antes de realizar otra solicitud
+                setTimeout(function () {
+                    descargarPublicaciones(hola);
+                }, 2000);
+            }
+        }
+    }
+
+    // Evento de desplazamiento para verificar el final de la página
+    window.onscroll = function () {
+        verificarFinalDePagina();
+    };
+
+    // Llama a descargarPublicaciones al cargar el documento
+    $(document).ready(function () {
+        descargarPublicaciones(hola);
+    });
+</script>
+
+
+
+
 </html>    

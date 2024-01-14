@@ -24,6 +24,11 @@
 <%  
         request.setCharacterEncoding("UTF-8");
         HttpSession sesion = request.getSession();
+        
+        
+        
+        String com_usuario = (String) sesion.getAttribute("SIUser");
+        String imag = (String) sesion.getAttribute("SIImgNum");
 
         String accion = request.getParameter("a");
 %>
@@ -151,11 +156,12 @@
                     <div class="conversation-form">
                         <div class="conversation-form-group">
                             <textarea id="message_in" class="conversation-form-input" rows="1" placeholder="Escribe aqui"></textarea>
-                            <input id="username_to" type="text" value="<%=id_rem%>" hidden>
-                            <input id="nom_to" type="text" value="<%=nom_rem%>" hidden>
-                            <input id="username_in" typse="text" value="<%=sesion.getAttribute("SIUserNum")%>" hidden>
-                            <input id="nom_in" type="text" value="<%=sesion.getAttribute("SIUser")%>" hidden>
-                            <input id="imag" type="text" value="<%=sesion.getAttribute("SIImgNum")%>" hidden>
+                            <input hidden id="nom_in" value="<%=sesion.getAttribute("SIUser")%>" type="text">
+                            <input hidden id="username_in" value="<%=sesion.getAttribute("SIUserNum")%>" type="text">
+                            <input hidden id="nom_to" value="<%=id_rem%>" type="text">
+                            <input hidden id="username_to" value="<%=nom_rem%>" type="text">
+                            <input hidden id="nom_in" value="<%=com_usuario%>" type="text">
+                            <input hidden id="imag" value="<%=imag%>" type="text">
                         </div>
                         <button onclick="send()" type="button" class="conversation-form-button conversation-form-submit"><i class="ri-send-plane-2-line"></i></button>
                     </div>
