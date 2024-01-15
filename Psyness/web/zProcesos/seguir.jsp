@@ -112,7 +112,83 @@
         response.sendRedirect("../zSocial/follow-new.jsp?follows="+flowi);
             
             }}else{response.sendRedirect("../zSocial/follow-new.jsp?follows="+flowi);}}
+            
+            if (request.getParameter("chest").equals("feed")) {
+        
+        String pub = request.getParameter("pub");
+        int pubInt = Integer.parseInt(pub);
+        pubInt = pubInt + 1;
+        
+        int FlowSeguidoresID = Integer.parseInt(request.getParameter("id"));
+        int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
 
+
+                InterFlowService flower = new InterFlowService();
+                InterFlow flow = new InterFlow();
+                flow.setFlowSeguidoresID(FlowSeguidoresID);
+                flow.setFlowSeguidorID(FlowSeguidorID);
+                boolean exist = flower.isUserFollowing(flow);
+                if (exist) {
+                        
+        boolean successs = flower.unfollowUser(flow);
+        if (successs) {
+                
+        InterUsersService usersService = new InterUsersService();
+        usersService.actSeguidores(FlowSeguidoresID);
+        usersService.actSeguidos(FlowSeguidorID);
+        
+            response.sendRedirect("../zSocial/feed-new.jsp#"+pubInt);
+            }}else{response.sendRedirect("../zSocial/feed-new.jsp#"+pubInt);}}
+
+            
+            
+            if (request.getParameter("chest").equals("profile")) {
+                int FlowSeguidoresID = Integer.parseInt(request.getParameter("id"));
+                int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
+
+
+                InterFlowService flower = new InterFlowService();
+                InterFlow flow = new InterFlow();
+                flow.setFlowSeguidoresID(FlowSeguidoresID);
+                flow.setFlowSeguidorID(FlowSeguidorID);
+                boolean exist = flower.isUserFollowing(flow);
+                if (exist) {
+                        
+                boolean successs = flower.unfollowUser(flow);
+                if (successs) {
+                        
+                InterUsersService usersService = new InterUsersService();
+                usersService.actSeguidores(FlowSeguidoresID);
+                usersService.actSeguidos(FlowSeguidorID);;
+        
+            response.sendRedirect("../zSocial/profile-new.jsp?id="+FlowSeguidoresID);
+            
+            }}else{response.sendRedirect("../zSocial/profile-new.jsp?id="+FlowSeguidoresID);}}
+            
+
+            if (request.getParameter("chest").equals("follows")) {
+                int FlowSeguidoresID = Integer.parseInt(request.getParameter("id"));
+                int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
+                int flowi = Integer.parseInt(request.getParameter("follows"));
+
+                InterFlowService flower = new InterFlowService();
+                InterFlow flow = new InterFlow();
+                flow.setFlowSeguidoresID(FlowSeguidoresID);
+                flow.setFlowSeguidorID(FlowSeguidorID);
+                boolean exist = flower.isUserFollowing(flow);
+                if (exist) {
+                                        
+                boolean successs = flower.unfollowUser(flow);
+                
+                if (successs) {
+                        
+                InterUsersService usersService = new InterUsersService();
+                usersService.actSeguidores(FlowSeguidoresID);
+                usersService.actSeguidos(FlowSeguidorID);
+        
+            response.sendRedirect("../zSocial/follow-new.jsp?follows="+flowi);
+            
+            }}else{response.sendRedirect("../zSocial/follow-new.jsp?follows="+flowi);}}
 %>
     </body>
 </html>

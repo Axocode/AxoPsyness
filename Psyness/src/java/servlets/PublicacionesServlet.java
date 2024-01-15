@@ -82,7 +82,7 @@ public class PublicacionesServlet extends HttpServlet {
         processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         
-        response.setContentType("text/html;charset=UTF-8");
+        
         request.setCharacterEncoding("UTF-8");          
           HttpSession sesion = request.getSession();
           
@@ -90,13 +90,8 @@ public class PublicacionesServlet extends HttpServlet {
                 Helpers helpers = null;
                 Helpers helperss = null;
                 InterPub user = null;
-                String aux = null;
-                boolean flag = false;
-                String readonly = null;
-                aux = "Guardar";
-                readonly = "";
-                String guardar = request.getParameter("guardar");
-                String comentar = request.getParameter("comentar");
+                
+                
                 int seguidores = 0;
                 int seguidos = 0;
                 int PubNumIdefinitivo;
@@ -108,8 +103,7 @@ public class PublicacionesServlet extends HttpServlet {
                 String horaFormateada = horaCiudadMexico.format(formatter);
                 
                 
-                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
-                String horaFormateada2 = horaCiudadMexico.format(formatter2);
+                
                 user = new InterPub(); 
                 user.setPubCont(""); 
                 InterUsersHelper userHelper = new InterUsersHelper();
@@ -168,6 +162,7 @@ public class PublicacionesServlet extends HttpServlet {
                             String horita = trows.getPubHour().substring(0, 5);
                             String escapedUser = HtmlEscape.escapeHtml(interUsers.getIUser());
                             String escapedCont = HtmlEscape.escapeHtml((trows.getPubCont()));
+                            
 
 
                     out.print("<div class=\"card lg:mx-0 uk-animation-slide-bottom-small\" id=\"posts_feed\">");
@@ -235,90 +230,15 @@ public class PublicacionesServlet extends HttpServlet {
                     out.print("<p class=\"post-text\">" + escapedCont + "</p>");
                     out.print("</div>");
                     out.print("<div class=\"p-4 space-y-3\">");
-                    out.print("<div class=\"flex space-x-4 lg:font-bold\">");
+                    out.print("<div id=\""+trows.getPubNumId()+"\" class=\"flex space-x-4 lg:font-bold\">");
 
-
-                InterLoveService lovee = new InterLoveService();
-                int LoveID = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                boolean seguirLove = lovee.isUserLove(trows.getPubNumId(), LoveID);
-
-                if (seguirLove) {
-                    out.print("<a href=\"../zProcesos/loveService.jsp?id=" + interUsers.getIUserNum() + "&&pub=" + trows.getPubNumId() + "&&chest=feed&&action1=Lovent\" class=\"flex items-center space-x-2\" style=\"color: #6B64F4;\">");
-                    out.print("<div id=\"likesito\" class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
-                    out.print("<span style=\"color: #6B64F4;\"> " + trows.getPubMg() + "</span>");
-                    out.print("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\" style=\"fill: #6B64F4;\">");
-                    out.print("<path fill-rule=\"evenodd\" d=\"M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z\" clip-rule=\"evenodd\"></path>");
-                    out.print("</svg>");
+                //-------------------------------------------------------------------------------------------reacciones 
+                
                     out.print("</div>");
-                    out.print("<div> Amor</div>");
-                    out.print("</a>");
-                } else {
-                    out.print("<a href=\"../zProcesos/loveService.jsp?id=" + interUsers.getIUserNum() + "&&pub=" + trows.getPubNumId() + "&&chest=feed&&action1=Love\" class=\"flex items-center space-x-2\" onmouseover=\"this.style.color='#6B64F4'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4'); this.querySelector('span').style.color = '#6B64F4';\" onmouseout=\"this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = ''); this.querySelector('span').style.color = '';\">");
-                    out.print("<div id=\"likesito\" class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
-                    out.print("<span>" + trows.getPubMg() + "</span>");
-                    out.print("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\">");
-                    out.print("<path fill-rule=\"evenodd\" d=\"M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z\" clip-rule=\"evenodd\"></path>");
-                    out.print("</svg>");
-                    out.print("</div>");
-                    out.print("<div> Amor</div>");
-                    out.print("</a>");
-                }
-                if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
-                    InterFavService fav = new InterFavService();
-                    int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
-                    boolean seguir = fav.isUserFav(trows.getPubNumId(), FlowSeguidorID);
-
-                    if (seguir) {
-                        out.print("<a href=\"../zProcesos/favService.jsp?pub=" + trows.getPubNumId() + "&&chest=feed&&action1=Favoritont\" class=\"flex items-center space-x-2\" style=\"color: #F6CE2F;\">");
-                        out.print("<div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
-                        out.print("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\" style=\"fill: #F6CE2F;\">");
-                        out.print("<path d=\"M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z\"></path>");
-                        out.print("</svg>");
-                        out.print("</div>");
-                        out.print("<div> Favorito</div>");
-                        out.print("</a>");
-                    } else {
-                        out.print("<a href=\"../zProcesos/favService.jsp?pub=" + trows.getPubNumId() + "&&chest=feed&&action1=Favorito\" class=\"flex items-center space-x-2\" onmouseover=\"this.style.color='#F6CE2F'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F')\" onmouseout=\"this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')\">");
-                        out.print("<div class=\"flex items-center p-2 rounded-full p-2 rounded-full  text-black lg:bg-gray-100 dark:bg-gray-600\">");
-                        out.print("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\">");
-                        out.print("<path d=\"M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z\"></path>");
-                        out.print("</svg>");
-                        out.print("</div>");
-                        out.print("<div> Favorito</div>");
-                        out.print("</a>");
-                    }
-                }
-      
-                if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
-                    InterFlowService flowww = new InterFlowService();
-                    int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
-                    boolean seguir = flowww.isUserFollowing(interUsers.getIUserNum(), FlowSeguidorID);
-
-                    if (seguir) {
-                        out.print("<a href=\"../zProcesos/seguirnt.jsp?id=" + interUsers.getIUserNum() + "&&pub=" + trows.getPubNumId() + "&&chest=feed\" class=\"flex items-center space-x-2 flex-1 justify-end\" style=\"color: #EB74DB;\">");
-                        out.print("<div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
-                        out.print("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" style=\"fill: #EB74DB;\" class=\"dark:text-gray-100\">");
-                        out.print("<path fill-rule=\"evenodd\" d=\"M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z\" clip-rule=\"evenodd\"></path>");
-                        out.print("</svg>");
-                        out.print("</div>");
-                        out.print("<div> Seguir </div>");
-                        out.print("</a>");
-                    } else {
-                        out.print("<a href=\"../zProcesos/seguir.jsp?id=" + interUsers.getIUserNum() + "&&pub=" + trows.getPubNumId() + "&&chest=feed\" class=\"flex items-center space-x-2 flex-1 justify-end\" onmouseover=\"this.style.color='#EB74DB'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB')\" onmouseout=\"this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')\">");
-                        out.print("<div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
-                        out.print("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\">");
-                        out.print("<path fill-rule=\"evenodd\" d=\"M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z\" clip-rule=\"evenodd\"></path>");
-                        out.print("</svg>");
-                        out.print("</div>");
-                        out.print("<div> Seguir </div>");
-                        out.print("</a>");
-                    }
-                }
-                out.print("</div>");
-                out.print("<div id=\"main-container\" class=\"container-comentarios border-b cursor-pointer py-2\">");
-                out.print("<p class=\"px-4 sm:flex sm:flex-row-reverse hover:text-blue-600\" onclick=\"toggleContainer(" + trows.getPubNumId() + ")\">Ver Comentarios </p>");
-                out.print("<div id=\"inner-container-" + trows.getPubNumId() + "\" class=\"inner-container\">");
-                out.print("<div class=\"border-t py-4 space-y-4 dark:border-gray-600\">");
+                    out.print("<div id=\"main-container\" class=\"container-comentarios border-b cursor-pointer py-2\">");
+                    out.print("<p class=\"px-4 sm:flex sm:flex-row-reverse hover:text-blue-600\" onclick=\"toggleContainer(" + trows.getPubNumId() + ")\">Ver Comentarios </p>");
+                    out.print("<div id=\"inner-container-" + trows.getPubNumId() + "\" class=\"inner-container\">");
+                    out.print("<div class=\"border-t py-4 space-y-4 dark:border-gray-600\">");
 
                 InterComentService coment = new InterComentService();
                 List<InterComent> comentarios = coment.getInterComentListWithNum(trows.getPubNumId().toString());

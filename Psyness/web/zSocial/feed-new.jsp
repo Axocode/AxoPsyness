@@ -966,9 +966,12 @@
         // Verificar si el usuario ha llegado al final de la página
         if (scrollTop + clientHeight >= scrollHeight - 10) {
             if (!esperandoRespuesta) {
-                // Esperar 5 segundos antes de realizar otra solicitud
+                descargarPublicaciones(hola);
+                
+                // Bloquear las siguientes solicitudes durante 2 segundos
+                esperandoRespuesta = true;
                 setTimeout(function () {
-                    descargarPublicaciones(hola);
+                    esperandoRespuesta = false;
                 }, 2000);
             }
         }
