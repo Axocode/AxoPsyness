@@ -939,6 +939,7 @@
                 },
                 success: function (data) {
                     $('#hiAxo0').html(data);
+                    
                     console.log("Ciclo anterior" + hola);
                     hola = hola + 1;
                     console.log("Nuevo ciclo" + hola);
@@ -964,11 +965,14 @@
         const clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
 
         // Verificar si el usuario ha llegado al final de la página
-        if (scrollTop + clientHeight >= scrollHeight - 10) {
+        if (scrollTop + clientHeight >= scrollHeight - 750) {
             if (!esperandoRespuesta) {
-                // Esperar 5 segundos antes de realizar otra solicitud
+                descargarPublicaciones(hola);
+                
+                // Bloquear las siguientes solicitudes durante 2 segundos
+                esperandoRespuesta = true;
                 setTimeout(function () {
-                    descargarPublicaciones(hola);
+                    esperandoRespuesta = false;
                 }, 2000);
             }
         }
@@ -984,7 +988,67 @@
         descargarPublicaciones(hola);
     });
 </script>
+<script>
+    function enviarAmor(pub1, action) {
+        var url = '/Psyness/MeGustaServlet?pub=' + pub1 + '&action1=' + action;
 
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(data) {
+                // Manejar la respuesta del servidor si es necesario
+            },
+            error: function(xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", status, error);
+                console.log(xhr.responseText);
+            }
+        });
+
+        // Devuelve false para evitar la recarga de la página
+        return false;
+    }
+</script>
+<script>
+    function agregarFav(pub1, action) {
+        var url = '/Psyness/FavoritoServlet?pub=' + pub1 + '&action1=' + action;
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(data) {
+                // Manejar la respuesta del servidor si es necesario
+            },
+            error: function(xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", status, error);
+                console.log(xhr.responseText);
+            }
+        });
+
+        // Devuelve false para evitar la recarga de la página
+        return false;
+    }
+</script>
+<script>
+    function agregarSeguido(num, action) {
+        var url = '/Psyness/SeguidoresServlet?id=' + num + '&action1=' + action;
+        console.log("numero:",num,"acccion:",action)
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(data) {
+                console.log("funciono")
+            },
+            error: function(xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", status, error);
+                console.log(xhr.responseText);
+            }
+        });
+
+        // Devuelve false para evitar la recarga de la página
+        return false;
+    }
+   
+</script>
 
 
 
