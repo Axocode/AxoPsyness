@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.axocode.dao.InterPub;
 
@@ -20,7 +21,7 @@ import org.axocode.dao.InterPub;
  */
 public class InterPubService extends Conexion<InterPub>
 {
-    public List<InterPub> getInterPubList(int count) {
+    public List<InterPub> getInterPubList(int count, int offset) {
     List<InterPub> pubList = null;
     Connection connection = null;
     PreparedStatement preparedStatement = null;
@@ -33,10 +34,11 @@ public class InterPubService extends Conexion<InterPub>
             return null;
         }
 
-        // Modifica la consulta SQL para aplicar la paginación
-        String sql = "SELECT * FROM interpub ORDER BY pubnumid DESC LIMIT ?";
+        // Modifica la consulta SQL para obtener un conjunto específico de publicaciones
+        String sql = "SELECT * FROM interpub ORDER BY pubnumid DESC LIMIT ? OFFSET ?";
         preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, count);
+        preparedStatement.setInt(2, offset);
 
         resultSet = preparedStatement.executeQuery();
 
@@ -225,10 +227,11 @@ public List<InterPub> getInterPubList1()
         resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
             aux = new InterPub();
-            aux.setPubCont(resultSet.getString(1));
-            aux.setPubMg(resultSet.getInt(2));
-            aux.setPubDate(resultSet.getString(3));
-            aux.setPubHour(resultSet.getString(4));
+            aux.setPubNumId(resultSet.getInt(1));
+            aux.setPubCont(resultSet.getString(2));
+            aux.setPubMg(resultSet.getInt(3));
+            aux.setPubDate(resultSet.getString(4));
+            aux.setPubHour(resultSet.getString(5));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();

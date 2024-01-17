@@ -136,11 +136,12 @@ public class PublicacionesServlet extends HttpServlet {
         int totalPub = pubService.getTotalPub();
         int TotalCiclos = Integer.parseInt(request.getParameter("key1"));
 
-        int startIdx = 5 + (5* TotalCiclos);
+        int startIdx = 5;
+        int endIdx = 5* TotalCiclos;
         
         
 
-        List<InterPub> list = pubService.getInterPubList(startIdx);
+        List<InterPub> list = pubService.getInterPubList(startIdx, endIdx);
                     int Cantidad = 0;
                     int tamano = list.size();
                     
@@ -166,7 +167,7 @@ public class PublicacionesServlet extends HttpServlet {
 
 
                     out.print("<div class=\"card lg:mx-0 uk-animation-slide-bottom-small\" id=\"posts_feed\">");
-                    out.print("<div class=\"flex justify-between items-center lg:p-4 p-2.5\" id=\"" + trows.getPubNumId() + "\">");
+                    out.print("<div class=\"flex justify-between items-center lg:p-4 p-2.5\">");
                     out.print("<div class=\"flex flex-1 items-center space-x-4\">");
                     out.print("<a href=\"profile-new.jsp?id=" + interUsers.getIUserNum() + "\">");
                     out.print("<img src=\"../assets/images/avatars/" + data1 + "\" class=\"bg-gray-200 border border-white rounded-full w-10 h-10\">");
@@ -230,16 +231,16 @@ public class PublicacionesServlet extends HttpServlet {
                     out.print("<p class=\"post-text\">" + escapedCont + "</p>");
                     out.print("</div>");
                     out.print("<div class=\"p-4 space-y-3\">");
-                    out.print("<div id=\""+trows.getPubNumId()+"\" class=\"flex space-x-4 lg:font-bold\">");
+                    String numpub = trows.getPubNumId().toString();
+                    String numid = interUsers.getIUserNum().toString();
+                    out.print("<div id=\"pub"+numpub+"\" class=\"flex space-x-4 lg:font-bold\">");
 
                 InterLoveService lovee = new InterLoveService();
                 int LoveID = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
                 boolean seguirLove = lovee.isUserLove(trows.getPubNumId(), LoveID);
-                String numpub = trows.getPubNumId().toString();
-                                            String numid = interUsers.getIUserNum().toString();
-
+                
                 if (seguirLove) {
-                    out.println("<form class=\"love-form\" action=\"/Psyness/MeGustaServlet\" method=\"get\" data-pub=\"" + trows.getPubNumId() + "\" onsubmit=\"return enviarAmor('" + numpub + "', 'Lovent');\">");
+                    out.println("<form class=\"love-form\" onsubmit=\"enviarAmor('" + numpub + "', 'Lovent'); actualizarPub('" + numpub + "'); return false;\">");
                     out.println("    <button type=\"submit\" class=\"flex items-center space-x-2 love-button\" style=\"color: #6B64F4; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                     out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
                     out.println("            <span style=\"color: #6B64F4;\">" + trows.getPubMg() + "</span>");
@@ -251,7 +252,7 @@ public class PublicacionesServlet extends HttpServlet {
                     out.println("    </button>");
                     out.println("</form>");
                 } else {
-                    out.println("<form class=\"love-form\" action=\"/Psyness/MeGustaServlet\" method=\"get\" data-pub=\"" + trows.getPubNumId() + "\" onsubmit=\"return enviarAmor('" + numpub + "', 'Love');\">");
+                    out.println("<form class=\"love-form\" onsubmit=\"enviarAmor('" + numpub + "', 'Love'); actualizarPub('" + numpub + "'); return false;\">");
                     out.println("    <button type=\"submit\" class=\"flex items-center space-x-2\" onmouseover=\"handleButtonHover1(this, true)\" onmouseout=\"handleButtonHover1(this, false)\" style=\"color: inherit; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                     out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
                     out.println("            <span>" + trows.getPubMg() + "</span>");
@@ -269,7 +270,7 @@ public class PublicacionesServlet extends HttpServlet {
                     boolean seguir = fav.isUserFav(trows.getPubNumId(), FlowSeguidorID);
 
                     if (seguir) {
-                        out.println("<form class=\"fav-form\" action=\"/Psyness/FavoritoServlet\" method=\"get\" data-pub=\"" + trows.getPubNumId() + "\" onsubmit=\"return agregarFav('" + numpub + "', 'Favoritont');\">");
+                        out.println("<form class=\"fav-form\" onsubmit=\"agregarFav('" + numpub + "', 'Favoritont'); actualizarPub('" + numpub + "'); return false;\">");
                         out.println("    <button type=\"submit\" class=\"flex items-center space-x-2\" style=\"color: #F6CE2F; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                         out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
                         out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\" style=\"fill: #F6CE2F;\">");
@@ -280,7 +281,7 @@ public class PublicacionesServlet extends HttpServlet {
                         out.println("    </button>");
                         out.println("</form>");
                     } else {
-                        out.println("<form class=\"fav-form\" action=\"/Psyness/FavoritoServlet\" method=\"get\" data-pub=\"" + trows.getPubNumId() + "\" onsubmit=\"return agregarFav('" + numpub + "', 'Favorito');\">");
+                        out.println("<form class=\"fav-form\" onsubmit=\"agregarFav('" + numpub + "', 'Favorito'); actualizarPub('" + numpub + "'); return false;\">");
                         out.println("    <button type=\"submit\" class=\"flex items-center space-x-2\" onmouseover=\"handleButtonHover(this, true)\" onmouseout=\"handleButtonHover(this, false)\" style=\"color: inherit; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                         out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
                         out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\">");
@@ -292,14 +293,14 @@ public class PublicacionesServlet extends HttpServlet {
                         out.println("</form>");
                     }
                 }
-      
+      /*
                 if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                     InterFlowService flowww = new InterFlowService();
                     int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
                     boolean seguir = flowww.isUserFollowing(interUsers.getIUserNum(), FlowSeguidorID);
 
                     if (seguir) {
-                        out.println("<form class=\"follow-form\" action=\"/Psyness/SeguidoresServlet\" method=\"get\" data-pub=\"" + interUsers.getIUserNum() + "\" onsubmit=\"return agregarSeguido('" + numid + "', 'seguirnt');\">");
+                        out.println("<form class=\"follow-form\" onsubmit=\"agregarSeguido('" + numid + "', 'seguirnt'); actualizarPub('" + numpub + "'); return false;\">");
                         out.println("    <button type=\"submit\" class=\"flex items-center space-x-2 flex-1 justify-end\" style=\"color: #EB74DB; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                         out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
                         out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" style=\"fill: #EB74DB;\" class=\"dark:text-gray-100\">");
@@ -310,7 +311,7 @@ public class PublicacionesServlet extends HttpServlet {
                         out.println("    </button>");
                         out.println("</form>");
                     } else {
-                        out.println("<form class=\"follow-form\" action=\"/Psyness/SeguidoresServlet\" method=\"get\" data-pub=\"" + interUsers.getIUserNum() + "\" onsubmit=\"return agregarSeguido('" + numid + "', 'seguir');\">");
+                        out.println("<form class=\"follow-form\" onsubmit=\"agregarSeguido('" + numid + "', 'seguir'); actualizarPub('" + numpub + "'); return false;\">");
                         out.println("    <button type=\"submit\" class=\"flex items-center space-x-2 flex-1 justify-end\" onmouseover=\"handleButtonHover2(this, true)\" onmouseout=\"handleButtonHover2(this, false)\" style=\"color: inherit; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                         out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
                         out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\">");
@@ -321,8 +322,7 @@ public class PublicacionesServlet extends HttpServlet {
                         out.println("    </button>");
                         out.println("</form>");
                     }
-                }
-                
+                }*/
                     out.print("</div>");
                     out.print("<div id=\"main-container\" class=\"container-comentarios border-b cursor-pointer py-2\">");
                     out.print("<p class=\"px-4 sm:flex sm:flex-row-reverse hover:text-blue-600\" onclick=\"toggleContainer(" + trows.getPubNumId() + ")\">Ver Comentarios </p>");
@@ -370,7 +370,11 @@ public class PublicacionesServlet extends HttpServlet {
                 out.print("</div>");
                 out.print("</div>");                 
                 out.print("</div>");
-    }}}}}
+         
+    }}
+                    out.println("<div id=\"hiAxo" + (TotalCiclos + 1) + "\">");
+                    out.println("</div>");
+                    }}}
 
     /**
      * Returns a short description of the servlet.

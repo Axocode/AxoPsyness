@@ -66,118 +66,36 @@ public class ReaccionesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");       
         response.setContentType("text/html;charset=UTF-8");
         
-        
-        request.setCharacterEncoding("UTF-8");          
+        int NumPubToAct = Integer.parseInt(request.getParameter("key2"));
+             
           HttpSession sesion = request.getSession();
           
-                String data = (String) sesion.getAttribute("SIImgNum");
-                Helpers helpers = null;
-                Helpers helperss = null;
-                InterPub user = null;
+
                 
-                
-                int seguidores = 0;
-                int seguidos = 0;
-                int PubNumIdefinitivo;
-                helpers = new InterPubHelper( ).addRequest( request );
-                helperss = new InterComentHelper( ).addRequest( request );
-                ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
-                ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
-                String horaFormateada = horaCiudadMexico.format(formatter);
-                
-                
-                
-                user = new InterPub(); 
-                user.setPubCont(""); 
-                InterUsersHelper userHelper = new InterUsersHelper();
-        List<InterUsers>listita = userHelper.getListT();
-        
-                    if( listita != null && listita.size() > 0)
-        {
-        for(InterUsers suko : listita)
-        {
-           InterUsersService dao = new InterUsersService();
-           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
-           if (interUsers != null) {
-            
-           if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
-            
-            seguidores = interUsers.getIUserSeguidores();
-            seguidos = interUsers.getIUserSeguidos();
-                
-            
-    }}}}
-                           
-                                        String[] partes =horaFormateada.split(" ");
-                                        String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-                                        String hora12 = partes[5];
-        
-        
-        
         
         InterPubService pubService = new InterPubService();
-        int totalPub = pubService.getTotalPub();
-        int TotalCiclos = Integer.parseInt(request.getParameter("key1"));
-
-        int startIdx = 5 + (5* TotalCiclos);
+        InterPub pub = new InterPub();
+        pub = pubService.getPubByInterPub(NumPubToAct);
         
-        
-
-        List<InterPub> list = pubService.getInterPubList(startIdx);
-                    int Cantidad = 0;
-                    int tamano = list.size();
-                    
                     try (PrintWriter out = response.getWriter()){
-                    if( list != null && list.size() > 0)
-                    {
-                    for(InterPub trows : list)
-                    {       
-                       Cantidad++;
+                    
                        InterUsersService dao = new InterUsersService();
-                       InterUsers interUsers = dao.getInterUsersByPubNumId(trows.getPubNumId());
-
-                        if (interUsers != null) {
-                        String data1 = interUsers.getIImgNum();
-
-                        if (data1 != null) {}
-                            else{data1 = "perfilsidebar.png";}
-                        
-                            String horita = trows.getPubHour().substring(0, 5);
-                            String escapedUser = HtmlEscape.escapeHtml(interUsers.getIUser());
-                            String escapedCont = HtmlEscape.escapeHtml((trows.getPubCont()));
-                            
-
+                       InterUsers interUsers = dao.getInterUsersByPubNumId(NumPubToAct);
 
                 InterLoveService lovee = new InterLoveService();
                 int LoveID = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                boolean seguirLove = lovee.isUserLove(trows.getPubNumId(), LoveID);
-                String numpub = trows.getPubNumId().toString();
-                                            String numid = interUsers.getIUserNum().toString();
-
+                boolean seguirLove = lovee.isUserLove(pub.getPubNumId(), LoveID);
+                String numpub = pub.getPubNumId().toString();
+                
+                                            
                 if (seguirLove) {
-                    out.println("<form class=\"love-form\" action=\"/Psyness/MeGustaServlet\" method=\"get\" data-pub=\"" + trows.getPubNumId() + "\" onsubmit=\"return enviarAmor('" + numpub + "', 'Lovent');\">");
+                    out.println("<form class=\"love-form\" onsubmit=\"enviarAmor('" + numpub + "', 'Lovent'); actualizarPub('" + numpub + "'); return false;\">");
                     out.println("    <button type=\"submit\" class=\"flex items-center space-x-2 love-button\" style=\"color: #6B64F4; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                     out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
-                    out.println("            <span style=\"color: #6B64F4;\">" + trows.getPubMg() + "</span>");
+                    out.println("            <span style=\"color: #6B64F4;\">" + pub.getPubMg() + "</span>");
                     out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\" style=\"fill: #6B64F4;\">");
                     out.println("                <path fill-rule=\"evenodd\" d=\"M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z\" clip-rule=\"evenodd\"></path>");
                     out.println("            </svg>");
@@ -186,10 +104,10 @@ public class ReaccionesServlet extends HttpServlet {
                     out.println("    </button>");
                     out.println("</form>");
                 } else {
-                    out.println("<form class=\"love-form\" action=\"/Psyness/MeGustaServlet\" method=\"get\" data-pub=\"" + trows.getPubNumId() + "\" onsubmit=\"return enviarAmor('" + numpub + "', 'Love');\">");
+                    out.println("<form class=\"love-form\" onsubmit=\"enviarAmor('" + numpub + "', 'Love'); actualizarPub('" + numpub + "'); return false;\">");
                     out.println("    <button type=\"submit\" class=\"flex items-center space-x-2\" onmouseover=\"handleButtonHover1(this, true)\" onmouseout=\"handleButtonHover1(this, false)\" style=\"color: inherit; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                     out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
-                    out.println("            <span>" + trows.getPubMg() + "</span>");
+                    out.println("            <span>" + pub.getPubMg() + "</span>");
                     out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\">");
                     out.println("                <path fill-rule=\"evenodd\" d=\"M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z\" clip-rule=\"evenodd\"></path>");
                     out.println("            </svg>");
@@ -201,10 +119,10 @@ public class ReaccionesServlet extends HttpServlet {
                 if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                     InterFavService fav = new InterFavService();
                     int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
-                    boolean seguir = fav.isUserFav(trows.getPubNumId(), FlowSeguidorID);
+                    boolean seguir = fav.isUserFav(pub.getPubNumId(), FlowSeguidorID);
 
                     if (seguir) {
-                        out.println("<form class=\"fav-form\" action=\"/Psyness/FavoritoServlet\" method=\"get\" data-pub=\"" + trows.getPubNumId() + "\" onsubmit=\"return agregarFav('" + numpub + "', 'Favoritont');\">");
+                        out.println("<form class=\"fav-form\" onsubmit=\"agregarFav('" + numpub + "', 'Favoritont'); actualizarPub('" + numpub + "'); return false;\">");
                         out.println("    <button type=\"submit\" class=\"flex items-center space-x-2\" style=\"color: #F6CE2F; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                         out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
                         out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\" style=\"fill: #F6CE2F;\">");
@@ -215,7 +133,7 @@ public class ReaccionesServlet extends HttpServlet {
                         out.println("    </button>");
                         out.println("</form>");
                     } else {
-                        out.println("<form class=\"fav-form\" action=\"/Psyness/FavoritoServlet\" method=\"get\" data-pub=\"" + trows.getPubNumId() + "\" onsubmit=\"return agregarFav('" + numpub + "', 'Favorito');\">");
+                        out.println("<form class=\"fav-form\" onsubmit=\"agregarFav('" + numpub + "', 'Favorito'); actualizarPub('" + numpub + "'); return false;\">");
                         out.println("    <button type=\"submit\" class=\"flex items-center space-x-2\" onmouseover=\"handleButtonHover(this, true)\" onmouseout=\"handleButtonHover(this, false)\" style=\"color: inherit; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                         out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
                         out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\">");
@@ -226,8 +144,7 @@ public class ReaccionesServlet extends HttpServlet {
                         out.println("    </button>");
                         out.println("</form>");
                     }
-                }
-      
+                }      /*
                 if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                     InterFlowService flowww = new InterFlowService();
                     int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
@@ -255,11 +172,25 @@ public class ReaccionesServlet extends HttpServlet {
                         out.println("        <div> + Seguir </div>");
                         out.println("    </button>");
                         out.println("</form>");
-                    }
-                }
+                    } 
+                }*/
                 
-                
-    }}}}}
+     }
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+        }
 
     /**
      * Returns a short description of the servlet.
