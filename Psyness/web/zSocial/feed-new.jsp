@@ -410,7 +410,6 @@
 <script>
     function buscarEnTiempoReal() {
         var searchTerm = document.getElementById('campoBusqueda').value;
-        console.log(searchTerm)
 
         // Asegúrate de que la URL sea correcta
         var url = '/Psyness/BusquedaServlet?term=' + searchTerm;
@@ -879,14 +878,11 @@
     
             'use strict';
     
-            // Feature test
             if (!('localStorage' in window)) return;
     
-            // Get our newly insert toggle
             var nightMode = document.querySelector('#night-mode');
             if (!nightMode) return;
     
-            // When clicked, toggle night mode on or off
             nightMode.addEventListener('click', function (event) {
                 event.preventDefault();
                 document.documentElement.classList.toggle('dark');
@@ -907,6 +903,10 @@
     <script src="../assets/js/simplebar.js"></script>
     <script src="../assets/js/custom.js"></script>
     <script src="../assets/js/bootstrap-select.min.js"></script>
+<audio id="miSonido">
+    <source src="../assets/audio.mp3" type="audio/mp3">
+    Tu navegador no soporta el elemento de audio.
+</audio>
 
 </body>  
 <% String coment = request.getParameter("coment"); %>
@@ -924,10 +924,8 @@
     var esperandoRespuesta = false;
 
     function descargarPublicaciones(TotalCiclos) {
-        // Asegúrate de que la URL sea correcta
         var url = '/Psyness/PublicacionesServlet';
 
-        // Realizar solicitud AJAX solo si no se ha ejecutado previamente y no se está esperando una respuesta
         if (!esperandoRespuesta) {
             esperandoRespuesta = true;
 
@@ -938,38 +936,33 @@
                     key1: TotalCiclos
                 },
                 success: function (data) {
-                    $('#hiAxo0').html(data);
+                    $('#hiAxo'+TotalCiclos).html(data);
                     
                     console.log("Ciclo anterior" + hola);
                     hola = hola + 1;
                     console.log("Nuevo ciclo" + hola);
 
-                    // Marcar que la función se ha ejecutado
                     esperandoRespuesta = false;
                 },
                 error: function (xhr, status, error) {
                     console.error("Error en la solicitud AJAX:", status, error);
                     console.log(xhr.responseText);
 
-                    // Asegurarse de que también se marque si hay un error en la solicitud
                     esperandoRespuesta = false;
                 }
             });
         }
     }
 
-    // Función para verificar si el usuario ha llegado al final de la página
     function verificarFinalDePagina() {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
         const clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
 
-        // Verificar si el usuario ha llegado al final de la página
         if (scrollTop + clientHeight >= scrollHeight - 750) {
             if (!esperandoRespuesta) {
                 descargarPublicaciones(hola);
                 
-                // Bloquear las siguientes solicitudes durante 2 segundos
                 esperandoRespuesta = true;
                 setTimeout(function () {
                     esperandoRespuesta = false;
@@ -978,12 +971,10 @@
         }
     }
 
-    // Evento de desplazamiento para verificar el final de la página
     window.onscroll = function () {
         verificarFinalDePagina();
     };
 
-    // Llama a descargarPublicaciones al cargar el documento
     $(document).ready(function () {
         descargarPublicaciones(hola);
     });
@@ -996,7 +987,6 @@
             type: 'GET',
             url: url,
             success: function(data) {
-                // Manejar la respuesta del servidor si es necesario
             },
             error: function(xhr, status, error) {
                 console.error("Error en la solicitud AJAX:", status, error);
@@ -1004,7 +994,6 @@
             }
         });
 
-        // Devuelve false para evitar la recarga de la página
         return false;
     }
 </script>
@@ -1016,7 +1005,6 @@
             type: 'GET',
             url: url,
             success: function(data) {
-                // Manejar la respuesta del servidor si es necesario
             },
             error: function(xhr, status, error) {
                 console.error("Error en la solicitud AJAX:", status, error);
@@ -1024,7 +1012,6 @@
             }
         });
 
-        // Devuelve false para evitar la recarga de la página
         return false;
     }
 </script>
@@ -1036,7 +1023,6 @@
             type: 'GET',
             url: url,
             success: function(data) {
-                console.log("funciono")
             },
             error: function(xhr, status, error) {
                 console.error("Error en la solicitud AJAX:", status, error);
@@ -1044,12 +1030,94 @@
             }
         });
 
-        // Devuelve false para evitar la recarga de la página
         return false;
     }
    
 </script>
+<script>
+    var sonidoReproducido = false; // Variable para rastrear si el sonido ya se ha reproducido
 
+    function actualizarPub(num) {
+        var url = '/Psyness/ReaccionesServlet?key2=' + num;
+        console.log("Click" + num);
+
+        // Función que realiza la solicitud AJAX
+        function hacerSolicitud() {
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function (data) {
+                    $('#pub' + num).html(data);
+                    console.log("Actualizada:" + num);
+
+                    // Reproducir el sonido solo la primera vez
+                    if (!sonidoReproducido) {
+                        reproducirSonido();
+                        sonidoReproducido = true;
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error en la solicitud AJAX:", status, error);
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+        // Ejecutar la función hacerSolicitud dos veces con un intervalo de 1 segundo
+        setTimeout(function () {
+            hacerSolicitud();
+            sonidoReproducido = false; // Restablecer la variable para permitir futuras reproducciones
+            setTimeout(hacerSolicitud, 1000); // 1000 milisegundos = 1 segundo
+        }, 200); // 1000 milisegundos = 1 segundo
+
+        return false;
+    }
+
+    function reproducirSonido() {
+        var audioElement = document.getElementById("miSonido");
+        if (audioElement) {
+            audioElement.play();
+        }
+    }
+</script>
+
+
+
+<script>
+                                                function handleButtonHover1(button, isHover) {
+                                                    if (isHover) {
+                                                        button.style.color = '#6B64F4';
+                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4');
+                                                        button.querySelector('span').style.color = '#6B64F4';
+                                                    } else {
+                                                        button.style.color = '';
+                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+                                                        button.querySelector('span').style.color = '';
+                                                    }
+                                                }
+                                            </script>
+                                            <script>
+                                                function handleButtonHover(button, isHover) {
+                                                    if (isHover) {
+                                                        button.style.color = '#F6CE2F';
+                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F');
+                                                    } else {
+                                                        button.style.color = '';
+                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+                                                    }
+                                                }
+                                            </script>
+                                            <script>
+                                                function handleButtonHover2(button, isHover) {
+                                                    if (isHover) {
+                                                        button.style.color = '#EB74DB';
+                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB');
+                                                    } else {
+                                                        button.style.color = '';
+                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+                                                    }
+                                                }
+                                            </script>
 
 
 </html>    
