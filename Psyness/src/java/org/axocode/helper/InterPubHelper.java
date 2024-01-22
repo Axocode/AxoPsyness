@@ -52,12 +52,7 @@ public class InterPubHelper extends Helpers<InterPub> implements Serializable
      *
      * @return
      */
-    @Override
-    public List<InterPub> getListT() 
-    {
-        pubService = new InterPubService();
-        return pubService.getInterPubList1();
-    }
+   
 
     /**
      *
@@ -82,6 +77,11 @@ public class InterPubHelper extends Helpers<InterPub> implements Serializable
 
     @Override
     public boolean deleteT() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<InterPub> getListT() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

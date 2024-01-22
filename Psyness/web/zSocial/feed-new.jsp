@@ -75,133 +75,34 @@
     </head>
 
 <body>
-
-<script>
-    function doPub() {
-      document.getElementById("guardadito").disabled = true;
-    }
-</script>
 <%
-          request.setCharacterEncoding("UTF-8");          
-          HttpSession sesion = request.getSession();
-          
-                String data = (String) sesion.getAttribute("SIImgNum");
-                Helpers helpers = null;
-                Helpers helperss = null;
-                InterPub user = null;
-                String aux = null;
-                boolean flag = false;
-                String readonly = null;
-                aux = "Guardar";
-                readonly = "";
-                String guardar = request.getParameter("guardar");
-                String comentar = request.getParameter("comentar");
-                int seguidores = 0;
-                int seguidos = 0;
-                int PubNumIdefinitivo;
-                helpers = new InterPubHelper( ).addRequest( request );
-                helperss = new InterComentHelper( ).addRequest( request );
+    request.setCharacterEncoding("UTF-8");          
+    HttpSession sesion = request.getSession();          
+    String data = (String) sesion.getAttribute("SIImgNum");
+    int seguidores = (Integer) sesion.getAttribute("SISeguidores");
+    int seguidos = (Integer) sesion.getAttribute("SISeguidos");           
+    Helpers helperss = null;
+    InterPub user = null;
+    boolean flag = false;
+    String comentar = request.getParameter("comentar");
+    helperss = new InterComentHelper( ).addRequest( request );
+                
+    
                 ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
                 ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
                 String horaFormateada = horaCiudadMexico.format(formatter);
-                
-                
                 DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
                 String horaFormateada2 = horaCiudadMexico.format(formatter2);
+                String[] partes =horaFormateada.split(" ");
+                String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                String hora12 = partes[5]; 
                 
-                
-                
-                user = new InterPub(); 
-                user.setPubCont("");    
-                if ("Submit".equals(comentar)) {
-                        flag = helperss.addT();
-                        response.sendRedirect("../zProcesos/error.jsp?direct=2&&place="+request.getParameter("ComentPubNumId"));
+                  
+    if ("Submit".equals(comentar)) {
+        flag = helperss.addT();
                     }
-                    
-                    
-                if(  "Submit".equals( guardar ) ){
-                    if (sesion.getAttribute("SILastPub") == null) {
-                        sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
-                        flag = helpers.addT( );
-                        if (flag) {
-                        
-                            
-                            int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                            InterPubService metododefinitivo = new InterPubService();
-                            InterPub objetodefinivo = metododefinitivo.getLastPub();
-                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
-                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
-                                } else {
-                                PubNumIdefinitivo = 1;}
-                            
-                            InterUsersPub contextInterses = new InterUsersPub();
-                            contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
-                            contextInterses.setiUserNum(new InterUsers(IUserNum));
-                            InterUsersPubService interUsersPubService = new InterUsersPubService();
-                            boolean success = interUsersPubService.addUsersPub(contextInterses);
-                            response.sendRedirect("../zProcesos/error.jsp?direct=0");     
-                            }
-                        }else{
-                            LocalDateTime horaAct = LocalDateTime.parse(horaFormateada2, formatter2);
-                            String horaLastPubliString = (String) sesion.getAttribute("SILastPub");
-                            LocalDateTime horaLastPubli = LocalDateTime.parse(horaLastPubliString, formatter2);
-                            long totalToAccesss = ChronoUnit.SECONDS.between(horaLastPubli, horaAct);
-                            if (totalToAccesss > 10) {
-                                sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
-                                flag = helpers.addT( );
-                                if (flag) {
-                                
-                                
-                                int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                                InterPubService metododefinitivo = new InterPubService();
-                            InterPub objetodefinivo = metododefinitivo.getLastPub();
-                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
-                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
-                                } else {
-                                PubNumIdefinitivo = 1;}
-
-                                InterUsersPub contextInterses = new InterUsersPub();
-                                contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
-                                contextInterses.setiUserNum(new InterUsers(IUserNum));
-                                InterUsersPubService interUsersPubService = new InterUsersPubService();
-                                boolean success = interUsersPubService.addUsersPub(contextInterses);
-                                response.sendRedirect("../zProcesos/error.jsp?direct=0");
-                                }   
-                                }else {%>
-                                        <script>
-                                         var valor = '<%= 10 - totalToAccesss %>';
-                                         if (valor === 1) {alert('Espera '+ valor +' segundo volver a publicar');
-                                         window.location.href = "feed-new.jsp";}else 
-                                         alert('Espera '+ valor +' segundos volver a publicar'); window.location.href = "feed-new.jsp"; 
-                                         </script><%}
-                        }
-                    }
-                    
-                    
-                    
-        InterUsersHelper userHelper = new InterUsersHelper();
-        List<InterUsers>listita = userHelper.getListT();
-        
-                    if( listita != null && listita.size() > 0)
-        {
-        for(InterUsers suko : listita)
-        {
-           InterUsersService dao = new InterUsersService();
-           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
-           if (interUsers != null) {
-            
-           if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
-            
-            seguidores = interUsers.getIUserSeguidores();
-            seguidos = interUsers.getIUserSeguidos();
-                
-            
-    }}}}
                            
-                                        String[] partes =horaFormateada.split(" ");
-                                        String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-                                        String hora12 = partes[5]; 
 %>
     <div id="wrapper">
 
@@ -449,13 +350,10 @@
                                        <div class="grid grid-flow-col pt-3 -mx-1 -mb-1 font-semibold text-sm">
                                             <div class="hover:bg-gray-100 flex items-center p-1.5 rounded-md cursor-pointer"> 
                                                 <svg class="bg-green-100 h-9 mr-2 p-1.5 rounded-full text-green-600 w-9 -my-0.5 hidden lg:block" uk-tooltip="title: Messages ; pos: bottom ;offset:7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" title="" aria-expanded="false"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
-                                                Tags
                                             </div>
                                        </div> 
                                    </div>
-                                           <div id ="hiAxo0">
-                                               
-                                           </div>
+                                <div id="hiAxo0"></div>
                             </div>
                                         <script>
                                             function toggleContainer(clave) {
@@ -465,7 +363,7 @@
                                             }
                                         </script>
                         </div>
-                            <!-------------------------IMPORTANTE - CAMBIOS - Comentarios-------------------------------->
+                            <!-------------------------IMPORTANTE - CAMBIOS - COMENTARIOS -------------------------------->
                                <!-- Comment modal -->
                             <div id="create-comment-modal" class="create-post" uk-modal>
                                 <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
@@ -517,14 +415,14 @@
                             
                                     <div class="text-center py-4 border-b">
                                         <h3 class="text-lg font-semibold"> Cuentanos tu pensamiento <c:out value='<%=sesion.getAttribute("SIUser")%>'/> </h3>  
-                                        <button class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 m-1 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
+                                        <button id="cerrar" class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 m-1 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
                                     </div>
-                                        <form id="formulario3" method="POST" accept-charset="UTF-8" onsubmit="doPub();" >
+                                    <form id="axocode123" method="POST" accept-charset="UTF-8">
                                     <div class="flex flex-1 items-start space-x-4 p-5">
                                         <img src="../assets/images/avatars/<c:out value='<%=data%>'/>"
                                             class="bg-gray-200 border border-white rounded-full w-11 h-11">
                                         <div class="flex-1 pt-2">
-                                            <textarea id="inputText" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?" maxlength="1250" autofocus></textarea>
+                                        <textarea id="inputText" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?" maxlength="1250" autofocus></textarea>
                                         <input type="hidden" id="guardar" name="guardar" value="Submit" />
                                         <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
                                         <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
@@ -558,106 +456,22 @@
                                             </div>
                             
                                     </div>
-                                        
-                                        <!---------CAMBIOS-------------->
-                                            <!--Etiquetas-->
-                                            <div class="space-x-4 p-5" id="tags-container">
-                                                <script>
-                                                    function agregarEtiqueta(categoria) {
-                                                        const tagsContainer = document.getElementById('tags-container');
-                                            
-                                                        // Primero creo la etiqueta
-                                                        const tag = document.createElement('div');
-                                                        tag.className = 'tag';
-                                                        tag.textContent = categoria;
-                                            
-                                                        // Esto es para el botón "X" para cerrar la etiqueta
-                                                        const closeBtn = document.createElement('span');
-                                                        closeBtn.className = 'close-btn';
-                                                        closeBtn.innerHTML = 'X';
-                                            
-                                                        // Agrego un manejador de eventos al botón para quitar la etiqueta
-                                                        closeBtn.addEventListener('click', function() {
-                                                            tagsContainer.removeChild(tag);
-                                                        });
-                                            
-                                                        // Agrego el botón "X" a la etiqueta
-                                                        tag.appendChild(closeBtn);
-                                            
-                                                        // Agrego la etiqueta al contenedor
-                                                        tagsContainer.appendChild(tag);
-                                                    }
-                                                </script>
-                                            </div>
-
-                                            <!--Fin - Cambios-->
-                                        
-                                        
-                                        
-                                        
                                     <div class="bsolute bottom-0 p-4 space-x-4 w-full">
                                         <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
                                             
-                                            <button type="button" onclick="evaluateText()" class="button bg-blue-700" id="guardadito"> Revisar </button>
+                                            <button type="button" onclick="evaluateText()" class="button bg-blue-700"> Revisar </button>
                                             <br>
                                             <p> ‎ ‎ ‎ ‎ ‎ ‎ </p>
                                             <p id="result">‎</p>
                                             <p> ‎ ‎ ‎ ‎ ‎ ‎ </p>
                                             <br>
-                                            <button type="submit" onclick="evaluateText()" class="button bg-blue-700" id="guardadito"> Publicar </button>
+                                            <button type="submit" class="button bg-blue-700" id="guardadito1"> Publicar </button>
                                             <div class="flex flex-1 items-center lg:justify-end justify-center space-x-2">
                                             
                                                 <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                                 <svg class="text-red-600 h-9 p-1.5 rounded-full bg-red-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"> </path></svg>
                                                 <svg class="text-green-600 h-9 p-1.5 rounded-full bg-green-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
                                                 <svg class="text-pink-600 h-9 p-1.5 rounded-full bg-pink-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"> </path></svg>
-                                                
-                                                <!-- TRES PUNTOS - etiquetas -->
-                                                <div>
-                                                    <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-2 dark:hover:bg-gray-700"></i> </a>
-                                                        <div class="overflow-auto bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" 
-                                                        uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
-                                                      
-                                                            <ul class="space-y-1 max-h-56">
-                                                              <li>
-                                                                <button class="flex items-center w-full px-6 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800" onclick="agregarEtiqueta('Ansiedad')"> 
-                                                                    <ion-icon name="home-sharp" class="rounded-full bg-gray-500 text-xl p-1 mr-3" id="iconito_edit_post"></ion-icon><p id="iconito_edit_post">Ansiedad</p></button>
-                                                             </li>
-                                                             <li>
-                                                                <button class="flex items-center w-full px-6 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800" onclick="agregarEtiqueta('Depresion')"> 
-                                                                    <ion-icon name="home-sharp" class="rounded-full bg-gray-500 text-xl p-1 mr-3" id="iconito_edit_post"></ion-icon><p id="iconito_edit_post">Depresion</p> </button>
-                                                             </li>
-                                                             <li>
-                                                                <button class="flex items-center w-full px-6 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800" onclick="agregarEtiqueta('Suicidio')"> 
-                                                                    <ion-icon name="home-sharp" class="rounded-full bg-gray-500 text-xl p-1 mr-3" id="iconito_edit_post"></ion-icon><p id="iconito_edit_post">Suicidio</p> </button>
-                                                             </li>
-                                                             <li>
-                                                                <button class="flex items-center w-full px-6 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800" onclick="agregarEtiqueta('Bipolaridad')"> 
-                                                                    <ion-icon name="home-sharp" class="rounded-full bg-gray-500 text-xl p-1 mr-3" id="iconito_edit_post"></ion-icon> <p id="iconito_edit_post">Bipolaridad</p> </button>
-                                                             </li>
-                                                             <li>
-                                                                <button class="flex items-center w-full px-6 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800" onclick="agregarEtiqueta('Estres')"> 
-                                                                    <ion-icon name="home-sharp" class="rounded-full bg-gray-500 text-xl p-1 mr-3" id="iconito_edit_post"></ion-icon> <p id="iconito_edit_post">Estres</p></button>
-                                                             </li>
-                                                             <li>
-                                                                <button class="flex items-center w-full px-6 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800" onclick="agregarEtiqueta('Autismo')"> 
-                                                                    <ion-icon name="home-sharp" class="rounded-full bg-gray-500 text-xl p-1 mr-3" id="iconito_edit_post"></ion-icon> <p id="iconito_edit_post">Autismo</p> </button>
-                                                             </li>
-                                                             <li>
-                                                                <button class="flex items-center w-full px-6 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800" onclick="agregarEtiqueta('Otros')"> 
-                                                                    <ion-icon name="home-sharp" class="rounded-full bg-gray-500 text-xl p-1 mr-3" id="iconito_edit_post"></ion-icon> <p id="iconito_edit_post">Otros</p></button>
-                                                             </li>
-                                                             <!-- No hacerle caso
-
-                                                                 <li> 
-                                                                     <a href="#" class="flex items-center px-6 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                                         <button onclick="agregarEtiqueta('Estres')">Estres</button>
-                                                                        </a> 
-                                                                    </li> 
-                                                            -->
-                                                            </ul>
-                                                        </div>
-                                                </div>
 
                                                 <!--Fin cambios-->
                                             </div>
@@ -903,55 +717,32 @@
     <script src="../assets/js/simplebar.js"></script>
     <script src="../assets/js/custom.js"></script>
     <script src="../assets/js/bootstrap-select.min.js"></script>
+    <script src="../assets/js/ProcesosAjax.js"></script>
 <audio id="miSonido">
     <source src="../assets/audio.mp3" type="audio/mp3">
-    Tu navegador no soporta el elemento de audio.
 </audio>
 
 </body>  
-<% String coment = request.getParameter("coment"); %>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function(event) { 
-        var coment = "<%= coment %>";
-        if (coment !== null && coment !== 'null' && coment.trim() !== '') {
-            UIkit.modal("#create-comment-modal").show();
-        }
-    });
-</script>
 <script>
     var hola = 0;
-    var esperandoRespuesta = false;
-
     function descargarPublicaciones(TotalCiclos) {
         var url = '/Psyness/PublicacionesServlet';
 
-        if (!esperandoRespuesta) {
-            esperandoRespuesta = true;
-
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: {
-                    key1: TotalCiclos
-                },
-                success: function (data) {
-                    $('#hiAxo'+TotalCiclos).html(data);
-                    
-                    console.log("Ciclo anterior" + hola);
-                    hola = hola + 1;
-                    console.log("Nuevo ciclo" + hola);
-
-                    esperandoRespuesta = false;
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error en la solicitud AJAX:", status, error);
-                    console.log(xhr.responseText);
-
-                    esperandoRespuesta = false;
-                }
-            });
-        }
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                key1: TotalCiclos
+            },
+            success: function (data) {
+                $('#hiAxo' + TotalCiclos).html(data);
+                hola = hola + 1;
+            },
+            error: function (xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", status, error);
+                console.log(xhr.responseText);
+            }
+        });
     }
 
     function verificarFinalDePagina() {
@@ -960,164 +751,50 @@
         const clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
 
         if (scrollTop + clientHeight >= scrollHeight - 750) {
-            if (!esperandoRespuesta) {
-                descargarPublicaciones(hola);
-                
-                esperandoRespuesta = true;
-                setTimeout(function () {
-                    esperandoRespuesta = false;
-                }, 2000);
-            }
+            descargarPublicaciones(hola);
         }
     }
 
-    window.onscroll = function () {
+    // Llamar a la función cada 2 segundos
+    setInterval(function () {
         verificarFinalDePagina();
-    };
+    }, 400);
 
+    // También ejecutarla al cargar la página
     $(document).ready(function () {
         descargarPublicaciones(hola);
     });
-</script>
-<script>
-    function enviarAmor(pub1, action) {
-        var url = '/Psyness/MeGustaServlet?pub=' + pub1 + '&action1=' + action;
 
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function(data) {
-            },
-            error: function(xhr, status, error) {
-                console.error("Error en la solicitud AJAX:", status, error);
-                console.log(xhr.responseText);
-            }
-        });
 
-        return false;
-    }
-</script>
-<script>
-    function agregarFav(pub1, action) {
-        var url = '/Psyness/FavoritoServlet?pub=' + pub1 + '&action1=' + action;
-
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function(data) {
-            },
-            error: function(xhr, status, error) {
-                console.error("Error en la solicitud AJAX:", status, error);
-                console.log(xhr.responseText);
-            }
-        });
-
-        return false;
-    }
-</script>
-<script>
-    function agregarSeguido(num, action) {
-        var url = '/Psyness/SeguidoresServlet?id=' + num + '&action1=' + action;
-        console.log("numero:",num,"acccion:",action)
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function(data) {
-            },
-            error: function(xhr, status, error) {
-                console.error("Error en la solicitud AJAX:", status, error);
-                console.log(xhr.responseText);
-            }
-        });
-
-        return false;
-    }
-   
-</script>
-<script>
-    var sonidoReproducido = false; // Variable para rastrear si el sonido ya se ha reproducido
-
-    function actualizarPub(num) {
-        var url = '/Psyness/ReaccionesServlet?key2=' + num;
-        console.log("Click" + num);
-
-        // Función que realiza la solicitud AJAX
-        function hacerSolicitud() {
-            $.ajax({
-                type: 'GET',
-                url: url,
-                success: function (data) {
-                    $('#pub' + num).html(data);
-                    console.log("Actualizada:" + num);
-
-                    // Reproducir el sonido solo la primera vez
-                    if (!sonidoReproducido) {
-                        reproducirSonido();
-                        sonidoReproducido = true;
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error en la solicitud AJAX:", status, error);
-                    console.log(xhr.responseText);
-                }
-            });
-        }
-
-        // Ejecutar la función hacerSolicitud dos veces con un intervalo de 1 segundo
-        setTimeout(function () {
-            hacerSolicitud();
-            sonidoReproducido = false; // Restablecer la variable para permitir futuras reproducciones
-            setTimeout(hacerSolicitud, 1000); // 1000 milisegundos = 1 segundo
-        }, 200); // 1000 milisegundos = 1 segundo
-
-        return false;
-    }
-
-    function reproducirSonido() {
-        var audioElement = document.getElementById("miSonido");
-        if (audioElement) {
-            audioElement.play();
+function handleButtonHover1(button, isHover) {
+    if (isHover) {
+        button.style.color = '#6B64F4';
+        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4');
+        button.querySelector('span').style.color = '#6B64F4';
+    } else {
+        button.style.color = '';
+        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+        button.querySelector('span').style.color = '';
         }
     }
+function handleButtonHover(button, isHover) {
+    if (isHover) {
+        button.style.color = '#F6CE2F';
+        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F');
+    } else {
+        button.style.color = '';
+        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+        }
+    }
+function handleButtonHover2(button, isHover) {
+    if (isHover) {
+        button.style.color = '#EB74DB';
+        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB');
+    } else {
+        button.style.color = '';
+         button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+        }
+   }
 </script>
-
-
-
-<script>
-                                                function handleButtonHover1(button, isHover) {
-                                                    if (isHover) {
-                                                        button.style.color = '#6B64F4';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4');
-                                                        button.querySelector('span').style.color = '#6B64F4';
-                                                    } else {
-                                                        button.style.color = '';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
-                                                        button.querySelector('span').style.color = '';
-                                                    }
-                                                }
-                                            </script>
-                                            <script>
-                                                function handleButtonHover(button, isHover) {
-                                                    if (isHover) {
-                                                        button.style.color = '#F6CE2F';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F');
-                                                    } else {
-                                                        button.style.color = '';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
-                                                    }
-                                                }
-                                            </script>
-                                            <script>
-                                                function handleButtonHover2(button, isHover) {
-                                                    if (isHover) {
-                                                        button.style.color = '#EB74DB';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB');
-                                                    } else {
-                                                        button.style.color = '';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
-                                                    }
-                                                }
-                                            </script>
-
 
 </html>    

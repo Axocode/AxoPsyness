@@ -34,7 +34,7 @@ function padSequence(sequence, maxLength) {
     return sequence.slice(-maxLength); // Asegúrate de que la secuencia no sea más larga que maxLength
 }
 
-async function evaluateText() {
+async function evaluateText(contenido) {
     let inputText = document.getElementById('inputText').value;
 
     let processedInput = processInput(inputText);

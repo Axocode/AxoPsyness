@@ -92,7 +92,7 @@ A<%@page import="org.axocode.dao.service.InterCodesUsersService"%>
                     flag = helpers.addT( );
 
                     InterUsersService inter = new InterUsersService();
-                    InterUsers userR = inter.getUserByInterUsers(request.getParameter("IUser"));
+                    InterUsers userR = inter.getUserByInterUsers((request.getParameter("IUser")));
                     Integer SIUserNum = userR.getIUserNum();
                     Integer SISeguidores = userR.getIUserSeguidores();
                     String SIImgNum = userR.getIImgNum();
