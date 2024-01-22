@@ -90,7 +90,7 @@
                     flag = helpers.addT( );
                   
                     InterUsersService inter = new InterUsersService();
-                    InterUsers userR = inter.getUserByInterUsers(request.getParameter("IUser"));
+                    InterUsers userR = inter.getUserByInterUsers((request.getParameter("IUser")));
                     Integer SIUserNum = userR.getIUserNum();
                     String SIRol = userR.getIRol();
                     String SIImgNum = userR.getIImgNum();

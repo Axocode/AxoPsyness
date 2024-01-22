@@ -30,8 +30,8 @@ import org.axocode.dao.service.InterUsersService;
  *
  * @author chump
  */
-@WebServlet(name = "PublicacionesServlet", urlPatterns = {"/PublicacionesServlet"})
-public class PublicacionesServlet extends HttpServlet {
+@WebServlet(name = "PublicacionesPerfilServlet", urlPatterns = {"/PublicacionesPerfilServlet"})
+public class PublicacionesPerfilServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,36 +44,6 @@ public class PublicacionesServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");          
         HttpSession sesion = request.getSession();        
@@ -87,10 +57,11 @@ public class PublicacionesServlet extends HttpServlet {
                         
         InterPubService pubService = new InterPubService();
         int TotalCiclos = Integer.parseInt(request.getParameter("key1"));
+        int personaPub = Integer.parseInt(request.getParameter("key2"));
         int startIdx = 5;
         int endIdx = 5 * TotalCiclos;
         
-        List<InterPub> list = pubService.getInterPubList(startIdx, endIdx);
+        List<InterPub> list = pubService.getPublicationsByUser(personaPub,startIdx, endIdx);
                     int Cantidad = 0;
                     
                     try (PrintWriter out = response.getWriter()){
@@ -321,7 +292,37 @@ public class PublicacionesServlet extends HttpServlet {
     }}
                     out.println("<div id=\"hiAxo" + (TotalCiclos + 1) + "\">");
                     out.println("</div>");
-                    }}}
+                    }}
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
     /**
      * Returns a short description of the servlet.
