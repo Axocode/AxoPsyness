@@ -707,7 +707,7 @@
         const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
         const clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
 
-        if (scrollTop + clientHeight >= scrollHeight - 750) {
+        if (scrollTop + clientHeight >= scrollHeight - 150) {
             if (isFocused) {
                 descargarPublicaciones('/Psyness/PublicacionesFavoritasServlet', 'PublicacionesFavoritas', holaFavoritos);
                 holaFavoritos++;
