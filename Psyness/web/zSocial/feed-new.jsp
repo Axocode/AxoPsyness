@@ -75,15 +75,6 @@
     </head>
 
 <body>
-
-<script>
-    function doPub() {
-      document.getElementById("guardadito1").disabled = true;
-    }
-     function resPub() {
-      document.getElementById("guardadito1").disabled = false;
-    }
-</script>
 <%
     request.setCharacterEncoding("UTF-8");          
     HttpSession sesion = request.getSession();          
@@ -362,9 +353,7 @@
                                             </div>
                                        </div> 
                                    </div>
-                                           <div id ="hiAxo0">
-                                               
-                                           </div>
+                                <div id="hiAxo0"></div>
                             </div>
                                         <script>
                                             function toggleContainer(clave) {
@@ -728,54 +717,32 @@
     <script src="../assets/js/simplebar.js"></script>
     <script src="../assets/js/custom.js"></script>
     <script src="../assets/js/bootstrap-select.min.js"></script>
+    <script src="../assets/js/ProcesosAjax.js"></script>
 <audio id="miSonido">
     <source src="../assets/audio.mp3" type="audio/mp3">
 </audio>
 
 </body>  
-<% String coment = request.getParameter("coment"); %>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function(event) { 
-        var coment = "<%= coment %>";
-        if (coment !== null && coment !== 'null' && coment.trim() !== '') {
-            UIkit.modal("#create-comment-modal").show();
-        }
-    });
-</script>
 <script>
     var hola = 0;
-    var esperandoRespuesta = false;
-
     function descargarPublicaciones(TotalCiclos) {
         var url = '/Psyness/PublicacionesServlet';
 
-        if (!esperandoRespuesta) {
-            esperandoRespuesta = true;
-
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: {
-                    key1: TotalCiclos
-                },
-                success: function (data) {
-                    $('#hiAxo'+TotalCiclos).html(data);
-                    
-                    console.log("Ciclo anterior" + hola);
-                    hola = hola + 1;
-                    console.log("Nuevo ciclo" + hola);
-
-                    esperandoRespuesta = false;
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error en la solicitud AJAX:", status, error);
-                    console.log(xhr.responseText);
-
-                    esperandoRespuesta = false;
-                }
-            });
-        }
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                key1: TotalCiclos
+            },
+            success: function (data) {
+                $('#hiAxo' + TotalCiclos).html(data);
+                hola = hola + 1;
+            },
+            error: function (xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", status, error);
+                console.log(xhr.responseText);
+            }
+        });
     }
 
     function verificarFinalDePagina() {
@@ -784,201 +751,50 @@
         const clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
 
         if (scrollTop + clientHeight >= scrollHeight - 750) {
-            if (!esperandoRespuesta) {
-                descargarPublicaciones(hola);
-                
-                esperandoRespuesta = true;
-                setTimeout(function () {
-                    esperandoRespuesta = false;
-                }, 2000);
-            }
+            descargarPublicaciones(hola);
         }
     }
 
-    window.onscroll = function () {
+    // Llamar a la función cada 2 segundos
+    setInterval(function () {
         verificarFinalDePagina();
-    };
+    }, 400);
 
+    // También ejecutarla al cargar la página
     $(document).ready(function () {
         descargarPublicaciones(hola);
     });
-</script>
-<script>
-    function enviarAmor(pub1, action) {
-        var url = '/Psyness/MeGustaServlet?pub=' + pub1 + '&action1=' + action;
 
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function(data) {
-            },
-            error: function(xhr, status, error) {
-                console.error("Error en la solicitud AJAX:", status, error);
-                console.log(xhr.responseText);
-            }
-        });
 
-        return false;
-    }
-</script>
-<script>
-    function agregarFav(pub1, action) {
-        var url = '/Psyness/FavoritoServlet?pub=' + pub1 + '&action1=' + action;
-
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function(data) {
-            },
-            error: function(xhr, status, error) {
-                console.error("Error en la solicitud AJAX:", status, error);
-                console.log(xhr.responseText);
-            }
-        });
-
-        return false;
-    }
-</script>
-<script>
-    function agregarSeguido(num, action) {
-        var url = '/Psyness/SeguidoresServlet?id=' + num + '&action1=' + action;
-        console.log("numero:",num,"acccion:",action),
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function(data) {
-            },
-            error: function(xhr, status, error) {
-                console.error("Error en la solicitud AJAX:", status, error);
-                console.log(xhr.responseText);
-            }
-        });
-    }
-   
-</script>
-<script>
-    var sonidoReproducido = false; // Variable para rastrear si el sonido ya se ha reproducido
-
-    function actualizarPub(num) {
-        var url = '/Psyness/ReaccionesServlet?key2=' + num;
-        console.log("Click" + num);
-
-        // Función que realiza la solicitud AJAX
-        function hacerSolicitud() {
-            $.ajax({
-                type: 'GET',
-                url: url,
-                success: function (data) {
-                    $('#pub' + num).html(data);
-                    console.log("Actualizada:" + num);
-
-                    // Reproducir el sonido solo la primera vez
-                    if (!sonidoReproducido) {
-                        reproducirSonido();
-                        sonidoReproducido = true;
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error en la solicitud AJAX:", status, error);
-                    console.log(xhr.responseText);
-                }
-            });
-        }
-
-        // Ejecutar la función hacerSolicitud dos veces con un intervalo de 1 segundo
-        setTimeout(function () {
-            hacerSolicitud();
-            sonidoReproducido = false; // Restablecer la variable para permitir futuras reproducciones
-            setTimeout(hacerSolicitud, 1000); // 1000 milisegundos = 1 segundo
-        }, 200); // 1000 milisegundos = 1 segundo
-
-        return false;
-    }
-
-    function reproducirSonido() {
-        var audioElement = document.getElementById("miSonido");
-        if (audioElement) {
-            audioElement.play();
+function handleButtonHover1(button, isHover) {
+    if (isHover) {
+        button.style.color = '#6B64F4';
+        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4');
+        button.querySelector('span').style.color = '#6B64F4';
+    } else {
+        button.style.color = '';
+        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+        button.querySelector('span').style.color = '';
         }
     }
+function handleButtonHover(button, isHover) {
+    if (isHover) {
+        button.style.color = '#F6CE2F';
+        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F');
+    } else {
+        button.style.color = '';
+        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+        }
+    }
+function handleButtonHover2(button, isHover) {
+    if (isHover) {
+        button.style.color = '#EB74DB';
+        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB');
+    } else {
+        button.style.color = '';
+         button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+        }
+   }
 </script>
-
-<!-- Agrega esto al final de tu HTML, antes de cerrar el body -->
-<script>
-$(document).ready(function() {
-    $("#axocode123").submit(function(event) {
-        console.log("Formulario enviado por AJAX");
-        event.preventDefault();
-
-        // Obtiene los datos del formulario
-        var formData = {
-            PubCont: $("#inputText").val(),
-            guardar: $("#guardar").val(),
-            PubDate: $("#PubDate").val(),
-            PubHour: $("#PubHour").val()
-        };
-
-        $.ajax({
-            type: "POST",
-            url: "/Psyness/PublicarServlet",
-            data: formData,
-            success: function(response) {
-                console.log("Formulario enviado por AJAX");
-                console.log(response);
-                doPub();
-                UIkit.modal("#create-post-modal").hide();
-                document.getElementById('inputText').value = '';
-                var botonPublicar = document.getElementById('guardadito1');
-                var colorOriginal = window.getComputedStyle(botonPublicar).backgroundColor;
-                botonPublicar.style.backgroundColor = '#CFCFCF';
-                setTimeout(function() {
-                    resPub();
-                    botonPublicar.style.backgroundColor = colorOriginal;
-                }, 10000);
-            },
-            error: function(error) {
-                // Maneja los errores aquí
-                console.error("Error en la solicitud AJAX: ", error);
-            }
-        });
-    });
-});
-</script>
-<script>
-                                                function handleButtonHover1(button, isHover) {
-                                                    if (isHover) {
-                                                        button.style.color = '#6B64F4';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4');
-                                                        button.querySelector('span').style.color = '#6B64F4';
-                                                    } else {
-                                                        button.style.color = '';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
-                                                        button.querySelector('span').style.color = '';
-                                                    }
-                                                }
-                                            </script>
-                                            <script>
-                                                function handleButtonHover(button, isHover) {
-                                                    if (isHover) {
-                                                        button.style.color = '#F6CE2F';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F');
-                                                    } else {
-                                                        button.style.color = '';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
-                                                    }
-                                                }
-                                            </script>
-                                            <script>
-                                                function handleButtonHover2(button, isHover) {
-                                                    if (isHover) {
-                                                        button.style.color = '#EB74DB';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB');
-                                                    } else {
-                                                        button.style.color = '';
-                                                        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
-                                                    }
-                                                }
-                                            </script>
-
 
 </html>    

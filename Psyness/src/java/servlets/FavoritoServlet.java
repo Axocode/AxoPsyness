@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.axocode.dao.InterFav;
 import org.axocode.dao.service.InterFavService;
+import org.axocode.dao.service.InterPubService;
 
 /**
  *
@@ -58,16 +59,18 @@ public class FavoritoServlet extends HttpServlet {
         int pubInt = Integer.parseInt(request.getParameter("pub"));
         int IUserNum = (Integer) sesion.getAttribute("SIUserNum");
         String action = request.getParameter("action1");
-        
+        InterPubService verficado = new InterPubService();
         if (action.equals("Favorito")) {
 
             InterFavService favorite = new InterFavService();
             InterFav fav = new InterFav();
             fav.setFavIdPub(pubInt);
-            fav.setFavIdUser(IUserNum);   
-            boolean exist = favorite.checkIfFavExists(fav);
-            if (!exist) {    
-                boolean successs = favorite.addInterFav(fav);
+            fav.setFavIdUser(IUserNum); 
+            if (!verficado.esPublicacionPropia(IUserNum, pubInt)) {
+                boolean exist = favorite.checkIfFavExists(fav);
+                if (!exist) {    
+                    boolean successs = favorite.addInterFav(fav);
+                }   
             }
         }
         
@@ -76,10 +79,12 @@ public class FavoritoServlet extends HttpServlet {
             InterFavService favorite = new InterFavService();
             InterFav fav = new InterFav();
             fav.setFavIdPub(pubInt);
-            fav.setFavIdUser(IUserNum);        
-            boolean exist = favorite.checkIfFavExists(fav);
-            if (exist) { 
-                boolean successs = favorite.unfollowFav(fav);
+            fav.setFavIdUser(IUserNum);     
+            if (!verficado.esPublicacionPropia(IUserNum, pubInt)) {
+                boolean exist = favorite.checkIfFavExists(fav);
+                if (exist) { 
+                    boolean successs = favorite.unfollowFav(fav);
+                }
             }
         }
     }
