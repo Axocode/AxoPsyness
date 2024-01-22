@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.ServletException;
@@ -23,14 +22,9 @@ import org.axocode.dao.InterPub;
 import org.axocode.dao.InterUsers;
 import org.axocode.dao.service.InterComentService;
 import org.axocode.dao.service.InterFavService;
-import org.axocode.dao.service.InterFlowService;
 import org.axocode.dao.service.InterLoveService;
 import org.axocode.dao.service.InterPubService;
 import org.axocode.dao.service.InterUsersService;
-import org.axocode.helper.Helpers;
-import org.axocode.helper.InterComentHelper;
-import org.axocode.helper.InterPubHelper;
-import org.axocode.helper.InterUsersHelper;
 
 /**
  *
@@ -81,72 +75,26 @@ public class PublicacionesServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
-        
-        
         request.setCharacterEncoding("UTF-8");          
-          HttpSession sesion = request.getSession();
-          
-                String data = (String) sesion.getAttribute("SIImgNum");
-                Helpers helpers = null;
-                Helpers helperss = null;
-                InterPub user = null;
-                
-                
-                int seguidores = 0;
-                int seguidos = 0;
-                int PubNumIdefinitivo;
-                helpers = new InterPubHelper( ).addRequest( request );
-                helperss = new InterComentHelper( ).addRequest( request );
+        HttpSession sesion = request.getSession();        
+
                 ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
                 ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
                 String horaFormateada = horaCiudadMexico.format(formatter);
-                
-                
-                
-                user = new InterPub(); 
-                user.setPubCont(""); 
-                InterUsersHelper userHelper = new InterUsersHelper();
-        List<InterUsers>listita = userHelper.getListT();
-        
-                    if( listita != null && listita.size() > 0)
-        {
-        for(InterUsers suko : listita)
-        {
-           InterUsersService dao = new InterUsersService();
-           InterUsers interUsers = dao.getUserByInterUsersNum(suko.getIUserNum());
-           if (interUsers != null) {
-            
-           if ((sesion.getAttribute("SIUserNum").toString()).equals(interUsers.getIUserNum().toString())) {
-            
-            seguidores = interUsers.getIUserSeguidores();
-            seguidos = interUsers.getIUserSeguidos();
-                
-            
-    }}}}
-                           
-                                        String[] partes =horaFormateada.split(" ");
-                                        String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-                                        String hora12 = partes[5];
-        
-        
-        
-        
+                String[] partes =horaFormateada.split(" ");
+                String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                        
         InterPubService pubService = new InterPubService();
-        int totalPub = pubService.getTotalPub();
         int TotalCiclos = Integer.parseInt(request.getParameter("key1"));
-
         int startIdx = 5;
-        int endIdx = 5* TotalCiclos;
+        int endIdx = 5 * TotalCiclos;
         
-        
-
         List<InterPub> list = pubService.getInterPubList(startIdx, endIdx);
                     int Cantidad = 0;
-                    int tamano = list.size();
                     
                     try (PrintWriter out = response.getWriter()){
-                    if( list != null && list.size() > 0)
+                    if( list != null && !list.isEmpty())
                     {
                     for(InterPub trows : list)
                     {       
@@ -174,7 +122,7 @@ public class PublicacionesServlet extends HttpServlet {
                     out.print("</a>");
                     out.print("<div class=\"flex-1 font-semibold capitalize\">");
                     out.print("<a href=\"profile-new.jsp?id=" + interUsers.getIUserNum() + "\" class=\"text-black dark:text-white\" id=\"name_user_feed\">");
-                    out.print(escapedUser+" "+totalPub);
+                    out.print(escapedUser);
                     out.print(" <span class=\"text-gray-700\">" + horita + "hrs</span>");
                     out.print("</a>");
 
@@ -232,7 +180,6 @@ public class PublicacionesServlet extends HttpServlet {
                     out.print("</div>");
                     out.print("<div class=\"p-4 space-y-3\">");
                     String numpub = trows.getPubNumId().toString();
-                    String numid = interUsers.getIUserNum().toString();
                     out.print("<div id=\"pub"+numpub+"\" class=\"flex space-x-4 lg:font-bold\">");
 
                 InterLoveService lovee = new InterLoveService();
@@ -332,7 +279,7 @@ public class PublicacionesServlet extends HttpServlet {
                 InterComentService coment = new InterComentService();
                 List<InterComent> comentarios = coment.getInterComentListWithNum(trows.getPubNumId().toString());
 
-                if (comentarios != null && comentarios.size() > 0) {
+                if (comentarios != null && !comentarios.isEmpty()) {
                     for (InterComent comentarito : comentarios) {
 
                         InterUsersService servicio = new InterUsersService();

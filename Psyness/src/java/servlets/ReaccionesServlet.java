@@ -6,30 +6,18 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.axocode.dao.InterComent;
 import org.axocode.dao.InterPub;
 import org.axocode.dao.InterUsers;
-import org.axocode.dao.service.InterComentService;
 import org.axocode.dao.service.InterFavService;
-import org.axocode.dao.service.InterFlowService;
 import org.axocode.dao.service.InterLoveService;
 import org.axocode.dao.service.InterPubService;
 import org.axocode.dao.service.InterUsersService;
-import org.axocode.helper.Helpers;
-import org.axocode.helper.InterComentHelper;
-import org.axocode.helper.InterPubHelper;
-import org.axocode.helper.InterUsersHelper;
 
 /**
  *
@@ -50,8 +38,6 @@ public class ReaccionesServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,7 +63,7 @@ public class ReaccionesServlet extends HttpServlet {
                 
         
         InterPubService pubService = new InterPubService();
-        InterPub pub = new InterPub();
+        InterPub pub;
         pub = pubService.getPubByInterPub(NumPubToAct);
         
                     try (PrintWriter out = response.getWriter()){
