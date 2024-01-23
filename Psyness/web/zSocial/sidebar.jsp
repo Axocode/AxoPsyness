@@ -5,6 +5,10 @@
 --%>
 
 
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.time.ZonedDateTime"%>
+<%@page import="java.time.ZoneId"%>
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="org.axocode.dao.InterUsers"%>
 <%@page import="java.util.List"%>
@@ -14,11 +18,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Socialite is - Professional A unique and beautiful collection of UI elements">
         <title>Feed - Psyness</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 
             <!-- Favicon -->
         <link href="../assets/images/Icono.svg" rel="icon" type="image/png">
@@ -92,9 +101,10 @@
                             <i class='bx bxs-home'></i>
                         </a>
 
-                        <a href="#" class="is_icon">
-                            <i class='bx bx-compass' ></i>
-                        </a>
+                        <button onclick="abrirModal()" class="is_icon">
+                            <i class='bx bx-send'></i>
+                        </button>
+
                         
                         <a href="settings-new.jsp" class="is_icon">
                             <i class='bx bx-cog' ></i>  
@@ -158,7 +168,7 @@
         </div>
     </header>
     <!-- SIDEBAR -->
-    <aside class="sidebar_feed">
+        <aside class="sidebar_feed">
 
         <div class="sidebar_header">
             <!--<img src="images/sololetras.svg" class="logo-img_sidebar">-->
@@ -224,6 +234,13 @@
                     <span>Configuración</span>
                 </span>
             </button>
+
+            <button onclick="abrirModal()">
+                <span>
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Publicar</span>
+                </span>
+            </button>
             
                         <button onclick="location.href='../index.jsp?cerrar=true'">
                 <span>
@@ -256,7 +273,6 @@
 <script>
     function buscarEnTiempoReal() {
         var searchTerm = document.getElementById('campoBusqueda').value;
-        console.log(searchTerm)
 
         // Asegúrate de que la URL sea correcta
         var url = '/Psyness/BusquedaServlet?term=' + searchTerm;
@@ -273,9 +289,98 @@
             }
         });
     }
+    
+    function abrirModal() {
+   setInterval(UIkit.modal("#create-post-modal").show() ,1000);
+}
 </script>
 
+<%
+            ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
+            ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
+            String horaFormateada = horaCiudadMexico.format(formatter);
+            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
+            String horaFormateada2 = horaCiudadMexico.format(formatter2);
+            String[] partes =horaFormateada.split(" ");
+            String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+            String hora12 = partes[5]; 
+            %>
+            
+            <div id="create-post-modal" class="create-post" uk-modal>
+                                <div
+                                    class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
+                            
+                                    <div class="text-center py-4 border-b">
+                                        <h3 class="text-lg font-semibold"> Cuentanos tu pensamiento <c:out value='<%=sesion.getAttribute("SIUser")%>'/> </h3>  
+                                        <button id="cerrar" class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 m-1 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
+                                    </div>
+                                    <form id="axocode123" method="POST" accept-charset="UTF-8">
+                                    <div class="flex flex-1 items-start space-x-4 p-5">
+                                        <img src="../assets/images/avatars/<c:out value='<%=data%>'/>"
+                                            class="bg-gray-200 border border-white rounded-full w-11 h-11">
+                                        <div class="flex-1 pt-2">
+                                        <textarea id="inputText" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?" maxlength="1250" autofocus></textarea>
+                                        <input type="hidden" id="guardar" name="guardar" value="Submit" />
+                                        <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
+                                        <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
+                                        <input type="hidden" name="numero" id="numero" value="<%=sesion.getAttribute("SIUserNum")%>" />
+                                        </div>
+                                        
+                                         <!-------------------------IMPORTANTE - CAMBIOS
+                                             <div>
+                                                <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-5 dark:hover:bg-gray-700"></i> </a>
+                                                    <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" 
+                                                    uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
+                                                  
+                                                        <ul class="space-y-1">
+                                                          <li> 
+                                                              <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                                               <i class="icon-brand-font-awesome-flag mr-3" id="iconito_edit_post"></i> <p id="iconito_edit_post">Pública</p>
+                                                              </a> 
+                                                          </li>
+                                                          <li> 
+                                                              <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                                               <i class="uil-lock-alt mr-2" id="iconito_edit_post"></i> <p id="iconito_edit_post">Privada</p>
+                                                              </a> 
+                                                          </li>
+                                                          <li> 
+                                                              <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                                               <i class="uil-comment-plus mr-2" id="iconito_edit_post"></i> <p id="iconito_edit_post">No sé</p>
+                                                              </a> 
+                                                          </li> 
+                                                        </ul>
+                                                    
+                                                    </div>
+                                            </div>
+                            -------------------------------->
+                                    </div>
+                                    <div class="bsolute bottom-0 p-4 space-x-4 w-full">
+                                        <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
+                                            
+                                            <br>
+                                            <p> ‎ ‎ ‎ ‎ ‎ ‎ </p>
+                                            <p id="result">‎</p>
+                                            <p> ‎ ‎ ‎ ‎ ‎ ‎ </p>
+                                            <br>
+                                            <button type="submit" class="button bg-blue-700" id="guardadito1" onclick="evaluarToxicidad()"> Publicar </button>
+                                            <div class="flex flex-1 items-center lg:justify-end justify-center space-x-2">
+                                            
+                                                <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                                <svg class="text-red-600 h-9 p-1.5 rounded-full bg-red-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"> </path></svg>
+                                                <svg class="text-green-600 h-9 p-1.5 rounded-full bg-green-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                                                <svg class="text-pink-600 h-9 p-1.5 rounded-full bg-pink-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"> </path></svg>
 
-
-
+                                                <!--Fin cambios-->
+                                            </div>
+                                        </div>
+                                    </div>   
+                                        </form>
+                                </div>
+                            </div>
+                                        
+<script src="../assets/js/ProcesosAjax.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../assets/js/Perspective.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </html>

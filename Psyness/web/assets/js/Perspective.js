@@ -35,7 +35,7 @@ async function obtenerPuntuacionPerspectiveAPI(texto, claveAPI) {
 function evaluarToxicidad() {
   const textoAEvaluar = document.getElementById('inputText').value;
   const claveAPIPerspective = "AIzaSyBhcaemBy-DSswtEZplbfxJcOTqrSYmHNw";
-
+  
   obtenerPuntuacionPerspectiveAPI(textoAEvaluar, claveAPIPerspective)
     .then((puntuacion) => {
       const resulttext = document.getElementById('result');
@@ -52,8 +52,23 @@ function evaluarToxicidad() {
     });
 }
 
+let timeoutId;
+
 function cerrarModal() {
-   UIkit.modal("#modal_offensive_announce").hide(); 
+  UIkit.modal("#modal_offensive_announce").hide();
+
+  // Limpiar el timeout si ya está configurado
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+    timeoutId = null;
+  }
+
+  // Iniciar el timeout para mostrar la modal después de 100 milisegundos
+  timeoutId = setTimeout(() => {
+    UIkit.modal("#create-post-modal").show();
+  }, 100);
 }
+
+
 
 
