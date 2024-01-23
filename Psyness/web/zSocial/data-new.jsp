@@ -257,6 +257,13 @@
                 </span>
             </button>
             
+            <button onclick="location.href='feed-new.jsp'">
+                <span>
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Publicar</span>
+                </span>
+            </button>
+
                         <button onclick="location.href='../index.jsp?cerrar=true'">
                 <span>
                     <i class='bx bx-log-out'></i>
