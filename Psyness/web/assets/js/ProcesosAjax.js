@@ -113,7 +113,11 @@ $(document).ready(function() {
             PubDate: $("#PubDate").val(),
             PubHour: $("#PubHour").val()
         };
-
+ //aqui va el if
+        const valida = localStorage.getItem("validacion");
+        console.log(valida);
+       if (valida < 0.58){
+           console.log("publicacion valida");
         $.ajax({
             type: "POST",
             url: "/Psyness/PublicarServlet",
@@ -137,5 +141,13 @@ $(document).ready(function() {
                 console.error("Error en la solicitud AJAX: ", error);
             }
         });
+    }
+      else {
+          UIkit.modal("#create-post-modal").hide();
+          const modalsita = document.getElementById("modal_offensive_announce");
+          modalsita.style.display = 'block';
+          modalsita.style.opacity = 1;
+          console.log("publicacion invalida");
+      }
     });
 });

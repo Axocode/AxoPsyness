@@ -58,6 +58,9 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
        
+            <!-----Perspective------->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="../assets/js/Perspective.js" defer></script>
             <!-----Fontawesome------->
         <script src="https://kit.fontawesome.com/54fa9899e2.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -459,7 +462,7 @@
                                     <div class="bsolute bottom-0 p-4 space-x-4 w-full">
                                         <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
                                             
-                                            <button type="button" onclick="evaluateText()" class="button bg-blue-700"> Revisar </button>
+                                            <button type="button" onclick="evaluarToxicidad()" class="button bg-blue-700"> Revisar </button>
                                             <br>
                                             <p> ‎ ‎ ‎ ‎ ‎ ‎ </p>
                                             <p id="result">‎</p>
@@ -539,13 +542,14 @@
                                                 <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                                     <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Comentario ofensivo</h3>
                                                     <div class="mt-2">
-                                                    <p class="text-sm text-gray-500">Puede que tu publicación, contenga contenido sensible para otros usuarios.</p>
+                                                    <p class="text-sm text-gray-500">Puede que tu publicación contenga contenido sensible para otros usuarios.
+                                                    Por favor edita el contenido y vuelve a intentarlo</p>
                                                     </div>
                                                 </div>
                                                 </div>
                                             </div>
                                             <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                <button type="button" id="button_close_offensive" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Cerrar</button>
+                                                <button type="button" onClick="cerrarModal()" id="button_close_offensive" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Cerrar</button>
                                             </div>
                                             </div>
                                         </div>
