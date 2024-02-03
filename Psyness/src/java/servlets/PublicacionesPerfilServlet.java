@@ -280,11 +280,6 @@ public class PublicacionesPerfilServlet extends HttpServlet {
                 out.print("</div>");
 
                 // Agregar comentario
-                out.print("<div id=\"card_posting\">");
-                out.print("<div class=\"bg-gray-100 rounded-full relative dark:bg-gray-800 border-t\">");
-                out.print("<div onclick=\"location.href='feed-new.jsp?coment=" + trows.getPubNumId() + "#"+ trows.getPubNumId() + "'\" class=\"bg-gray-100 hover:bg-gray-200 flex-1 h-10 px-6 rounded-full\" style=\"display: flex; align-items: center; color: #b0b0b0; height: 40px; border: none; font-size: 15px;\">Agregar comentario</div>");
-                out.print("</div>");
-                out.print("</div>");
                 out.print("</div>");
                 out.print("</div>");                 
                 out.print("</div>");

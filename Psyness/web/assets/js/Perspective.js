@@ -52,7 +52,7 @@ function evaluarToxicidad() {
     });
 }
 
-let timeoutId;
+let timeoutId; // Declaración global
 
 function cerrarModal() {
   UIkit.modal("#modal_offensive_announce").hide();
@@ -68,7 +68,4 @@ function cerrarModal() {
     UIkit.modal("#create-post-modal").show();
   }, 100);
 }
-
-
-
 

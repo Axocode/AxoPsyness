@@ -368,7 +368,6 @@
     <script src="../assets/js/simplebar.js"></script>
     <script src="../assets/js/custom.js"></script>
     <script src="../assets/js/bootstrap-select.min.js"></script>
-    <script src="../assets/js/ProcesosAjax.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     var holaPerfil = 0;
@@ -416,7 +415,7 @@
         const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
         const clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
 
-        if (scrollTop + clientHeight >= scrollHeight - 150) {
+        if (scrollTop + clientHeight >= scrollHeight - 50) {
             if (isFocused) {
                 descargarPublicaciones('/Psyness/PublicacionesFavoritasServlet', 'PublicacionesFavoritas', holaFavoritos, cooldownFavoritos);
                 holaFavoritos++;
@@ -448,37 +447,35 @@
     });
 
 
-    
-    
-function handleButtonHover1(button, isHover) {
-    if (isHover) {
-        button.style.color = '#6B64F4';
-        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4');
-        button.querySelector('span').style.color = '#6B64F4';
-    } else {
-        button.style.color = '';
-        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
-        button.querySelector('span').style.color = '';
+    function handleButtonHover1(button, isHover) {
+        if (isHover) {
+            button.style.color = '#6B64F4';
+            button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4');
+            button.querySelector('span').style.color = '#6B64F4';
+        } else {
+            button.style.color = '';
+            button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+            button.querySelector('span').style.color = '';
+            }
         }
-    }
-function handleButtonHover(button, isHover) {
-    if (isHover) {
-        button.style.color = '#F6CE2F';
-        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F');
-    } else {
-        button.style.color = '';
-        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+    function handleButtonHover(button, isHover) {
+        if (isHover) {
+            button.style.color = '#F6CE2F';
+            button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F');
+        } else {
+            button.style.color = '';
+            button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+            }
         }
-    }
-function handleButtonHover2(button, isHover) {
-    if (isHover) {
-        button.style.color = '#EB74DB';
-        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB');
-    } else {
-        button.style.color = '';
-         button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
-        }
-   }
+    function handleButtonHover2(button, isHover) {
+        if (isHover) {
+            button.style.color = '#EB74DB';
+            button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#EB74DB');
+        } else {
+            button.style.color = '';
+             button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+            }
+       }
 </script>
 </body>
 </html>

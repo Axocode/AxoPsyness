@@ -1,10 +1,12 @@
-    function doPub() {
-      document.getElementById("guardadito1").disabled = true;
+   function doPub() {
+        $("#guardadito1").prop('disabled', true);
     }
-     function resPub() {
-      document.getElementById("guardadito1").disabled = false;
+
+    function resPub() {
+        $("#guardadito1").prop('disabled', false);
     }
-    
+
+
 
     function enviarAmor(pub1, action) {
         var url = '/Psyness/MeGustaServlet?pub=' + pub1 + '&action1=' + action;
@@ -100,11 +102,33 @@
         }
     }
     
+    function mostrarNotificacion(mensaje, tipo) {
+        Toastify({
+        text: mensaje,
+        duration: 4000,
+        close: true,
+        gravity: "bottom",
+        position: 'center',
+        style: {
+          background: tipo === "success" ? "#6B64F4" : "#FF6347",
+        },
+        onClick: function () {
+          window.open("profile-new.jsp?id=" + numero, '_blank');
+        },
+      }).showToast();
+    }
+    
 
 
 
 
 $(document).ready(function () {
+    
+    $("#guardadito1").click(function (event) {
+        event.preventDefault();
+        evaluarToxicidad();
+    });
+    
     $("#axocode123").submit(function (event) {
         console.log("Formulario enviado por AJAX");
         event.preventDefault();
@@ -140,25 +164,11 @@ $(document).ready(function () {
                                 var botonPublicar = document.getElementById('guardadito1');
                                 var colorOriginal = window.getComputedStyle(botonPublicar).backgroundColor;
                                 botonPublicar.style.backgroundColor = '#CFCFCF';
+                                
                                 setTimeout(function () {
                                     resPub();
                                     botonPublicar.style.backgroundColor = colorOriginal;
                                 }, 10000);
-                                
-                                
-                                function mostrarNotificacion(mensaje, tipo) {
-                                    Toastify({
-                                      text: mensaje,
-                                      duration: 4000,
-                                      close: true,
-                                      gravity: "bottom", // Aparecer en la parte inferior
-                                      position: 'center', // Aparecer en el centro horizontalmente
-                                      backgroundColor: tipo === "success" ? "#6B64F4" : "#FF6347", // Color de fondo según el tipo
-                                      onClick: function () {
-                                      window.open("profile-new.jsp?id=" + numero, '_blank');
-                                      },
-                                    }).showToast();
-                                  }
 
                                   // Ejemplo de uso
                                   mostrarNotificacion("Publicación válida. Ver Publicacion", "success");
@@ -188,7 +198,7 @@ $(document).ready(function () {
 
 //volver comandos 
 
-
+/*
     function guardarPosicionEnHistorial() {
         const posicionActual = window.scrollY || window.pageYOffset;
         history.replaceState({ scrollPos: posicionActual }, "");
@@ -205,3 +215,5 @@ $(document).ready(function () {
   // Volver atrás en el historial
   history.go(-1);
 });
+
+*/
