@@ -66,7 +66,7 @@ public class ServletComentarios extends HttpServlet {
                     int id = com.getComentIUserNum();
                     
                     InterUsersService serviceUsers = new InterUsersService();
-                    InterUsers us = serviceUsers.getInterUsersByPubNumId(id);
+                    InterUsers us = serviceUsers.getUserByInterUsersNum(id);
                     
                     String data1 = us.getIImgNum();
                     String username = HtmlEscape.escapeHtml(us.getIUser());
@@ -89,10 +89,10 @@ public class ServletComentarios extends HttpServlet {
                     out.println("            <span>"+ fecha +" "+horita+"</span>");
                     out.println("        </div>");
                     out.println("    </div>");
-                    out.println("</div>");
+                    out.println("</div>");                    
+                }
                     out.println("<div id=\"comentarios" + (TotalCiclos + 1) + "\">");
                     out.println("</div>");
-                }
             }
         }
     }
