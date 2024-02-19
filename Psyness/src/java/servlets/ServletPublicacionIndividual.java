@@ -6,23 +6,15 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.axocode.dao.InterComent;
 import org.axocode.dao.InterPub;
 import org.axocode.dao.InterUsers;
-import org.axocode.dao.service.InterComentService;
 import org.axocode.dao.service.InterFavService;
-import org.axocode.dao.service.InterFlowService;
 import org.axocode.dao.service.InterLoveService;
 import org.axocode.dao.service.InterPubService;
 import org.axocode.dao.service.InterUsersService;
@@ -31,8 +23,8 @@ import org.axocode.dao.service.InterUsersService;
  *
  * @author chump
  */
-@WebServlet(name = "PublicacionesServlet", urlPatterns = {"/PublicacionesServlet"})
-public class PublicacionesServlet extends HttpServlet {
+@WebServlet(name = "ServletPublicacionIndividual", urlPatterns = {"/ServletPublicacionIndividual"})
+public class ServletPublicacionIndividual extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,7 +37,7 @@ public class PublicacionesServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,138 +52,38 @@ public class PublicacionesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");          
-        HttpSession sesion = request.getSession();        
-
-                ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
-                ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
-                String horaFormateada = horaCiudadMexico.format(formatter);
-                String[] partes =horaFormateada.split(" ");
-                String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-                        
-        InterPubService pubService = new InterPubService();
-        int TotalCiclos = Integer.parseInt(request.getParameter("key1"));
-        int startIdx = 5;
-        int endIdx = 5 * TotalCiclos;
+        {
         
-        List<InterPub> list = pubService.getInterPubList(startIdx, endIdx);
-                    int Cantidad = 0;
-                    
+        request.setCharacterEncoding("UTF-8");       
+        response.setContentType("text/html;charset=UTF-8");
+        
+        int NumPubToAct = Integer.parseInt(request.getParameter("key2"));
+             
+          HttpSession sesion = request.getSession();
+          
+
+                
+        
+        InterPubService pubService = new InterPubService();
+        InterPub pub;
+        pub = pubService.getPubByInterPub(NumPubToAct);
+        
                     try (PrintWriter out = response.getWriter()){
-                    if( list != null && !list.isEmpty())
-                    {
-                    for(InterPub trows : list)
-                    {       
-                       Cantidad++;
+                    
                        InterUsersService dao = new InterUsersService();
-                       InterUsers interUsers = dao.getInterUsersByPubNumId(trows.getPubNumId());
-
-                        if (interUsers != null) {
-                        String data1 = interUsers.getIImgNum();
-
-                        if (data1 != null) {}
-                            else{data1 = "perfilsidebar.png";}
-                        
-                            String horita = trows.getPubHour().substring(0, 5);
-                            String escapedUser = HtmlEscape.escapeHtml(interUsers.getIUser());
-                            String escapedCont = HtmlEscape.escapeHtml((trows.getPubCont()));
-                            
-
-                    out.print("<div id=\"inicio"+TotalCiclos+"\"></div>");
-                    out.print("<div class=\"card lg:mx-0 uk-animation-slide-bottom-small\" id=\"posts_feed\">");
-                    out.print("<div class=\"flex justify-between items-center lg:p-4 p-2.5\">");
-                    out.print("<div class=\"flex flex-1 items-center space-x-4\">");
-                    out.print("<a href=\"profile-new.jsp?id=" + interUsers.getIUserNum() + "\">");
-                    out.print("<img src=\"../assets/images/avatars/" + data1 + "\" class=\"bg-gray-200 border border-white rounded-full w-10 h-10\">");
-                    out.print("</a>");
-                    out.print("<div class=\"flex-1 font-semibold capitalize\">");
-                    out.print("<a href=\"profile-new.jsp?id=" + interUsers.getIUserNum() + "\" class=\"text-black dark:text-white\" id=\"name_user_feed\">");
-                    out.print(escapedUser);
-                    out.print(" <span class=\"text-gray-700\">" + horita + "hrs</span>");
-                    out.print("</a>");
-
-                    if (trows.getPubDate().equals(fecha12)) {
-                        out.print("<div class=\"text-gray-700 flex items-center space-x-2\">hoy <ion-icon name=\"people\"></ion-icon></div>");
-                    } else {
-                        out.print("<div class=\"text-gray-700 flex items-center space-x-2\">"+trows.getPubDate()+"<ion-icon name=\"people\"></ion-icon></div>");
-                    }
-
-                    out.print("</div>");
-                    out.print("</div>");
-                    out.print("<div>");
-                    out.print("<a href=\"\"> <i class=\"icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700\"></i></a>");
-                    out.print("<div class=\"bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700\" uk-drop=\"mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small\">");
-                    out.print("<ul class=\"space-y-0\">");
-
-                    if (sesion.getAttribute("SIUser").equals(interUsers.getIUser())) {
-                        out.print("<li uk-toggle=\"target: #create-post-modal-edit\" >");
-                        out.print("<a href=\"#\" class=\"flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800\">");
-                        out.print("<i class=\"uil-edit-alt mr-1\"></i>  Editar publicacion");
-                        out.print("</a>");
-                        out.print("</li>");
-                        out.print("<li>");
-                        out.print("<a href=\"#\" class=\"flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800\">");
-                        out.print("<i class=\"uil-comment-slash mr-1\"></i>  Desactivar");
-                        out.print("</a>");
-                        out.print("</li>");
-                        out.print("<li>");
-                        out.print("<hr class=\"-mx-2 my-2 dark:border-gray-800\">");
-                        out.print("</li>");
-                    }
-
-                    if (sesion.getAttribute("SIUser").equals(interUsers.getIUser()) || sesion.getAttribute("SIRol").equals("Administrador")) {
-                        out.print("<li>");
-                        out.print("<a href=\"../zProcesos/eliminarPub.jsp?eliminar=" + trows.getPubNumId() + "&per=" + interUsers.getIUserNum() + "&direct=0\" class=\"flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600\">");
-                        out.print("<i class=\"uil-trash-alt mr-1\"></i>  Eliminar");
-                        out.print("</a>");
-                        out.print("</li>");
-                    }
-
-                    if (!sesion.getAttribute("SIUser").equals(interUsers.getIUser())) {
-                        out.print("<li>");
-                        out.print("<a href=\"#\" class=\"flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600\">");
-                        out.print("<i class=\"icon-feather-alert-circle mr-1\"></i>  Reportar");
-                        out.print("</a>");
-                        out.print("</li>");
-                    }
-
-                    out.print("</ul>");
-                    out.print("</div>");
-                    out.print("</div>");
-                    out.print("</div>");
-                    out.print("<div class=\"p-4 pt-0 border-b dark:border-gray-700\">");
-                    out.print("<p class=\"post-text\">" + escapedCont + "</p>");
-                    out.print("</div>");
-                    out.print("<div class=\"p-4 space-y-3\">");
-                    String numpub = trows.getPubNumId().toString();
-                    out.print("<div id=\"pub"+numpub+"\" class=\"flex space-x-4 lg:font-bold\">");
+                       InterUsers interUsers = dao.getInterUsersByPubNumId(NumPubToAct);
 
                 InterLoveService lovee = new InterLoveService();
                 int LoveID = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                boolean seguirLove = lovee.isUserLove(trows.getPubNumId(), LoveID);
+                boolean seguirLove = lovee.isUserLove(pub.getPubNumId(), LoveID);
+                String numpub = pub.getPubNumId().toString();
                 
+                                            
                 if (seguirLove) {
                     out.println("<form class=\"love-form\" onsubmit=\"enviarAmor('" + numpub + "', 'Lovent'); actualizarPub('" + numpub + "'); return false;\">");
                     out.println("    <button type=\"submit\" class=\"flex items-center space-x-2 love-button\" style=\"color: #6B64F4; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                     out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
-                    out.println("            <span style=\"color: #6B64F4;\">" + trows.getPubMg() + "</span>");
+                    out.println("            <span style=\"color: #6B64F4;\">" + pub.getPubMg() + "</span>");
                     out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\" style=\"fill: #6B64F4;\">");
                     out.println("                <path fill-rule=\"evenodd\" d=\"M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z\" clip-rule=\"evenodd\"></path>");
                     out.println("            </svg>");
@@ -203,7 +95,7 @@ public class PublicacionesServlet extends HttpServlet {
                     out.println("<form class=\"love-form\" onsubmit=\"enviarAmor('" + numpub + "', 'Love'); actualizarPub('" + numpub + "'); return false;\">");
                     out.println("    <button type=\"submit\" class=\"flex items-center space-x-2\" onmouseover=\"handleButtonHover1(this, true)\" onmouseout=\"handleButtonHover1(this, false)\" style=\"color: inherit; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                     out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
-                    out.println("            <span>" + trows.getPubMg() + "</span>");
+                    out.println("            <span>" + pub.getPubMg() + "</span>");
                     out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\">");
                     out.println("                <path fill-rule=\"evenodd\" d=\"M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z\" clip-rule=\"evenodd\"></path>");
                     out.println("            </svg>");
@@ -215,7 +107,7 @@ public class PublicacionesServlet extends HttpServlet {
                 if (!interUsers.getIUser().equals(sesion.getAttribute("SIUser"))) {
                     InterFavService fav = new InterFavService();
                     int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
-                    boolean seguir = fav.isUserFav(trows.getPubNumId(), FlowSeguidorID);
+                    boolean seguir = fav.isUserFav(pub.getPubNumId(), FlowSeguidorID);
 
                     if (seguir) {
                         out.println("<form class=\"fav-form\" onsubmit=\"agregarFav('" + numpub + "', 'Favoritont'); actualizarPub('" + numpub + "'); return false;\">");
@@ -240,31 +132,34 @@ public class PublicacionesServlet extends HttpServlet {
                         out.println("    </button>");
                         out.println("</form>");
                     }
-                }
-      
-
-                        out.println("<button onclick=\"window.location.href='post.jsp?id=" + numpub + "'\" class=\"flex items-center space-x-2 flex-1 justify-end\" style=\"color: #99D1FF; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
+                }    
+                
+                        out.println("<button onclick=\"openModal()\" class=\"flex items-center space-x-2 flex-1 justify-end\" style=\"color: #99D1FF; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                         out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
                         out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" style=\"fill: #99D1FF;\" class=\"dark:text-gray-100\">");
                         out.println("                <path fill-rule=\"evenodd\" d=\"M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z\" clip-rule=\"evenodd\"></path>");
                         out.println("            </svg>");
                         out.println("        </div>");
-                        out.println("        <div>Ver</div>");
+                        out.println("        <div>Opinar</div>");
                         out.println("    </button>");
+                
+     }
+    }
+    }
 
-
-                    out.print("</div>");
-
-
-                // Agregar comentario
-                out.print("</div>");
-                out.print("</div>");                 
-                out.print("</div>");
-         
-    }}
-                    out.println("<div id=\"hiAxo" + (TotalCiclos + 1) + "\">");
-                    out.println("</div>");
-                    }}}
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+    }
 
     /**
      * Returns a short description of the servlet.

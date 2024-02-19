@@ -183,6 +183,61 @@ public class InterPubService extends Conexion<InterPub>
     return aux;
 }
    
+    public InterPub getLastPubByInterIUserNum(int PubNumId) {
+        InterPub aux = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return null;
+            }
+
+            preparedStatement = connection.prepareStatement("select * from interpub where pubnumid = ?");
+            preparedStatement.setInt(1, PubNumId);
+
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                aux = new InterPub();
+                aux.setPubNumId(resultSet.getInt(1));
+                aux.setPubCont(resultSet.getString(2));
+                aux.setPubMg(resultSet.getInt(3));
+                aux.setPubDate(resultSet.getString(4));
+                aux.setPubHour(resultSet.getString(5));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Cerrar los recursos en el orden inverso
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return aux;
+    }
+    
+    
     public List<InterPub> getPublicationsByUser(int iusernum, int limit, int offset) {
         List<InterPub> publications = new ArrayList<>();
         Connection connection = null;
@@ -196,12 +251,12 @@ public class InterPubService extends Conexion<InterPub>
             }
 
             String query = "SELECT interpub.* " +
-                           "FROM interusers " +
-                           "JOIN interuserspub ON interusers.iusernum = interuserspub.iusernum " +
-                           "JOIN interpub ON interuserspub.pubnumid = interpub.pubnumid " +
-                           "WHERE interusers.iusernum = ? " +
-                           "ORDER BY interpub.pubnumid DESC " +
-                           "LIMIT ? OFFSET ?";
+                "FROM interusers " +
+                "JOIN interuserspub ON interusers.iusernum = interuserspub.iusernum " +
+                "JOIN interpub ON interuserspub.pubnumid = interpub.pubnumid " +
+                "WHERE interusers.iusernum = ? " +
+                "ORDER BY interpub.pubnumid DESC " +
+                "LIMIT ? OFFSET ?";
 
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, iusernum);

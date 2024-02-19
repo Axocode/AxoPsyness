@@ -24,9 +24,7 @@ public class InterComentHelper extends Helpers<InterComent> implements Serializa
 public boolean isValidaCamposOk() {
     return isNotNullAndNotEmpity(t.getComentCont()) 
             && isNotNullAndNotEmpity(t.getComentDate())
-            && isNotNullAndNotEmpity(t.getComentHour())
-            && t.getComentPubNumId() > 0
-            && t.getComentIUserNum() > 0;
+            && isNotNullAndNotEmpity(t.getComentHour());
 }
 
     @Override
@@ -42,9 +40,11 @@ public boolean isValidaCamposOk() {
         t.setComentPubNumId(Integer.parseInt(getParameter("ComentPubNumId")));
         t.setComentIUserNum(Integer.parseInt(getParameter("ComentIUserNum")));
         if( isValidaCamposOk( ) )
-        {
+        {   
+            System.out.println("publicado");
             return comentService.addInterComent(t );
         }
+        System.out.println("error0");
         return false;
     }
 

@@ -7,7 +7,6 @@
     }
 
 
-
     function enviarAmor(pub1, action) {
         var url = '/Psyness/MeGustaServlet?pub=' + pub1 + '&action1=' + action;
 
@@ -102,37 +101,61 @@
         }
     }
     
-    function mostrarNotificacion(mensaje, tipo) {
+var notificacionEnCooldown = false;
+
+function mostrarNotificacion(mensaje, tipo, numero) {
+    if (!notificacionEnCooldown) {
+        notificacionEnCooldown = true;
         Toastify({
-        text: mensaje,
-        duration: 4000,
-        close: true,
-        gravity: "bottom",
-        position: 'center',
-        style: {
-          background: tipo === "success" ? "#6B64F4" : "#FF6347",
-        },
-        onClick: function () {
-          window.open("profile-new.jsp?id=" + numero, '_blank');
-        },
-      }).showToast();
+            text: mensaje,
+            duration: 4000,
+            close: true,
+            gravity: "bottom",
+            position: 'center',
+            style: {
+                background: tipo === "success" ? "#6B64F4" : "#FF6347",
+            },
+            onClick: function () {
+                window.open("profile-new.jsp?id=" + numero, '_blank');
+            },
+            onHidden: function () {
+                setTimeout(function () {
+                    notificacionEnCooldown = false;
+                }, 5000); // 5 segundos de cooldown
+            }
+        }).showToast();
     }
+}
+
+function mostrarNotificacionComent(mensaje, tipo, numero) {
+    if (!notificacionEnCooldown) {
+        notificacionEnCooldown = true;
+        Toastify({
+            text: mensaje,
+            duration: 4000,
+            close: true,
+            gravity: "bottom",
+            position: 'center',
+            style: {
+                background: tipo === "success" ? "#6B64F4" : "#FF6347",
+            },
+            onClick: function () {
+                window.open("post.jsp?id=" + numero, '_blank');
+            },
+            onHidden: function () {
+                setTimeout(function () {
+                    notificacionEnCooldown = false;
+                }, 5000); // 5 segundos de cooldown
+            }
+        }).showToast();
+    }
+}
+
     
-
-
-
-
 $(document).ready(function () {
-    
-    $("#guardadito1").click(function (event) {
-        event.preventDefault();
-        evaluarToxicidad();
-    });
-    
     $("#axocode123").submit(function (event) {
-        console.log("Formulario enviado por AJAX");
         event.preventDefault();
-
+        console.log("Enviado y esperando resultado...");
         const textoAEvaluar = $("#inputText").val();
         const claveAPIPerspective = "AIzaSyBhcaemBy-DSswtEZplbfxJcOTqrSYmHNw";
 
@@ -144,7 +167,7 @@ $(document).ready(function () {
                     // Ahora puedes utilizar puntuacionN en tu lógica
                     if (puntuacionN < 0.58) {
                         console.log("publicacion valida");
-                        var numero  = $("#numero").val();
+                        var numero1  = $("#numero123").val();
                         // Resto de la lógica para publicación válida
                         $.ajax({
                             type: "POST",
@@ -156,7 +179,7 @@ $(document).ready(function () {
                                 PubHour: $("#PubHour").val()
                             },
                             success: function (response) {
-                                console.log("Formulario enviado por AJAX");
+                                console.log("Formulario enviado por AJAX", numero1);
                                 console.log(response);
                                 doPub();
                                 UIkit.modal("#create-post-modal").hide();
@@ -171,7 +194,74 @@ $(document).ready(function () {
                                 }, 10000);
 
                                   // Ejemplo de uso
-                                  mostrarNotificacion("Publicación válida. Ver Publicacion", "success");
+                                  mostrarNotificacion("Publicación válida. Ver Publicacion", "success", numero1);
+
+                            },
+                            error: function (error) {
+                                // Maneja los errores aquí
+                                console.error("Error en la solicitud AJAX: ", error);
+                            }
+                        });
+                    } else {
+                        console.log("publicacion invalida");
+                        UIkit.modal("#create-post-modal").hide();
+                        const modalsita = document.getElementById("modal_offensive_announce");
+                        modalsita.style.display = 'block';
+                        modalsita.style.opacity = 1;
+                    }
+                } else {
+                    resultadoDiv.innerHTML = 'No se pudo obtener la puntuación.';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+    
+    $("#comentariosAxo").submit(function (event) {
+        event.preventDefault();
+        console.log("Enviado y esperando resultado...");
+        const textoAEvaluar = $("#inputText1").val();
+        const claveAPIPerspective = "AIzaSyBhcaemBy-DSswtEZplbfxJcOTqrSYmHNw";
+
+        obtenerPuntuacionPerspectiveAPI(textoAEvaluar, claveAPIPerspective)
+            .then((puntuacion) => {
+                const resulttext = document.getElementById('result');
+                if (puntuacion !== null) {
+                    const puntuacionN = parseFloat(puntuacion);
+                    // Ahora puedes utilizar puntuacionN en tu lógica
+                    if (puntuacionN < 0.58) {
+                        console.log("publicacion valida");
+                        var numero1  = $("#numero23").val();
+                        // Resto de la lógica para publicación válida
+                        $.ajax({
+                            type: "POST",
+                            url: "/Psyness/PublicarComentarioServlet",
+                            data: {
+                                guardar: $("#guardar").val(),
+                                ComentCont: $("#inputText1").val(),
+                                ComentDate: $("#ComentDate").val(),
+                                ComentHour: $("#ComentHour").val(),
+                                ComentPubNumId: $("#ComentPubNumId").val(),
+                                ComentIUserNum: $("#ComentIUserNum").val()
+                            },
+                            success: function (response) {
+                                console.log("Formulario enviado por AJAX", numero1);
+                                console.log(response);
+                                doPub();
+                                UIkit.modal("#create-post-modal").hide();
+                                document.getElementById('inputText').value = '';
+                                var botonPublicar = document.getElementById('guardadito1');
+                                var colorOriginal = window.getComputedStyle(botonPublicar).backgroundColor;
+                                botonPublicar.style.backgroundColor = '#CFCFCF';
+                                
+                                setTimeout(function () {
+                                    resPub();
+                                    botonPublicar.style.backgroundColor = colorOriginal;
+                                }, 10000);
+
+                                  // Ejemplo de uso
+                                    mostrarNotificacionComent("Publicación Realizada. Ver comentario", "success", numero1);
 
                             },
                             error: function (error) {
