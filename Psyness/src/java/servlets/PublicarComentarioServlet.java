@@ -5,6 +5,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -23,14 +24,15 @@ import org.axocode.dao.InterUsersPub;
 import org.axocode.dao.service.InterPubService;
 import org.axocode.dao.service.InterUsersPubService;
 import org.axocode.helper.Helpers;
+import org.axocode.helper.InterComentHelper;
 import org.axocode.helper.InterPubHelper;
 
 /**
  *
  * @author chump
  */
-@WebServlet(name = "PublicarServlet", urlPatterns = {"/PublicarServlet"})
-public class PublicarServlet extends HttpServlet {
+@WebServlet(name = "PublicarComentarioServlet", urlPatterns = {"/PublicarComentarioServlet"})
+public class PublicarComentarioServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -72,15 +74,15 @@ public class PublicarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        request.setCharacterEncoding("UTF-8");          
-        HttpSession sesion = request.getSession();
-                    
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8"); 
+        processRequest(request, response);        
+        HttpSession sesion = request.getSession();          
                 Helpers helpers;
                 boolean flag;
                 String guardar = request.getParameter("guardar");
                 int PubNumIdefinitivo;
-                helpers = new InterPubHelper( ).addRequest( request );
+                helpers = new InterComentHelper( ).addRequest( request );
                 ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
                 ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
                 
@@ -92,21 +94,7 @@ public class PublicarServlet extends HttpServlet {
                     if (sesion.getAttribute("SILastPub") == null) {
                         sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
                         flag = helpers.addT( );
-                        if (flag) {
-                            int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                            InterPubService metododefinitivo = new InterPubService();
-                            InterPub objetodefinivo = metododefinitivo.getLastPub();
-                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
-                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
-                                } else {
-                                PubNumIdefinitivo = 1;}
-                            
-                            InterUsersPub contextInterses = new InterUsersPub();
-                            contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
-                            contextInterses.setiUserNum(new InterUsers(IUserNum));
-                            InterUsersPubService interUsersPubService = new InterUsersPubService();
-                            interUsersPubService.addUsersPub(contextInterses);
-                            }
+                        if (flag) {}
                         }else{
                             LocalDateTime horaAct = LocalDateTime.parse(horaFormateada2, formatter2);
                             String horaLastPubliString = (String) sesion.getAttribute("SILastPub");
@@ -116,21 +104,6 @@ public class PublicarServlet extends HttpServlet {
                                 sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
                                 flag = helpers.addT( );
                                 if (flag) {
-                                
-                                
-                                int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                                InterPubService metododefinitivo = new InterPubService();
-                            InterPub objetodefinivo = metododefinitivo.getLastPub();
-                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
-                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
-                                } else {
-                                PubNumIdefinitivo = 1;}
-
-                                InterUsersPub contextInterses = new InterUsersPub();
-                                contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
-                                contextInterses.setiUserNum(new InterUsers(IUserNum));
-                                InterUsersPubService interUsersPubService = new InterUsersPubService();
-                                interUsersPubService.addUsersPub(contextInterses);
                                 }} else {
                                 
                                 /*
@@ -146,6 +119,7 @@ public class PublicarServlet extends HttpServlet {
                             }
                         }
                     }
+        
     }
 
     /**

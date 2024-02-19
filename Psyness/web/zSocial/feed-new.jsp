@@ -114,8 +114,6 @@
     <jsp:include page="sidebar.jsp"/>
     
         <!---------------CREAR----------------->
-    
-
         <!-- Main Contents -->
                 <div class="main_content">
                     <div class="mcontainer">
@@ -443,7 +441,6 @@
         }
 
         solicitudPendiente = true;
-
         var url = '/Psyness/PublicacionesServlet';
 
         $.ajax({

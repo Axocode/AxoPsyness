@@ -46,18 +46,20 @@ public class InterComentService extends Conexion<InterComent>{
         // Ejecutar la actualización y verificar el resultado
         row = preparedStatement.executeUpdate();
         closeConnection(connection);
+        System.out.println("publicado");
         return row == 1;
     } catch (SQLException ex) {
         ex.printStackTrace();
     }
+        System.out.println("error1");
     return false;
 }
 
     
+  
     
-    
-    public List<InterComent> getInterComentListWithNum(String num) {
-    List<InterComent> comentList = new ArrayList<>();
+    public List<InterComent> getInterComentListWithNum(int num, int count, int offset) {
+    List<InterComent> comentList = null;
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
@@ -68,12 +70,16 @@ public class InterComentService extends Conexion<InterComent>{
         if (connection == null) {
             return null;
         }
-        String query = "SELECT * FROM intercoment WHERE pubnumid = ?";
+        
+        String query = "SELECT * FROM intercoment WHERE pubnumid = ? ORDER BY idcoment DESC LIMIT ? OFFSET ?";
         preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, num);
+        preparedStatement.setInt(1, num);
+        preparedStatement.setInt(2, count);
+        preparedStatement.setInt(3, offset);
 
         resultSet = preparedStatement.executeQuery();
 
+        comentList = new ArrayList<>();
         while (resultSet.next()) {
             coment = new InterComent();
             coment.setComentId(resultSet.getInt(1));
@@ -103,6 +109,7 @@ public class InterComentService extends Conexion<InterComent>{
 
     return comentList;
 }
+
 
     
 

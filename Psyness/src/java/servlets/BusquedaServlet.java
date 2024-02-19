@@ -29,8 +29,7 @@ public class BusquedaServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             if (users != null && users.size() > 0) {
                 for (InterUsers user : users) {
-                    out.println("<div class='box_profile_search' onclick=\"location.href='profile-new.jsp?id="
-                            + user.getIUserNum() + "'\">");
+                    out.println("<div class='box_profile_search' onclick=\"location.href='profile-new.jsp?id=" + user.getIUserNum() + "'\">");
                     out.println("<img src='../images/" + user.getIImgNum() + "' class='img_search'>");
                     out.println("<p>" + user.getIUser() + "<span>" + user.getIAge() + "</span></p>");
                     out.println("<div class='icons_X'><i class='bx bx-x'></i></div></div>");
