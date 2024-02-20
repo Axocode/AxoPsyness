@@ -167,7 +167,7 @@
 
                                     <div class="bsolute bottom-0 p-4 space-x-4 w-full">
                                         <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
-                                            <button type="submit" id="guardadito" class="button bg-blue-700"> Publicar </button>
+                                            <button type="submit" id="guardadito" class="button bg-blue-700" > Publicar </button>
                                             
                                             <div class="flex flex-1 items-center lg:justify-end justify-center space-x-2">
                                             
@@ -189,7 +189,7 @@
                                         
                                          <!-------------------------IMPORTANTE - CAMBIOS - Editar-------------------------------->
                                <!----------- Edit modal-------------->
-                               <div id="create-post-modal-edit" class="create-post" uk-modal>
+                               <div id="create-post-modal-edit"class="create-post" uk-modal>
                                 <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
                                     
                                     <div class="text-center py-4 border-b">
