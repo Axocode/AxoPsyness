@@ -7,6 +7,11 @@ and open the template in the editor.
     Created on : 23 nov. 2023, 18:56:30
     Author     : admin
 */
+@font-face {
+    font-family: 'FAMILY_NAME';
+    src: url(FONT_FILE_NAME.woff2) format('woff2');
+   }
+
 *{
     box-sizing: border-box;
 }
@@ -447,6 +452,7 @@ body{
 /*MAIN CONTENT */
 
 #card_posting{
+    margin-top: -45px;
     margin-bottom: 30px;
 }
 
@@ -681,11 +687,12 @@ body{
     display: none;
 }
 
+
 @media screen and (max-width: 1200px){
     .sidebar_feed .logo-img_sidebar{
         display: none;
     }
-    
+
     .sidebar_feed .sidebar_header h1{
         display: none;
     }
@@ -717,7 +724,7 @@ body{
     .main_content{
         margin-left: 72px;  
         padding: 10px 5px 0 15px;
-        padding-top: 10px !important;
+        padding-top: 16px !important;
         margin-bottom: 50px;
         margin-top: 15px;
     }  
@@ -787,7 +794,7 @@ body{
     }
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 700px){  /*MOBILE*/
     .sidebar_feed{
         display: none;
     }  
@@ -797,9 +804,12 @@ body{
     }
 
     .main_content{
-        margin-left: 0px;   
+        margin-left: 0px; 
+        margin-right: 0px;  
         left: 0;
-        padding-top: 45px !important;
+        padding-top: 15px !important;
+        padding-left: 0px;
+        padding-right: 0px;
     }   
 
     .header_wrap{
@@ -842,4 +852,68 @@ body{
         visibility: hidden;
         opacity: 0;
     }
+
+    .icon_posteo button {
+        display: block;
+        visibility: visible;
+    }
+    
+    .header_inicio_clinicas{
+        padding-top: 60px;
+    }
+    
+}
+
+
+/*   ICONO POST    */
+
+
+.icon_posteo button {
+    background: #0a64da;
+    width: 52px;
+    height: 52px;
+    position: fixed;
+    border-radius: 50px;
+    border: 1px solid #fff;
+    color: #f9f9f9;
+    bottom: 70px;
+    right: 10px;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.4);
+    transition: all 500ms ease;
+    text-decoration: none;
+}
+
+.icon_posteo button:hover{
+    background: #196ddb;
+}
+
+
+/* HEADER INICIO */
+
+.header_inicio_clinicas{
+    top: 0px;
+    left: 0px;
+}
+
+
+#btn_feed{
+    width: 100%;
+    height: 50%;
+    transition: all 500ms ease;
+    text-decoration: none;
+}
+
+.header_inicio_clinicas span{
+    position: relative;
+}
+
+.header_inicio_clinicas span:after{
+    content: "";
+    position: absolute;
+    background-color: #0570e2;
+    height: 3px;
+    width: 100%;
+    left: 0;
+    transition: 0.3s;
+
 }
