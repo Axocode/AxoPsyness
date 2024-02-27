@@ -483,7 +483,7 @@
             <div class="weekly_d">
                 <div class="title">
                     <div class="line"></div>
-                    <h5>Proceso de algo</h5>
+                    <h5>Proceso de al</h5>
                 </div>
                 <div class="dprogress-bar" role="dprogressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
                 </div>
