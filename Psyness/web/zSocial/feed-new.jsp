@@ -113,12 +113,29 @@
 
     <jsp:include page="sidebar.jsp"/>
     
+    
+     <!--------------------------- BARRA INICIO  - CLIENTE   -------------------------------------------------------->
+ 
+        <div class="header_inicio_clinicas">
+            <div class="bg-white">
+                <nav class="mx-auto flex max-w-lg items-center justify-between p-2 lg:px-12">    
+                        <button id="btn_feed" class="text-sm font-semibold leading-8 text-gray-900 lg:px-12  hover:bg-gray-100">Inicio</button>
+                        <button id="btn_feed" class="text-sm font-semibold leading-8 text-gray-900 lg:px-12  hover:bg-gray-100">Clínicas</button>
+                </nav>
+            </div>
+        </div>
+ 
+ <!----------------------------------------------------------------------------------->
+          
         <!---------------CREAR----------------->
         <!-- Main Contents -->
                 <div class="main_content">
                     <div class="mcontainer">
+                        
+                                              
                             <!-- Perfil -->
                         <div class="md:flex md:space-x-6 lg:mx-16">
+                            
                             <div class="space-y-5 flex-shrink-0 md:w-7/12">
               
                                    <!-- Crear publiccion  -->
@@ -359,6 +376,16 @@
                                 
                             </div>    
                         </div>
+                                
+                                <!------------------------ ICON POST--------------------------------   -->
+
+                                <div class="icon_posteo">
+                                    <button onclick="abrirModal()">
+                                        <span>
+                                            <i class="fa-solid fa-plus"></i>
+                                        </span>
+                                    </button>
+                                </div>
                     </div>    
                 </div> 
             </div>    
@@ -368,6 +395,11 @@
 
                                
 
+                                <script>
+                                    function goBack() {
+                                    window.history.back();
+                                  }
+                                </script>    
 
                             <script>
                                 $(document).ready(function () {

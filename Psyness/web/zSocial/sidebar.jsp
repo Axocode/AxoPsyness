@@ -101,11 +101,10 @@
                         <a href="feed-new.jsp" class="is_icon">
                             <i class='bx bxs-home'></i>
                         </a>
-
-                        <button onclick="abrirModal()" class="is_icon">
-                            <i class='bx bx-send'></i>
-                        </button>
-
+                        
+                        <a href="data-new.jsp" class="is_icon">
+                            <i class='bx bx-user-voice'></i>
+                        </a>
                         
                         <a href="settings-new.jsp" class="is_icon">
                             <i class='bx bx-cog' ></i>  
