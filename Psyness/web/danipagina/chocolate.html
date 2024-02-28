@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bakeWme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="stylesheet" href="estilo.css">
+
+
+</head>
+<body>
+    <!-- SECCION INICIO -->
+    <section id="inicio">
+        <header>
+            <div class="contenido-header">
+                <div class="logo">
+                    <h1>bakeWme</h1>
+                </div>
+                <nav id="nav">
+                    <ul>
+                        <li>
+                            <a href="#inicio" onclick="seleccionar()">
+                                <i class="fa-solid fa-house"></i>
+                                <span>Inicio</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#platos" onclick="seleccionar()">
+                                <i class="fa-solid fa-utensils"></i>
+                                <span>Platos</span>
+                            </a></li>
+                        <li>
+                            <a href="#contacto" onclick="seleccionar()">
+                                <i class="fa-solid fa-comments"></i>
+                                <span>Contacto</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="social">
+                    <a href="https://www.instagram.com/okdanimuak?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://x.com/whoisdddani?s=20" target="_blank"><i class="fa-brands fa-twitter"></i></a> 
+                </div>
+                <div class="nav-responsive" id="bar" onclick="mostrarOcultarMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </header>
+        <!-- Carrusel -->
+        <div class="carrusel">
+            <div class="gallery js-flickity" data-flickity-options='{ "wrapAround":true, "pageDots": false, "autoPlay": true}'>
+                <div class="gallery-cell" >
+                    <img src="img/imagensita.webp" alt="">
+                </div>
+                <div class="gallery-cell">
+                    <img src="img/imagensita2.webp" alt="">
+                </div>
+            </div>
+            <div class="info">
+                <h2>Recetas utiles de reposteria</h2>
+                <p>bakeWme</p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- SECCION SABORES -->
+    <section id="sabores">
+        <h2>Ejemplos</h2>
+        <div class="fila">
+            <div class="item">
+                <div class="icono">
+                    <img src="img/sabor2.png" alt="">
+                </div>
+                <div class="info">
+                    <h3>Pasteles</h3>
+                    <p>Pasteles de todos los sabores y diseños</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="icono">
+                    <img src="img/sabor4.png" alt="">
+                </div>
+                <div class="info">
+                    <h3>Helados</h3>
+                    <p>Helados creativos con mucho sabor</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="icono">
+                    <img src="img/sabor6.png" alt="">
+                </div>
+                <div class="info">
+                    <h3>Galletas</h3>
+                    <p>Galletas horneadas con distintos diseños y mucho amor</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION PLATOS -->
+    <section id="platos">
+        <h2>Platos</h2>
+
+        <div class="fila">
+            <div class="item">
+                <a href="red.html#blog" >
+                    <img src="img/red.webp" alt="">
+                    <p>Pastel red velvet (12 porciones)</p>
+                </a>
+            </div>
+            <div class="item">
+                <a href="chocolate.html#blog" >
+                    <img src="img/choco.webp" alt="">
+                    <p>Pastel de chocolate (8 porciones)</p>
+                </a>
+            </div>
+            <div class="item">
+                <a href="pay.html#blog" >
+                    <img src="img/pay.webp" alt="">
+                    <p>Pay de limon</p>
+                </a>
+            </div>            
+        </div>
+    </section>
+
+    <!-- SECCION BLOG -->
+    <section id="blog">
+        <h2>Receta Pastel de chocolate</h2>
+        <div class="galeria-blog js-flickity" data-flickity-options='{ "wrapAround":true, "pageDots": true}'>
+            <div class="gallery-cell" >
+                <div class="item">
+                    <div class="info">
+                        <h3>Ingredientes</h3>
+                        <p>
+                            ●2 tazas de harina
+                            ●2 tazas de azúcar
+                            ●1/2 tazas de cocoa en polvo
+                            ●2 cucharaditas de polvo para 
+                        hornear
+                        ●2 cucharaditas de bicarbonato 
+                        de sodio
+                        ●1 1/2 tazas de leche de vaca
+                        ●1/2 tazas de mantequilla, suave
+                        ●1 cucharadita de vainilla líquida
+                        ●2 huevos
+                        ●1/2 cucharaditas de sal
+                        ●3 tazas de azúcar glass, para 
+                        el glaseado
+                        ●250 gramos de chocolate 
+                        amargo, para el glaseado
+                        ●6 cucharadas de mantequilla, 
+                        para el glaseado
+                        ●6 cucharadas de agua, para el 
+                        glaseado
+                        ●suficiente de mermelada de 
+                        chabacano</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-cell" >
+                <div class="item">
+                    <div class="info">
+                        <h3>Preparación de la receta 1</h3>
+                        <p>●En un recipiente combinar 
+                            harina, azúcar, cocoa, polvo 
+                            hornear, bicarbonato y sal. 
+                            Revolver a baja velocidad con 
+                            la batidora.
+                            ●Agregar leche, mantequilla y 
+                            vainilla. Batir con batidora a 
+                            velocidad baja, luego batir 2 
+                            minutos a velocidad media, 
+                            agregar huevo y batir 2 
+                            minutos más. Poner en un 
+                            molde redondo de 22 cms. de 
+                            diámetro, engrasado y 
+                            enharinado.
+                            ●Hornear a 180 °C por 30 o 35 
+                            minutos. Sacar del horno y 
+                            enfriar en una rejilla 10 
+                            minutos. Sacar del molde y 
+                            dejar enfriar completamente.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-cell" >
+                <div class="item">
+                    <div class="info">
+                        <h3>Preparación de la receta 2</h3>
+                        <p>●Para hacer el glaseado: 
+                            derretir chocolate y 
+                            mantequilla a fuego suave, 
+                            remover del fuego y agregar el 
+                            azúcar glass y el agua caliente 
+                            moviendo siempre. Si es 
+                            necesario agregar mas de 
+                            agua para tener la consistencia 
+                            de glaseado
+                            ●Glasear el pastel y dejar 
+                            escurrir por los lados a cubrirlo 
+                            totalmente.
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION CONTACTO Y PIE DE PAGINA -->
+    <section id="contacto">
+        <div class="fila">
+            <div class="col">
+                <h1>bakeWme</h1>
+            </div>
+            <div class="col">
+                <h3>Menú</h3>
+                <a href="#inicio">Inicio</a>
+                <a href="#sabores">Ejemplos</a>
+                <a href="#sabores">Platos</a>
+                <a href="#blog">Receta</a>
+            </div>
+            <div class="col">
+                <h3>Cheffs</h3>
+                <a href="#">Arantxa Daniela Ledesma Urquiza<div class="foto">
+                </a>
+            </div>
+            <div class="col">
+                <h3>Social Media</h3>
+                <div class="media">
+                    <i class="fa-brands fa-twitter"></i> <a href="https://x.com/whoisdddani?s=20" target="_blank">Twitter</a> 
+                </div>
+                <div class="media">
+                    <i class="fa-brands fa-instagram"></i><a href="https://www.instagram.com/okdanimuak?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
+                </div>
+            </div>
+            <div class="col">
+                <h3>Contacto</h3>
+                <input type="text" placeholder="Tu correo">
+                <input type="submit" class="enviar">
+            </div>
+        </div>
+
+    </section>
+    
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
