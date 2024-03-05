@@ -1,13 +1,14 @@
 package org.axocode.dao;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class InterPub implements Serializable{
     
     private Integer PubNumId;
     private String PubCont;
     private int PubMg;
+    private int PubFavs;
+    private int PubComent;
     private String PubDate;
     private String PubHour;
 
@@ -55,6 +56,22 @@ public class InterPub implements Serializable{
 
     public void setPubHour(String PubHour) {
         this.PubHour = PubHour;
+    }
+
+    public int getPubFavs() {
+        return PubFavs;
+    }
+
+    public void setPubFavs(int PubFavs) {
+        this.PubFavs = PubFavs;
+    }
+
+    public int getPubComent() {
+        return PubComent;
+    }
+
+    public void setPubComent(int PubComent) {
+        this.PubComent = PubComent;
     }
     
 }

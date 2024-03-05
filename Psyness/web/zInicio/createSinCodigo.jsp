@@ -1,3 +1,7 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.time.ZonedDateTime"%>
+<%@page import="java.time.ZoneId"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
   
@@ -11,12 +15,21 @@
         <link rel="stylesheet" href="../css/maincss.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
         <title>Psyness</title>
-        <link rel="icon" type="image/jpg" href="../images/favicon.jpg"/>
+        <link rel="icon" type="image/jpg" href="../images/favicon.svg"/>
     
     </head>
     <body>
         <%
         HttpSession sesion = request.getSession();
+            ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
+            ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
+            String horaFormateada = horaCiudadMexico.format(formatter);
+            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
+            String horaFormateada2 = horaCiudadMexico.format(formatter2);
+            String[] partes =horaFormateada.split(" ");
+            String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+            String hora12 = partes[5]; 
         %>
         <div class="wrapper">
         <div class="container main">
@@ -33,15 +46,15 @@
                         <header>Crear cuenta sin codigo</header>
                         <form id="form1" action="SessionSin.jsp" onsubmit="subir()" >
                             <div class="input-field">
-                                <input id="IUser" name="IUser" value="${param.IUser}"${param.readonly} type="text" class="input"  minlength="6" maxlength="13" required/>
+                                <input id="IUser" name="IUser" value="${param.IUser}"${param.readonly} type="text" class="input" maxlength="20" required/>
                                 <label for="user">Nombre de Usuario</label>
                             </div>
                             <div class="input-field">
-                                <input id="IAge" name="IAge" value="${param.IAge}" type="text" class="input" required   maxlength="2"  />
+                                <input id="IAge" name="IAge" value="${param.IAge}" type="text" class="input" required oninput="validateAge(this)" maxlength="2" required min="14" />
                                 <label for="edad">Edad</label>
                             </div>
                             <div class="input-field">
-                                <input id="IEmail" name="IEmail" value="${param.IEmail}" type="email" class="input" required onblur="validar(form.correo.value)" maxlength="40" />
+                                <input id="IEmail" name="IEmail" value="${param.IEmail}" type="email" class="input" required onblur="validar(form.correo.value)" maxlength="70" />
                                 <label for="correo">Correo</label>
                             </div>
                             <div class="input-field">
@@ -53,6 +66,8 @@
                                 <input id="accion" type="hidden" value="Guardar" name="accion"  class="submit" value="${param.accion}">
                                 <input id="action" type="hidden" value="Empezar" name="action" class="submit" value="${param.accion}"> 
                                 <input id="actionsita" type="submit" value="Empezar" name="action" class="submit" value="${param.accion}"> 
+                                <input id="IUserDate" name="IUserDate" type="hidden"  value="<%=fecha12%>" class="submit" value="${param.IUserDate}"/>
+                                <input id="IUserHour" name="IUserHour" type="hidden" value="<%=hora12%>" class="submit" value="${param.IUserHour}"/>
                             </div>
                             <div class="signin">
                                 <span>Ya tienes una cuenta? <a href="login.jsp">Iniciar Sesion</a></span>
@@ -63,7 +78,7 @@
             </div>
         </div>
     </div>
-                                
+    </body>
     <script>
         <!--
         function validateTexto( obj , textoError, campoError )
@@ -113,5 +128,25 @@
                     }
             }
         </script>
-    </body>
+            <script>
+                        function validateAge(input) {
+                            // Reemplaza cualquier caracter que no sea un dígito por una cadena vacía
+                            input.value = input.value.replace(/\D/g, '');
+
+                            // Opcional: limita el valor máximo
+                            if (parseInt(input.value, 10) > 99) {
+                                input.value = "99";
+                            }
+                        }
+                        </script>
+                        <script>
+                        document.getElementById('form1').onsubmit = function(event) {
+                            var ageInput = document.getElementById('IAge');
+                            var age = parseInt(ageInput.value, 10);
+                            if (age < 13) {
+                                alert('Debes tener más de 13 años para enviar este formulario.');
+                                event.preventDefault();
+                            }
+                        };
+                        </script>
 </html>

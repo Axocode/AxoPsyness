@@ -28,7 +28,9 @@ public class InterUsersHelper extends Helpers<InterUsers> implements Serializabl
                && isNotNullAndNotEmpity( t.getIPassword() ) 
                && isNotNullAndNotEmpity( t.getIEmail()) 
                && isNotNullAndNotEmpity( t.getIAge())
-               && isNotNullAndNotEmpity( t.getIRol());
+               && isNotNullAndNotEmpity( t.getIRol())
+               && isNotNullAndNotEmpity( t.getIUserDate())
+               && isNotNullAndNotEmpity( t.getIUserHour());
     }
 
     @Override
@@ -43,6 +45,8 @@ public class InterUsersHelper extends Helpers<InterUsers> implements Serializabl
         t.setIEmail(getParameter("IEmail"));
         t.setIPassword(getParameter("IPassword"));
         t.setIRol(getParameter("IRol"));
+        t.setIUserDate(getParameter("IUserDate"));
+        t.setIUserHour(getParameter("IUserHour"));
         if( isValidaCamposOk( ) )
         {
             return usersService.addInterUsers(t );

@@ -82,8 +82,7 @@
                   </h3><br>
                 </h1>
                 <div class="btns-main1 container-fluid">
-                  <a href="zInicio/createCodigo.jsp"><button type="button" class="btn btn-lg btn-log">¿Tienes un código? Clic aquí</button><br><br></a>
-                  <a href="zInicio/createSinCodigo.jsp"><button type="button" class="btn btn-lg btn-log1">Iniciar sin código</button></a>
+                  <a href="zInicio/createSinCodigo.jsp"><button type="button" class="btn btn-lg btn-log">Click aquí para crear tu cuenta</button><br><br></a>
                 </div>
             </div>
           </div>
@@ -226,6 +225,73 @@
     </div>
       <!--/Footer-->
     </div>
-    
+<script>
+    function obtenerCoordenadas(direccion) {
+      const apiKey = 'pk.79194de17838dd557bc019090eca41e9'; // Sustituye con tu clave de API real
+      const urlBase = 'https://us1.locationiq.com/v1/search.php';
+
+      // Codifica la dirección y construye la URL completa
+      var url = urlBase + "?key=" + apiKey + "&q=" + encodeURIComponent(direccion) + "&format=json";
+
+      // Crea una nueva instancia de XMLHttpRequest
+      const xhr = new XMLHttpRequest();
+
+      // Configura la solicitud
+      xhr.open('GET', url, true);
+
+      // Establece el tipo de respuesta esperado a 'json'
+      xhr.responseType = 'json';
+
+      // Define lo que sucede en caso de éxito
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          var data = xhr.response;
+          if (data && data.length > 0) {
+            // Accede al primer resultado
+            var lat = data[0].lat;
+            var lon = data[0].lon;
+            console.log("Latitud: " + lat + ", Longitud: " + lon);
+            var distancia = calcularDistancia(19.39329259, -99.0357923, lat, lon);
+            console.log("La distancia es: " + distancia + " kilómetros");
+
+          } else {
+            console.log("No se encontraron resultados.");
+          }
+        } else {
+          console.error('Error al obtener las coordenadas:', xhr.statusText);
+        }
+      };
+
+
+      // Define lo que sucede en caso de error
+      xhr.onerror = function() {
+        console.error('Error en la solicitud a la API.');
+      };
+
+      // Envía la solicitud
+      xhr.send();
+    }
+    function calcularDistancia(lat1, lon1, lat2, lon2) {
+        var radioTierra = 6371; // Radio de la Tierra en kilómetros
+        var rad = function(x) {
+          return x * Math.PI / 180;
+        };
+        var dLat = rad(lat2 - lat1);
+        var dLong = rad(lon2 - lon1);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(rad(lat1)) * Math.cos(rad(lat2)) *
+                Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var distancia = radioTierra * c;
+
+        return distancia; // Retorna la distancia en kilómetros
+      }
+
+    // Ejemplo de uso
+    obtenerCoordenadas("Canal Moscú Volga L22 mz8 09700 Iztapalapa DF");
+</script>
+
+
+
 </body>
 </html>

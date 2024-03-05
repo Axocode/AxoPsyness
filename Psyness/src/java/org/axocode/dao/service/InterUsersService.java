@@ -49,6 +49,8 @@ public class InterUsersService extends Conexion<InterUsers>
                 users.setIUserSeguidores(resultSet.getInt(8));
                 users.setIUserSeguidos(resultSet.getInt(9));
                 users.setIUserDescription(resultSet.getString(10));
+                users.setIUserDate(resultSet.getString(11));
+                users.setIUserHour(resultSet.getString(12));
                 usersList.add(users);
             }
             resultSet.close();
@@ -90,6 +92,9 @@ public class InterUsersService extends Conexion<InterUsers>
                 users.setIImgNum(resultSet.getString(7));
                 users.setIUserSeguidores(resultSet.getInt(8));
                 users.setIUserSeguidos(resultSet.getInt(9));
+                users.setIUserDescription(resultSet.getString(10));
+                users.setIUserDate(resultSet.getString(11));
+                users.setIUserHour(resultSet.getString(12));
                 usersList.add(users);
         }
     } catch (SQLException ex) {
@@ -277,6 +282,55 @@ public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEd
     return false;
     }
     
+    public boolean verificarCorreoExistente(String IEmail) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+       
+        connection = getConnection();
+        
+        String query = "select count(*) from interusers where iemail = ?";
+        statement = connection.prepareStatement(query);
+        statement.setString(1, IEmail);
+        
+        resultSet = statement.executeQuery();
+        
+        if (resultSet.next()) {
+            int count = resultSet.getInt(1);
+            if (count > 0) {
+                return true;
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    return false;
+    }
+    
     public InterUsers getInterUsersByPubNumId(int pubNumId) {
         InterUsers interUsers = null;
 
@@ -302,8 +356,10 @@ public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEd
                         int IUserSeguidores = resultSet.getInt("iuserseguidores");
                         int IUserSeguidos = resultSet.getInt("iuserseguidos");
                         String IUserDescripion = resultSet.getString("iuserdescription");
+                        String IUserDate = resultSet.getString("iuserdate");
+                        String IUserHour = resultSet.getString("iuserhour");
 
-                        interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IRol, IUserSeguidores, IUserSeguidos, IUserDescripion);
+                        interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IRol, IUserSeguidores, IUserSeguidos, IUserDescripion, IUserDate, IUserHour);
                     }
                 }
             }
@@ -318,7 +374,7 @@ public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEd
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "insert into interusers( iuser , iage , iemail , ipassword, irol ) values( ? , ? , ? , ? , ?)";
+        String sql = "insert into interusers( iuser , iage , iemail , ipassword, irol, iuserdate, iuserhour ) values( ? , ? , ? , ? , ?, ?, ?)";
         int row = 0;
         try 
         {
@@ -337,6 +393,8 @@ public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEd
             preparedStatement.setString(3, users.getIEmail());
             preparedStatement.setString(4, users.getIPassword());
             preparedStatement.setString(5, users.getIRol());
+            preparedStatement.setString(6, users.getIUserDate());
+            preparedStatement.setString(7, users.getIUserHour());
 
             row = preparedStatement.executeUpdate();
             closeConnection(connection);
@@ -375,8 +433,10 @@ public List<InterUsers> getInterUsersByFollow(int pubNumId) {
                     int userSeguidores = resultSet.getInt("iuserseguidores");
                     int userSeguidos = resultSet.getInt("iuserseguidos");
                     String IUserDescripion = resultSet.getString("iuserdescription");
+                    String IUserDate = resultSet.getString("iuserdate");
+                    String IUserHour = resultSet.getString("iuserhour");
 
-                    InterUsers interUsers = new InterUsers(IUserNum, IUser,IAge, IEmail, IPassword, IImgNum, IRol, userSeguidores, userSeguidos, IUserDescripion);
+                    InterUsers interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IRol, userSeguidores, userSeguidos, IUserDescripion, IUserDate, IUserHour);
                     interUsersList.add(interUsers);
                 }
             }
@@ -413,8 +473,10 @@ public List<InterUsers> getInterUsersByFollower(int ipubnumid) {
                     int userSeguidores = resultSet.getInt("iuserseguidores");
                     int userSeguidos = resultSet.getInt("iuserseguidos");
                     String IUserDescripion = resultSet.getString("iuserdescription");
+                    String IUserDate = resultSet.getString("iuserdate");
+                    String IUserHour = resultSet.getString("iuserhour");
 
-                    InterUsers interUsers = new InterUsers(IUserNum, IUser,IAge, IEmail, IPassword, IImgNum, IRol, userSeguidores, userSeguidos, IUserDescripion);
+                    InterUsers interUsers = new InterUsers(IUserNum, IUser, IAge, IEmail, IPassword, IImgNum, IRol, userSeguidores, userSeguidos, IUserDescripion, IUserDate, IUserHour);
                     userList.add(interUsers);
                 }
             }
@@ -517,6 +579,8 @@ public List<InterUsers> getInterUsersByFollower(int ipubnumid) {
             aux.setIUserSeguidores(resultSet.getInt(8));
             aux.setIUserSeguidos(resultSet.getInt(9));
             aux.setIUserDescription(resultSet.getString(10));
+            aux.setIUserDate(resultSet.getString(11));
+            aux.setIUserHour(resultSet.getString(12));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -576,6 +640,8 @@ public List<InterUsers> getInterUsersByFollower(int ipubnumid) {
             aux.setIUserSeguidores(resultSet.getInt(8));
             aux.setIUserSeguidos(resultSet.getInt(9));
             aux.setIUserDescription(resultSet.getString(10));
+            aux.setIUserDate(resultSet.getString(11));
+            aux.setIUserHour(resultSet.getString(12));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();

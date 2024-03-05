@@ -14,8 +14,13 @@ public class InterUsers implements Serializable{
     private Integer IUserSeguidores;
     private Integer IUserSeguidos;
     private String IUserDescription;
+    private String IUserDate;
+    private String IUserHour;
 
-    public InterUsers(Integer IUserNum, String IUser, String IAge, String IEmail, String IPassword, String IImgNum, String IRol, Integer IUserSeguidores, Integer IUserSeguidos, String IUserDescription) {
+    public InterUsers() {
+    }
+    
+    public InterUsers(Integer IUserNum, String IUser, String IAge, String IEmail, String IPassword, String IImgNum, String IRol, Integer IUserSeguidores, Integer IUserSeguidos, String IUserDescription, String IUserDate, String IUserHour) {
         this.IUserNum = IUserNum;
         this.IUser = IUser;
         this.IAge = IAge;
@@ -26,37 +31,14 @@ public class InterUsers implements Serializable{
         this.IUserSeguidores = IUserSeguidores;
         this.IUserSeguidos = IUserSeguidos;
         this.IUserDescription = IUserDescription;
+        this.IUserDate = IUserDate;
+        this.IUserHour = IUserHour;
     }
-
-
-   
-    
-    public Integer getIUserSeguidores() {
-        return IUserSeguidores;
-    }
-
-    public void setIUserSeguidores(Integer IUserSeguidores) {
-        this.IUserSeguidores = IUserSeguidores;
-    }
-
-    public Integer getIUserSeguidos() {
-        return IUserSeguidos;
-    }
-
-    public void setIUserSeguidos(Integer IUserSeguidos) {
-        this.IUserSeguidos = IUserSeguidos;
-    }
-
-    
-    
-    public InterUsers() {
-    }
-
     public InterUsers ( Integer IUserNum) 
     {
         this.IUserNum = IUserNum;
     }
-    
+
     public Integer getIUserNum() {
         return IUserNum;
     }
@@ -113,6 +95,22 @@ public class InterUsers implements Serializable{
         this.IRol = IRol;
     }
 
+    public Integer getIUserSeguidores() {
+        return IUserSeguidores;
+    }
+
+    public void setIUserSeguidores(Integer IUserSeguidores) {
+        this.IUserSeguidores = IUserSeguidores;
+    }
+
+    public Integer getIUserSeguidos() {
+        return IUserSeguidos;
+    }
+
+    public void setIUserSeguidos(Integer IUserSeguidos) {
+        this.IUserSeguidos = IUserSeguidos;
+    }
+
     public String getIUserDescription() {
         return IUserDescription;
     }
@@ -121,6 +119,21 @@ public class InterUsers implements Serializable{
         this.IUserDescription = IUserDescription;
     }
 
+    public String getIUserDate() {
+        return IUserDate;
+    }
 
+    public void setIUserDate(String IUserDate) {
+        this.IUserDate = IUserDate;
+    }
 
+    public String getIUserHour() {
+        return IUserHour;
+    }
+
+    public void setIUserHour(String IUserHour) {
+        this.IUserHour = IUserHour;
+    }
+    
+    
 }

@@ -89,12 +89,13 @@ public class PublicarComentarioServlet extends HttpServlet {
                 
                 DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
                 String horaFormateada2 = horaCiudadMexico.format(formatter2);
-                
+                int pubInt = Integer.parseInt(request.getParameter("ComentPubNumId"));
+                InterPubService pubService = new InterPubService();
                 if(  "Submit".equals( guardar ) ){
                     if (sesion.getAttribute("SILastPub") == null) {
                         sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
                         flag = helpers.addT( );
-                        if (flag) {}
+                        if (flag) {pubService.actComent(pubInt);}
                         }else{
                             LocalDateTime horaAct = LocalDateTime.parse(horaFormateada2, formatter2);
                             String horaLastPubliString = (String) sesion.getAttribute("SILastPub");
@@ -103,8 +104,8 @@ public class PublicarComentarioServlet extends HttpServlet {
                             if (totalToAccesss > 10) {
                                 sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
                                 flag = helpers.addT( );
-                                if (flag) {
-                                }} else {
+                                if (flag) {pubService.actComent(pubInt);}
+                            } else {
                                 
                                 /*
                                 
