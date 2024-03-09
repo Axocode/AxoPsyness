@@ -338,7 +338,148 @@
                                                     </div>
                                             </div>
                             -------------------------------->
-                        </div>
+                        </div>                 
+                              <!------------------------- Etiquetas-------------------------->    
+                                           <div class="space-x-4 p-5" id="tags_Container">
+                                               
+                                                <div class="toogle-desactivable">
+                                                    <input type="checkbox" id="toggle" class="toggle-checkbox">
+                                                    <label for="toggle" class="toggle-label"></label>      
+                                                    <span>Contenido sensible</span>
+                                                </div>                                               
+                                               
+                                              <div class="boton-desactivable">
+                                                <input type="checkbox" id="boton1" onclick="alternarEstado('boton1')">
+                                                <label for="boton1">Ansiedad</label>
+                                              </div>
+                                              <div class="boton-desactivable">
+                                                <input type="checkbox" id="boton2" onclick="alternarEstado('boton2')">
+                                                <label for="boton2">Depresión</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="boton3" onclick="alternarEstado('boton2')">
+                                                <label for="boton3">TDAH</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="boton4" onclick="alternarEstado('boton2')">
+                                                <label for="boton4">Estrés</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="boton5" onclick="alternarEstado('boton2')">
+                                                <label for="boton5">Bipolaridad</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="boton6" onclick="alternarEstado('boton2')">
+                                                <label for="boton6">Déficit Atención</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="boton7" onclick="alternarEstado('boton2')">
+                                                <label for="boton7">Adicciones</label>
+                                              </div>
+                                           </div>  
+                                        
+
+                                       
+                                        <script>
+                                            function alternarEstado(id) {
+                                              var checkbox = document.getElementById(id);
+                                            }
+                                        </script>     
+                                        
+                                        <style>
+                                            
+                                            /* ETIQUETAS */
+
+                                            .boton-desactivable {
+                                                display: inline-block;
+                                                position: relative;
+                                            }
+
+                                            .boton-desactivable input[type="checkbox"] {
+                                                display: none;
+                                            }
+
+                                            .boton-desactivable label {
+                                                padding: 10px 20px;
+                                                background-color: #f8f8f8;
+                                                border: 1px solid #afaeae;
+                                                border-radius: 20px;
+                                                cursor: pointer;
+                                                box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.1);
+                                            }
+
+                                            .boton-desactivable input[type="checkbox"]:checked + label {
+                                                background-color: #b937f5;
+                                                color: #fff;
+                                                cursor:pointer;
+                                            }
+
+                                            .boton-desactivable input[type="checkbox"]:checked + label::before {
+                                                content: "°";
+                                                display: inline-block;
+                                                position: absolute;
+                                                margin: auto;
+                                                left: 8px;
+                                                top: 50%;
+                                                transform: translateY(-50%);
+                                            }
+
+                                            /*       Toogle     */
+
+                                            .toogle-desactivable {
+                                                display: flex;
+                                                flex-direction: row;
+                                                align-items: flex-start;
+                                                margin-left: 10px;
+                                            }
+
+                                            .toogle-desactivable input[type="checkbox"] {
+                                                display: none;
+                                            }
+
+                                            .toogle-desactivable span{
+                                                margin: 10px;
+                                                transform: translateY(-20%);
+                                            }
+
+                                            .toggle-label {
+                                                display: inline-block;
+                                                width: 50px;
+                                                height: 25px;
+                                                background-color: #d3d3d3;
+                                                border-radius: 25px;
+                                                cursor: pointer;
+                                                position: relative;
+                                                box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.1);
+                                            }
+
+                                            .toggle-label::after {
+                                                content: '';
+                                                display: block;
+                                                width: 23px;
+                                                height: 23px;
+                                                background-color: #fff;
+                                                border-radius: 50%;
+                                                position: absolute;
+                                                top: 0;
+                                                left: 0;
+                                                transition: transform 0.3s;
+                                            }
+
+                                            .toggle-checkbox:checked + .toggle-label::after {
+                                                transform: translateX(25px);
+
+                                            }     
+
+                                            .toggle-checkbox:checked + .toggle-label {
+                                                background-color: #b937f5;
+
+                                            }         
+                                        </style>
+                                         
+                                         
+                                         
+                        
                         <div class="bsolute bottom-0 p-4 space-x-4 w-full">
                             <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
                                 <button type="submit" class="button bg-blue-700" id="guardadito1" ontouchstart="this.click()"> Publicar </button>

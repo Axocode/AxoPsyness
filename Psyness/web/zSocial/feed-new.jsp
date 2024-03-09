@@ -119,8 +119,8 @@
         <div class="header_inicio_clinicas">
             <div class="bg-white">
                 <nav class="mx-auto flex max-w-lg items-center justify-between p-2 lg:px-12">    
-                        <button id="btn_feed" class="text-sm font-semibold leading-8 text-gray-900 lg:px-12  hover:bg-gray-100">Inicio</button>
-                        <button id="btn_feed" class="text-sm font-semibold leading-8 text-gray-900 lg:px-12  hover:bg-gray-100">Clínicas</button>
+                        <button id="btn_feed" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Inicio</button>
+                        <button id="btn_feed" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Clínicas</button>
                 </nav>
             </div>
         </div>
@@ -178,8 +178,7 @@
                                         <input type="hidden" name="ComentPubNumId" id="ComentPubNumId" value="<%=request.getParameter("coment")%>" />
                                         <input type="hidden" name="ComentIUserNum" id="ComentIUserNum" value="<%=sesion.getAttribute("SIUserNum")%>" />
                                         </div>
-                                    </div>
-
+                                    </div>                                            
                                         
 
                                     <div class="bsolute bottom-0 p-4 space-x-4 w-full">

@@ -34,7 +34,7 @@
             Integer SISeguidores = user.getIUserSeguidores();
             Integer SISeguidos = user.getIUserSeguidos();
             String SIRol = user.getIRol();
-            String SIAge = user.getIAge();
+            int SIAge = user.getIAge();
             String SIEmail = user.getIEmail();
             String SIPassword = user.getIPassword();
             String SIImgNum = user.getIImgNum();

@@ -6,7 +6,7 @@ public class InterUsers implements Serializable{
     
     private Integer IUserNum;
     private String IUser;
-    private String IAge;
+    private int IAge;
     private String IEmail;
     private String IPassword;
     private String IImgNum;
@@ -20,7 +20,7 @@ public class InterUsers implements Serializable{
     public InterUsers() {
     }
     
-    public InterUsers(Integer IUserNum, String IUser, String IAge, String IEmail, String IPassword, String IImgNum, String IRol, Integer IUserSeguidores, Integer IUserSeguidos, String IUserDescription, String IUserDate, String IUserHour) {
+    public InterUsers(Integer IUserNum, String IUser, int IAge, String IEmail, String IPassword, String IImgNum, String IRol, Integer IUserSeguidores, Integer IUserSeguidos, String IUserDescription, String IUserDate, String IUserHour) {
         this.IUserNum = IUserNum;
         this.IUser = IUser;
         this.IAge = IAge;
@@ -55,11 +55,11 @@ public class InterUsers implements Serializable{
         this.IUser = IUser;
     }
 
-    public String getIAge() {
+    public int getIAge() {
         return IAge;
     }
 
-    public void setIAge(String IAge) {
+    public void setIAge(int IAge) {
         this.IAge = IAge;
     }
 

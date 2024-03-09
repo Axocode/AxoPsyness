@@ -20,7 +20,7 @@
     </head>
     <body>
         <%
-        HttpSession sesion = request.getSession();
+            HttpSession sesion = request.getSession();
             ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
             ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));

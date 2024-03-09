@@ -27,7 +27,7 @@ public class InterUsersHelper extends Helpers<InterUsers> implements Serializabl
         return isNotNullAndNotEmpity( t.getIUser()) 
                && isNotNullAndNotEmpity( t.getIPassword() ) 
                && isNotNullAndNotEmpity( t.getIEmail()) 
-               && isNotNullAndNotEmpity( t.getIAge())
+               &&  t.getIAge() > 13
                && isNotNullAndNotEmpity( t.getIRol())
                && isNotNullAndNotEmpity( t.getIUserDate())
                && isNotNullAndNotEmpity( t.getIUserHour());
@@ -41,7 +41,7 @@ public class InterUsersHelper extends Helpers<InterUsers> implements Serializabl
         
         
         t.setIUser(getParameter("IUser"));
-        t.setIAge(getParameter("IAge"));
+        t.setIAge(Integer.parseInt(getParameter("IAge")));
         t.setIEmail(getParameter("IEmail"));
         t.setIPassword(getParameter("IPassword"));
         t.setIRol(getParameter("IRol"));
@@ -75,7 +75,7 @@ public class InterUsersHelper extends Helpers<InterUsers> implements Serializabl
         usersService = new InterUsersService();
         t = new InterUsers();
         t.setIUser(getParameter("IUser"));
-        t.setIAge(getParameter("IAge"));
+        t.setIAge(Integer.parseInt(getParameter("IAge")));
         t.setIUserDescription(getParameter("IUserDescription"));
         if( isValidaCamposOk( ) )
         {

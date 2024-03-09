@@ -49,7 +49,7 @@
                     user = new InterUsers();
                  
                     user.setIUser("");
-                    user.setIAge("");
+                    user.setIAge(0);
                     user.setIEmail("");
                     user.setIPassword("");
                     user.setIRol("");
