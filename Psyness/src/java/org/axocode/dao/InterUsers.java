@@ -55,13 +55,6 @@ public class InterUsers implements Serializable{
         this.IUser = IUser;
     }
 
-    public int getIAge() {
-        return IAge;
-    }
-
-    public void setIAge(int IAge) {
-        this.IAge = IAge;
-    }
 
     public String getIEmail() {
         return IEmail;
@@ -133,6 +126,14 @@ public class InterUsers implements Serializable{
 
     public void setIUserHour(String IUserHour) {
         this.IUserHour = IUserHour;
+    }
+
+    public int getIAge() {
+        return IAge;
+    }
+
+    public void setIAge(int IAge) {
+        this.IAge = IAge;
     }
     
     
