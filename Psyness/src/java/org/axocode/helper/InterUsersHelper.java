@@ -27,7 +27,7 @@ public class InterUsersHelper extends Helpers<InterUsers> implements Serializabl
         return isNotNullAndNotEmpity( t.getIUser()) 
                && isNotNullAndNotEmpity( t.getIPassword() ) 
                && isNotNullAndNotEmpity( t.getIEmail()) 
-               &&  t.getIAge() > 13
+               &&  t.getIAge() >= 13
                && isNotNullAndNotEmpity( t.getIRol())
                && isNotNullAndNotEmpity( t.getIUserDate())
                && isNotNullAndNotEmpity( t.getIUserHour());
