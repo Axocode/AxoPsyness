@@ -16,7 +16,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.axocode.dao.InterUsers;
 import org.axocode.dao.service.InterUsersService;
 
@@ -24,8 +23,8 @@ import org.axocode.dao.service.InterUsersService;
  *
  * @author chump
  */
-@WebServlet(name = "crearcuenta", urlPatterns = {"/crearcuenta"})
-public class crearcuenta extends HttpServlet {
+@WebServlet(name = "signin", urlPatterns = {"/signin"})
+public class signin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,26 +38,37 @@ public class crearcuenta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        
-            HttpSession sesion = request.getSession();
-            ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
-            ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
-            String horaFormateada = horaCiudadMexico.format(formatter);
-            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
-            String horaFormateada2 = horaCiudadMexico.format(formatter2);
-            String[] partes =horaFormateada.split(" ");
-            String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-            String hora12 = partes[5];
-            
             
         String iuser = request.getParameter("iuser");
-        int iage = Integer.parseInt(request.getParameter("iuser"));
+        String iageParam = request.getParameter("iage");
+        int iage;
+        if (iageParam != null && !iageParam.isEmpty()) {
+            try {
+                iage = Integer.parseInt(iageParam);
+                if (iage <= 13) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    response.getWriter().write("Debes tener mas de 13 años o más para usar Psyness");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().write("Formato de edad inválido");
+                return;
+            }
+        } else {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("Edad requerida");
+            return;
+        }
+        
         String iemail = request.getParameter("iemail");
         String ipassword = request.getParameter("ipassword");
         String apipassword = request.getParameter("apipassword");
-        if (iuser == null || iuser.isEmpty() || ipassword == null || ipassword.isEmpty() || apipassword == null || apipassword.isEmpty() || iage <= 13 || iemail == null || iemail.isEmpty()) {
+        
+        if (iuser == null || iuser.isEmpty() || ipassword == null || ipassword.isEmpty() || apipassword == null || apipassword.isEmpty() || iemail == null || iemail.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.setContentType("text/plain");
+            response.getWriter().write("Valores vacios");
             return;
         }
         
@@ -67,6 +77,14 @@ public class crearcuenta extends HttpServlet {
                 InterUsers user = new InterUsers();
                 InterUsersService userService = new InterUsersService();
                 
+                ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
+                ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
+                String horaFormateada = horaCiudadMexico.format(formatter);
+                String[] partes =horaFormateada.split(" ");
+                String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                String hora12 = partes[5];
+                
                 user.setIUser(iuser);
                 user.setIAge(iage);
                 user.setIEmail(iemail);
@@ -74,6 +92,22 @@ public class crearcuenta extends HttpServlet {
                 user.setIRol("Movil");
                 user.setIUserDate(fecha12);
                 user.setIUserHour(hora12);
+                
+                boolean correo = userService.verificarCorreoExistente(iemail);
+                boolean usuario = userService.verificarUserExistente(iuser);
+                
+                if (usuario) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    response.setContentType("text/plain");
+                    response.getWriter().write("El apodo de usuario ya esta en uso");
+                    return;
+                }
+                if (correo) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    response.setContentType("text/plain");
+                    response.getWriter().write("El correo ya esta en uso");
+                    return;
+                }
                 
                 boolean flag = userService.addInterUsers(user);
                 
@@ -85,8 +119,16 @@ public class crearcuenta extends HttpServlet {
                     try (PrintWriter out = response.getWriter()) {
                         out.println(json);
                     }
+                } else {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    response.setContentType("text/plain");
+                    response.getWriter().write("Error al agregar usuario");
+                    }
+            } else {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.setContentType("text/plain");
+                response.getWriter().write("Error de api");
                 }
-            }
         } catch (NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
