@@ -9363,7 +9363,9 @@ body.story-active header .header_widgets .is_link {
 .dark .sidebar_header h1,
 .dark .name_user_tittle,
 .dark #iconito_edit_post,
-.dark #name_user_feed{
+.dark #name_user_feed,
+.dark .header_inicio_clinicas button,
+.dark .boton-desactivable label{
   color: #f1f1f1 !important;
 }
 
@@ -9396,6 +9398,7 @@ html.dark,
 .dark .message-time-sign span,
 .dark .sidebar_feed,
 .dark .sidebar-search,
+.dark .boton-desactivable label,
 .dark .contact-list a:hover {
   background-color: #232626 !important;
   border-color: #424242;
