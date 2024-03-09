@@ -3,12 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/AxoPsyness/Psyness/web/assets/css/cambios.css</file>
             <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/AxoPsyness/Psyness/src/java/org/axocode/dao/service/Conexion.java</file>
             <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/AxoPsyness/Psyness/web/zSocial/dashboard.jsp</file>
             <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/AxoPsyness/Psyness/web/zSocial/post.jsp</file>
             <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/AxoPsyness/Psyness/web/zSocial/sidebar.jsp</file>
             <file>file:/C:/Users/JORGE%20MENDOZA/Desktop/AxoPsyness/AxoPsyness/Psyness/web/zSocial/feed-new.jsp</file>
+=======
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/web/index.jsp</file>
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/src/java/org/axocode/dao/service/InterUsersService.java</file>
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/src/java/api/crearcuenta.java</file>
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/src/java/org/axocode/dao/InterUsers.java</file>
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/web/zInicio/SessionSin.jsp</file>
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/src/java/api/login.java</file>
+>>>>>>> 0432f70fd11d20472783ca58834d59216f49346a
         </group>
     </open-files>
 </project-private>

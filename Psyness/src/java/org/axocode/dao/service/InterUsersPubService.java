@@ -50,7 +50,7 @@ public class InterUsersPubService extends Conexion<InterUsersPub>{
             while (resultSet.next()) 
             {
                 context = new InterUsersPub();
-                context.setiUserNum(new InterUsers(resultSet.getInt(1) ) );
+                context.setiUserNum(new InterUsers(resultSet.getInt(1)));
                 context.setPubNumId(new InterPub(resultSet.getInt(2) ) );
                 contextList.add(context);
             }

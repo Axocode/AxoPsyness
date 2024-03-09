@@ -187,17 +187,6 @@
                         <!-- Perfil -->
                         <div class="md:flex md:space-x-6 lg:mx-16">
                             <div class="space-y-5 flex-shrink-0 md:w-7/12">
-                                <%if (nombre.equals(sesion.getAttribute("SIUser"))) {%>
-                            <!-- Crear publiccion  -->
-                                   <div class="card lg:mx-0 p-4" uk-toggle="target: #create-post-modal" id="card_posting">
-                                       <div class="flex space-x-3">
-                                           <img src="../assets/images/avatars/<%=data%>" class="w-10 h-10 rounded-full">
-                                           <div class="bg-gray-100 hover:bg-gray-200 flex-1 h-10 px-6 rounded-full" style="display: flex; align-items: center; color: #b0b0b0; height: 40px; border: none; font-size: 15px;">¿Tienes algo que compartir?</div>
-                                       </div>
-                                       <div class="grid grid-flow-col pt-3 -mx-1 -mb-1 font-semibold text-sm">
-                                       </div> 
-                                   </div>
-                                           <%}%>
                                 <div id="hiAxo0"></div>
                             </div>
                             
@@ -415,7 +404,7 @@
         const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
         const clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
 
-        if (scrollTop + clientHeight >= scrollHeight - 0) {
+        if (scrollTop + clientHeight >= scrollHeight - 300) {
             if (isFocused) {
                 descargarPublicaciones('/Psyness/PublicacionesFavoritasServlet', 'PublicacionesFavoritas', holaFavoritos, cooldownFavoritos);
                 holaFavoritos++;
@@ -425,28 +414,33 @@
             }
         }
     }
-
+    
     $(document).ready(function () {
-        $("#pubsFavoritas").focus(function () {
-            console.log("Elemento enfocado");
+    var $pubsFavoritas = $("#pubsFavoritas");
+
+    // Escuchar eventos en el documento entero.
+    $(document).on('click touchstart', function (e) {
+        // Verificar si el evento ocurrió en $pubsFavoritas o en un descendiente.
+        if ($pubsFavoritas.is(e.target) || $pubsFavoritas.has(e.target).length > 0) {
+            console.log("Elemento activado");
             isFocused = true;
-        });
-
-        $("#pubsFavoritas").blur(function () {
-            console.log("Elemento fuera de foco");
+        } else {
+            console.log("Elemento desactivado");
             isFocused = false;
-        });
-
-        // Llamar a la función cada 2 segundos para cada caso
-        setInterval(function () {
-            verificarFinalDePagina();
-        }, 400);
-
-        // También ejecutarla al cargar la página
-        verificarFinalDePagina();
+        }
     });
 
+    setInterval(function () {
+        verificarFinalDePagina();
+    }, 400);
 
+    verificarFinalDePagina();
+});
+
+
+
+
+    
     function handleButtonHover1(button, isHover) {
         if (isHover) {
             button.style.color = '#6B64F4';

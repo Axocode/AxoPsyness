@@ -375,16 +375,6 @@
                                 
                             </div>    
                         </div>
-                                
-                                <!------------------------ ICON POST--------------------------------   -->
-
-                                <div class="icon_posteo">
-                                    <button onclick="abrirModal()">
-                                        <span>
-                                            <i class="fa-solid fa-plus"></i>
-                                        </span>
-                                    </button>
-                                </div>
                     </div>    
                 </div> 
             </div>    
@@ -523,9 +513,9 @@
 
 function handleButtonHover1(button, isHover) {
     if (isHover) {
-        button.style.color = '#6B64F4';
-        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#6B64F4');
-        button.querySelector('span').style.color = '#6B64F4';
+        button.style.color = '#787DF1';
+        button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#787DF1');
+        button.querySelector('span').style.color = '#787DF1';
     } else {
         button.style.color = '';
         button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
@@ -536,9 +526,11 @@ function handleButtonHover(button, isHover) {
     if (isHover) {
         button.style.color = '#F6CE2F';
         button.querySelectorAll('svg').forEach(svg => svg.style.fill = '#F6CE2F');
+        button.querySelector('span').style.color = '#F6CE2F';
     } else {
         button.style.color = '';
         button.querySelectorAll('svg').forEach(svg => svg.style.fill = '');
+        button.querySelector('span').style.color = '';
         }
     }
 function handleButtonHover2(button, isHover) {

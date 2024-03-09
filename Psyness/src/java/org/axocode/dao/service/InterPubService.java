@@ -46,8 +46,10 @@ public class InterPubService extends Conexion<InterPub>
             pub.setPubNumId(resultSet.getInt(1));
             pub.setPubCont(resultSet.getString(2));
             pub.setPubMg(resultSet.getInt(3));
-            pub.setPubDate(resultSet.getString(4));
-            pub.setPubHour(resultSet.getString(5));
+            pub.setPubFavs(resultSet.getInt(4));
+            pub.setPubComent(resultSet.getInt(5));
+            pub.setPubDate(resultSet.getString(6));
+            pub.setPubHour(resultSet.getString(7));
 
             pubList.add(pub);
         }
@@ -150,8 +152,10 @@ public class InterPubService extends Conexion<InterPub>
             aux.setPubNumId(resultSet.getInt(1));
             aux.setPubCont(resultSet.getString(2));
             aux.setPubMg(resultSet.getInt(3));
-            aux.setPubDate(resultSet.getString(4));
-            aux.setPubHour(resultSet.getString(5));
+            aux.setPubFavs(resultSet.getInt(4));
+            aux.setPubComent(resultSet.getInt(5));
+            aux.setPubDate(resultSet.getString(6));
+            aux.setPubHour(resultSet.getString(7));
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -204,8 +208,10 @@ public class InterPubService extends Conexion<InterPub>
                 aux.setPubNumId(resultSet.getInt(1));
                 aux.setPubCont(resultSet.getString(2));
                 aux.setPubMg(resultSet.getInt(3));
-                aux.setPubDate(resultSet.getString(4));
-                aux.setPubHour(resultSet.getString(5));
+                aux.setPubFavs(resultSet.getInt(4));
+                aux.setPubComent(resultSet.getInt(5));
+                aux.setPubDate(resultSet.getString(6));
+                aux.setPubHour(resultSet.getString(7));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -269,6 +275,8 @@ public class InterPubService extends Conexion<InterPub>
                 aux.setPubNumId(resultSet.getInt("pubnumid"));
                 aux.setPubCont(resultSet.getString("pubcont"));
                 aux.setPubMg(resultSet.getInt("pubmg"));
+                aux.setPubFavs(resultSet.getInt("pubfavs"));
+                aux.setPubComent(resultSet.getInt("pubcoment"));
                 aux.setPubDate(resultSet.getString("pubdate"));
                 aux.setPubHour(resultSet.getString("pubhour"));
 
@@ -334,6 +342,8 @@ public class InterPubService extends Conexion<InterPub>
                 aux.setPubNumId(resultSet.getInt("pubnumid"));
                 aux.setPubCont(resultSet.getString("pubcont"));
                 aux.setPubMg(resultSet.getInt("pubmg"));
+                aux.setPubFavs(resultSet.getInt("pubfavs"));
+                aux.setPubComent(resultSet.getInt("pubcoment"));
                 aux.setPubDate(resultSet.getString("pubdate"));
                 aux.setPubHour(resultSet.getString("pubhour"));
 
@@ -470,6 +480,8 @@ public class InterPubService extends Conexion<InterPub>
             mostLikedPub.setPubNumId(resultSet.getInt("pubnumid"));
             mostLikedPub.setPubCont(resultSet.getString("pubcont"));
             mostLikedPub.setPubMg(resultSet.getInt("pubmg"));
+            mostLikedPub.setPubFavs(resultSet.getInt("pubfavs"));
+            mostLikedPub.setPubComent(resultSet.getInt("pubcoment"));
             mostLikedPub.setPubDate(resultSet.getString("pubdate"));
             mostLikedPub.setPubHour(resultSet.getString("pubhour"));
 
@@ -628,5 +640,82 @@ public boolean actLove(int pub) {
     }
     return false;
 }
-    
+
+public boolean actFav(int pub) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+
+    String sql = "update interpub set pubfavs = (select count(*) from interfav where favidpub = ?) where pubnumid = ?";
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return false;
+        }
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, pub); 
+        preparedStatement.setInt(2, pub); 
+
+        int row = preparedStatement.executeUpdate();
+
+        return row > 0;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    return false;
+}
+
+public boolean actComent(int pub) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+
+    String sql = "update interpub set pubcoment = (select count(*) from intercoment where pubnumid = ?) where pubnumid = ?";
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return false;
+        }
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, pub); 
+        preparedStatement.setInt(2, pub); 
+
+        int row = preparedStatement.executeUpdate();
+
+        return row > 0;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    return false;
+}
 }

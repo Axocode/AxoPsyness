@@ -111,12 +111,12 @@
                             <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
                                 <div>
                                     <label for="">Nombre de Usuario</label>
-                                    <input type="text" name="nombre"value="<c:out value='<%=sesion.getAttribute("SIUser")%>'/>" placeholder="Ingresa Algo" class="shadow-none with-border" minlength="6" maxlength="15" required>
+                                    <input type="text" name="nombre"value="<c:out value='<%=sesion.getAttribute("SIUser")%>'/>" placeholder="Ingresa Algo" class="shadow-none with-border" maxlength="0" required>
                                 </div>
                                 
                                 <div>
                                     <label for=""> Edad</label>
-                                    <input type="text" name="edad" value="<c:out value='<%=sesion.getAttribute("SIAge")%>'/>" maxlength="2" required placeholder="Ingresa Algo" class="shadow-none with-border">
+                                    <input hidden type="text" name="edad" value="<c:out value='<%=sesion.getAttribute("SIAge")%>'/>" maxlength="2" required placeholder="Ingresa Algo" class="shadow-none with-border">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="about"> Descripcion</label>

@@ -27,8 +27,10 @@ public class InterUsersHelper extends Helpers<InterUsers> implements Serializabl
         return isNotNullAndNotEmpity( t.getIUser()) 
                && isNotNullAndNotEmpity( t.getIPassword() ) 
                && isNotNullAndNotEmpity( t.getIEmail()) 
-               && isNotNullAndNotEmpity( t.getIAge())
-               && isNotNullAndNotEmpity( t.getIRol());
+               &&  t.getIAge() > 13
+               && isNotNullAndNotEmpity( t.getIRol())
+               && isNotNullAndNotEmpity( t.getIUserDate())
+               && isNotNullAndNotEmpity( t.getIUserHour());
     }
 
     @Override
@@ -39,10 +41,12 @@ public class InterUsersHelper extends Helpers<InterUsers> implements Serializabl
         
         
         t.setIUser(getParameter("IUser"));
-        t.setIAge(getParameter("IAge"));
+        t.setIAge(Integer.parseInt(getParameter("IAge")));
         t.setIEmail(getParameter("IEmail"));
         t.setIPassword(getParameter("IPassword"));
         t.setIRol(getParameter("IRol"));
+        t.setIUserDate(getParameter("IUserDate"));
+        t.setIUserHour(getParameter("IUserHour"));
         if( isValidaCamposOk( ) )
         {
             return usersService.addInterUsers(t );
@@ -71,7 +75,7 @@ public class InterUsersHelper extends Helpers<InterUsers> implements Serializabl
         usersService = new InterUsersService();
         t = new InterUsers();
         t.setIUser(getParameter("IUser"));
-        t.setIAge(getParameter("IAge"));
+        t.setIAge(Integer.parseInt(getParameter("IAge")));
         t.setIUserDescription(getParameter("IUserDescription"));
         if( isValidaCamposOk( ) )
         {

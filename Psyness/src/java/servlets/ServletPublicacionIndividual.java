@@ -81,9 +81,9 @@ public class ServletPublicacionIndividual extends HttpServlet {
                                             
                 if (seguirLove) {
                     out.println("<form class=\"love-form\" onsubmit=\"enviarAmor('" + numpub + "', 'Lovent'); actualizarPub('" + numpub + "'); return false;\">");
-                    out.println("    <button type=\"submit\" class=\"flex items-center space-x-2 love-button\" style=\"color: #6B64F4; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
+                    out.println("    <button type=\"submit\" class=\"flex items-center space-x-2 love-button\" style=\"color: #787DF1; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                     out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
-                    out.println("            <span style=\"color: #6B64F4;\">" + pub.getPubMg() + "</span>");
+                    out.println("            <span style=\"color: #787DF1;\">" + pub.getPubMg() + "</span>");
                     out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\" style=\"fill: #6B64F4;\">");
                     out.println("                <path fill-rule=\"evenodd\" d=\"M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z\" clip-rule=\"evenodd\"></path>");
                     out.println("            </svg>");
@@ -113,6 +113,7 @@ public class ServletPublicacionIndividual extends HttpServlet {
                         out.println("<form class=\"fav-form\" onsubmit=\"agregarFav('" + numpub + "', 'Favoritont'); actualizarPub('" + numpub + "'); return false;\">");
                         out.println("    <button type=\"submit\" class=\"flex items-center space-x-2\" style=\"color: #F6CE2F; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                         out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
+                        out.println("            <span style=\"color: #F6CE2F;\">" + pub.getPubFavs()+ "</span>");
                         out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\" style=\"fill: #F6CE2F;\">");
                         out.println("                <path d=\"M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.810l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.810h3.461a1 1 0 00.951-.69l1.07-3.292z\"></path>");
                         out.println("            </svg>");
@@ -124,6 +125,7 @@ public class ServletPublicacionIndividual extends HttpServlet {
                         out.println("<form class=\"fav-form\" onsubmit=\"agregarFav('" + numpub + "', 'Favorito'); actualizarPub('" + numpub + "'); return false;\">");
                         out.println("    <button type=\"submit\" class=\"flex items-center space-x-2\" onmouseover=\"handleButtonHover(this, true)\" onmouseout=\"handleButtonHover(this, false)\" style=\"color: inherit; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                         out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
+                        out.println("            <span>" + pub.getPubFavs()+ "</span>");
                         out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" class=\"dark:text-gray-100\">");
                         out.println("                <path d=\"M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z\"></path>");
                         out.println("            </svg>");
@@ -136,6 +138,7 @@ public class ServletPublicacionIndividual extends HttpServlet {
                 
                         out.println("<button onclick=\"openModal()\" class=\"flex items-center space-x-2 flex-1 justify-end\" style=\"color: #99D1FF; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                         out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
+                        out.println("            <span style=\"color: #99D1FF;\">" + pub.getPubComent()+ "</span>");
                         out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" style=\"fill: #99D1FF;\" class=\"dark:text-gray-100\">");
                         out.println("                <path fill-rule=\"evenodd\" d=\"M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z\" clip-rule=\"evenodd\"></path>");
                         out.println("            </svg>");

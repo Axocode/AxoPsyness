@@ -60,6 +60,7 @@ public class FavoritoServlet extends HttpServlet {
         int IUserNum = (Integer) sesion.getAttribute("SIUserNum");
         String action = request.getParameter("action1");
         InterPubService verficado = new InterPubService();
+        InterPubService pubService = new InterPubService();
         if (action.equals("Favorito")) {
 
             InterFavService favorite = new InterFavService();
@@ -70,6 +71,9 @@ public class FavoritoServlet extends HttpServlet {
                 boolean exist = favorite.checkIfFavExists(fav);
                 if (!exist) {    
                     boolean successs = favorite.addInterFav(fav);
+                    if (successs) {
+                        pubService.actFav(pubInt);
+                    }
                 }   
             }
         }
@@ -84,6 +88,9 @@ public class FavoritoServlet extends HttpServlet {
                 boolean exist = favorite.checkIfFavExists(fav);
                 if (exist) { 
                     boolean successs = favorite.unfollowFav(fav);
+                    if (successs) {
+                        pubService.actFav(pubInt);
+                    }
                 }
             }
         }
