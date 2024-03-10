@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package api;
-
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,16 +47,18 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
+        response.setContentType("application/json; charset=UTF-8");
+        
+       
         
         String iuser = request.getParameter("iuser");
         String ipassword = request.getParameter("ipassword");
         String apipassword = request.getParameter("apipassword");
         if (iuser == null || iuser.isEmpty() || ipassword == null || ipassword.isEmpty() || apipassword == null || apipassword.isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.setContentType("text/plain");
-            response.getWriter().write("Valores vacios");
-            return;
+            response.setContentType("application/json; charset=UTF-8");
+            ErrorResponse errorResponse = new ErrorResponse("Valores vacios.");
+            String errorJson = new Gson().toJson(errorResponse);
+            response.getWriter().write(errorJson);
         }
         
         try {
@@ -74,18 +75,19 @@ public class login extends HttpServlet {
                         out.println(json);
                     }
                 } else {
-                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    response.setContentType("text/plain");
-                    response.getWriter().write("Contraseña o usuario incorrectos");
+                    ErrorResponse errorResponse = new ErrorResponse("Contraseña o usuario incorrectos.");
+                    String errorJson = new Gson().toJson(errorResponse);
+                    response.getWriter().write(errorJson);
                     }
             } else {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.setContentType("text/plain");
-                response.getWriter().write("Error de contraseña de api");
+                ErrorResponse errorResponse = new ErrorResponse("Error de contraseña de api.");
+                String errorJson = new Gson().toJson(errorResponse);
+                response.getWriter().write(errorJson);
                 }
         } catch (NumberFormatException e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
+            ErrorResponse errorResponse = new ErrorResponse("Formato incorrecto.");
+            String errorJson = new Gson().toJson(errorResponse);
+            response.getWriter().write(errorJson);
         }
     }
 
