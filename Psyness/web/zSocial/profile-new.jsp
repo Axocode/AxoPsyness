@@ -91,7 +91,7 @@
 
         String descripcion = usuario.getIUserDescription();
         String nombre = usuario.getIUser();
-        String edad = usuario.getIAge();
+        int edad = usuario.getIAge();
         String data = usuario.getIImgNum();
         int seguidores = usuario.getIUserSeguidores();
         int seguidos = usuario.getIUserSeguidos();

@@ -111,7 +111,7 @@
                             <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
                                 <div>
                                     <label for="">Nombre de Usuario</label>
-                                    <input type="text" name="nombre"value="<c:out value='<%=sesion.getAttribute("SIUser")%>'/>" placeholder="Ingresa Algo" class="shadow-none with-border" maxlength="0" required>
+                                    <input type="text" name="nombre"value="<c:out value='<%=sesion.getAttribute("SIUser")%>'/>" placeholder="Ingresa Algo" class="shadow-none with-border" maxlength="20" required>
                                 </div>
                                 
                                 <div>

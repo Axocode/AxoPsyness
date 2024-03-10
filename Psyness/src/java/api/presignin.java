@@ -23,9 +23,8 @@ import org.axocode.dao.service.InterUsersService;
  *
  * @author chump
  */
-@WebServlet(name = "signin", urlPatterns = {"/signin"})
-public class signin extends HttpServlet {
-
+@WebServlet(name = "presignin", urlPatterns = {"/presignin"})
+public class presignin extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,18 +37,22 @@ public class signin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json; charset=UTF-8");
-            
+
         String iuser = request.getParameter("iuser");
         String iageParam = request.getParameter("iage");
-        int iage;
+        int iage = 0; // Inicializado a 0 para manejo de control
+        String apipassword = request.getParameter("apipassword");
+
+        if (iuser == null || iuser.isEmpty() || apipassword == null || apipassword.isEmpty()) {
+            ErrorResponse errorResponse = new ErrorResponse("Valores vacios.");
+            String errorJson = new Gson().toJson(errorResponse);
+            response.getWriter().write(errorJson);
+            return;
+        }
+
         if (iageParam != null && !iageParam.isEmpty()) {
             try {
                 iage = Integer.parseInt(iageParam);
-                if (iage < 13) {
-                    ErrorResponse errorResponse = new ErrorResponse("Debes de tener 13 años o más para usar Psyness.");
-                    String errorJson = new Gson().toJson(errorResponse);
-                    response.getWriter().write(errorJson);
-                }
             } catch (NumberFormatException e) {
                 ErrorResponse errorResponse = new ErrorResponse("Formato de edad invalido.");
                 String errorJson = new Gson().toJson(errorResponse);
@@ -62,78 +65,39 @@ public class signin extends HttpServlet {
             response.getWriter().write(errorJson);
             return;
         }
-        
-        String iemail = request.getParameter("iemail");
-        String ipassword = request.getParameter("ipassword");
-        String apipassword = request.getParameter("apipassword");
-        
-        if (iuser == null || iuser.isEmpty() || ipassword == null || ipassword.isEmpty() || apipassword == null || apipassword.isEmpty() || iemail == null || iemail.isEmpty()) {
-            ErrorResponse errorResponse = new ErrorResponse("Valores vacios.");
+
+        if (iage < 13) {
+            ErrorResponse errorResponse = new ErrorResponse("Debes tener 13 años o más para usar Psyness.");
             String errorJson = new Gson().toJson(errorResponse);
             response.getWriter().write(errorJson);
             return;
         }
-        
-        try {
-            if (apipassword.equals("wawawawaAxolloros")) {
+
+        if (!apipassword.equals("wawawawaAxolloros")) {
+            ErrorResponse errorResponse = new ErrorResponse("Contraseña de API incorrecta.");
+            String errorJson = new Gson().toJson(errorResponse);
+            response.getWriter().write(errorJson);
+            return;
+        }
+
                 InterUsers user = new InterUsers();
                 InterUsersService userService = new InterUsersService();
-                
-                ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
-                ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
-                String horaFormateada = horaCiudadMexico.format(formatter);
-                String[] partes =horaFormateada.split(" ");
-                String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-                String hora12 = partes[5];
-                
                 user.setIUser(iuser);
                 user.setIAge(iage);
-                user.setIEmail(iemail);
-                user.setIPassword(ipassword);
-                user.setIRol("Movil");
-                user.setIUserDate(fecha12);
-                user.setIUserHour(hora12);
-                
-                boolean correo = userService.verificarCorreoExistente(iemail);
+
                 boolean usuario = userService.verificarUserExistente(iuser);
                 
                 if (usuario) {
                     ErrorResponse errorResponse = new ErrorResponse("El apodo de usuario ya esta en uso.");
                     String errorJson = new Gson().toJson(errorResponse);
                     response.getWriter().write(errorJson);
-                } else if (correo) {
-                    ErrorResponse errorResponse = new ErrorResponse("El correo ya esta en uso.");
+                } else{
+                    ErrorResponse errorResponse = new ErrorResponse("Correcto.");
                     String errorJson = new Gson().toJson(errorResponse);
                     response.getWriter().write(errorJson);
-                } else {
-                
-                boolean flag = userService.addInterUsers(user);
-                
-                if (flag) {
-                    user = userService.getUserByInterUsers(iuser);
-                    
-                    Gson gson = new Gson();
-                    String json = gson.toJson(user);
-                    try (PrintWriter out = response.getWriter()) {
-                        out.println(json);
-                    }
-                } else {
-                    ErrorResponse errorResponse = new ErrorResponse("Error al agregar usuario.");
-                    String errorJson = new Gson().toJson(errorResponse);
-                    response.getWriter().write(errorJson);
-                    }}
-            } else {
-                ErrorResponse errorResponse = new ErrorResponse("Error de api.");
-                String errorJson = new Gson().toJson(errorResponse);
-                response.getWriter().write(errorJson);
                 }
-        } catch (NumberFormatException e) {
-                ErrorResponse errorResponse = new ErrorResponse("Error al agregar.");
-                String errorJson = new Gson().toJson(errorResponse);
-                response.getWriter().write(errorJson);
-        }
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
