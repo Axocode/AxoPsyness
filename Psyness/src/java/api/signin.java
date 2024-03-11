@@ -16,7 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.axocode.dao.InterTagUsers;
 import org.axocode.dao.InterUsers;
+import org.axocode.dao.service.InterTagUsersService;
 import org.axocode.dao.service.InterUsersService;
 
 /**
@@ -111,7 +113,12 @@ public class signin extends HttpServlet {
                 boolean flag = userService.addInterUsers(user);
                 
                 if (flag) {
+                    
                     user = userService.getUserByInterUsers(iuser);
+                    InterTagUsersService tag = new InterTagUsersService();
+                    InterTagUsers tagUser = new InterTagUsers();
+                    tagUser.setTagUser(user.getIUserNum());
+                    tag.addInterTagUsers(tagUser);
                     
                     Gson gson = new Gson();
                     String json = gson.toJson(user);

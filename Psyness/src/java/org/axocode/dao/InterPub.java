@@ -11,8 +11,10 @@ public class InterPub implements Serializable{
     private int PubComent;
     private String PubDate;
     private String PubHour;
+    private String PubRol;
 
-    public InterPub(){}
+    public InterPub(){
+    }
     
     public InterPub(Integer PubNumId){
         this.PubNumId = PubNumId;
@@ -72,6 +74,14 @@ public class InterPub implements Serializable{
 
     public void setPubComent(int PubComent) {
         this.PubComent = PubComent;
+    }
+
+    public String getPubRol() {
+        return PubRol;
+    }
+
+    public void setPubRol(String PubRol) {
+        this.PubRol = PubRol;
     }
     
 }
