@@ -67,7 +67,6 @@ public class FavoritoServlet extends HttpServlet {
             InterFav fav = new InterFav();
             fav.setFavIdPub(pubInt);
             fav.setFavIdUser(IUserNum); 
-            if (!verficado.esPublicacionPropia(IUserNum, pubInt)) {
                 boolean exist = favorite.checkIfFavExists(fav);
                 if (!exist) {    
                     boolean successs = favorite.addInterFav(fav);
@@ -75,7 +74,6 @@ public class FavoritoServlet extends HttpServlet {
                         pubService.actFav(pubInt);
                     }
                 }   
-            }
         }
         
         if (action.equals("Favoritont")) {
@@ -84,7 +82,6 @@ public class FavoritoServlet extends HttpServlet {
             InterFav fav = new InterFav();
             fav.setFavIdPub(pubInt);
             fav.setFavIdUser(IUserNum);     
-            if (!verficado.esPublicacionPropia(IUserNum, pubInt)) {
                 boolean exist = favorite.checkIfFavExists(fav);
                 if (exist) { 
                     boolean successs = favorite.unfollowFav(fav);
@@ -92,7 +89,6 @@ public class FavoritoServlet extends HttpServlet {
                         pubService.actFav(pubInt);
                     }
                 }
-            }
         }
     }
 
