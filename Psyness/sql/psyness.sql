@@ -23,8 +23,8 @@ create table if not exists interusers (
 
 create table if not exists interclinic (
   clinicnum int not null auto_increment,
+  clinicuser int not null ,
   clinic varchar(70) null default null,
-  clinicimgnum varchar(20) null default 'profilesidebar3.png',
   clinictel varchar(25) not null,
   clinicstreetnum varchar(30) not null,
   clinicstate varchar(30) not null,
@@ -34,7 +34,8 @@ create table if not exists interclinic (
   cliniclatitud varchar(30) not null,
   cliniclongitud varchar(30) not null,
   clinitype varchar(10) not null,
-  primary key (clinicnum)
+  primary key (clinicnum),
+  foreign key (clinicuser) references interusers (iusernum) on delete cascade on update cascade
 ) engine = innodb auto_increment = 1 default character set = utf8;
 
 create table if not exists interclinicusers (

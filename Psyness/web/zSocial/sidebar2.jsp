@@ -169,14 +169,7 @@
     </header>
                                 
                             <!-- SIDEBAR -->
-    
-                      <div class="icon_posteo">
-                                    <button onclick="abrirModal()">
-                                        <span>
-                                            <i class="fa-solid fa-plus"></i>
-                                        </span>
-                                    </button>
-                                </div>                        
+                         
     <!-- SIDEBAR -->
         <aside class="sidebar_feed">
 
@@ -537,13 +530,6 @@
                             </form>
                         </div>       
                     </div>                        
-                                            <div class="icon_posteo">
-                                                <button onclick="abrirModal()">
-                                                    <span>
-                                                        <i class="fa-solid fa-plus"></i>
-                                                    </span>
-                                                </button>
-                                            </div>
                                 
 <script src="../assets/js/ProcesosAjax.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

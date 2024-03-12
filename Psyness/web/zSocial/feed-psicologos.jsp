@@ -4,7 +4,6 @@
     Author     : admin
 --%>
 
-<%@page import="org.axocode.dao.service.InterClinicService"%>
 <%@page import="org.axocode.dao.InterComent"%>
 <%@page import="org.axocode.dao.service.InterComentService"%>
 <%@page import="org.axocode.helper.InterComentHelper"%>
@@ -100,19 +99,13 @@
                 String horaFormateada2 = horaCiudadMexico.format(formatter2);
                 String[] partes =horaFormateada.split(" ");
                 String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-                String hora12 = partes[5]; 
-                
-                  
-    if ("Submit".equals(comentar)) {
-        flag = helperss.addT();
-                    }
-                           
+                String hora12 = partes[5];               
 %>
     <div id="wrapper">
 
     
 
-    <jsp:include page="sidebar.jsp"/>
+    <jsp:include page="sidebar1.jsp"/>
     
     
      <!--------------------------- BARRA INICIO  - CLIENTE   -------------------------------------------------------->
@@ -120,17 +113,13 @@
         <div class="header_inicio_clinicas">
             <div class="bg-white">
                 <nav class="mx-auto flex max-w-lg items-center justify-between p-2 lg:px-12">    
-                    <button id="btn_feed" onclick="location.href='feed-new.jsp'" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Inicio</button>
-                    <%
-                    InterClinicService clinica = new InterClinicService();
-                    if (clinica.checkIfUserExistsInClinic(Integer.parseInt(sesion.getAttribute("SIUserNum").toString()))) {  
-                    %>
-                    <button id="btn_feed" onclick="location.href='feed-psicologos.jsp'" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Clínicas</button>
-                    <%}
-                    %>
+                        <button id="btn_feed" onclick="location.href='feed-new.jsp'" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Inicio</button>
+                        <button id="btn_feed" onclick="location.href='feed-psicologos.jsp'" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Clínicas</button>
                 </nav>
             </div>
         </div>
+ 
+ <!----------------------------------------------------------------------------------->
           
         <!---------------CREAR----------------->
         <!-- Main Contents -->
@@ -299,7 +288,6 @@
                                                 <div class="text-gray-500 flex items-center space-x-2"><span><%=sesion.getAttribute("SIAge")%></span></div>
                                             </div>
                                             
-                                            
                                             <div class="Salir-cuents">
                                                 <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-1 transition -mr-1 dark:hover:bg-gray-700"></i> </a>
                                                 <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
@@ -311,8 +299,7 @@
                                                       </li>
                                                     </ul>
                                                 </div>
-                                            </div>    
-                                            
+                                            </div> 
                                         </div>
                                         <a href="follow-new.jsp?follows=<%=sesion.getAttribute("SIUserNum")%>"
                                         onmouseover="this.style.color='#141414'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#141414')" 
@@ -394,9 +381,6 @@
                                 
                                 
                             </div>    
-                                <div class="right_sidebar_feed" id="imagengen">
-                                    
-                                </div>
                         </div>
                     </div>    
                 </div> 
@@ -485,7 +469,7 @@
         }
 
         solicitudPendiente = true;
-        var url = '/Psyness/PublicacionesServlet';
+        var url = '/Psyness/PublicacionesPsicoServlet';
 
         $.ajax({
             type: 'POST',

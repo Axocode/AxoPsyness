@@ -208,7 +208,7 @@
                 </span>
             </button>
 
-            <button onclick="location.href='chat-new.jsp'">
+            <button onclick="location.href='chat1.jsp'">
                 <span>
                     <i class='bx bxl-telegram' >
                         <!--<span>15</span>-->
@@ -231,7 +231,8 @@
                     <span>Configuración</span>
                 </span>
             </button>
-                     <%
+                        
+                   <%
                          InterClinicService clinic = new InterClinicService();
                          if(clinic.checkIfUserWithInClinic(Integer.parseInt(sesion.getAttribute("SIUserNum").toString()))){  
                      %>   
@@ -242,6 +243,7 @@
                 </span>
                 </button>
                     <%}%>
+
                <button onclick="abrirModal()">
                 <span>
                     <i class="icon-feather-plus"></i>
@@ -326,7 +328,7 @@
                                             <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
                                             <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
                                             <input type="hidden" name="numero123" id="numero123" value="<%=sesion.getAttribute("SIUserNum")%>" />
-                                            <input type="hidden" name="PubRol" id="PubRol" value="Feed" />
+                                            <input type="hidden" name="PubRol" id="PubRol" value="Clinica" />
                                         </div>
                                          <!-------------------------IMPORTANTE - CAMBIOS
                                              <div>

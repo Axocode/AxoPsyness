@@ -44,14 +44,12 @@ body{
     margin-bottom: 44px;
 }
 
-.sidebar_header h1{
-    margin-left: 55px;
+.sidebar_header{
+    left: 0;
+    top: 0;
     margin-top: 20px;
     align-items: center;
     height: 50px;
-    font-family: monospace ;
-    font-size: 31px;
-    font-weight: 400;
 }
 
 .logo-icon_sidebar{
@@ -147,6 +145,7 @@ body{
 .sidebar_feed button span{
     font-size: 17px;
 }
+
 
 .sidebar_feed > nav{
     flex: 1 1 auto;
@@ -857,13 +856,31 @@ body{
         padding-top: 60px;
     }
     
+    .select-menusito{
+        display: block !important;
+    }
+    
+    .select-menu{
+        margin-bottom: 5px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .sidebar_registros{
+        display: none !important;
+        visibility: hidden;
+        opacity: 0;
+    }
+        
+
+    
 }
 
 
 /*   ICONO POST    */
 
 .icon_posteo button {
-    background: #0a64da;
+    background: #99d1ff;
     width: 52px;
     height: 52px;
     position: fixed;
@@ -875,10 +892,11 @@ body{
     box-shadow: 0px 1px 10px rgba(0,0,0,0.4);
     transition: all 500ms ease;
     text-decoration: none;
+    z-index: 99;
 }
 
 .icon_posteo button:hover{
-    background: #196ddb;
+    background: #787df1;
 }
 
 
@@ -918,7 +936,7 @@ body{
 }
 
 .boton-desactivable input[type="checkbox"]:checked + label {
-    background-color: #b937f5;
+    background-color: #787df1;
     color: #fff;
     cursor:pointer;
 }
@@ -983,8 +1001,41 @@ body{
 }     
     
 .toggle-checkbox:checked + .toggle-label {
-    background-color: #b937f5;
+    background-color: #787df1;
 
 }   
 
+/* Boton Publicar */
+
+#guardadito1{
+    background-color: #787df1; 
+}
+
+
+/* Select menu */
+
+.select-menusito{
+    display: flex;
+}
+
+.select-menu {
+    width: 170px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-right: 10px;
+    color: #333;
+}
+
+.select-menu:hover {
+    border-color: #ccc;
+}
+
+.select-menu:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
 

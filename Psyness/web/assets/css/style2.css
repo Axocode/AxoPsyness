@@ -22,7 +22,7 @@ button {
 }
 
 a.button, span.button, button.button {
-  background-color: #2a41e8;
+  background-color: #787df1;
   height: 38px;
   padding: 0 20px;
   line-height: 24px;
@@ -7627,7 +7627,7 @@ header .header_inner .right_side {
 
 /*  Scrollbar Hide - End */
 .messages-headline {
-  max-height: 77px;
+  max-height: 67px;
   font-size: 15px;
   margin: 0;
   padding: 22px 30px;
@@ -7804,7 +7804,7 @@ header .header_inner .right_side {
 }
 
 .messages-container-inner .messages-inbox .message-by p {
-  height: 26px;
+  height: 43px;
   max-width: 212px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -7863,8 +7863,8 @@ header .header_inner .right_side {
 .message-bubble .message-text {
   margin-left: 70px;
   background-color: #f4f4f4;
-  border-radius: 6px;
-  padding: 12px 18px;
+  border-radius: 30px;
+  padding: 1px 18px;
   position: relative;
   display: inline-block;
   float: left;
@@ -7889,8 +7889,8 @@ header .header_inner .right_side {
 
 .message-bubble.me .message-text {
   margin-left: 0;
-  margin-right: 70px;
-  background-color: #2a41e8;
+  margin-right: 63px;
+  background-color: #787DF1;
   color: #fff;
   position: relative;
 }
@@ -7902,7 +7902,7 @@ header .header_inner .right_side {
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
   border-right: 6px solid #f4f4f4;
-  left: -6px;
+  left: 2px;
   right: auto;
   top: 19px;
   position: absolute;
@@ -7911,9 +7911,9 @@ header .header_inner .right_side {
 .message-bubble.me .message-text:before {
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
-  border-left: 6px solid #2a41e8;
+  border-left: 8px solid #787DF1;
   border-right: none;
-  right: -6px;
+  right: 5px;
   left: auto;
 }
 
@@ -7986,23 +7986,23 @@ header .header_inner .right_side {
 
 /* Reply */
 .message-reply {
-  border-top: 1px solid #eaeaea;
-  padding: 30px;
+  border-top: 128px solid #ffffff;
+  padding: 33px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  margin-top: 15px;
+  margin-top: 27px;
 }
 
 .message-reply textarea {
   min-width: auto;
-  height: 48px;
-  min-height: 48px;
-  padding: 10px 0;
-  margin: 0 15px 0 0;
+  height: 152px;
+  min-height: 63px;
+  padding: 58px 0;
+  margin: 0 33px 0 0;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -8015,6 +8015,23 @@ header .header_inner .right_side {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   resize: none;
+}
+.btn-primary{
+    color: #fff;
+    background-color: #787DF1 !important ; 
+    border-color: #787DF1 !important; 
+}
+.contact-list .contact-username{
+    color: #ffff !important;
+}
+.btn{
+    padding: 0.375rem 7.5rem !important;
+    font-size: 1rem;
+    border-radius: 4.25rem !important;
+}
+body p{
+        font-size: 17px !important;
+    line-height: 47px !important; 
 }
 
 .message-reply button {
@@ -8041,8 +8058,8 @@ header .header_inner .right_side {
 /* Typing Indicastor */
 .typing-indicator {
   width: auto;
-  height: 24px;
-  padding-top: 8px;
+  height: 40px;
+  padding-top: 16px;
 }
 
 .typing-indicator span {
@@ -8243,7 +8260,7 @@ input[type="button"].dark1, input[type="submit"].dark1 {
 /*  start-chat button
 ------------------------------------- */
 .start-chat {
-  background-color: #2563eb;
+  background-color: #787DF1;
   color: white;
   border-radius: 100%;
   display: -webkit-box;
@@ -8257,8 +8274,8 @@ input[type="button"].dark1, input[type="submit"].dark1 {
           justify-content: center;
   position: fixed;
   width: 50px;
-  bottom: 25px;
-  right: 25px;
+  bottom: 78px;
+  right: 50px;
   height: 50px;
   z-index: 1000;
   cursor: pointer;

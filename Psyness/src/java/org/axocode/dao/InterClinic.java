@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class InterClinic implements Serializable{
     private int ClinicNum;
+    private int ClinicUserNum;
     private String Clinic;
-    private String ClinicImgNum;
     private String ClinicTel;
     private String ClinicStreetNum;
     private String ClinicState;
@@ -15,10 +15,10 @@ public class InterClinic implements Serializable{
     private String ClinicLongitud;
     private String ClinicType;
 
-    public InterClinic(int ClinicNum, String Clinic, String ClinicImgNum, String ClinicTel, String ClinicStreetNum, String ClinicState, String ClinicCode, String ClinicHour, String ClinicLatitud, String ClinicLongitud, String ClinicType) {
+    public InterClinic(int ClinicNum, int ClinicUserNum, String Clinic, String ClinicTel, String ClinicStreetNum, String ClinicState, String ClinicCode, String ClinicHour, String ClinicLatitud, String ClinicLongitud, String ClinicType) {
         this.ClinicNum = ClinicNum;
+        this.ClinicUserNum = ClinicUserNum;
         this.Clinic = Clinic;
-        this.ClinicImgNum = ClinicImgNum;
         this.ClinicTel = ClinicTel;
         this.ClinicStreetNum = ClinicStreetNum;
         this.ClinicState = ClinicState;
@@ -40,20 +40,20 @@ public class InterClinic implements Serializable{
         this.ClinicNum = ClinicNum;
     }
 
+    public int getClinicUserNum() {
+        return ClinicUserNum;
+    }
+
+    public void setClinicUserNum(int ClinicUserNum) {
+        this.ClinicUserNum = ClinicUserNum;
+    }
+
     public String getClinic() {
         return Clinic;
     }
 
     public void setClinic(String Clinic) {
         this.Clinic = Clinic;
-    }
-
-    public String getClinicImgNum() {
-        return ClinicImgNum;
-    }
-
-    public void setClinicImgNum(String ClinicImgNum) {
-        this.ClinicImgNum = ClinicImgNum;
     }
 
     public String getClinicTel() {
@@ -119,6 +119,6 @@ public class InterClinic implements Serializable{
     public void setClinicType(String ClinicType) {
         this.ClinicType = ClinicType;
     }
-
+    
     
 }
