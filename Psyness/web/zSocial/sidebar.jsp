@@ -166,12 +166,13 @@
             </div>
         </div>
     </header>
-    <!-- SIDEBAR -->
+                                
+                            <!-- SIDEBAR -->
+    
         <aside class="sidebar_feed">
 
         <div class="sidebar_header">
-            <!--<img src="images/sololetras.svg" class="logo-img_sidebar">-->
-            <h1>Psyness</h1>
+            <img src="../assets/images/avatars/Logo con letras centrado.svg" class="logo-img_sidebar">
             <img src="../images/Icono.svg" class="logo-icon_sidebar">
         </div>
 
@@ -221,20 +222,21 @@
                     <span>Configuración</span>
                 </span>
             </button>
-
-            <button onclick="abrirModal()">
+                        
+                <button onclick="location.href='search-user.jsp'">
                 <span>
-                    <i class="fa-solid fa-plus"></i>
+                    <i class="icon-feather-activity"></i>
+                    <span>Clinicas</span>
+                </span>
+            </button>
+
+               <button onclick="abrirModal()">
+                <span>
+                    <i class="icon-feather-plus"></i>
                     <span>Publicar</span>
                 </span>
             </button>
             
-                        <button onclick="location.href='../index.jsp?cerrar=true'">
-                <span>
-                    <i class='bx bx-log-out'></i>
-                    <span>Salir</span>
-                </span>
-            </button>
         </nav>
     </aside>
 <!-- SIDEBAR BUSCAR --><nav class="sidebar-search">
@@ -340,7 +342,7 @@
                             -------------------------------->
                         </div>                 
                               <!------------------------- Etiquetas-------------------------->    
-                                           <div class="space-x-4 p-5" id="tags_Container">
+                                           <div class="overflow-auto space-x-4 p-5" id="tags_Container">
                                                
                                                 <div class="toogle-desactivable">
                                                     <input type="checkbox" id="toggle" class="toggle-checkbox">
@@ -375,7 +377,8 @@
                                                <div class="boton-desactivable">
                                                 <input type="checkbox" id="boton7" onclick="alternarEstado('boton2')">
                                                 <label for="boton7">Adicciones</label>
-                                              </div>
+                                              </div>       
+                                               
                                            </div>  
                                         
 
@@ -409,7 +412,7 @@
                                             }
 
                                             .boton-desactivable input[type="checkbox"]:checked + label {
-                                                background-color: #b937f5;
+                                                background-color: #787df1;
                                                 color: #fff;
                                                 cursor:pointer;
                                             }
@@ -461,7 +464,7 @@
                                                 background-color: #fff;
                                                 border-radius: 50%;
                                                 position: absolute;
-                                                top: 0;
+                                                top: 1px;
                                                 left: 0;
                                                 transition: transform 0.3s;
                                             }
@@ -472,9 +475,14 @@
                                             }     
 
                                             .toggle-checkbox:checked + .toggle-label {
-                                                background-color: #b937f5;
+                                                background-color: #787df1;
 
                                             }         
+                                            
+                                            #guardadito1{
+                                                background-color: #787df1; 
+                                            }
+
                                         </style>
                                          
                                          
@@ -495,12 +503,14 @@
                 </div>
             </div>                 
                                             <div class="icon_posteo">
-                                    <button onclick="abrirModal()">
-                                        <span>
-                                            <i class="fa-solid fa-plus"></i>
-                                        </span>
-                                    </button>
-                                </div>
+                                                <button onclick="abrirModal()">
+                                                    <span>
+                                                        <i class="fa-solid fa-plus"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                
+                                
 <script src="../assets/js/ProcesosAjax.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../assets/js/Perspective.js" defer></script>

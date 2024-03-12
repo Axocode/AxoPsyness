@@ -24,7 +24,7 @@
     <title>Datacenter - Psyness</title>
 
             <!-- Favicon -->
-        <link href="assets/images/Icono.svg" rel="icon" type="image/png">
+        <link href="../assets/images/Icono.svg" rel="icon" type="image/png">
 
 
             <!-- icons ================================================== -->
