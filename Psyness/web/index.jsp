@@ -288,7 +288,7 @@
       }
 
     // Ejemplo de uso
-    obtenerCoordenadas("Canal Moscú Volga L22 mz8 09700 Iztapalapa DF");
+    obtenerCoordenadas("Plan de Guadalupe 82, Nextitla, Miguel Hidalgo, 11420 Ciudad de México, CDMX");
 </script>
 
 
