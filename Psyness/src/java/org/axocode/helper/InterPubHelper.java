@@ -41,6 +41,7 @@ public class InterPubHelper extends Helpers<InterPub> implements Serializable
         t.setPubCont(getParameter("PubCont"));
         t.setPubDate(getParameter("PubDate"));
         t.setPubHour(getParameter("PubHour"));
+        t.setPubRol(getParameter("PubRol"));
         if( isValidaCamposOk( ) )
         {
             return pubService.addInterPub(t );

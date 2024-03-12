@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="org.axocode.dao.service.InterClinicService"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.time.ZonedDateTime"%>
@@ -166,12 +167,21 @@
             </div>
         </div>
     </header>
+                                
+                            <!-- SIDEBAR -->
+    
+                      <div class="icon_posteo">
+                                    <button onclick="abrirModal()">
+                                        <span>
+                                            <i class="fa-solid fa-plus"></i>
+                                        </span>
+                                    </button>
+                                </div>                        
     <!-- SIDEBAR -->
         <aside class="sidebar_feed">
 
         <div class="sidebar_header">
-            <!--<img src="images/sololetras.svg" class="logo-img_sidebar">-->
-            <h1>Psyness</h1>
+            <img src="../assets/images/avatars/Logo con letras centrado.svg" class="logo-img_sidebar">
             <img src="../images/Icono.svg" class="logo-icon_sidebar">
         </div>
 
@@ -221,25 +231,35 @@
                     <span>Configuración</span>
                 </span>
             </button>
-
-            <button onclick="abrirModal()">
+                     <%
+                         InterClinicService clinic = new InterClinicService();
+                         if(clinic.checkIfUserWithInClinic(Integer.parseInt(sesion.getAttribute("SIUserNum").toString()))){  
+                     %>   
+                <button onclick="location.href='search-user.jsp'">
                 <span>
-                    <i class="fa-solid fa-plus"></i>
+                    <i class="icon-feather-activity"></i>
+                    <span>Clinicas</span>
+                </span>
+                </button>
+                    <%}%>
+               <button onclick="abrirModal()">
+                <span>
+                    <i class="icon-feather-plus"></i>
                     <span>Publicar</span>
                 </span>
             </button>
             
-                        <button onclick="location.href='../index.jsp?cerrar=true'">
-                <span>
-                    <i class='bx bx-log-out'></i>
-                    <span>Salir</span>
-                </span>
-            </button>
         </nav>
     </aside>
+<<<<<<< HEAD
 <!-- SIDEBAR BUSCAR -->
 
 <nav class="sidebar-search">
+=======
+                        
+                        
+<!-- SIDEBAR BUSCAR --><nav class="sidebar-search">
+>>>>>>> 2bba8971ee30991168fb5b5f1632394fa2839ae9
     <div class="search-header">
         <p>Buscar</p>
     </div>
@@ -297,22 +317,23 @@
             String hora12 = partes[5]; 
             %>
             
-            <div id="create-post-modal" class="create-post" uk-modal>
-                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
-                    <div class="text-center py-4 border-b">
-                        <h3 class="text-lg font-semibold"> Cuentanos tu pensamiento <c:out value='<%=sesion.getAttribute("SIUser")%>'/> </h3>  
-                        <button id="cerrar" class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 m-1 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
-                    </div>
-                    <form id="axocode123" method="POST" accept-charset="UTF-8">
-                        <div class="flex flex-1 items-start space-x-4 p-5">
-                            <img src="../assets/images/avatars/<c:out value='<%=data%>'/>" class="bg-gray-200 border border-white rounded-full w-11 h-11">
-                                <div class="flex-1 pt-2">
-                                    <textarea id="inputText" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?" maxlength="1250" autofocus></textarea>
-                                    <input type="hidden" id="guardar" name="guardar" value="Submit" />
-                                    <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
-                                    <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
-                                    <input type="hidden" name="numero123" id="numero123" value="<%=sesion.getAttribute("SIUserNum")%>" />
-                                </div>
+                    <div id="create-post-modal" class="create-post" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
+                            <div class="text-center py-4 border-b">
+                                <h3 class="text-lg font-semibold"> Cuentanos tu pensamiento <c:out value='<%=sesion.getAttribute("SIUser")%>'/> </h3>  
+                                <button id="cerrar" class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 m-1 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
+                            </div>
+                            <form id="axocode123" method="POST" accept-charset="UTF-8">
+                                <div class="flex flex-1 items-start space-x-4 p-5">
+                                    <img src="../assets/images/avatars/<c:out value='<%=data%>'/>" class="bg-gray-200 border border-white rounded-full w-11 h-11">
+                                        <div class="flex-1 pt-2">
+                                            <textarea id="inputText" name="PubCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Tienes algo que compartir?" maxlength="1250" autofocus></textarea>
+                                            <input type="hidden" id="guardar" name="guardar" value="Submit" />
+                                            <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
+                                            <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
+                                            <input type="hidden" name="numero123" id="numero123" value="<%=sesion.getAttribute("SIUserNum")%>" />
+                                            <input type="hidden" name="PubRol" id="PubRol" value="Feed" />
+                                        </div>
                                          <!-------------------------IMPORTANTE - CAMBIOS
                                              <div>
                                                 <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-5 dark:hover:bg-gray-700"></i> </a>
@@ -340,43 +361,64 @@
                                                     </div>
                                             </div>
                             -------------------------------->
-                        </div>                 
+                                </div> 
+                                            
                               <!------------------------- Etiquetas-------------------------->    
-                                           <div class="space-x-4 p-5" id="tags_Container">
+                                           <div class="overflow-auto space-x-4 p-5" id="tags_Container">
                                                
                                                 <div class="toogle-desactivable">
-                                                    <input type="checkbox" id="toggle" class="toggle-checkbox">
-                                                    <label for="toggle" class="toggle-label"></label>      
+                                                    <input type="checkbox" id="TagPubSensible" name="TagPubSensible" class="toggle-checkbox">
+                                                    <label for="TagPubSensible" class="toggle-label"></label>      
                                                     <span>Contenido sensible</span>
                                                 </div>                                               
                                                
                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton1" onclick="alternarEstado('boton1')">
-                                                <label for="boton1">Ansiedad</label>
+                                                <input type="checkbox" id="TagPubAutoestima" name="TagPubAutoestima" onclick="alternarEstado('TagPubAutoestima')">
+                                                <label for="TagPubAutoestima">Autoestima y confianza</label>
                                               </div>
                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton2" onclick="alternarEstado('boton2')">
-                                                <label for="boton2">Depresión</label>
+                                                <input type="checkbox" id="TagPubRelaciones" name="TagPubRelaciones" onclick="alternarEstado('TagPubRelaciones')">
+                                                <label for="TagPubRelaciones">Relaciones interpersonales</label>
                                               </div>
                                                <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton3" onclick="alternarEstado('boton2')">
-                                                <label for="boton3">TDAH</label>
+                                                <input type="checkbox" id="TagPubAnsiedad" name="TagPubAnsiedad" onclick="alternarEstado('TagPubAnsiedad')">
+                                                <label for="TagPubAnsiedad">Ansiedad y estrés</label>
                                               </div>
                                                <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton4" onclick="alternarEstado('boton2')">
-                                                <label for="boton4">Estrés</label>
+                                                <input type="checkbox" id="TagPubDepresion" name="TagPubDepresion" onclick="alternarEstado('TagPubDepresion')">
+                                                <label for="TagPubDepresion">Depresión</label>
                                               </div>
                                                <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton5" onclick="alternarEstado('boton2')">
-                                                <label for="boton5">Bipolaridad</label>
+                                                <input type="checkbox" id="TagPubConflictos" name="TagPubConflictos" onclick="alternarEstado('TagPubConflictos')">
+                                                <label for="TagPubConflictos">Resolución de conflictos</label>
                                               </div>
                                                <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton6" onclick="alternarEstado('boton2')">
-                                                <label for="boton6">Déficit Atención</label>
+                                                <input type="checkbox" id="TagPubBienestar" name="TagPubBienestar" onclick="alternarEstado('TagPubBienestar')">
+                                                <label for="TagPubBienestar">Mindfulness y bienestar</label>
                                               </div>
                                                <div class="boton-desactivable">
                                                 <input type="checkbox" id="boton7" onclick="alternarEstado('boton2')">
                                                 <label for="boton7">Adicciones</label>
+                                              </div>   
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="TagPubCrecimiento" name="TagPubCrecimiento" onclick="alternarEstado('TagPubCrecimiento')">
+                                                <label for="TagPubCrecimiento">Crecimiento personal</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="TagPubSalud" name="TagPubSalud" onclick="alternarEstado('TagPubSalud')">
+                                                <label for="TagPubSalud">Salud emocional</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="TagPubTranstornos" name="TagPubTranstornos" onclick="alternarEstado('TagPubTranstornos')">
+                                                <label for="TagPubTranstornos">Transtornos</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="TagPubRecaidas" name="TagPubRecaidas" onclick="alternarEstado('TagPubRecaidas')">
+                                                <label for="TagPubRecaidas">Recaidas</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="TagPubSueno" name="TagPubSueno" onclick="alternarEstado('TagPubSueno')">
+                                                <label for="TagPubSueno">Problemas de sueño</label>
                                               </div>
                                            </div>  
                                         
@@ -411,7 +453,7 @@
                                             }
 
                                             .boton-desactivable input[type="checkbox"]:checked + label {
-                                                background-color: #b937f5;
+                                                background-color: #787df1;
                                                 color: #fff;
                                                 cursor:pointer;
                                             }
@@ -463,7 +505,7 @@
                                                 background-color: #fff;
                                                 border-radius: 50%;
                                                 position: absolute;
-                                                top: 0;
+                                                top: 1px;
                                                 left: 0;
                                                 transition: transform 0.3s;
                                             }
@@ -474,35 +516,41 @@
                                             }     
 
                                             .toggle-checkbox:checked + .toggle-label {
-                                                background-color: #b937f5;
+                                                background-color: #787df1;
 
                                             }         
+                                            
+                                            #guardadito1{
+                                                background-color: #787df1; 
+                                            }
+
                                         </style>
                                          
                                          
                                          
                         
-                        <div class="bsolute bottom-0 p-4 space-x-4 w-full">
-                            <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
-                                <button type="submit" class="button bg-blue-700" id="guardadito1" ontouchstart="this.click()"> Publicar </button>
-                                    <div class="flex flex-1 items-center lg:justify-end justify-center space-x-2">
-                                        <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                        <svg class="text-red-600 h-9 p-1.5 rounded-full bg-red-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"> </path></svg>
-                                        <svg class="text-green-600 h-9 p-1.5 rounded-full bg-green-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
-                                        <svg class="text-pink-600 h-9 p-1.5 rounded-full bg-pink-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"> </path></svg>
+                                <div class="bsolute bottom-0 p-4 space-x-4 w-full">
+                                    <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
+                                        <button type="submit" class="button bg-blue-700" id="guardadito1" ontouchstart="this.click()"> Publicar </button>
+                                            <div class="flex flex-1 items-center lg:justify-end justify-center space-x-2">
+                                                <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                                <svg class="text-red-600 h-9 p-1.5 rounded-full bg-red-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"> </path></svg>
+                                                <svg class="text-green-600 h-9 p-1.5 rounded-full bg-green-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                                                <svg class="text-pink-600 h-9 p-1.5 rounded-full bg-pink-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"> </path></svg>
+                                            </div>
                                     </div>
-                            </div>
-                        </div>   
-                    </form>
-                </div>
-            </div>                 
+                                </div>   
+                            </form>
+                        </div>       
+                    </div>                        
                                             <div class="icon_posteo">
-                                    <button onclick="abrirModal()">
-                                        <span>
-                                            <i class="fa-solid fa-plus"></i>
-                                        </span>
-                                    </button>
-                                </div>
+                                                <button onclick="abrirModal()">
+                                                    <span>
+                                                        <i class="fa-solid fa-plus"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                
 <script src="../assets/js/ProcesosAjax.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../assets/js/Perspective.js" defer></script>

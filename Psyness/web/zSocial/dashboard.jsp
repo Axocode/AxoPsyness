@@ -17,8 +17,6 @@
 
         <!-- Favicon -->
     <link href="assets/images/Icono.svg" rel="icon" type="image/png">
-
-
         <!-- CSS ================================================== --> 
     <link rel="stylesheet" href="../assets/css/cambios.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>

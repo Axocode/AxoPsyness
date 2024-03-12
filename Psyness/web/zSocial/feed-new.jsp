@@ -4,6 +4,7 @@
     Author     : admin
 --%>
 
+<%@page import="org.axocode.dao.service.InterClinicService"%>
 <%@page import="org.axocode.dao.InterComent"%>
 <%@page import="org.axocode.dao.service.InterComentService"%>
 <%@page import="org.axocode.helper.InterComentHelper"%>
@@ -119,8 +120,14 @@
         <div class="header_inicio_clinicas">
             <div class="bg-white">
                 <nav class="mx-auto flex max-w-lg items-center justify-between p-2 lg:px-12">    
-                        <button id="btn_feed" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Inicio</button>
-                        <button id="btn_feed" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Clínicas</button>
+                    <button id="btn_feed" onclick="location.href='feed-new.jsp'" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Inicio</button>
+                    <%
+                    InterClinicService clinica = new InterClinicService();
+                    if (clinica.checkIfUserExistsInClinic(Integer.parseInt(sesion.getAttribute("SIUserNum").toString()))) {  
+                    %>
+                    <button id="btn_feed" onclick="location.href='feed-psicologos.jsp'" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Clínicas</button>
+                    <%}
+                    %>
                 </nav>
             </div>
         </div>
@@ -293,6 +300,21 @@
                                                 <a href="profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="text-black dark:text-white" id="name_user_feed"><c:out value='<%=sesion.getAttribute("SIUser")%>'/></a>
                                                 <div class="text-gray-500 flex items-center space-x-2"><span><%=sesion.getAttribute("SIAge")%></span></div>
                                             </div>
+                                            
+                                            
+                                            <div class="Salir-cuents">
+                                                <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-1 transition -mr-1 dark:hover:bg-gray-700"></i> </a>
+                                                <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
+                                                    <ul class="space-y-1">
+                                                      <li> 
+                                                          <a onclick="location.href='../index.jsp?cerrar=true'" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                                            <i class="icon-feather-log-out px-1"></i> Cerrar
+                                                          </a> 
+                                                      </li>
+                                                    </ul>
+                                                </div>
+                                            </div>    
+                                            
                                         </div>
                                         <a href="follow-new.jsp?follows=<%=sesion.getAttribute("SIUserNum")%>"
                                         onmouseover="this.style.color='#141414'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#141414')" 
@@ -374,6 +396,9 @@
                                 
                                 
                             </div>    
+                                <div class="right_sidebar_feed" id="imagengen">
+                                    
+                                </div>
                         </div>
                     </div>    
                 </div> 

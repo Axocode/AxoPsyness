@@ -19,8 +19,13 @@ public abstract class Conexion<T> implements Serializable
 {
 
     public static String user = "root";
+<<<<<<< HEAD
     public static String password = "n0m3l0";
     public static String db = "axobasepsy";
+=======
+    public static String password = "1234";
+    public static String db = "psynessbase";
+>>>>>>> 2bba8971ee30991168fb5b5f1632394fa2839ae9
     public static String port = "3306";
 
     public boolean testDriver() 

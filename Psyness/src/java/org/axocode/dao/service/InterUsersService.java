@@ -65,54 +65,46 @@ public class InterUsersService extends Conexion<InterUsers>
     }
     
     public List<InterUsers> getInterUsersListByTerm(String searchTerm) {
-    List<InterUsers> usersList = new ArrayList<>();
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
-    InterUsers users = null;
+        // Inicializa la lista de usuarios que se devolverá
+        List<InterUsers> usersList = new ArrayList<>();
 
-    try {
-        connection = getConnection();
-        if (connection == null) {
-            return null;
-        }
-        String query = "select * from interusers where iuser like ? limit 10";
-        preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, "%" + searchTerm + "%");
-        resultSet = preparedStatement.executeQuery();
+        // Consulta SQL para buscar usuarios basado en el término de búsqueda
+        String query = "SELECT * FROM interusers WHERE iuser LIKE ? LIMIT 10";
 
-        while (resultSet.next()) {
-            users = new InterUsers();
-                users.setIUserNum(resultSet.getInt(1));
-                users.setIUser(resultSet.getString(2));
-                users.setIAge(resultSet.getInt(3));
-                users.setIEmail(resultSet.getString(4));
-                users.setIPassword(resultSet.getString(5));
-                users.setIRol(resultSet.getString(6));
-                users.setIImgNum(resultSet.getString(7));
-                users.setIUserSeguidores(resultSet.getInt(8));
-                users.setIUserSeguidos(resultSet.getInt(9));
-                users.setIUserDescription(resultSet.getString(10));
-                users.setIUserDate(resultSet.getString(11));
-                users.setIUserHour(resultSet.getString(12));
-                usersList.add(users);
+        // Utiliza try-with-resources para asegurar que los recursos se cierren adecuadamente
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Prepara la consulta
+            preparedStatement.setString(1, "%" + searchTerm + "%");
+
+            // Ejecuta la consulta
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                // Procesa los resultados
+                while (resultSet.next()) {
+                    InterUsers user = new InterUsers();
+                    user.setIUserNum(resultSet.getInt("iusernum"));
+                    user.setIUser(resultSet.getString("iuser"));
+                    user.setIAge(resultSet.getInt("iage"));
+                    user.setIEmail(resultSet.getString("iemail"));
+                    user.setIPassword(resultSet.getString("ipassword"));
+                    user.setIRol(resultSet.getString("irol"));
+                    user.setIImgNum(resultSet.getString("iimgnum"));
+                    user.setIUserSeguidores(resultSet.getInt("iuserseguidores"));
+                    user.setIUserSeguidos(resultSet.getInt("iuserseguidos"));
+                    user.setIUserDescription(resultSet.getString("iuserdescription"));
+                    user.setIUserDate(resultSet.getString("iuserdate"));
+                    user.setIUserHour(resultSet.getString("iuserhour"));
+                    usersList.add(user);
+                }
+            }
+        } catch (SQLException ex) {
+            // En un entorno de producción, considera loggear este error en lugar de imprimir la pila de llamadas
+            ex.printStackTrace();
         }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        return null;
-    } finally {
-        // Cerrar los recursos en un bloque finally
-        try {
-            if (resultSet != null) resultSet.close();
-            if (preparedStatement != null) preparedStatement.close();
-            if (connection != null) closeConnection(connection);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        // Devuelve la lista de usuarios
+        return usersList;
     }
-
-    return usersList;
-}
     
     public List<InterUsers> getInterUsersMoreFav() {
     List<InterUsers> usersList = new ArrayList<>();
@@ -370,8 +362,7 @@ public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEd
         return interUsers;
     }
     
-        public boolean addInterUsers( InterUsers users )
-    {
+    public boolean addInterUsers( InterUsers users ){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         String sql = "insert into interusers( iuser , iage , iemail , ipassword, irol, iuserdate, iuserhour ) values( ? , ? , ? , ? , ?, ?, ?)";

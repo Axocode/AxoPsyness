@@ -16,7 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.axocode.dao.InterTagUsers;
 import org.axocode.dao.InterUsers;
+import org.axocode.dao.service.InterTagUsersService;
 import org.axocode.dao.service.InterUsersService;
 
 /**
@@ -37,7 +39,7 @@ public class signin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
+        response.setContentType("application/json; charset=UTF-8");
             
         String iuser = request.getParameter("iuser");
         String iageParam = request.getParameter("iage");
@@ -45,19 +47,21 @@ public class signin extends HttpServlet {
         if (iageParam != null && !iageParam.isEmpty()) {
             try {
                 iage = Integer.parseInt(iageParam);
-                if (iage <= 13) {
-                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    response.getWriter().write("Debes tener mas de 13 años o más para usar Psyness");
-                    return;
+                if (iage < 13) {
+                    ErrorResponse errorResponse = new ErrorResponse("Debes de tener 13 años o más para usar Psyness.");
+                    String errorJson = new Gson().toJson(errorResponse);
+                    response.getWriter().write(errorJson);
                 }
             } catch (NumberFormatException e) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.getWriter().write("Formato de edad inválido");
+                ErrorResponse errorResponse = new ErrorResponse("Formato de edad invalido.");
+                String errorJson = new Gson().toJson(errorResponse);
+                response.getWriter().write(errorJson);
                 return;
             }
         } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Edad requerida");
+            ErrorResponse errorResponse = new ErrorResponse("Edad requerida.");
+            String errorJson = new Gson().toJson(errorResponse);
+            response.getWriter().write(errorJson);
             return;
         }
         
@@ -66,9 +70,9 @@ public class signin extends HttpServlet {
         String apipassword = request.getParameter("apipassword");
         
         if (iuser == null || iuser.isEmpty() || ipassword == null || ipassword.isEmpty() || apipassword == null || apipassword.isEmpty() || iemail == null || iemail.isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.setContentType("text/plain");
-            response.getWriter().write("Valores vacios");
+            ErrorResponse errorResponse = new ErrorResponse("Valores vacios.");
+            String errorJson = new Gson().toJson(errorResponse);
+            response.getWriter().write(errorJson);
             return;
         }
         
@@ -97,22 +101,24 @@ public class signin extends HttpServlet {
                 boolean usuario = userService.verificarUserExistente(iuser);
                 
                 if (usuario) {
-                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    response.setContentType("text/plain");
-                    response.getWriter().write("El apodo de usuario ya esta en uso");
-                    return;
-                }
-                if (correo) {
-                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    response.setContentType("text/plain");
-                    response.getWriter().write("El correo ya esta en uso");
-                    return;
-                }
+                    ErrorResponse errorResponse = new ErrorResponse("El apodo de usuario ya esta en uso.");
+                    String errorJson = new Gson().toJson(errorResponse);
+                    response.getWriter().write(errorJson);
+                } else if (correo) {
+                    ErrorResponse errorResponse = new ErrorResponse("El correo ya esta en uso.");
+                    String errorJson = new Gson().toJson(errorResponse);
+                    response.getWriter().write(errorJson);
+                } else {
                 
                 boolean flag = userService.addInterUsers(user);
                 
                 if (flag) {
+                    
                     user = userService.getUserByInterUsers(iuser);
+                    InterTagUsersService tag = new InterTagUsersService();
+                    InterTagUsers tagUser = new InterTagUsers();
+                    tagUser.setTagUser(user.getIUserNum());
+                    tag.addInterTagUsers(tagUser);
                     
                     Gson gson = new Gson();
                     String json = gson.toJson(user);
@@ -120,18 +126,19 @@ public class signin extends HttpServlet {
                         out.println(json);
                     }
                 } else {
-                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    response.setContentType("text/plain");
-                    response.getWriter().write("Error al agregar usuario");
-                    }
+                    ErrorResponse errorResponse = new ErrorResponse("Error al agregar usuario.");
+                    String errorJson = new Gson().toJson(errorResponse);
+                    response.getWriter().write(errorJson);
+                    }}
             } else {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                response.setContentType("text/plain");
-                response.getWriter().write("Error de api");
+                ErrorResponse errorResponse = new ErrorResponse("Error de api.");
+                String errorJson = new Gson().toJson(errorResponse);
+                response.getWriter().write(errorJson);
                 }
         } catch (NumberFormatException e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
+                ErrorResponse errorResponse = new ErrorResponse("Error al agregar.");
+                String errorJson = new Gson().toJson(errorResponse);
+                response.getWriter().write(errorJson);
         }
     }
 

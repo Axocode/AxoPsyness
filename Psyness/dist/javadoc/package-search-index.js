@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"api"},{"l":"org.axocode.dao"},{"l":"org.axocode.dao.service"},{"l":"org.axocode.helper"},{"l":"servlets"}];updateSearchResults();
