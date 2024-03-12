@@ -151,6 +151,13 @@ function mostrarNotificacionComent(mensaje, tipo, numero) {
     }
 }
 
+    function recolectarEstadosCheckboxes() {
+        let estados = {};
+        $(".boton-desactivable input[type='checkbox']").each(function() {
+            estados[this.id] = $(this).is(':checked') ? 5 : 0;
+        });
+        return estados;
+    }
     
 $(document).ready(function () {
     $("#axocode123").submit(function (event) {
@@ -158,7 +165,8 @@ $(document).ready(function () {
         console.log("Enviado y esperando resultado...");
         const textoAEvaluar = $("#inputText").val();
         const claveAPIPerspective = "AIzaSyBhcaemBy-DSswtEZplbfxJcOTqrSYmHNw";
-
+        const estadosCheckboxes = recolectarEstadosCheckboxes();
+        
         translateAndAnalyze(textoAEvaluar);
         
         obtenerPuntuacionPerspectiveAPI(textoAEvaluar, claveAPIPerspective)
@@ -174,13 +182,26 @@ $(document).ready(function () {
                         var numero1  = $("#numero123").val();
                         // Resto de la lógica para publicación válida
                         $.ajax({
-                            type: "POST",
+                            type: "GET",
                             url: "/Psyness/PublicarServlet",
                             data: {
                                 PubCont: $("#inputText").val(),
                                 guardar: $("#guardar").val(),
                                 PubDate: $("#PubDate").val(),
-                                PubHour: $("#PubHour").val()
+                                PubHour: $("#PubHour").val(),
+                                PubRol: $("#PubRol").val(),
+                                TagPubSensible: $("#TagPubSensible").is(':checked') ? 1 : 0,
+                                TagPubAutoestima: $("#TagPubAutoestima").is(':checked') ? 5 : 0,
+                                TagPubRelaciones: $("#TagPubRelaciones").is(':checked') ? 5 : 0,
+                                TagPubAnsiedad: $("#TagPubAnsiedad").is(':checked') ? 5 : 0,
+                                TagPubDepresion: $("#TagPubDepresion").is(':checked') ? 5 : 0,
+                                TagPubConflictos: $("#TagPubConflictos").is(':checked') ? 5 : 0,
+                                TagPubBienestar: $("#TagPubBienestar").is(':checked') ? 5 : 0,
+                                TagPubCrecimiento: $("#TagPubCrecimiento").is(':checked') ? 5 : 0,
+                                TagPubSalud: $("#TagPubSalud").is(':checked') ? 5 : 0,
+                                TagPubTranstornos: $("#TagPubTranstornos").is(':checked') ? 5 : 0,
+                                TagPubRecaidas: $("#TagPubRecaidas").is(':checked') ? 5 : 0,
+                                TagPubSueno: $("#TagPubSueno").is(':checked') ? 5 : 0
                             },
                             success: function (response) {
                                 console.log("Formulario enviado por AJAX", numero1);
@@ -199,7 +220,9 @@ $(document).ready(function () {
 
                                   // Ejemplo de uso
                                   mostrarNotificacion("Publicación válida. Ver Publicacion", "success", numero1);
-
+                                  $(".boton-desactivable input[type='checkbox']").each(function() {
+                                    $(this).prop('checked', false);
+                                    });
                             },
                             error: function (error) {
                                 // Maneja los errores aquí

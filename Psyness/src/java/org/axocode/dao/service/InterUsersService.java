@@ -362,8 +362,7 @@ public boolean modificarUsuario(int IUserNum, String nuevoNombre, String nuevaEd
         return interUsers;
     }
     
-        public boolean addInterUsers( InterUsers users )
-    {
+    public boolean addInterUsers( InterUsers users ){
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         String sql = "insert into interusers( iuser , iage , iemail , ipassword, irol, iuserdate, iuserhour ) values( ? , ? , ? , ? , ?, ?, ?)";

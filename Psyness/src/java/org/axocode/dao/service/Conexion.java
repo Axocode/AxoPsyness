@@ -20,7 +20,7 @@ public abstract class Conexion<T> implements Serializable
 
     public static String user = "root";
     public static String password = "n0m3l0";
-    public static String db = "axobasepsy";
+    public static String db = "psynessbase";
     public static String port = "3306";
 
     public boolean testDriver() 

@@ -18,9 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.axocode.dao.InterPub;
+import org.axocode.dao.InterTagPub;
 import org.axocode.dao.InterUsers;
 import org.axocode.dao.InterUsersPub;
 import org.axocode.dao.service.InterPubService;
+import org.axocode.dao.service.InterTagPubService;
 import org.axocode.dao.service.InterUsersPubService;
 import org.axocode.helper.Helpers;
 import org.axocode.helper.InterPubHelper;
@@ -59,20 +61,6 @@ public class PublicarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
         request.setCharacterEncoding("UTF-8");          
         HttpSession sesion = request.getSession();
                     
@@ -105,7 +93,38 @@ public class PublicarServlet extends HttpServlet {
                             contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
                             contextInterses.setiUserNum(new InterUsers(IUserNum));
                             InterUsersPubService interUsersPubService = new InterUsersPubService();
-                            interUsersPubService.addUsersPub(contextInterses);
+                            if(interUsersPubService.addUsersPub(contextInterses)){
+                                    InterTagPub t = new InterTagPub();
+                                    InterTagPubService tagService = new InterTagPubService();
+                                    String tag1 = request.getParameter("TagPubAutoestima");
+                                    String tag2 = request.getParameter("TagPubRelaciones");
+                                    String tag3 = request.getParameter("TagPubAnsiedad");
+                                    String tag4 = request.getParameter("TagPubDepresion");
+                                    String tag5 = request.getParameter("TagPubConflictos");
+                                    String tag6 = request.getParameter("TagPubBienestar");
+                                    String tag7 = request.getParameter("TagPubCrecimiento");
+                                    String tag8 = request.getParameter("TagPubSalud");
+                                    String tag9 = request.getParameter("TagPubTranstornos");
+                                    String tag10 = request.getParameter("TagPubRecaidas");
+                                    String tag11 = request.getParameter("TagPubSueno");
+                                    String tag12 = request.getParameter("TagPubSensible");
+                                    
+                                    t.setTagPub(PubNumIdefinitivo);
+                                    t.setTagPubSensible(Integer.parseInt(tag12));
+                                    t.setTagPubAutoestima(Integer.parseInt(tag1));
+                                    t.setTagPubRelaciones(Integer.parseInt(tag2));
+                                    t.setTagPubAnsiedad(Integer.parseInt(tag3));
+                                    t.setTagPubDepresion(Integer.parseInt(tag4));
+                                    t.setTagPubConflictos(Integer.parseInt(tag5));
+                                    t.setTagPubBienestar(Integer.parseInt(tag6));
+                                    t.setTagPubCrecimiento(Integer.parseInt(tag7));
+                                    t.setTagPubSalud(Integer.parseInt(tag8));
+                                    t.setTagPubTranstornos(Integer.parseInt(tag9));
+                                    t.setTagPubRecaidas(Integer.parseInt(tag10));
+                                    t.setTagPubSueno(Integer.parseInt(tag11));
+                                    
+                                    tagService.addInterTagPub(t);
+                                }
                             }
                         }else{
                             LocalDateTime horaAct = LocalDateTime.parse(horaFormateada2, formatter2);
@@ -116,8 +135,6 @@ public class PublicarServlet extends HttpServlet {
                                 sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
                                 flag = helpers.addT( );
                                 if (flag) {
-                                
-                                
                                 int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
                                 InterPubService metododefinitivo = new InterPubService();
                             InterPub objetodefinivo = metododefinitivo.getLastPub();
@@ -130,7 +147,27 @@ public class PublicarServlet extends HttpServlet {
                                 contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
                                 contextInterses.setiUserNum(new InterUsers(IUserNum));
                                 InterUsersPubService interUsersPubService = new InterUsersPubService();
-                                interUsersPubService.addUsersPub(contextInterses);
+                                if(interUsersPubService.addUsersPub(contextInterses)){
+                                    
+                                    InterTagPub t = new InterTagPub();
+                                    InterTagPubService tagService = new InterTagPubService();
+                                    
+                                    t.setTagPub(PubNumIdefinitivo);
+                                    t.setTagPubSensible(Integer.parseInt(request.getParameter("TagPubSensible")));
+                                    t.setTagPubAutoestima(Integer.parseInt(request.getParameter("TagPubAutoestima")));
+                                    t.setTagPubRelaciones(Integer.parseInt(request.getParameter("TagPubRelaciones")));
+                                    t.setTagPubAnsiedad(Integer.parseInt(request.getParameter("TagPubAnsiedad")));
+                                    t.setTagPubDepresion(Integer.parseInt(request.getParameter("TagPubDepresion")));
+                                    t.setTagPubConflictos(Integer.parseInt(request.getParameter("TagPubConflictos")));
+                                    t.setTagPubBienestar(Integer.parseInt(request.getParameter("TagPubBienestar")));
+                                    t.setTagPubCrecimiento(Integer.parseInt(request.getParameter("TagPubCrecimiento")));
+                                    t.setTagPubSalud(Integer.parseInt(request.getParameter("TagPubSalud")));
+                                    t.setTagPubTranstornos(Integer.parseInt(request.getParameter("TagPubTranstornos")));
+                                    t.setTagPubRecaidas(Integer.parseInt(request.getParameter("TagPubRecaidas")));
+                                    t.setTagPubSueno(Integer.parseInt(request.getParameter("TagPubSueno")));
+                                    
+                                    tagService.addInterTagPub(t);
+                                    }
                                 }} else {
                                 
                                 /*
@@ -146,6 +183,19 @@ public class PublicarServlet extends HttpServlet {
                             }
                         }
                     }
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
     }
 
     /**

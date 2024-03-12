@@ -33,10 +33,11 @@ public class InterPubService extends Conexion<InterPub>
             return null;
         }
 
-        String sql = "SELECT * FROM interpub ORDER BY pubnumid DESC LIMIT ? OFFSET ?";
+        String sql = "SELECT * FROM interpub WHERE pubrol = ? ORDER BY pubnumid DESC LIMIT ? OFFSET ?";
         preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, count);
-        preparedStatement.setInt(2, offset);
+        preparedStatement.setString(1, "Feed");
+        preparedStatement.setInt(2, count);
+        preparedStatement.setInt(3, offset);
 
         resultSet = preparedStatement.executeQuery();
 
@@ -63,12 +64,55 @@ public class InterPubService extends Conexion<InterPub>
     return null;
 }
 
+      public List<InterPub> getInterPubListPsico(int count, int offset) {
+    List<InterPub> pubList = null;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    InterPub pub = null;
+
+    try {
+        connection = getConnection();
+        if (connection == null) {
+            return null;
+        }
+
+        String sql = "SELECT * FROM interpub WHERE pubrol = ? ORDER BY pubnumid DESC LIMIT ? OFFSET ?";
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, "Clinica");
+        preparedStatement.setInt(2, count);
+        preparedStatement.setInt(3, offset);
+
+        resultSet = preparedStatement.executeQuery();
+
+        pubList = new ArrayList<>();
+        while (resultSet.next()) {
+            pub = new InterPub();
+            pub.setPubNumId(resultSet.getInt(1));
+            pub.setPubCont(resultSet.getString(2));
+            pub.setPubMg(resultSet.getInt(3));
+            pub.setPubFavs(resultSet.getInt(4));
+            pub.setPubComent(resultSet.getInt(5));
+            pub.setPubDate(resultSet.getString(6));
+            pub.setPubHour(resultSet.getString(7));
+
+            pubList.add(pub);
+        }
+
+        resultSet.close();
+        closeConnection(connection);
+        return pubList;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return null;
+}
     
     public boolean addInterPub( InterPub pub )
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        String sql = "insert into interpub( pubcont, pubdate, pubhour ) values( ?, ?, ? )";
+        String sql = "insert into interpub( pubcont, pubdate, pubhour, pubrol ) values( ?, ?, ?, ? )";
         int row = 0;
         try 
         {
@@ -85,6 +129,7 @@ public class InterPubService extends Conexion<InterPub>
             preparedStatement.setString(1, pub.getPubCont());
             preparedStatement.setString(2, pub.getPubDate());
             preparedStatement.setString(3, pub.getPubHour());
+            preparedStatement.setString(4, pub.getPubRol());
 
             row = preparedStatement.executeUpdate();
             closeConnection(connection);

@@ -3,6 +3,8 @@
     Created on : 19 may 2023, 12:51:17
     Author     : alumno
 --%>
+<%@page import="org.axocode.dao.InterTagUsers"%>
+<%@page import="org.axocode.dao.service.InterTagUsersService"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.time.ZonedDateTime"%>
@@ -117,8 +119,13 @@
             
             
             
-
+                    
                     if(flag != false){
+
+                    InterTagUsersService tag = new InterTagUsersService();
+                    InterTagUsers tagUser = new InterTagUsers();
+                    tagUser.setTagUser(SIUserNum);
+                    tag.addInterTagUsers(tagUser);
 
                     String SIUser = request.getParameter("IUser");
                     String SIAge = request.getParameter("IAge");

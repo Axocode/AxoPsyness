@@ -119,8 +119,8 @@
         <div class="header_inicio_clinicas">
             <div class="bg-white">
                 <nav class="mx-auto flex max-w-lg items-center justify-between p-2 lg:px-12">    
-                        <button id="btn_feed" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Inicio</button>
-                        <button id="btn_feed" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Clínicas</button>
+                    <button id="btn_feed" onclick="location.href='feed-new.jsp'" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Inicio</button>
+                        <button id="btn_feed" onclick="location.href='feed-psicologos.jsp'" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Clínicas</button>
                 </nav>
             </div>
         </div>

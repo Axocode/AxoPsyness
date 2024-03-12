@@ -166,9 +166,20 @@
             </div>
         </div>
     </header>
+<<<<<<< HEAD
                                 
                             <!-- SIDEBAR -->
     
+=======
+                      <div class="icon_posteo">
+                                    <button onclick="abrirModal()">
+                                        <span>
+                                            <i class="fa-solid fa-plus"></i>
+                                        </span>
+                                    </button>
+                                </div>                        
+    <!-- SIDEBAR -->
+>>>>>>> ee0d43312c4558a588259bb8367eaae248cd013b
         <aside class="sidebar_feed">
 
         <div class="sidebar_header">
@@ -239,6 +250,8 @@
             
         </nav>
     </aside>
+                        
+                        
 <!-- SIDEBAR BUSCAR --><nav class="sidebar-search">
     <div class="search-header">
         <p>Buscar</p>
@@ -312,6 +325,7 @@
                                     <input type="hidden" name="PubDate" id="PubDate" value="<%=fecha12%>" />
                                     <input type="hidden" name="PubHour" id="PubHour" value="<%=hora12%>" />
                                     <input type="hidden" name="numero123" id="numero123" value="<%=sesion.getAttribute("SIUserNum")%>" />
+                                    <input type="hidden" name="PubRol" id="PubRol" value="Feed" />
                                 </div>
                                          <!-------------------------IMPORTANTE - CAMBIOS
                                              <div>
@@ -345,40 +359,62 @@
                                            <div class="overflow-auto space-x-4 p-5" id="tags_Container">
                                                
                                                 <div class="toogle-desactivable">
-                                                    <input type="checkbox" id="toggle" class="toggle-checkbox">
-                                                    <label for="toggle" class="toggle-label"></label>      
+                                                    <input type="checkbox" id="TagPubSensible" name="TagPubSensible" class="toggle-checkbox">
+                                                    <label for="TagPubSensible" class="toggle-label"></label>      
                                                     <span>Contenido sensible</span>
                                                 </div>                                               
                                                
                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton1" onclick="alternarEstado('boton1')">
-                                                <label for="boton1">Ansiedad</label>
+                                                <input type="checkbox" id="TagPubAutoestima" name="TagPubAutoestima" onclick="alternarEstado('TagPubAutoestima')">
+                                                <label for="TagPubAutoestima">Autoestima y confianza</label>
                                               </div>
                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton2" onclick="alternarEstado('boton2')">
-                                                <label for="boton2">Depresión</label>
+                                                <input type="checkbox" id="TagPubRelaciones" name="TagPubRelaciones" onclick="alternarEstado('TagPubRelaciones')">
+                                                <label for="TagPubRelaciones">Relaciones interpersonales</label>
                                               </div>
                                                <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton3" onclick="alternarEstado('boton2')">
-                                                <label for="boton3">TDAH</label>
+                                                <input type="checkbox" id="TagPubAnsiedad" name="TagPubAnsiedad" onclick="alternarEstado('TagPubAnsiedad')">
+                                                <label for="TagPubAnsiedad">Ansiedad y estrés</label>
                                               </div>
                                                <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton4" onclick="alternarEstado('boton2')">
-                                                <label for="boton4">Estrés</label>
+                                                <input type="checkbox" id="TagPubDepresion" name="TagPubDepresion" onclick="alternarEstado('TagPubDepresion')">
+                                                <label for="TagPubDepresion">Depresión</label>
                                               </div>
                                                <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton5" onclick="alternarEstado('boton2')">
-                                                <label for="boton5">Bipolaridad</label>
+                                                <input type="checkbox" id="TagPubConflictos" name="TagPubConflictos" onclick="alternarEstado('TagPubConflictos')">
+                                                <label for="TagPubConflictos">Resolución de conflictos</label>
                                               </div>
                                                <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton6" onclick="alternarEstado('boton2')">
-                                                <label for="boton6">Déficit Atención</label>
+                                                <input type="checkbox" id="TagPubBienestar" name="TagPubBienestar" onclick="alternarEstado('TagPubBienestar')">
+                                                <label for="TagPubBienestar">Mindfulness y bienestar</label>
                                               </div>
                                                <div class="boton-desactivable">
+<<<<<<< HEAD
                                                 <input type="checkbox" id="boton7" onclick="alternarEstado('boton2')">
                                                 <label for="boton7">Adicciones</label>
                                               </div>       
                                                
+=======
+                                                <input type="checkbox" id="TagPubCrecimiento" name="TagPubCrecimiento" onclick="alternarEstado('TagPubCrecimiento')">
+                                                <label for="TagPubCrecimiento">Crecimiento personal</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="TagPubSalud" name="TagPubSalud" onclick="alternarEstado('TagPubSalud')">
+                                                <label for="TagPubSalud">Salud emocional</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="TagPubTranstornos" name="TagPubTranstornos" onclick="alternarEstado('TagPubTranstornos')">
+                                                <label for="TagPubTranstornos">Transtornos</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="TagPubRecaidas" name="TagPubRecaidas" onclick="alternarEstado('TagPubRecaidas')">
+                                                <label for="TagPubRecaidas">Recaidas</label>
+                                              </div>
+                                               <div class="boton-desactivable">
+                                                <input type="checkbox" id="TagPubSueno" name="TagPubSueno" onclick="alternarEstado('TagPubSueno')">
+                                                <label for="TagPubSueno">Problemas de sueño</label>
+                                              </div>
+>>>>>>> ee0d43312c4558a588259bb8367eaae248cd013b
                                            </div>  
                                         
 
@@ -502,6 +538,7 @@
                     </form>
                 </div>
             </div>                 
+<<<<<<< HEAD
                                             <div class="icon_posteo">
                                                 <button onclick="abrirModal()">
                                                     <span>
@@ -511,6 +548,8 @@
                                             </div>
                                 
                                 
+=======
+>>>>>>> ee0d43312c4558a588259bb8367eaae248cd013b
 <script src="../assets/js/ProcesosAjax.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../assets/js/Perspective.js" defer></script>
