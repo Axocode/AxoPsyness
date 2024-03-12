@@ -198,7 +198,7 @@
                 </span>
             </button>
 
-            <button onclick="location.href='chat1.jsp'">
+            <button onclick="location.href='chat-new.jsp'">
                 <span>
                     <i class='bx bxl-telegram' >
                         <!--<span>15</span>-->
@@ -237,7 +237,9 @@
             </button>
         </nav>
     </aside>
-<!-- SIDEBAR BUSCAR --><nav class="sidebar-search">
+<!-- SIDEBAR BUSCAR -->
+
+<nav class="sidebar-search">
     <div class="search-header">
         <p>Buscar</p>
     </div>

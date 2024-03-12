@@ -210,9 +210,9 @@
             <div class="bg-gradient-to-tr flex from-blue-400 h-52 items-center justify-center lg:h-80 pb-10 relative to-blue-300 via-blue-400 w-full">
 
                 <div class="text-center max-w-xl mx-auto z-10 relative px-5">
-                    <div class="lg:text-4xl text-2xl text-white font-semibold mb-3"> Contactar Psicologo </div>
-                    <div class="text-white text-lg font-medium text-opacity-90"> Hola que tal! Soy "Nombre" 
-                        <br>Contactame si tienes alguna pregunta o situacion, recuerda que tu salud mental es muy importante!</div>
+                    <div class="lg:text-4xl text-2xl text-white font-semibold mb-3"> Contactar Clinica </div>
+                    <div class="text-white text-lg font-medium text-opacity-90"> Hola que tal! Somos "Nombre" 
+                        <br>Contactanos si tienes alguna pregunta o situacion, recuerda que tu salud mental es muy importante!</div>
     
                 </div>
             
