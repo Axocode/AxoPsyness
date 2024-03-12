@@ -64,7 +64,7 @@ public class InterPubService extends Conexion<InterPub>
     return null;
 }
 
-      public List<InterPub> getInterPubListPsico(int count, int offset) {
+      public List<InterPub> getInterPubListPsic(int count, int offset) {
     List<InterPub> pubList = null;
     Connection connection = null;
     PreparedStatement preparedStatement = null;

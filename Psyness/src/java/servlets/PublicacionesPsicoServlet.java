@@ -91,7 +91,7 @@ public class PublicacionesPsicoServlet extends HttpServlet {
         int startIdx = 5;
         int endIdx = 5 * TotalCiclos;
         
-        List<InterPub> list = pubService.getInterPubListPsico(startIdx, endIdx);
+        List<InterPub> list = pubService.getInterPubListPsic(startIdx, endIdx);
                     int Cantidad = 0;
                     
                     try (PrintWriter out = response.getWriter()){
