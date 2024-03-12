@@ -4,6 +4,9 @@
     Author     : makak
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="org.axocode.dao.InterUsers"%>
+<%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -107,205 +110,41 @@
                                                 </div>
                                             </div>
                                             <nav>
-                                                <input class="box-search" type="text" placeholder="Buscar">
+                                                <input autofocus oninput="buscarEnTiempoRealL()" class="box-search" id="buscadito" type="text" placeholder="Buscar">
                                             </nav>
-
-                                            <ul role="list" class="overflow-auto divide-y divide-gray-100 border-b" id="busquedas_users_contenedor">
-                                                <li class="flex justify-between gap-x-6 py-5" >
-                                                  <div class="flex min-w-0 gap-x-4" id="busquedas_users">
-                                                    <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="images/prof1.png" alt="">
-                                                    <div class="min-w-0 flex-auto">
-                                                      <p class="text-sm font-semibold leading-6 text-gray-900" id="texto_busqeuda_user">Yorch1234</p>
-                                                      <p class="mt-1 truncate text-xs leading-5 text-gray-500">Yorch</p>
-                                                    </div>
-                                                  </div>   
-                                                    <div class="select-menusito">
-                                                        <select id="miSelect" class="select-menu">
-                                                            <option value="opcion1">Psicologos</option>
-                                                            <option value="opcion2">Pacientes</option>
-                                                            <option value="opcion3">Ye</option>
-                                                        </select>
-                                                        <button class="boton-select-menusito">Dar de Alta</button>
-
-                                                    </div>
-                                                </li>
-                                                <li class="flex justify-between gap-x-6 py-5" id="busquedas_users_contenedor">
-                                                    <div class="flex min-w-0 gap-x-4" id="busquedas_users">
-                                                      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="images/prof2.png" alt="">
-                                                      <div class="min-w-0 flex-auto">
-                                                        <p class="text-sm font-semibold leading-6 text-gray-900"  id="texto_busqeuda_user">Vargas1341</p>
-                                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">FerVargas</p>
-                                                      </div>
-                                                    </div>
-                                                    <div class="select-menusito">
-                                                        <select id="miSelect" class="select-menu">
-                                                            <option value="opcion1">Psicologos</option>
-                                                            <option value="opcion2">Pacientes</option>
-                                                            <option value="opcion3">Ye</option>
-                                                        </select>
-                                                        <button class="boton-select-menusito">Dar de Alta</button>
-                                                    </div>
-                                                  </li>
-                                                  <li class="flex justify-between gap-x-6 py-5" id="busquedas_users_contenedor">
-                                                    <div class="flex min-w-0 gap-x-4" id="busquedas_users">
-                                                      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="images/prof3.png" alt="">
-                                                      <div class="min-w-0 flex-auto">
-                                                        <p class="text-sm font-semibold leading-6 text-gray-900"  id="texto_busqeuda_user">JohanUwW</p>
-                                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Yohan</p>
-                                                      </div>
-                                                    </div>
-                                                    <div class="select-menusito">
-                                                        <select id="miSelect" class="select-menu">
-                                                            <option value="opcion1">Psicologos</option>
-                                                            <option value="opcion2">Pacientes</option>
-                                                            <option value="opcion3">Ye</option>
-                                                        </select>
-                                                        <button class="boton-select-menusito">Dar de Alta</button>
-                                                    </div>
-                                                  </li>
-                                                  <li class="flex justify-between gap-x-6 py-5" id="busquedas_users_contenedor">
-                                                    <div class="flex min-w-0 gap-x-4" id="busquedas_users">
-                                                      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="images/prof4.png" alt="">
-                                                      <div class="min-w-0 flex-auto">
-                                                        <p class="text-sm font-semibold leading-6 text-gray-900"  id="texto_busqeuda_user">Axel42891</p>
-                                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Nextle</p>
-                                                      </div>
-                                                    </div>
-                                                    <div class="select-menusito">
-                                                        <select id="miSelect" class="select-menu">
-                                                            <option value="opcion1">Psicologos</option>
-                                                            <option value="opcion2">Pacientes</option>
-                                                            <option value="opcion3">Ye</option>
-                                                        </select>
-                                                        <button class="boton-select-menusito">Dar de Alta</button>
-                                                    </div>
-                                                  </li>
-                                                  <li class="flex justify-between gap-x-6 py-5" id="busquedas_users_contenedor">
-                                                    <div class="flex min-w-0 gap-x-4" id="busquedas_users">
-                                                      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="images/prof5.png" alt="">
-                                                      <div class="min-w-0 flex-auto">
-                                                        <p class="text-sm font-semibold leading-6 text-gray-900"  id="texto_busqeuda_user">Perro_NAOH</p>
-                                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Doggy</p>
-                                                      </div>
-                                                    </div>
-                                                     <div class="select-menusito">
-                                                        <select id="miSelect" class="select-menu">
-                                                            <option value="opcion1">Psicologos</option>
-                                                            <option value="opcion2">Pacientes</option>
-                                                            <option value="opcion3">Ye</option>
-                                                        </select>
-                                                         <button class="boton-select-menusito">Dar de Alta</button>
-                                                    </div>
-                                                  </li>
-                                                  <li class="flex justify-between gap-x-6 py-5" id="busquedas_users_contenedor">
-                                                    <div class="flex min-w-0 gap-x-4" id="busquedas_users">
-                                                      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="images/prof6.png" alt="">
-                                                      <div class="min-w-0 flex-auto">
-                                                        <p class="text-sm font-semibold leading-6 text-gray-900"  id="texto_busqeuda_user">Yael48392</p>
-                                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">Valentain</p>
-                                                      </div>
-                                                    </div>
-                                                    <div class="select-menusito">
-                                                        <select id="miSelect" class="select-menu">
-                                                            <option value="opcion1">Psicologos</option>
-                                                            <option value="opcion2">Pacientes</option>
-                                                            <option value="opcion3">Ye</option>
-                                                        </select>
-                                                        <button class="boton-select-menusito">Dar de Alta</button>
-                                                    </div>
-                                                  </li>
-                                              </ul>
+                                            <ul role="list" class="overflow-auto divide-y divide-gray-100 border-b" id="busquedas">
+                                                
+                                            </ul>
 
 
                                         </div>      
                                     </div>
                                 </div>
-                            
-                            
-
                         </div>
-                    
-                   
-
-
                         <!----------------- Sidebar - Profile---------------------->
                         <div class="lg:w-1/3 w-full" id="sidebar_registros">
                             <div uk-sticky="media @m ; offset:80 ; bottom : true" class="card">
-                            
-                            
                                 <div class="border-b flex items-center justify-between p-4">
                                     <div>
                                         <h2 class="text-lg font-semibold">Usuarios Registrados</h2>
                                     </div>
                                 </div>
-                            
                                 <div class="p-4 -mt-1.5">
-                            
+                                    <!--  
                                     <div class="flex items-center space-x-4 rounded-md -mx-2 p-2 hover:bg-gray-50">
                                         <a href="timeline.html" href="timeline.html"iv class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
                                             <img src="assets/images/avatars/prof3.png" class="absolute w-full h-full inset-0 " alt="">
                                         </a>
                                         <div class="flex-1">
                                             <a href="timeline.html" class="text-base font-semibold capitalize"> U1</a>
-                                            <div class="text-sm text-gray-500 mt-0.5"> 845K Following</div>
+                                            <div class="text-sm text-gray-500 mt-0.5"> </div>
                                         </div>
                                             <div class="boton-tipo-user font-semibold">
                                                 <h2>Psicologo</h2>
                                              </div>
                                     </div>
-                                    <div class="flex items-center space-x-4 rounded-md -mx-2 p-2 hover:bg-gray-50">
-                                        <a href="timeline.html" class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
-                                            <img src="assets/images/avatars/prof2.png" class="absolute w-full h-full inset-0 " alt="">
-                                        </a>
-                                        <div class="flex-1">
-                                            <a href="timeline.html" class="text-base font-semibold capitalize"> U2 </a>
-                                            <div class="text-sm text-gray-500 mt-0.5"> 356k Following </div>
-                                        </div>
-                                            <div class="boton-tipo-user font-semibold">
-                                                <h2>Paciente</h2>
-                                             </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4 rounded-md -mx-2 p-2 hover:bg-gray-50">
-                                        <a href="timeline.html" class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
-                                            <img src="assets/images/avatars/prof7.png" class="absolute w-full h-full inset-0" alt="">
-                                        </a>
-                                        <div class="flex-1">
-                                            <a href="timeline.html" class="text-base font-semibold capitalize">U3</a>
-                                            <div class="text-sm text-gray-500 mt-0.5"> 845K Following</div>
-                                        </div>
-                                            <div class="boton-tipo-user font-semibold">
-                                                <h2>Paciente</h2>
-                                             </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4 rounded-md -mx-2 p-2 hover:bg-gray-50">
-                                        <a href="timeline.html" class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
-                                            <img src="assets/images/avatars/prof7.png" class="absolute w-full h-full inset-0" alt="">
-                                        </a>
-                                        <div class="flex-1">
-                                            <a href="timeline.html" class="text-base font-semibold capitalize">U4</a>
-                                            <div class="text-sm text-gray-500 mt-0.5"> 845K Following</div>
-                                        </div>
-                                            <div class="boton-tipo-user font-semibold">
-                                                <h2>Ye</h2>
-                                             </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4 rounded-md -mx-2 p-2 hover:bg-gray-50">
-                                        <a href="timeline.html" class="w-12 h-12 flex-shrink-0 overflow-hidden rounded-full relative">
-                                            <img src="assets/images/avatars/prof7.png" class="absolute w-full h-full inset-0" alt="">
-                                        </a>
-                                        <div class="flex-1">
-                                            <a href="timeline.html" class="text-base font-semibold capitalize">U5</a>
-                                            <div class="text-sm text-gray-500 mt-0.5"> 845K Following</div>
-                                        </div>
-                                            <div class="boton-tipo-user font-semibold">
-                                                <h2>Psicologo</h2>
-                                             </div>
-                                    </div>
-                                    
-                            
+                                    -->
                                 </div>
-                            
-
                             </div>
                         </div>
 
@@ -317,6 +156,25 @@
             
         </div>
     </body>
-    
+    <script>
+    function buscarEnTiempoRealL() {
+        var searchTerm = document.getElementById('buscadito').value;
+
+        // Asegúrate de que la URL sea correcta
+        var url = '/Psyness/BusquedaUsuariosClinicaServlet?teerm=' + searchTerm;
+
+        // Realizar solicitud AJAX
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(data) {
+                $('#busquedas').html(data);
+            },error: function(xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", status, error);
+                console.log(xhr.responseText);  // Agrega esta línea para mostrar la respuesta del servidor en la consola.
+            }
+        });
+    }
+</script>
     
 </html>

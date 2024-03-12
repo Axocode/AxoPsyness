@@ -4,6 +4,7 @@
     Author     : admin
 --%>
 
+<%@page import="org.axocode.dao.service.InterClinicService"%>
 <%@page import="org.axocode.dao.InterComent"%>
 <%@page import="org.axocode.dao.service.InterComentService"%>
 <%@page import="org.axocode.helper.InterComentHelper"%>
@@ -120,7 +121,13 @@
             <div class="bg-white">
                 <nav class="mx-auto flex max-w-lg items-center justify-between p-2 lg:px-12">    
                     <button id="btn_feed" onclick="location.href='feed-new.jsp'" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Inicio</button>
-                        <button id="btn_feed" onclick="location.href='feed-psicologos.jsp'" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Clínicas</button>
+                    <%
+                    InterClinicService clinica = new InterClinicService();
+                    if (clinica.checkIfUserExistsInClinic(Integer.parseInt(sesion.getAttribute("SIUserNum").toString()))) {  
+                    %>
+                    <button id="btn_feed" onclick="location.href='feed-psicologos.jsp'" class="text-sm font-semibold leading-8 text-gray-900 hover:bg-gray-100">Clínicas</button>
+                    <%}
+                    %>
                 </nav>
             </div>
         </div>
@@ -301,7 +308,7 @@
                                                     <ul class="space-y-1">
                                                       <li> 
                                                           <a onclick="location.href='../index.jsp?cerrar=true'" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                            <i class="icon-feather-log-out px-1"></i> Log Out
+                                                            <i class="icon-feather-log-out px-1"></i> Cerrar
                                                           </a> 
                                                       </li>
                                                     </ul>
