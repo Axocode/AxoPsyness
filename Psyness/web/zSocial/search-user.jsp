@@ -75,6 +75,25 @@
                                 </div>
                                 
                             </div>
+                                
+                            <style>
+                                .boton-select-menusito {
+                                    padding: 10px 15px;
+                                    font-size: 16px;
+                                    font-weight: bold;
+                                    color: #fff;
+                                    background-color: #99d1ff;
+                                    border: none;
+                                    border-radius: 5px;
+                                    cursor: pointer;
+                                    transition: background-color 0.3s ease;
+                                  }
+
+                                  .boton-select-menusito:hover {
+                                    background-color: #787df1;
+                                  }
+
+                            </style>
                             
                                     <!--BOXES PUB-->
 
@@ -106,6 +125,8 @@
                                                             <option value="opcion2">Pacientes</option>
                                                             <option value="opcion3">Ye</option>
                                                         </select>
+                                                        <button class="boton-select-menusito">Dar de Alta</button>
+
                                                     </div>
                                                 </li>
                                                 <li class="flex justify-between gap-x-6 py-5" id="busquedas_users_contenedor">
@@ -122,6 +143,7 @@
                                                             <option value="opcion2">Pacientes</option>
                                                             <option value="opcion3">Ye</option>
                                                         </select>
+                                                        <button class="boton-select-menusito">Dar de Alta</button>
                                                     </div>
                                                   </li>
                                                   <li class="flex justify-between gap-x-6 py-5" id="busquedas_users_contenedor">
@@ -138,6 +160,7 @@
                                                             <option value="opcion2">Pacientes</option>
                                                             <option value="opcion3">Ye</option>
                                                         </select>
+                                                        <button class="boton-select-menusito">Dar de Alta</button>
                                                     </div>
                                                   </li>
                                                   <li class="flex justify-between gap-x-6 py-5" id="busquedas_users_contenedor">
@@ -154,6 +177,7 @@
                                                             <option value="opcion2">Pacientes</option>
                                                             <option value="opcion3">Ye</option>
                                                         </select>
+                                                        <button class="boton-select-menusito">Dar de Alta</button>
                                                     </div>
                                                   </li>
                                                   <li class="flex justify-between gap-x-6 py-5" id="busquedas_users_contenedor">
@@ -170,6 +194,7 @@
                                                             <option value="opcion2">Pacientes</option>
                                                             <option value="opcion3">Ye</option>
                                                         </select>
+                                                         <button class="boton-select-menusito">Dar de Alta</button>
                                                     </div>
                                                   </li>
                                                   <li class="flex justify-between gap-x-6 py-5" id="busquedas_users_contenedor">
@@ -186,6 +211,7 @@
                                                             <option value="opcion2">Pacientes</option>
                                                             <option value="opcion3">Ye</option>
                                                         </select>
+                                                        <button class="boton-select-menusito">Dar de Alta</button>
                                                     </div>
                                                   </li>
                                               </ul>

@@ -856,6 +856,24 @@ body{
         padding-top: 60px;
     }
     
+    .select-menusito{
+        display: block !important;
+    }
+    
+    .select-menu{
+        margin-bottom: 5px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .sidebar_registros{
+        display: none !important;
+        visibility: hidden;
+        opacity: 0;
+    }
+        
+
+    
 }
 
 
@@ -996,13 +1014,18 @@ body{
 
 /* Select menu */
 
+.select-menusito{
+    display: flex;
+}
+
 .select-menu {
     width: 170px;
-    padding: 10px;
+    padding: 10px 20px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
+    margin-right: 10px;
     color: #333;
 }
 
