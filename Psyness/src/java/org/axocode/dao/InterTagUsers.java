@@ -3,7 +3,6 @@ package org.axocode.dao;
 import java.io.Serializable;
 
 public class InterTagUsers implements Serializable{
-    private int TagUserNum;
     private int TagUser;
     private int TagUserSensible;
     private int TagUserAutoestima;
@@ -17,34 +16,6 @@ public class InterTagUsers implements Serializable{
     private int TagUserTranstornos;
     private int TagUserRecaidas;
     private int TagUserSueno;
-
-    public InterTagUsers(int TagUserNum, int TagUser, int TagUserSensible, int TagUserAutoestima, int TagUserRelaciones, int TagUserAnsiedad, int TagUserbDepresion, int TagUserConflictos, int TagUserBienestar, int TagUserCrecimiento, int TagUserSalud, int TagUserTranstornos, int TagUserRecaidas, int TagUserSueno) {
-        this.TagUserNum = TagUserNum;
-        this.TagUser = TagUser;
-        this.TagUserSensible = TagUserSensible;
-        this.TagUserAutoestima = TagUserAutoestima;
-        this.TagUserRelaciones = TagUserRelaciones;
-        this.TagUserAnsiedad = TagUserAnsiedad;
-        this.TagUserbDepresion = TagUserbDepresion;
-        this.TagUserConflictos = TagUserConflictos;
-        this.TagUserBienestar = TagUserBienestar;
-        this.TagUserCrecimiento = TagUserCrecimiento;
-        this.TagUserSalud = TagUserSalud;
-        this.TagUserTranstornos = TagUserTranstornos;
-        this.TagUserRecaidas = TagUserRecaidas;
-        this.TagUserSueno = TagUserSueno;
-    }
-
-    public InterTagUsers() {
-    }
-    
-    public int getTagUserNum() {
-        return TagUserNum;
-    }
-
-    public void setTagUserNum(int TagUserNum) {
-        this.TagUserNum = TagUserNum;
-    }
 
     public int getTagUser() {
         return TagUser;
@@ -149,5 +120,6 @@ public class InterTagUsers implements Serializable{
     public void setTagUserSueno(int TagUserSueno) {
         this.TagUserSueno = TagUserSueno;
     }
+
     
 }

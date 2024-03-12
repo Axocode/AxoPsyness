@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-<<<<<<< HEAD
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/AxoPsyness/Psyness/web/zSocial/sidebar.jsp</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/zSocial/chat1.jsp</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/assets/css/style2.css</file>
-            <file>file:/D:/AxoPsyness/Psyness/web/zSocial/settings-new.jsp</file>
-            <file>file:/D:/AxoPsyness/Psyness/src/java/org/axocode/dao/service/Conexion.java</file>
-=======
-            <file>file:/C:/Users/BD1/Documents/5to/AxoPsyness/AxoPsyness/Psyness/web/zSocial/profile-new.jsp</file>
-            <file>file:/C:/Users/BD1/Documents/5to/AxoPsyness/AxoPsyness/Psyness/web/zSocial/feed-new.jsp</file>
-            <file>file:/C:/Users/BD1/Documents/5to/AxoPsyness/AxoPsyness/Psyness/web/assets/js/ProcesosAjax.js</file>
-            <file>file:/C:/Users/BD1/Documents/5to/AxoPsyness/AxoPsyness/Psyness/web/zProcesos/ia.js</file>
-            <file>file:/C:/Users/BD1/Documents/5to/AxoPsyness/AxoPsyness/Psyness/web/assets/js/feel.js</file>
-            <file>file:/C:/Users/BD1/Documents/5to/AxoPsyness/AxoPsyness/Psyness/src/java/org/axocode/dao/service/Conexion.java</file>
-            <file>file:/C:/Users/BD1/Documents/5to/AxoPsyness/AxoPsyness/Psyness/web/assets/js/Perspective.js</file>
->>>>>>> 2bba8971ee30991168fb5b5f1632394fa2839ae9
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/src/java/org/axocode/dao/service/InterUsersService.java</file>
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/src/java/api/recomendation.java</file>
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/src/java/org/axocode/dao/service/Conexion.java</file>
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/src/java/org/axocode/dao/InterTagUsers.java</file>
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/src/java/org/axocode/dao/service/InterTagUsersService.java</file>
+            <file>file:/C:/Users/chump/OneDrive/Escritorio/AxoPsyness/Psyness/src/java/api/login.java</file>
         </group>
     </open-files>
-=======
->>>>>>> c2def2856448c08f7b246f7f3a5ae1f275e79f45
 </project-private>

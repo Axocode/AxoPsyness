@@ -1,4 +1,4 @@
-<%-- 
+ <%-- 
     Document   : settings-new
     Created on : 23 nov. 2023, 19:00:41
     Author     : axelitomixxxddd
@@ -81,200 +81,7 @@
     <div id="wrapper">
 
               
-
-    <header>
-        <div class="header_wrap">
-            <div class="header_inner mcontainer">
-                <div class="left_side">
-                    
-                    <!-- Burguer de NavBar - No es necesario
-
-                        <span class="slide_menu" uk-toggle="target: #wrapper ; cls: is-collapse is-active">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M3 4h18v2H3V4zm0 7h12v2H3v-2zm0 7h18v2H3v-2z" fill="currentColor"></path></svg>
-                        </span>
-                    -->
-
-                    <div id="logo">
-                        <a href="feed-new.jsp"> 
-                            <img src="../assets/images/avatars/Logo con letras centrado.svg" alt="">
-                            <img src="../assets/images/avatars/Logo con letras centrado.svg" class="logo_mobile" alt="">
-                        </a>
-                    </div>
-                </div>
-                 
-              <!-- Busqueda icon for mobile -->
-                
-                <div class="header_search">
-                    <i class="uil-search-alt"></i> 
-                    <input value="" type="text" class="form-control" placeholder="Buscar" autocomplete="off">
-                    
-                </div>
-
-                <div class="right_side">
-
-                    <div class="header_widgets">                       
-
-                        <!-- Iconos -->
-
-                        <a href="feed-new.jsp" class="is_icon">
-                            <i class='bx bxs-home'></i>
-                        </a>
-                        
-                        <a href="data-new.jsp?follows=1" class="is_icon">
-                            <i class='bx bx-user-voice'></i>
-                        </a>
-                        
-                        <a href="settings-new.jsp" class="is_icon">
-                            <i class='bx bx-cog' ></i>  
-                        </a>
-
-                        <a href="chat1.jsp" class="is_icon" uk-tooltip="title: Message">
-                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path></svg>
-                        </a>
-
-                        <!-- Message de Bolita - Perfil -->
-                        <a href="">
-                            <img src="../assets/images/avatars/<%=data%>" class="is_avatar" alt="">
-                        </a>
-                        <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
-
-                            <a href="profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>" class="user">
-                                <div class="user_avatar">
-                                    <img src="../assets/images/avatars/<%=data%>" alt="">
-                                </div>
-                                <div class="user_name">
-                                    <div> <c:out value='<%=sesion.getAttribute("SIUser")%>'/> </div>
-                                    <span> <%=sesion.getAttribute("SIAge")%></span>
-                                </div>
-                            </a>
-                           
-                            <a href="settings-new.jsp">
-                                <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
-                                Configuración 
-                            </a>
-                            <a href="follow-new.jsp?follows=<%=sesion.getAttribute("SIUserNum")%>">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z"  clip-rule="evenodd" />
-                                </svg>
-                                Seguidores 
-                            </a>
-                            
-                            <a href="#" id="night-mode" class="btn-night-mode">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                                  </svg>
-                                 Modo oscuro
-                                <span class="btn-night-mode-switch">
-                                    <span class="uk-switch-button"></span>
-                                </span>
-                            </a>
-                            <a href="../index.jsp?cerrar=true">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                                </svg>
-                                Salir
-                            </a>
-
-                            
-                        </div>
-
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- SIDEBAR -->
-        <aside class="sidebar_feed">
-
-        <div class="sidebar_header">
-            <!--<img src="images/sololetras.svg" class="logo-img_sidebar">-->
-            <h1>Psyness</h1>
-            <img src="../images/Icono.svg" class="logo-icon_sidebar">
-        </div>
-
-
-        <nav>
-            <button onclick="location.href='feed-new.jsp'">
-                <span>
-                     <i class='bx bx-home' ></i>
-                    <span>Inicio</span>
-                </span>
-            </button>
-
-            <button id="button_search">
-                <span>
-                    <i class='bx bx-search'></i>
-                    <span>Buscar</span>
-                </span>
-            </button>
-
-            <button onclick="location.href='data-new.jsp?follows=1'">
-                <span>
-                   <i class='bx bx-user-voice' ></i>
-                    <span>Datacenter</span>
-                </span>
-            </button>
-
-            <button onclick="location.href='chat1.jsp'">
-                <span>
-                    <i class='bx bxl-telegram' >
-                        <!--<span>15</span>-->
-                        <em></em>
-                    </i>
-                    <span>Axochat</span>
-                </span>
-            </button>
-
-            <button onclick="location.href='profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>'">
-                    <span>
-                        <img src="../images/<%=sesion.getAttribute("SIImgNum")%>" alt="" class="profile-img">
-                        <span>Perfil</span>
-                    </span>
-            </button>
-            
-            <button onclick="location.href='settings-new.jsp'">
-                <span>
-                    <i class='bx bx-cog' ></i>  
-                    <span>Configuración</span>
-                </span>
-            </button>
-
-            <button onclick="abrirModal()">
-                <span>
-                    <i class="fa-solid fa-plus"></i>
-                    <span>Publicar</span>
-                </span>
-            </button>
-            
-                        <button onclick="location.href='../index.jsp?cerrar=true'">
-                <span>
-                    <i class='bx bx-log-out'></i>
-                    <span>Salir</span>
-                </span>
-            </button>
-        </nav>
-    </aside>
-<!-- SIDEBAR BUSCAR -->
-
-<nav class="sidebar-search">
-    <div class="search-header">
-        <p>Buscar</p>
-    </div>
-
-    <nav>
-        <input id="campoBusqueda" type="text" placeholder="Buscar" autofocus oninput="buscarEnTiempoReal()">
-    </nav>
-
-    <nav class="profiles_search">
-        <hr>
-        <div class="subtitle_search">
-            <p>Personas</p>
-        </div>
-
-        <div id="resultadosBusqueda"></div>
-    </nav>
-</nav>
+ <jsp:include page="sidebar2.jsp"/>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
@@ -361,13 +168,6 @@
                                         <span>4, Marzo 2024</span>
                                     </div>
     
-                                    <div class="message-bubble me">
-                                        <div class="message-bubble-inner">
-                                            <div class="message-avatar"><img src="../assets/images/avatars/prof3.png" alt=""></div>
-                                            <div class="message-text"><p>ME VALE VERGA ALV MI COMPAAAA.</p></div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
     
                                     <div class="message-bubble">
                                         <div class="message-bubble-inner">
@@ -385,7 +185,13 @@
                                     </div>
     
                                     
-    
+                                    <div class="message-bubble me">
+                                        <div class="message-bubble-inner">
+                                            <div class="message-avatar"><img src="../assets/images/avatars/prof3.png" alt=""></div>
+                                            <div class="message-text"><p>Hola Axo! te quiero mucho</p></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
                                     
     
                                     <div class="message-bubble">
@@ -496,7 +302,7 @@
 
             <nav class="responsive-nav border-b extanded mb-2 -mt-2">
                 <ul uk-switcher="connect: #chats-tab; animation: uk-animation-fade">
-                    <li class="uk-active"><a class="active" href="#0"> Psicologos </a></li>
+                    <li class="uk-active"><a class="active" href="#0"> Clinica </a></li>
                     
                 </ul>
             </nav>
@@ -512,11 +318,11 @@
                     
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
-                        <div class="contact-username">clinica1</div>
+                        <div class="contact-username">Sexenal</div>
                     </button><br><br>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
 
-                        <div class="contact-username">clinica2</div>
+                        <div class="contact-username">Cañitas</div>
                     </button><br>
                     
                     
@@ -534,18 +340,18 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">DOCTORALIA</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Sexenal</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
   <h5>NOMBRE</h5>
-  <p>Doctoralia</p>
+  <p>Sexenal</p>
   <hr><br>
   <h5>TELEFONO DE CONTACTO</h5>
-  <p>Link para contactar <a href="psiconfio.jsp" class="link-dark"> aqui</a></p>
+  <p>555 <a href="psiconfio.jsp" class="link-dark"> aqui</a></p>
   <hr><br>
-  <h5>Ubicacion</h5>
-  <p>Link para visualizar ubicacion <a href="psiconfio.jsp" class="link-dark"> aqui</a></p>
+  <h5>Plan de Guadalupe 82, Nextitla, Miguel Hidalgo, 11420 Ciudad de México, CDMX</h5>
+  <!--<p>Link para visualizar ubicacion <a href="psiconfio.jsp" class="link-dark"> aqui</a></p>-->
     </div>
       <div class="modal-footer">
         
@@ -557,17 +363,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">NEURO WELL</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cañitas</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
   <h5>NOMBRE</h5>
-  <p>Doctoralia</p>
+  <p>Cañitas</p>
   <hr><br>
   <h5>TELEFONO DE CONTACTO</h5>
-  <p>Link para contactar <a href="psiconfio.jsp" class="link-dark"> aqui</a></p>
+  <p> 555 <a href="psiconfio.jsp" class="link-dark"> aqui</a></p>
   <hr><br>
-  <h5>Ubicacion</h5>
+  <h5>C. Cañitas, Popotla, Miguel Hidalgo, 11400 Ciudad de México, CDMX</h5>
   <p>Link para visualizar ubicacion <a href="psiconfio.jsp" class="link-dark"> aqui</a></p>
     </div>
       
@@ -630,6 +436,74 @@
         })(window, document);
     </script>
   
+<script>
+    function obtenerCoordenadasYCalcularDistancia(direccion) {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(position => {
+        buscarCoordenadas(direccion, position.coords.latitude, position.coords.longitude);
+      }, error => {
+        console.error("Error al obtener la ubicación del usuario:", error);
+      }, {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      });
+    } else {
+      console.log("La geolocalización no está disponible en este navegador.");
+    }
+  }
+
+  function buscarCoordenadas(direccion, latUsuario, lonUsuario) {
+    const apiKey = 'pk.79194de17838dd557bc019090eca41e9'; // Asegúrate de que esto es una cadena de texto válida
+    const urlBase = 'https://us1.locationiq.com/v1/search.php';
+    var url = urlBase + "?key=" + apiKey + "&q=" + encodeURIComponent(direccion) + "&format=json";
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+          var data = xhr.response;
+          if (data && data.length > 0) {
+            // Accede al primer resultado
+            var lat = data[0].lat;
+            var lon = data[0].lon;
+            console.log("Latitud: " + lat + ", Longitud: " + lon);
+            var distancia = calcularDistancia(latUsuario, lonUsuario, lat, lon);
+            console.log("La distancia es: " + distancia + " kilómetros");
+
+          } else {
+            console.log("No se encontraron resultados.");
+          }
+        } else {
+          console.error('Error al obtener las coordenadas:', xhr.statusText);
+        }
+      };
+    xhr.onerror = function() {
+      console.error('Error en la solicitud a la API.');
+    };
+    xhr.send();
+  }
+
+  function calcularDistancia(lat1, lon1, lat2, lon2) {
+    const radioTierra = 6371; // Radio de la Tierra en kilómetros
+    const rad = x => x * Math.PI / 180;
+    const dLat = rad(lat2 - lat1);
+    const dLon = rad(lon2 - lon1);
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(rad(lat1)) * Math.cos(rad(lat2)) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return radioTierra * c;
+  }
+
+  // Ejemplo de uso
+  obtenerCoordenadasYCalcularDistancia("C. Cañitas, Popotla, Miguel Hidalgo, 11400 Ciudad de México, CDMX");
+  obtenerCoordenadasYCalcularDistancia("Plan de Guadalupe 82, Nextitla, Miguel Hidalgo, 11420 Ciudad de México, CDMX");
+
+</script>
+
+    
     <!-- Javascript
     ================================================== -->
     <script src="../assets/js/tippy.all.min.js"></script>
