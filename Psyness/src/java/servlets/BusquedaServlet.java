@@ -33,7 +33,7 @@ public class BusquedaServlet extends HttpServlet {
                     // Renderiza cada usuario como un elemento HTML
                     out.println("<div class='box_profile_search' onclick=\"location.href='profile-new.jsp?id=" + user.getIUserNum() + "'\">");
                     out.println("<img src='../images/" + user.getIImgNum() + "' alt='User Image' class='img_search'>");
-                    out.println("<p>" + user.getIUser() + "<span> Edad: " + user.getIAge() + "</span></p>");
+                    out.println("<p>" + user.getIUser() + "</p>");
                     out.println("<div class='icons_X'><i class='bx bx-x'></i></div></div>");
                 }
             } else {

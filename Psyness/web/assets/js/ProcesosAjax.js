@@ -335,6 +335,7 @@ $(document).ready(function () {
 
 */
 
+
 async function fetchWithBackoff(url, options, maxAttempts = 5, attempt = 1) {
    const backoffDelay = (attempt) => Math.min(1000 * Math.pow(2, attempt), 30000);
    try {

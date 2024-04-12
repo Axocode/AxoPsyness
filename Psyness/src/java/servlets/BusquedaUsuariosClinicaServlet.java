@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.axocode.dao.InterUsers;
+import org.axocode.dao.service.InterClinicService;
 import org.axocode.dao.service.InterUsersService;
 
 /**
@@ -49,33 +51,65 @@ public class BusquedaUsuariosClinicaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String searchTerm = request.getParameter("teerm"); // Asegúrate de corregir "teerm" a "term" si fue un error tipográfico.
+        HttpSession sesion = request.getSession();    
+        int numero = 0;
+        String searchTerm = request.getParameter("teerm");
         InterUsersService service = new InterUsersService();
         List<InterUsers> users = service.getInterUsersListByTerm(searchTerm);
+        InterClinicService clinicService = new InterClinicService();
+        int numeroClinica = clinicService.getkClinicNumByUserId(1);
 
         try (PrintWriter out = response.getWriter()) {
             if (users != null && !users.isEmpty()) {
                 for (InterUsers user : users) {
-                    out.println("<li class='flex justify-between gap-x-6 py-5'>");
-                    out.println("<div class='flex min-w-0 gap-x-4' id='busquedas_users'>");
-                    out.println("<img class='h-12 w-12 flex-none rounded-full bg-gray-50' src='../images/" + user.getIImgNum() + "' alt=''>");
-                    out.println("<div class='min-w-0 flex-auto'>");
-                    out.println("<p class='text-sm font-semibold leading-6 text-gray-900' id='texto_busqeuda_user'>" + user.getIUser() + "</p>");
-                    out.println("<p class='mt-1 truncate text-xs leading-5 text-gray-500'>" + user.getIAge() + "</p>");
-                    out.println("</div></div>");
-                    out.println("<div class='select-menusito'>");
-                    out.println("<form id='opcion1' accept-charset='UTF-8'>");
-                    out.println("<select id='miSelect' class='select-menu'>");
-                    out.println("<option id='opnada' value='opcion1'>Selecciona</option>");
-                    out.println("<option id='oppacien' value='opcion2'>Paciente</option>");
-                    out.println("<option id='oppsi' value='opcion3'>Psicologo</option>");
-                    out.println("</select>");
-                    out.println("<button type='submit' class='boton-select-menusito'>Dar de Alta</button>");
-                    out.println("</form></div></li>");
+                    if (!user.getIUserNum().equals(sesion.getAttribute("SIUserNum"))) {
+                        numero++;
+                        String selectId = "miSelect" + numero;
+                        String botonId = "submitButton" + numero;
+                        String resultado = clinicService.checkUserRol(user.getIUserNum(), numeroClinica);
+                        String paciente = null;
+                        String clinica = null;
+                        String nulo = "selected"; 
+                        if (resultado != null) {
+                            if (resultado.equals("Paciente")) {
+                                paciente = "selected";
+                                nulo = null;
+                            } else if (resultado.equals("Psicologo")) {
+                                clinica = "selected";
+                                nulo = null;
+                            } 
+                        }
+                        
+                        
+                        out.println("<li class='flex justify-between gap-x-6 py-5'>");
+                        out.println("<div class='flex min-w-0 gap-x-4' id='busquedas_users'>");
+                        out.println("<img class='h-12 w-12 flex-none rounded-full bg-gray-50' src='../images/" + user.getIImgNum() + "' alt=''>");
+                        out.println("<div class='min-w-0 flex-auto'>");
+                        out.println("<p class='text-sm font-semibold leading-6 text-gray-900' id='texto_busqueda_user'>" + user.getIUser() + "</p>");
+                        out.println("<p class='mt-1 truncate text-xs leading-5 text-gray-500'>" + user.getIAge() + "</p>");
+                        out.println("</div></div>");
+                        out.println("<div class='select-menusito'>");
+
+                        // Asegúrate de que este formulario apunte a tu servlet o endpoint correcto
+                        out.println("<form id='opcion1' accept-charset='UTF-8' >");
+
+                        // Campo oculto para el número de clínica
+                        out.println("<input type='hidden' name='clinicNum' value='" + numeroClinica + "'>");
+
+                        // Campo oculto para el número de usuario
+                        out.println("<input type='hidden' name='userNum' value='" + user.getIUserNum() + "'>");
+
+                        out.println("<select id='" + selectId + "' name='userRole' class='select-menu'>");
+                        out.println("<option id='opnada' value='Desvinculado'" + nulo + ">Desvinculado</option>");
+                        out.println("<option id='oppacien' value='Paciente'" + paciente + ">Paciente</option>");
+                        out.println("<option id='oppsi' value='Psicologo'" + clinica + ">Psicologo</option>");
+                        out.println("</select>");
+                        String textoBoton = (paciente != null || clinica != null) ? "Modificar rol" : "Dar de Alta";
+                        out.println("<button type='button' onclick='enviarDatos(" + numeroClinica + ", " + user.getIUserNum() + ", " + numero + ")' id='submitButton" + numero + "' class='submitButton boton-select-menusito'>" + textoBoton + "</button>");
+                        out.println("</form></div></li>");
+                    }
                 }
             } else {
-                // Mensaje de no resultados encontrados
                 out.println("<p>No se encontraron usuarios.</p>");
             }
         }

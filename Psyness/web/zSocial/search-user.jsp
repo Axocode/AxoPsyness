@@ -171,10 +171,31 @@
                 $('#busquedas').html(data);
             },error: function(xhr, status, error) {
                 console.error("Error en la solicitud AJAX:", status, error);
-                console.log(xhr.responseText);  // Agrega esta línea para mostrar la respuesta del servidor en la consola.
+                console.log(xhr.responseText);
             }
         });
     }
+    
+    function enviarDatos(clinicNum, userNum, numero) {
+        // Construye los IDs basados en `numero`
+        var selectId = "miSelect" + numero;
+
+        // Usa el ID construido para encontrar el select y obtener el valor seleccionado
+        var userRole = $('#' + selectId).val();
+
+        // Ejecuta la solicitud AJAX como antes, usando userRole
+        $.ajax({
+            type: "GET",
+            url: "/Psyness/ServletModificarClinica?clinicNum=" + clinicNum + "&userNum=" + userNum + "&userRole=" + userRole,
+            success: function(response) {
+                alert("Operación realizada con éxito");
+            },
+            error: function(xhr, status, error) {
+                console.error("Error en la solicitud AJAX: " + status + ", " + error);
+            }
+        });
+    }
+
 </script>
     
 </html>
