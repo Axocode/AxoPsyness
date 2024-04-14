@@ -113,21 +113,19 @@ function mostrarNotificacion(mensaje, tipo, numero) {
             gravity: "bottom",
             position: 'center',
             style: {
-                background: tipo === "success" ? "#6B64F4" : "#FF6347",
+                background: tipo === "success" ? "#787DF1" : "#FFFFF",
             },
             onClick: function () {
-                window.open("profile-new.jsp?id=" + numero, '_blank');
+                window.open("post.jsp?id=" + numero, '_blank');
             },
-            onHidden: function () {
-                setTimeout(function () {
+        }).showToast();
+            setTimeout(function () {
                     notificacionEnCooldown = false;
                 }, 5000); // 5 segundos de cooldown
-            }
-        }).showToast();
     }
 }
 
-function mostrarNotificacionComent(mensaje, tipo, numero) {
+function mostrarNotificacionErorr(mensaje, tipo) {
     if (!notificacionEnCooldown) {
         notificacionEnCooldown = true;
         Toastify({
@@ -137,17 +135,12 @@ function mostrarNotificacionComent(mensaje, tipo, numero) {
             gravity: "bottom",
             position: 'center',
             style: {
-                background: tipo === "success" ? "#6B64F4" : "#FF6347",
+                background: tipo === "success" ? "#99D1FF" : "#FFFFF",
             },
-            onClick: function () {
-                window.open("post.jsp?id=" + numero, '_blank');
-            },
-            onHidden: function () {
-                setTimeout(function () {
+        }).showToast();
+            setTimeout(function () {
                     notificacionEnCooldown = false;
                 }, 5000); // 5 segundos de cooldown
-            }
-        }).showToast();
     }
 }
 
@@ -203,31 +196,37 @@ $(document).ready(function () {
                                 TagPubRecaidas: $("#TagPubRecaidas").is(':checked') ? 5 : 0,
                                 TagPubSueno: $("#TagPubSueno").is(':checked') ? 5 : 0
                             },
-                            success: function (response) {
+                            success: function (data) {
+                                $('#hiAxogg').html(data);
+                                $('#hiAxogg1').html(data);
                                 console.log("Formulario enviado por AJAX", numero1);
-                                console.log(response);
                                 doPub();
                                 UIkit.modal("#create-post-modal").hide();
                                 document.getElementById('inputText').value = '';
                                 var botonPublicar = document.getElementById('guardadito1');
                                 var colorOriginal = window.getComputedStyle(botonPublicar).backgroundColor;
                                 botonPublicar.style.backgroundColor = '#CFCFCF';
-                                
                                 setTimeout(function () {
                                     resPub();
                                     botonPublicar.style.backgroundColor = colorOriginal;
                                 }, 10000);
-
-                                  // Ejemplo de uso
-                                  mostrarNotificacion("Publicación válida. Ver Publicacion", "success", numero1);
-                                  $(".boton-desactivable input[type='checkbox']").each(function() {
-                                    $(this).prop('checked', false);
+                                var elemento = document.getElementById('resultadoPublicacion');
+                                var contenido = elemento.textContent || elemento.innerText;
+                                if (contenido === "error") {
+                                    mostrarNotificacionErorr("Espera un poco para volver a publicar", "success");
+                                    $(".boton-desactivable input[type='checkbox']").each(function() {
+                                      $(this).prop('checked', false);
                                     });
-                            },
-                            error: function (error) {
-                                // Maneja los errores aquí
-                                console.error("Error en la solicitud AJAX: ", error);
-                            }
+                                } else {
+                                    mostrarNotificacion("Publicación válida. Ver Publicacion", "success", contenido);
+                                    $(".boton-desactivable input[type='checkbox']").each(function() {
+                                      $(this).prop('checked', false);
+                                    }); 
+                                }
+                                },
+                                error: function (error) {
+                                    console.error("Error en la solicitud AJAX: ", error);
+                                }
                         });
                     } else {
                         console.log("publicacion invalida");
@@ -434,9 +433,9 @@ function generateSmoothGradientCircle(scores, size) {
     ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
   
   var colors = {
-    'LABEL_0': 'rgb(134, 198, 238)', //azul
-    'LABEL_1': 'rgb(255,218,91)', //amarillo
-    'LABEL_2': 'rgb(242,154,186)', //rosa
+    'LABEL_0': 'rgb(134, 198, 238)', //azul | tristeza
+    'LABEL_1': 'rgb(255,218,91)', //amarillo | felicidad
+    'LABEL_2': 'rgb(242,154,186)', //rosa | amor
     'LABEL_3': 'rgb(255,44,33)', //enojo | rojo
     'LABEL_4': 'rgb(201,201,255)', //miedo | morado
     'LABEL_5': 'rgb(218,218,210)', //sorpresa | gris
