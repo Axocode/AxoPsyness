@@ -93,7 +93,7 @@
 
         return false;
     }
-
+    
     function reproducirSonido() {
         var audioElement = document.getElementById("miSonido");
         if (audioElement) {
@@ -152,6 +152,7 @@ function mostrarNotificacionErorr(mensaje, tipo) {
         return estados;
     }
     
+    var varvar = {CicloPubli: 0};
 $(document).ready(function () {
     $("#axocode123").submit(function (event) {
         event.preventDefault();
@@ -194,11 +195,21 @@ $(document).ready(function () {
                                 TagPubSalud: $("#TagPubSalud").is(':checked') ? 5 : 0,
                                 TagPubTranstornos: $("#TagPubTranstornos").is(':checked') ? 5 : 0,
                                 TagPubRecaidas: $("#TagPubRecaidas").is(':checked') ? 5 : 0,
-                                TagPubSueno: $("#TagPubSueno").is(':checked') ? 5 : 0
+                                TagPubSueno: $("#TagPubSueno").is(':checked') ? 5 : 0,
+                                key3: varvar.CicloPubli
                             },
                             success: function (data) {
-                                $('#hiAxogg').html(data);
-                                $('#hiAxogg1').html(data);
+                                    if (data.length > 150) {
+                                        console.log(varvar.CicloPubli);
+                                        
+                                        $('#hiAxogg'+varvar.CicloPubli).html(data);
+                                        varvar.CicloPubli +=1;
+                                        
+                                        console.log(varvar.CicloPubli);
+                                    }else{
+                                     $('#hiAxoggA').html(data);  
+                                     console.log("error");
+                                    }
                                 console.log("Formulario enviado por AJAX", numero1);
                                 doPub();
                                 UIkit.modal("#create-post-modal").hide();
@@ -210,7 +221,7 @@ $(document).ready(function () {
                                     resPub();
                                     botonPublicar.style.backgroundColor = colorOriginal;
                                 }, 10000);
-                                var elemento = document.getElementById('resultadoPublicacion');
+                                var elemento = document.getElementById('resultadoPublicacion'+varvar.CicloPubli);
                                 var contenido = elemento.textContent || elemento.innerText;
                                 if (contenido === "error") {
                                     mostrarNotificacionErorr("Espera un poco para volver a publicar", "success");

@@ -80,12 +80,12 @@ public class BusquedaUsuariosClinicaServlet extends HttpServlet {
                             } 
                         }
                         
-                        
+                        String usuario = HtmlEscape.escapeHtml(user.getIUser());
                         out.println("<li class='flex justify-between gap-x-6 py-5'>");
                         out.println("<div class='flex min-w-0 gap-x-4' id='busquedas_users'>");
                         out.println("<img class='h-12 w-12 flex-none rounded-full bg-gray-50' src='../images/" + user.getIImgNum() + "' alt=''>");
                         out.println("<div class='min-w-0 flex-auto'>");
-                        out.println("<p class='text-sm font-semibold leading-6 text-gray-900' id='texto_busqueda_user'>" + user.getIUser() + "</p>");
+                        out.println("<p class='text-sm font-semibold leading-6 text-gray-900' id='texto_busqueda_user'>" + usuario + "</p>");
                         out.println("<p class='mt-1 truncate text-xs leading-5 text-gray-500'>" + user.getIAge() + "</p>");
                         out.println("</div></div>");
                         out.println("<div class='select-menusito'>");

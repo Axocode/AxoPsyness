@@ -21,92 +21,125 @@ import org.axocode.dao.InterPub;
 public class InterPubService extends Conexion<InterPub>
 {
     public List<InterPub> getInterPubList(int count, int offset) {
-    List<InterPub> pubList = null;
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
-    InterPub pub = null;
+        List<InterPub> pubList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        InterPub pub = null;
 
-    try {
-        connection = getConnection();
-        if (connection == null) {
-            return null;
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return null;
+            }
+
+            // Actualiza la consulta para excluir publicaciones de "Axo Anuncios"
+            String sql = "SELECT ip.pubnumid, ip.pubcont, ip.pubmg, ip.pubfavs, ip.pubcoment, ip.pubdate, ip.pubhour " +
+                         "FROM interpub ip " +
+                         "JOIN interuserspub iup ON ip.pubnumid = iup.pubnumid " +
+                         "JOIN interusers iu ON iup.iusernum = iu.iusernum " +
+                         "WHERE iu.iuser <> ? AND ip.pubrol = ? " +
+                         "ORDER BY ip.pubnumid DESC LIMIT ? OFFSET ?";
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "Axo Anuncios"); // Excluir publicaciones de "Axo Anuncios"
+            preparedStatement.setString(2, "Feed"); // Filtro por rol
+            preparedStatement.setInt(3, count); // Límite
+            preparedStatement.setInt(4, offset); // Desplazamiento
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                pub = new InterPub();
+                pub.setPubNumId(resultSet.getInt("pubnumid"));
+                pub.setPubCont(resultSet.getString("pubcont"));
+                pub.setPubMg(resultSet.getInt("pubmg"));
+                pub.setPubFavs(resultSet.getInt("pubfavs"));
+                pub.setPubComent(resultSet.getInt("pubcoment"));
+                pub.setPubDate(resultSet.getString("pubdate"));
+                pub.setPubHour(resultSet.getString("pubhour"));
+
+                pubList.add(pub);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null; // Retorna null en caso de excepción para mantener la consistencia del método
+        } finally {
+            // Cierra recursos en el bloque finally
+            try {
+                if (resultSet != null) resultSet.close();
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) closeConnection(connection);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-
-        String sql = "SELECT * FROM interpub WHERE pubrol = ? ORDER BY pubnumid DESC LIMIT ? OFFSET ?";
-        preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, "Feed");
-        preparedStatement.setInt(2, count);
-        preparedStatement.setInt(3, offset);
-
-        resultSet = preparedStatement.executeQuery();
-
-        pubList = new ArrayList<>();
-        while (resultSet.next()) {
-            pub = new InterPub();
-            pub.setPubNumId(resultSet.getInt(1));
-            pub.setPubCont(resultSet.getString(2));
-            pub.setPubMg(resultSet.getInt(3));
-            pub.setPubFavs(resultSet.getInt(4));
-            pub.setPubComent(resultSet.getInt(5));
-            pub.setPubDate(resultSet.getString(6));
-            pub.setPubHour(resultSet.getString(7));
-
-            pubList.add(pub);
-        }
-
-        resultSet.close();
-        closeConnection(connection);
         return pubList;
-    } catch (SQLException ex) {
-        ex.printStackTrace();
     }
-    return null;
-}
 
-      public List<InterPub> getInterPubListPsic(int count, int offset) {
-    List<InterPub> pubList = null;
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
-    InterPub pub = null;
 
-    try {
-        connection = getConnection();
-        if (connection == null) {
-            return null;
+    public List<InterPub> getInterPubListPsic(int count, int offset) {
+        List<InterPub> pubList = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        InterPub pub = null;
+
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return null;
+            }
+
+            // Actualiza la consulta para excluir publicaciones de "Axo Anuncios"
+            String sql = "SELECT ip.pubnumid, ip.pubcont, ip.pubmg, ip.pubfavs, ip.pubcoment, ip.pubdate, ip.pubhour " +
+                         "FROM interpub ip " +
+                         "JOIN interuserspub iup ON ip.pubnumid = iup.pubnumid " +
+                         "JOIN interusers iu ON iup.iusernum = iu.iusernum " +
+                         "WHERE iu.iuser <> ? AND ip.pubrol = ? " +
+                         "ORDER BY ip.pubnumid DESC LIMIT ? OFFSET ?";
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "Axo Anuncios"); // Excluir publicaciones de "Axo Anuncios"
+            preparedStatement.setString(2, "Clinica"); // Filtro por rol
+            preparedStatement.setInt(3, count); // Límite
+            preparedStatement.setInt(4, offset); // Desplazamiento
+
+            resultSet = preparedStatement.executeQuery();
+
+            pubList = new ArrayList<>();
+            while (resultSet.next()) {
+                pub = new InterPub();
+                pub.setPubNumId(resultSet.getInt("pubnumid"));
+                pub.setPubCont(resultSet.getString("pubcont"));
+                pub.setPubMg(resultSet.getInt("pubmg"));
+                pub.setPubFavs(resultSet.getInt("pubfavs"));
+                pub.setPubComent(resultSet.getInt("pubcoment"));
+                pub.setPubDate(resultSet.getString("pubdate"));
+                pub.setPubHour(resultSet.getString("pubhour"));
+
+                pubList.add(pub);
+            }
+
+            resultSet.close();
+            preparedStatement.close(); // Asegúrate de cerrar el PreparedStatement
+            closeConnection(connection);
+            return pubList;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Es una buena práctica cerrar los recursos en el bloque finally para asegurar que se liberen incluso si hay una excepción.
+            try {
+                if (resultSet != null) resultSet.close();
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) closeConnection(connection);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-
-        String sql = "SELECT * FROM interpub WHERE pubrol = ? ORDER BY pubnumid DESC LIMIT ? OFFSET ?";
-        preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, "Clinica");
-        preparedStatement.setInt(2, count);
-        preparedStatement.setInt(3, offset);
-
-        resultSet = preparedStatement.executeQuery();
-
-        pubList = new ArrayList<>();
-        while (resultSet.next()) {
-            pub = new InterPub();
-            pub.setPubNumId(resultSet.getInt(1));
-            pub.setPubCont(resultSet.getString(2));
-            pub.setPubMg(resultSet.getInt(3));
-            pub.setPubFavs(resultSet.getInt(4));
-            pub.setPubComent(resultSet.getInt(5));
-            pub.setPubDate(resultSet.getString(6));
-            pub.setPubHour(resultSet.getString(7));
-
-            pubList.add(pub);
-        }
-
-        resultSet.close();
-        closeConnection(connection);
-        return pubList;
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+        return null;
     }
-    return null;
-}
+
     
     public boolean addInterPub( InterPub pub )
     {
@@ -561,6 +594,71 @@ public class InterPubService extends Conexion<InterPub>
 
     return null;
 }
+    
+    public InterPub getLastPubByUser(String iuser) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        // Actualización de la consulta SQL para obtener la última publicación basada en iuser
+        String sql = "SELECT p.* FROM interusers AS iu " +
+                     "JOIN interuserspub AS up ON iu.iusernum = up.iusernum " +
+                     "JOIN interpub AS p ON up.pubnumid = p.pubnumid " +
+                     "WHERE iu.iuser = ? ORDER BY p.pubnumid DESC LIMIT 1";
+
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return null;
+            }
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, iuser); // Se usa setString para el parámetro iuser
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                InterPub lastPub = new InterPub();
+                lastPub.setPubNumId(resultSet.getInt("pubnumid"));
+                lastPub.setPubCont(resultSet.getString("pubcont"));
+                lastPub.setPubMg(resultSet.getInt("pubmg"));
+                lastPub.setPubFavs(resultSet.getInt("pubfavs"));
+                lastPub.setPubComent(resultSet.getInt("pubcoment"));
+                lastPub.setPubDate(resultSet.getString("pubdate"));
+                lastPub.setPubHour(resultSet.getString("pubhour"));
+
+                return lastPub;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Cierre de recursos
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return null;
+    }
+
     
     public InterPub getLastPub() {
         Connection connection = null;

@@ -135,9 +135,7 @@
         <!---------------CREAR----------------->
         <!-- Main Contents -->
                 <div class="main_content">
-                    <div class="mcontainer">
-                        
-                                              
+                    <div class="mcontainer">  
                             <!-- Perfil -->
                         <div class="md:flex md:space-x-6 lg:mx-16">
                             
@@ -152,9 +150,18 @@
                                        <div class="grid grid-flow-col pt-3 -mx-1 -mb-1 font-semibold text-sm">
                                        </div> 
                                    </div>
-                                <div id="hiAxogg"></div>
-                                
-                                <div id="hiAxo0"></div>
+                                           
+                                    <div id="publiinicial">
+                                    </div>
+                                           
+                                    <div>
+                                        <div id="hiAxogg0">
+                                        
+                                        </div>
+                                    </div>
+                                           
+                                    <div id="hiAxo0">
+                                    </div>
                             </div>
                                         <script>
                                             function toggleContainer(clave) {
@@ -442,6 +449,22 @@
     var cooldown = false;
     var solicitudPendiente = false;
 
+    function cargarPub1() {
+        var url = '/Psyness/ServletInicial';
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $('#publiinicial').html(data);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", status, error);
+                console.log(xhr.responseText);
+            },
+        });
+    }
+
     function descargarPublicaciones(TotalCiclos) {
         if (cooldown || solicitudPendiente) {
             console.log("Esperando el cooldown o ya hay una solicitud pendiente...");
@@ -494,6 +517,7 @@
 
     $(document).ready(function () {
         descargarPublicaciones(hola);
+        cargarPub1(); 
     });
 
 

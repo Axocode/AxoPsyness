@@ -6,12 +6,9 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,24 +17,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.axocode.dao.InterPub;
-import org.axocode.dao.InterTagPub;
 import org.axocode.dao.InterUsers;
-import org.axocode.dao.InterUsersPub;
 import org.axocode.dao.service.InterFavService;
 import org.axocode.dao.service.InterLoveService;
 import org.axocode.dao.service.InterPubService;
-import org.axocode.dao.service.InterTagPubService;
-import org.axocode.dao.service.InterUsersPubService;
 import org.axocode.dao.service.InterUsersService;
-import org.axocode.helper.Helpers;
-import org.axocode.helper.InterPubHelper;
 
 /**
  *
  * @author chump
  */
-@WebServlet(name = "PublicarServlet", urlPatterns = {"/PublicarServlet"})
-public class PublicarServlet extends HttpServlet {
+@WebServlet(name = "ServletInicial", urlPatterns = {"/ServletInicial"})
+public class ServletInicial extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,6 +42,7 @@ public class PublicarServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,144 +57,21 @@ public class PublicarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        request.setCharacterEncoding("UTF-8");          
+        request.setCharacterEncoding("UTF-8");   
+        response.setContentType("text/html;charset=UTF-8");
         HttpSession sesion = request.getSession();
-                    
-                Helpers helpers;
-                boolean flag;
-                String guardar = request.getParameter("guardar");
-                int PubNumIdefinitivo;
-                helpers = new InterPubHelper( ).addRequest( request );
+        
                 ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
                 ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
-                String resultado = "error";
-                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
-                String horaFormateada2 = horaCiudadMexico.format(formatter2);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
-            String horaFormateada = horaCiudadMexico.format(formatter);
-            
-            String[] partes =horaFormateada.split(" ");
-            String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-            String hora12 = partes[5]; 
-                if(  "Submit".equals( guardar ) ){
-                    if (sesion.getAttribute("SILastPub") == null) {
-                        sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
-                        flag = helpers.addT( );
-                        if (flag) {
-                            int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                            InterPubService metododefinitivo = new InterPubService();
-                            InterPub objetodefinivo = metododefinitivo.getLastPub();
-                            if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
-                                PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
-                                } else {
-                                PubNumIdefinitivo = 1;}
-                            
-                            InterUsersPub contextInterses = new InterUsersPub();
-                            contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
-                            contextInterses.setiUserNum(new InterUsers(IUserNum));
-                            InterUsersPubService interUsersPubService = new InterUsersPubService();
-                            if(interUsersPubService.addUsersPub(contextInterses)){
-                                    InterTagPub t = new InterTagPub();
-                                    InterTagPubService tagService = new InterTagPubService();
-                                    String tag1 = request.getParameter("TagPubAutoestima");
-                                    String tag2 = request.getParameter("TagPubRelaciones");
-                                    String tag3 = request.getParameter("TagPubAnsiedad");
-                                    String tag4 = request.getParameter("TagPubDepresion");
-                                    String tag5 = request.getParameter("TagPubConflictos");
-                                    String tag6 = request.getParameter("TagPubBienestar");
-                                    String tag7 = request.getParameter("TagPubCrecimiento");
-                                    String tag8 = request.getParameter("TagPubSalud");
-                                    String tag9 = request.getParameter("TagPubTranstornos");
-                                    String tag10 = request.getParameter("TagPubRecaidas");
-                                    String tag11 = request.getParameter("TagPubSueno");
-                                    String tag12 = request.getParameter("TagPubSensible");
-                                    
-                                    t.setTagPub(PubNumIdefinitivo);
-                                    t.setTagPubSensible(Integer.parseInt(tag12));
-                                    t.setTagPubAutoestima(Integer.parseInt(tag1));
-                                    t.setTagPubRelaciones(Integer.parseInt(tag2));
-                                    t.setTagPubAnsiedad(Integer.parseInt(tag3));
-                                    t.setTagPubDepresion(Integer.parseInt(tag4));
-                                    t.setTagPubConflictos(Integer.parseInt(tag5));
-                                    t.setTagPubBienestar(Integer.parseInt(tag6));
-                                    t.setTagPubCrecimiento(Integer.parseInt(tag7));
-                                    t.setTagPubSalud(Integer.parseInt(tag8));
-                                    t.setTagPubTranstornos(Integer.parseInt(tag9));
-                                    t.setTagPubRecaidas(Integer.parseInt(tag10));
-                                    t.setTagPubSueno(Integer.parseInt(tag11));
-                                    resultado = objetodefinivo.getPubNumId().toString();
-                                    tagService.addInterTagPub(t);
-                                }
-                            }
-                        }else{
-                            LocalDateTime horaAct = LocalDateTime.parse(horaFormateada2, formatter2);
-                            String horaLastPubliString = (String) sesion.getAttribute("SILastPub");
-                            LocalDateTime horaLastPubli = LocalDateTime.parse(horaLastPubliString, formatter2);
-                            long totalToAccesss = ChronoUnit.SECONDS.between(horaLastPubli, horaAct);
-                            if (totalToAccesss > 10) {
-                                sesion.setAttribute("SILastPub", horaCiudadMexico.format(formatter2));
-                                flag = helpers.addT( );
-                                if (flag) {
-                                int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                                InterPubService metododefinitivo = new InterPubService();
-                                InterPub objetodefinivo = metododefinitivo.getLastPub();
-                                if (objetodefinivo != null && objetodefinivo.getPubNumId() != null) {
-                                    PubNumIdefinitivo = Integer.parseInt(objetodefinivo.getPubNumId().toString());
-                                    } else {
-                                        PubNumIdefinitivo = 1;}
-
-                                        InterUsersPub contextInterses = new InterUsersPub();
-                                        contextInterses.setPubNumId(new InterPub(PubNumIdefinitivo));
-                                        contextInterses.setiUserNum(new InterUsers(IUserNum));
-                                        InterUsersPubService interUsersPubService = new InterUsersPubService();
-                                        if(interUsersPubService.addUsersPub(contextInterses)){
-
-                                        InterTagPub t = new InterTagPub();
-                                        InterTagPubService tagService = new InterTagPubService();
-
-                                        t.setTagPub(PubNumIdefinitivo);
-                                        t.setTagPubSensible(Integer.parseInt(request.getParameter("TagPubSensible")));
-                                        t.setTagPubAutoestima(Integer.parseInt(request.getParameter("TagPubAutoestima")));
-                                        t.setTagPubRelaciones(Integer.parseInt(request.getParameter("TagPubRelaciones")));
-                                        t.setTagPubAnsiedad(Integer.parseInt(request.getParameter("TagPubAnsiedad")));
-                                        t.setTagPubDepresion(Integer.parseInt(request.getParameter("TagPubDepresion")));
-                                        t.setTagPubConflictos(Integer.parseInt(request.getParameter("TagPubConflictos")));
-                                        t.setTagPubBienestar(Integer.parseInt(request.getParameter("TagPubBienestar")));
-                                        t.setTagPubCrecimiento(Integer.parseInt(request.getParameter("TagPubCrecimiento")));
-                                        t.setTagPubSalud(Integer.parseInt(request.getParameter("TagPubSalud")));
-                                        t.setTagPubTranstornos(Integer.parseInt(request.getParameter("TagPubTranstornos")));
-                                        t.setTagPubRecaidas(Integer.parseInt(request.getParameter("TagPubRecaidas")));
-                                        t.setTagPubSueno(Integer.parseInt(request.getParameter("TagPubSueno")));
-                                        resultado = objetodefinivo.getPubNumId().toString();
-                                        tagService.addInterTagPub(t);
-                                    }
-                                }} else {
-                                /*
-                                
-                                AQUI DEBERIA DE IR MODAL DE CULDAUN
-                                <script>
-                                         var valor = '<%= 10 - totalToAccesss %>';
-                                         if (valor === 1) {alert('Espera '+ valor +' segundo volver a publicar');
-                                         window.location.href = "feed-new.jsp";}else 
-                                         alert('Espera '+ valor +' segundos volver a publicar'); window.location.href = "zd-new.jsp"; 
-                                </script>
-                                */
-                            }
-                        }
-                    int TotalCiclos2 = Integer.parseInt(request.getParameter("key3"));
-                    System.out.println(TotalCiclos2);
-                    if (resultado.equals("error")) {
-                        try (PrintWriter out = response.getWriter()){
-                        out.println("<div hidden id=\"resultadoPublicacion"+(TotalCiclos2+1)+"\">" + resultado + "</div>");
-                        }
-                    }else 
-                    {int IUserNum = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
-                    InterPubService metododefinitivo = new InterPubService();
-                    InterPub trowss = metododefinitivo.getLastPub();
-                    int rest = trowss.getPubNumId();
-                    InterPub trows =  metododefinitivo.getPubByInterPub(rest);
-                    
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
+                String horaFormateada = horaCiudadMexico.format(formatter);
+                String[] partes =horaFormateada.split(" ");
+                String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
+                
+                
+                InterPubService metododefinitivo = new InterPubService();    
+                InterPub trows =  metododefinitivo.getLastPubByUser("Axo Anuncios");
+                
                     try (PrintWriter out = response.getWriter()){
                     
                        InterUsersService dao = new InterUsersService();
@@ -217,9 +86,7 @@ public class PublicarServlet extends HttpServlet {
                             String horita = trows.getPubHour().substring(0, 5);
                             String escapedUser = HtmlEscape.escapeHtml(interUsers.getIUser());
                             String escapedCont = HtmlEscape.escapeHtml((trows.getPubCont()));
-                    out.println("<div id=\"hiAxogg" + (TotalCiclos2 + 1) + "\">");
-                    out.println("<div hidden id=\"resultadoPublicacion"+(TotalCiclos2+1)+"\">" + resultado + "</div>");
-                    out.println("</div>");
+                            
                     out.print("<div class=\"card lg:mx-0 uk-animation-slide-bottom-small\" id=\"posts_feed\">");
                     out.print("<div class=\"flex justify-between items-center lg:p-4 p-2.5\">");
                     out.print("<div class=\"flex flex-1 items-center space-x-4\">");
@@ -233,9 +100,9 @@ public class PublicarServlet extends HttpServlet {
                     out.print("</a>");
 
                     if (trows.getPubDate().equals(fecha12)) {
-                        out.print("<div class=\"text-gray-700 flex items-center space-x-2\"> hoy <ion-icon name=\"people\"></ion-icon></div>");
+                        out.print("<div class=\"text-gray-700 flex items-center space-x-2\">hoy <ion-icon name=\"people\"></ion-icon></div>");
                     } else {
-                        out.print("<div class=\"text-gray-700 flex items-center space-x-2\"> "+trows.getPubDate()+"<ion-icon name=\"people\"></ion-icon></div>");
+                        out.print("<div class=\"text-gray-700 flex items-center space-x-2\">"+trows.getPubDate()+"<ion-icon name=\"people\"></ion-icon></div>");
                     }
 
                     out.print("</div>");
@@ -370,7 +237,6 @@ public class PublicarServlet extends HttpServlet {
     }
                     out.println("</div>");
                 }
-    }}
     }
 
     /**
@@ -384,6 +250,7 @@ public class PublicarServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**

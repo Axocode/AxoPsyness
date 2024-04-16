@@ -97,7 +97,7 @@
                                   }
 
                             </style>
-                            
+                            <div  hidden id="hiAxogg0"></div>
                                     <!--BOXES PUB-->
 
                                 <div class="card lg:mx-0 uk-animation-slide-bottom-small" id="contenedor_busqueda">

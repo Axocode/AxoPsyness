@@ -65,7 +65,7 @@
           HttpSession sesion = request.getSession();
           String data = (String) sesion.getAttribute("SIImgNum");%>
         <!-- Header -->
-        <div hidden id="hiAxogg1"></div>
+        <div hidden id="hiAxoggA"></div>
     <header>
         <div class="header_wrap">
             <div class="header_inner mcontainer">

@@ -32,7 +32,7 @@
 
         String accion = request.getParameter("a");
 %>
-    <!-- start: Chat -->
+    <div  hidden id="hiAxogg0"></div><!-- start: Chat -->
     <section class="chat-section">
         <div class="chat-container">
             <!-- start: Sidebar -->

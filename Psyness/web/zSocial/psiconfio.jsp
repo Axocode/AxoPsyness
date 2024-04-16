@@ -201,7 +201,7 @@
     <div id="wrapper">
 
     
-             
+          <div  hidden id="hiAxogg0"></div>   
         <!-- Header -->
     <jsp:include page="sidebar.jsp"/>
 <!-- CONTENIDO FORMULARIOS -->
