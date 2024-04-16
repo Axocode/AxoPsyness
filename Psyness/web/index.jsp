@@ -17,6 +17,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Psyness</title>
     <link href="assets/images/Icono.svg" rel="icon" type="image/png">   
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="assets/css/indexcss.css">
 </head>
 <body>
    <%HttpSession sesion = request.getSession();
@@ -42,188 +45,138 @@
     </symbol>
   </svg>
   <!--Nav Bar-->
-    <div class="container-fluid">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-          <div class="col-md-3 mb-2 mb-md-0">
-            <img class="img-responsive logo" src="images/Logo con letras centrado.svg" alt="">
-          </div>
-    
-          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2">Tecnología</a></li>
-            <li><a href="#" class="nav-link px-2">Sobre Nosotros</a></li>
-            <li><a href="#" class="nav-link px-2">Póliticas</a></li>
-            <li><button class="btn dropdown-toggle btn-nav-custom " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-               Sobre las cuentas
-            </button><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        
+<!--/Nav Bar-->
+    <!--Main Content 1-->
+        
+        <nav>
+        <img class="img-responsive-index" src="images/Logo con letras centrado.svg" alt="">
+        <div class="links">
+            <a href="#">Tecnología</a>
+            <a href="#">Sobre nosotros</a>
+            <a href="#">Politicas</a>
+            <!--
+            <a href="#" class="btn dropdown-toggle btn-nav-custom " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Sobre las cuentas</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="#">Cuenta con Código</a></li>
               <li><a class="dropdown-item" href="#">Institución o Clinica</a></li>
               <li><a class="dropdown-item" href="#">Creadores de Contenido</a></li>
-            </ul></li>
-          </ul>
-    
-          <div class="col-md-3 text-end">
-            <a href="zInicio/createSinCodigo.jsp"><button type="button" class="btn btn-outline-primary me-2 rounded-pill btn-custom">Crear Cuenta</button></a>
-                  <a href="zInicio/login.jsp"><button type="button" class="btn btn-primary rounded-pill btn-custom2">Iniciar Sesion</button></a>
-          </div>
-        </header>
-      
-    <!--/Nav Bar-->
-    <!--Main Content 1-->
-      <div class="container-fluid d-flex flex-wrap">
-        <div class="col-md-6 mb-2 mb-md-0">
-          <div class="cont-main1 container-fluid">
-            <div id="desc" class="titulo-main1 container-fluid">
-                <h1 class="display-2">
-                  Una Red Social Orientada a la Psicología
-                  <br>
-                  <h3>
-                    Buscamos ayudar a los usuarios mediante el uso de la psicoterapia
-                     y con herramientas de software tales como la Inteligencia artificial.
-                  </h3><br>
-                </h1>
-                <div class="btns-main1 container-fluid">
-                  <a href="zInicio/createSinCodigo.jsp"><button type="button" class="btn btn-lg btn-log">Click aquí para crear tu cuenta</button><br><br></a>
+            </ul> 1-->
+        </div>
+        <div class="login">
+            <a href="zInicio/createSinCodigo.jsp"><button type="button" class="signup">Crear Cuenta</button></a>
+            <a href="zInicio/login.jsp"><button type="button" >Iniciar Sesion</button></a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="left">
+            <h1>Una Red Social Orientada a la <span>Psicología</span></h1>
+            <p> Somos una herramienta de ayuda psicológica, buscamos ayudar a las personas a través del uso de la psicoterapia y de la terapia cognitivo conductual.
+            </p>
+            <a href="zInicio/createSinCodigo.jsp">
+                <i class='bx bx-click'></i>
+                <span>Click aquí para crear tu cuenta</span>
+            </a>
+        </div>
+        <img src="images/imgindex.jpg">
+    </header><hr>
+        
+<!-- Get Stearted -->
+        <div class="get-started">
+            <p class="header">Clínicas Asociadas</p>
+            <p class="info-text">Como funciona y cuales son las ventajas</p>
+            <div class="items-box">
+                <div class="item-container">
+                    <div class="item">
+                        <i class='bx bx-check-shield'></i>
+                    </div>
+                    <p>Para atener acceso a todas las funciones especiales es necesario tener una cuenta con código</p>
+                </div>
+                <div class="item-container">
+                    <div class="item">
+                        <i class='bx bx-wallet-alt'></i>
+                    </div>
+                    <p>Algunas funciones extras son la IA Axochat, realizar publicaciones, llevar un seguimiento clinico</p>
+                </div>
+                <div class="item-container">
+                    <div class="item">
+                        <i class='bx bx-money'></i>
+                    </div>
+                    <p>Para poder obtener un código de acceso este deberá ser expedido por una de las clínicas afiliadas</p>
+                </div>
+                <div class="item-container">
+                    <div class="item">
+                        <i class='bx bx-rocket'></i>
+                    </div>
+                    <p>En caso de no contar con una cuenta con código, se puede acceder con una pública</p>
                 </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-6 mb-2 mb-md-0">
-          <img src="images/imgindex.jpg" class="img-thumbnail img-fluid" width="700px">
-        </div>
-      </div>
+        <!-- End of Get Started -->
+
+
     <!--/Main Content 1-->
-    <br><br><br><br><br><br><br><hr>
-    <!--Main Content 2-->
-      <div class="container-fluid d-flex flex-wrap">
-        <div class="col-md-6 mb-2 mb-md-0">
-          <div class="container-fluid cont-main2">   
-               <div class="container-fluid titulo-main2" >
-                  <h1 class="titulo_clinicas">Clinicas Asociadas</h1>
-                  <div class="img-main container-fluid">
-                    <img src="images/imgindex.jpg" class="img-fluid" width="700px">
-                 </div>
-                 <div class="container-fluid clinicas">
-                  <h4 id="clin" class="ubi_clinics">
-                    Ubicada en Voca 9 <button type="button" class="btn btn-outline-primary me-2 rounded-pill btn-custom">Sitio Web</button><br>
-                    <small class="text-muted">Asociada con Psyness</small>
-                  </h4>
-                 </div>
-               </div>     
-          </div>
-        </div>
-          <div class="col-md-6 mb-2 mb-md-0">
-            <div class="cont-main3 container-fluid">
-              <div class="titulo-main3 container-fluid">
-                <h1 class="display-2">
-                  Cuenta con código
-                  <br>
-                  <p id="desc">
-                    Para tener Acceso a una de nuestras cuentas con todas las funcionalidades especiales como nuestra <strong>IA Axochat</strong>,
-                    hablar con tus Psicólogos o <strong>realizar publicaciones</strong>, necesitaras de una cuenta con código.<br><br>
-                    Para poder obtener un código de acceso este deberá ser expedido por una de las clínicas afiliadas a Axocode,nuestra empresa.
-                  </p><br>
-                </h1>
-              </div>
-            </div>
-          </div>
-      </div>
-      <!--/Main Content 2-->
-      <!--No se que es eso-->
+<hr>
+
       
-      <!--/No se-->
-      <!--Creadores de Contenido-->
-      <section id="portfolio"><hr>
-        <div class="p-5 text-center bg-body-tertiary rounded-3">
-        <h1 class="text-body-emphasis">Creadores de contenido</h1>
-        </div>
-        <div class="fila">
-            <div class="proyecto">
-                <div class="overlay"></div>
-                <img src="images/apoyofamiliar.png" alt="">
-                <div class="info">
-                    <h4>Contenido Hopcore</h4>
-                </div>
+      
+            <!--Creadores de contenido-->
+      
+     <h2 class="separator">
+        Creadores de Contenido
+    </h2>
+
+    <div class="sellers">
+        <div class="item">
+            <img src="images/apoyofamiliar.png">
+            <div class="info">
+                <h4>Contenido Hopcore</h4>
+                <p>Click</p>
             </div>
-            <div class="proyecto">
-                <div class="overlay"></div>
-                <img src="images/acoso.png" alt="">
-                <div class="info">
-                    <h4>Contenido motivacional</h4>
-                </div>
-            </div>
-
-            <div class="proyecto">
-              <div class="overlay"></div>
-              <img src="images/apoyomujeres.png" alt="">
-              <div class="info">
-                  <h4>Investigacion Cientifica</h4>
-              </div>
-          </div>
-          <div class="proyecto">
-              <div class="overlay"></div>
-              <img src="images/apoyopsicologico.png" alt="">
-              <div class="info">
-                  <h4>Psicologos para comentarios</h4>
-             
-              </div>
-          </div>
-            
         </div>
-        <br><br><br><br><br><br><br>
-        <div class="filass">
-          <div class = "img-back">
-          <button type="button" class="btn btn-lg btn-log2"><H4>Contactanos</H4></button><br><br>
-
-          </div>
-          <!--<img src="images/CTA.png" height="300px">-->    
-        </div>      
-     
-    </section>
-      <!--///Creadores de Contenido-->
-
+        <div class="item">
+            <img src="images/apoyofamiliar.png">
+            <div class="info">
+                <h4>Psicologos verificados</h4>
+                <p>Click</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="images/apoyofamiliar.png">
+            <div class="info">
+                <h4>Apoyo mutuo</h4>
+                <p>Click</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="images/apoyofamiliar.png">
+            <div class="info">
+                <h4>Datos cientificos</h4>
+                <p>Click</p>
+            </div>
+        </div>
+    </div>
+           
     
       <!--Footer-->
-      <div class="foot_containt">
-        
-        <div class="container">
-          <footer class="py-5">
-            <div class="row">
-            <div class="col-2">
-              <h5>Compania</h5>
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="http://axocode.gerdoc.com/" class="nav-link p-0 text-muted">Home</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-              </ul>
-            </div>
-             
-              <div class="col-2" id="footer_left_text">
-                <h5>Links de ayuda</h5>
-                <ul class="nav flex-column">
-                  <li class="nav-item mb-2"><a href="http://axocode.gerdoc.com/" class="nav-link p-0 text-muted">Home</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
-              </div>
-
-          </div>
-          
-          <div class="d-flex justify-content-between py-4 my-4 border-top">
-            <p>&copy; 2023 Axocode, Inc. All rights reserved.</p>
-            <ul class="list-unstyled d-flex">
-              <li class="ms-3"><a class="link-dark" href="https://twitter.com/Axocode1"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-              <li class="ms-3"><a class="link-dark" href="https://www.instagram.com/axocode?igshid=NTdlMDg3MTY%3D"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-              <li class="ms-3"><a class="link-dark" href="https://www.facebook.com/profile.php?id=100033197299590"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
-            </ul>
-          </div>
-        </footer>
-      </div>
-    </div>
-      <!--/Footer-->
-    </div>
+        <footer>
+                <h3>Únete a nuestra comunidad, estamos juntos en ésto</h3>
+                <div class="right">
+                    <div class="links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Cooperation</a>
+                        <a href="#">Sponsorship</a>
+                        <a href="#">Contact Us</a>
+                    </div>
+                    <div class="social">
+                        <i class='bx bxl-instagram'><a class="link-dark" href="https://www.instagram.com/axocode?igshid=NTdlMDg3MTY%3D"></a></i>
+                        <i class='bx bxl-facebook-square'><a class="link-dark" href="https://www.facebook.com/profile.php?id=100033197299590"></a></i>
+                        <i class='bx bxl-twitter'><a class="link-dark" href="https://twitter.com/Axocode1"></a></i>
+                    </div>
+                    <p>Copyright © 2024 Axocode, All Rights Reserved.</p>
+                </div>
+       </footer>
+         
 </body>
 </html>

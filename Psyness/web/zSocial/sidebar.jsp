@@ -359,63 +359,115 @@
                                 </div> 
                                             
                               <!------------------------- Etiquetas-------------------------->    
-                                           <div class="overflow-auto space-x-4 p-5" id="tags_Container">
+                                            <div class="space-x-4 p-5 responsive-overflow" id="tags_Container">
                                                
                                                 <div class="toogle-desactivable">
                                                     <input type="checkbox" id="TagPubSensible" name="TagPubSensible" class="toggle-checkbox">
                                                     <label for="TagPubSensible" class="toggle-label"></label>      
-                                                    <span>Contenido sensible</span>
+                                                    <span>Contenido sensible  →</span>
                                                 </div>                                               
-                                               
-                                              <div class="boton-desactivable">
-                                                <input type="checkbox" id="TagPubAutoestima" name="TagPubAutoestima" onclick="alternarEstado('TagPubAutoestima')">
-                                                <label for="TagPubAutoestima">Autoestima y confianza</label>
-                                              </div>
-                                              <div class="boton-desactivable">
-                                                <input type="checkbox" id="TagPubRelaciones" name="TagPubRelaciones" onclick="alternarEstado('TagPubRelaciones')">
-                                                <label for="TagPubRelaciones">Relaciones interpersonales</label>
-                                              </div>
-                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="TagPubAnsiedad" name="TagPubAnsiedad" onclick="alternarEstado('TagPubAnsiedad')">
-                                                <label for="TagPubAnsiedad">Ansiedad y estrés</label>
-                                              </div>
-                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="TagPubDepresion" name="TagPubDepresion" onclick="alternarEstado('TagPubDepresion')">
-                                                <label for="TagPubDepresion">Depresión</label>
-                                              </div>
-                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="TagPubConflictos" name="TagPubConflictos" onclick="alternarEstado('TagPubConflictos')">
-                                                <label for="TagPubConflictos">Resolución de conflictos</label>
-                                              </div>
-                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="TagPubBienestar" name="TagPubBienestar" onclick="alternarEstado('TagPubBienestar')">
-                                                <label for="TagPubBienestar">Mindfulness y bienestar</label>
-                                              </div>
-                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="boton7" onclick="alternarEstado('boton2')">
-                                                <label for="boton7">Adicciones</label>
-                                              </div>   
-                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="TagPubCrecimiento" name="TagPubCrecimiento" onclick="alternarEstado('TagPubCrecimiento')">
-                                                <label for="TagPubCrecimiento">Crecimiento personal</label>
-                                              </div>
-                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="TagPubSalud" name="TagPubSalud" onclick="alternarEstado('TagPubSalud')">
-                                                <label for="TagPubSalud">Salud emocional</label>
-                                              </div>
-                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="TagPubTranstornos" name="TagPubTranstornos" onclick="alternarEstado('TagPubTranstornos')">
-                                                <label for="TagPubTranstornos">Transtornos</label>
-                                              </div>
-                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="TagPubRecaidas" name="TagPubRecaidas" onclick="alternarEstado('TagPubRecaidas')">
-                                                <label for="TagPubRecaidas">Recaidas</label>
-                                              </div>
-                                               <div class="boton-desactivable">
-                                                <input type="checkbox" id="TagPubSueno" name="TagPubSueno" onclick="alternarEstado('TagPubSueno')">
-                                                <label for="TagPubSueno">Problemas de sueño</label>
-                                              </div>
-                                           </div>  
+                                            
+                                            
+                                                <div class="boton-desactivable">
+                                                  <input type="checkbox" id="TagPubAutoestima" name="TagPubAutoestima" onclick="alternarEstado('TagPubAutoestima')">
+                                                  <label for="TagPubAutoestima">Autoestima y confianza</label>
+                                                </div>
+                                                <div class="boton-desactivable">
+                                                  <input type="checkbox" id="TagPubRelaciones" name="TagPubRelaciones" onclick="alternarEstado('TagPubRelaciones')">
+                                                  <label for="TagPubRelaciones">Relaciones interpersonales</label>
+                                                </div>
+                                                 <div class="boton-desactivable">
+                                                  <input type="checkbox" id="TagPubAnsiedad" name="TagPubAnsiedad" onclick="alternarEstado('TagPubAnsiedad')">
+                                                  <label for="TagPubAnsiedad">Ansiedad y estrés</label>
+                                                </div>
+                                                 <div class="boton-desactivable">
+                                                  <input type="checkbox" id="TagPubDepresion" name="TagPubDepresion" onclick="alternarEstado('TagPubDepresion')">
+                                                  <label for="TagPubDepresion">Depresión</label>
+                                                </div>
+                                                 <div class="boton-desactivable">
+                                                  <input type="checkbox" id="TagPubConflictos" name="TagPubConflictos" onclick="alternarEstado('TagPubConflictos')">
+                                                  <label for="TagPubConflictos">Resolución de conflictos</label>
+                                                </div>
+                                                 <div class="boton-desactivable">
+                                                  <input type="checkbox" id="TagPubBienestar" name="TagPubBienestar" onclick="alternarEstado('TagPubBienestar')">
+                                                  <label for="TagPubBienestar">Mindfulness y bienestar</label>
+                                                </div>
+                                                 <div class="boton-desactivable">
+                                                  <input type="checkbox" id="boton7" onclick="alternarEstado('boton2')">
+                                                  <label for="boton7">Adicciones</label>
+                                                </div>   
+                                                 <div class="boton-desactivable">
+                                                  <input type="checkbox" id="TagPubCrecimiento" name="TagPubCrecimiento" onclick="alternarEstado('TagPubCrecimiento')">
+                                                  <label for="TagPubCrecimiento">Crecimiento personal</label>
+                                                </div>
+                                                 <div class="boton-desactivable">
+                                                  <input type="checkbox" id="TagPubSalud" name="TagPubSalud" onclick="alternarEstado('TagPubSalud')">
+                                                  <label for="TagPubSalud">Salud emocional</label>
+                                                </div>
+                                                 <div class="boton-desactivable">
+                                                  <input type="checkbox" id="TagPubTranstornos" name="TagPubTranstornos" onclick="alternarEstado('TagPubTranstornos')">
+                                                  <label for="TagPubTranstornos">Transtornos</label>
+                                                </div>
+                                                 <div class="boton-desactivable">
+                                                  <input type="checkbox" id="TagPubRecaidas" name="TagPubRecaidas" onclick="alternarEstado('TagPubRecaidas')">
+                                                  <label for="TagPubRecaidas">Recaidas</label>
+                                                </div>
+                                                 <div class="boton-desactivable">
+                                                  <input type="checkbox" id="TagPubSueno" name="TagPubSueno" onclick="alternarEstado('TagPubSueno')">
+                                                  <label for="TagPubSueno">Problemas de sueño</label>
+                                                </div>
+                                            
+                                            </div>  
+                              
+                              
+                              
+                              
+                              <style>
+                                .responsive-overflow {
+                                  overflow-x: auto;
+                                  overflow-y: hidden; 
+                                }
+
+                                @media screen and (max-width: 768px) {
+                                  .responsive-overflow {
+                                    white-space: nowrap;   
+                                    overflow-x: auto; 
+                                    overflow-y: auto; 
+                                  }
+                                }
+                                
+                                /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
+
+                                
+                                #tagsssssss_Container {
+                                  overflow: hidden; 
+                                  display: flex; 
+                                  flex-wrap: wrap; 
+                                }
+                                
+                                @media (max-width: 768px) {
+                                  #tagssssssssss_Container {
+                                    flex-direction: column; 
+                                  }
+                                }
+                                
+                                /* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
+                                
+                                #tagggggs_Container {
+                                    overflow-y: auto; 
+                                    padding: 5px; 
+                                    display: flex;
+                                    flex-wrap: wrap; 
+                                  }
+  
+                                @media (max-width: 768px) {
+                                  #tagggggggs_Container {
+                                    overflow-x: auto; 
+                                    overflow-y: scroll; 
+                                  }
+                                }
+
+                              </style>
                                         
 
                                        
