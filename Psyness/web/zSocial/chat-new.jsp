@@ -165,7 +165,7 @@
                                     
                                     <!-- Time Sign -->
                                     <div class="message-time-sign">
-                                        <span>4, Marzo 2024</span>
+                                        <span>23, Abril 2024</span>
                                     </div>
     
     
@@ -179,26 +179,26 @@
                                     <div class="message-bubble">
                                         <div class="message-bubble-inner">
                                             <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                            <div class="message-text"><p>Hola! Soy tu acompañante en esta red social!</p></div>
+                                            <div class="message-text"><p>Hola! Soy tu acompañante en esta red social!<br>Cuentame como te sientes el dia de hoy</p></div>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
     
                                     
-                                    <div class="message-bubble me">
+                                   <!-- <div class="message-bubble me">
                                         <div class="message-bubble-inner">
                                             <div class="message-avatar"><img src="../assets/images/avatars/prof3.png" alt=""></div>
                                             <div class="message-text"><p>Hola Axo! te quiero mucho</p></div>
                                         </div>
                                         <div class="clearfix"></div>
-                                    </div>
+                                    </div> -->
                                     
     
-                                    <div class="message-bubble">
+                                   <!-- <div class="message-bubble">
                                         <div class="message-bubble-inner">
                                             <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
                                             <div class="message-text">
-                                                <!-- Typing Indicator -->
+                                                <!-- Typing Indicator <-Est0 es un comentario
                                                 <div class="typing-indicator">
                                                     <span></span>
                                                     <span></span>
@@ -207,13 +207,13 @@
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
-                                    </div>
+                                    </div> -->
                             </div>
                             <!-- Message Content Inner / End -->
                             
                             <!-- Reply Area -->
                             <div class="message-reply">
-                                <textarea cols="1" rows="1" placeholder="Your Message"></textarea>
+                                <textarea cols="1" rows="1" placeholder="Escribe un mensaje"></textarea>
                                 <button class="button ripple-effect">Enviar</button>
                             </div>
 
