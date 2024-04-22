@@ -161,7 +161,7 @@
                         <div class="message-content-scrolbar" data-simplebar>
 
                             <!-- Message Content Inner -->
-                            <div class="message-content-inner">
+                            <div class="message-content-inner" id="contento">
                                     
                                     <!-- Time Sign -->
                                     <div class="message-time-sign">
@@ -184,15 +184,7 @@
                                         <div class="clearfix"></div>
                                     </div>
     
-                                    
-                                   <!-- <div class="message-bubble me">
-                                        <div class="message-bubble-inner">
-                                            <div class="message-avatar"><img src="../assets/images/avatars/prof3.png" alt=""></div>
-                                            <div class="message-text"><p>Hola Axo! te quiero mucho</p></div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div> -->
-                                    
+                                                                     
     
                                    <!-- <div class="message-bubble">
                                         <div class="message-bubble-inner">
@@ -213,8 +205,8 @@
                             
                             <!-- Reply Area -->
                             <div class="message-reply">
-                                <textarea cols="1" rows="1" placeholder="Escribe un mensaje"></textarea>
-                                <button class="button ripple-effect">Enviar</button>
+                                <input cols="1" rows="1" placeholder="Escribe un mensaje" id="user-input"></input>
+                                <button class="button ripple-effect" id="send-btn">Enviar</button>
                             </div>
 
                         </div>
@@ -511,6 +503,7 @@
     <script src="../assets/js/simplebar.js"></script>
     <script src="../assets/js/custom.js"></script>
     <script src="../assets/js/bootstrap-select.min.js"></script>
+    <script src="../assets/js/axochat.js"></script>
 
 </body>
 </html>
