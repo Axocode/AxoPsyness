@@ -1,9 +1,12 @@
 document.getElementById('send-btn').addEventListener('click', function(e) {
-    e.preventDefault(); // Previene el comportamiento por defecto del botón (en caso de estar dentro de un formulario)
+    e.preventDefault(); 
     let userMessage = document.getElementById('user-input').value;
-
+    
     // Mostrar el mensaje del usuario en el chat
     displayMessage('user', userMessage);
+
+    // Mostrar el indicador de que el bot está escribiendo
+    var typingIndicator = displayTypingIndicator();
 
     fetch('http://FerV24.pythonanywhere.com/ask', {
         method: 'POST',
@@ -14,11 +17,17 @@ document.getElementById('send-btn').addEventListener('click', function(e) {
     })
     .then(response => response.json())
     .then(data => {
+        // Quitar el indicador de escritura antes de mostrar la respuesta
+        removeTypingIndicator(typingIndicator);
+
         // Mostrar la respuesta del bot en el chat
         displayMessage('bot', data.message);
     })
     .catch((error) => {
         console.error('Error:', error);
+        // Quitar el indicador de escritura incluso en caso de error
+        removeTypingIndicator(typingIndicator);
+
         // Opcional: Mostrar un mensaje de error en el chat
         displayMessage('bot', 'Error al obtener respuesta.');
     });
@@ -26,6 +35,52 @@ document.getElementById('send-btn').addEventListener('click', function(e) {
     // Limpiar el campo de entrada del usuario
     document.getElementById('user-input').value = '';
 });
+
+function displayTypingIndicator() {
+    var chatWindow = document.getElementById('contento');
+    
+    var messageElement = document.createElement('div');
+    messageElement.className = 'message-bubble';
+    var messageBubbleInner = document.createElement('div');
+    messageBubbleInner.className = 'message-bubble-inner';
+
+    var avatarDiv = document.createElement('div');
+    avatarDiv.className = 'message-avatar';
+    var avatarImg = document.createElement('img');
+    avatarImg.src = '../assets/images/avatars/axo.jpg'; // Ajusta la ruta al avatar del bot
+    avatarImg.alt = 'avatar';
+    avatarDiv.appendChild(avatarImg);
+
+    var messageTextDiv = document.createElement('div');
+    messageTextDiv.className = 'message-text';
+    var typingIndicatorDiv = document.createElement('div');
+    typingIndicatorDiv.className = 'typing-indicator';
+    for (let i = 0; i < 3; i++) {
+        let span = document.createElement('span');
+        typingIndicatorDiv.appendChild(span);
+    }
+
+    messageTextDiv.appendChild(typingIndicatorDiv);
+    messageBubbleInner.appendChild(avatarDiv);
+    messageBubbleInner.appendChild(messageTextDiv);
+    messageElement.appendChild(messageBubbleInner);
+
+    var clearfixDiv = document.createElement('div');
+    clearfixDiv.className = 'clearfix';
+    messageElement.appendChild(clearfixDiv);
+
+    chatWindow.appendChild(messageElement);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+
+    return messageElement; // Devuelve el elemento del mensaje para poder quitarlo más tarde
+}
+
+function removeTypingIndicator(typingIndicatorElement) {
+    if (typingIndicatorElement && typingIndicatorElement.parentNode) {
+        typingIndicatorElement.parentNode.removeChild(typingIndicatorElement);
+    }
+}
+
 function displayMessage(sender, message) {
     var chatWindow = document.getElementById('contento');
     var messageElement = document.createElement('div');
