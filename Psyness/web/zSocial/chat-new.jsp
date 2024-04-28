@@ -169,17 +169,27 @@
                                     </div>
     
     
+                                    
                                     <div class="message-bubble">
                                         <div class="message-bubble-inner">
                                             <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                            <div class="message-text"><p>Hi Axo!</p></div>
+                                            <div class="message-text"><p>Hola! Soy tu acompañante en esta red social!<br>Cuentame,que necesitas el dia de hoy?</p></div>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
+                                    
                                     <div class="message-bubble">
                                         <div class="message-bubble-inner">
                                             <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                            <div class="message-text"><p>Hola! Soy tu acompañante en esta red social!<br>Cuentame como te sientes el dia de hoy</p></div>
+                                            <div class="message-text"><p>Consejos</p></div>
+                                        </div>
+                                        <div class="message-bubble-inner">
+                                            <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
+                                            <div class="message-text"><p>Mensajes de Apoyo</p></div>
+                                        </div>
+                                        <div class="message-bubble-inner">
+                                            <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
+                                            <div class="message-text"><p>Actividades de Relajación</p></div>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
