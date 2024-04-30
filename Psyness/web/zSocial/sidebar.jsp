@@ -303,13 +303,17 @@
 <%
             ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
             ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
+            // Restar una hora a la hora actual de la Ciudad de México
+            ZonedDateTime horaMenosUnahora = horaCiudadMexico.minusHours(1);
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
-            String horaFormateada = horaCiudadMexico.format(formatter);
+            String horaFormateada = horaMenosUnahora.format(formatter);  // Usar la hora ajustada para formatear
             DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss", new Locale("es", "MX"));
-            String horaFormateada2 = horaCiudadMexico.format(formatter2);
-            String[] partes =horaFormateada.split(" ");
+            String horaFormateada2 = horaMenosUnahora.format(formatter2);  // Usar la hora ajustada para formatear
+
+            String[] partes = horaFormateada.split(" ");
             String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
-            String hora12 = partes[5]; 
+            String hora12 = partes[5];
             %>
             
                     <div id="create-post-modal" class="create-post" uk-modal>
