@@ -1,14 +1,50 @@
+var endpointVariable = "";
+
+/*var boton = document.getElementById('send-btn');
+/ Agrega un evento de click al botón
+boton.addEventListener('click', function() {
+    // Incrementa el valor de la variable
+    endpointVariable = "";
+    // Imprime el nuevo valor en la consola
+    console.log("Nuevo valor de la variable:", endpointVariable);
+});*/
+/*
+var boton2 = document.getElementById('send-btn');
+// Agrega un evento de click al botón
+boton2.addEventListener('click', function() {
+    // Incrementa el valor de la variable
+    endpointVariable = "conse";
+    // Imprime el nuevo valor en la consola
+    console.log("Nuevo valor de la variable:", endpointVariable);
+});
+
+var boton3 = document.getElementById('send-btn');
+// Agrega un evento de click al botón
+boton3.addEventListener('click', function() {
+    // Incrementa el valor de la variable
+    endpointVariable = "apo";
+    // Imprime el nuevo valor en la consola
+    console.log("Nuevo valor de la variable:", endpointVariable);
+});*/
+
+
 document.getElementById('send-btn').addEventListener('click', function(e) {
     e.preventDefault(); 
     let userMessage = document.getElementById('user-input').value;
     
+    // Aquí asumo que obtienes la variable de algún lugar, por ejemplo, de otro input o una variable global
+    /*let endpointVariable = 'apo'; // Cambiar esto por la fuente de tu variable*/
+
+    // Construye la URL incorporando la variable
+    let url = `http://FerV24.pythonanywhere.com/${endpointVariable}`;
+
     // Mostrar el mensaje del usuario en el chat
     displayMessage('user', userMessage);
 
     // Mostrar el indicador de que el bot está escribiendo
     var typingIndicator = displayTypingIndicator();
 
-    fetch('http://FerV24.pythonanywhere.com/ask', {
+    fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -34,6 +70,10 @@ document.getElementById('send-btn').addEventListener('click', function(e) {
 
     // Limpiar el campo de entrada del usuario
     document.getElementById('user-input').value = '';
+    // Incrementa el valor de la variable
+    endpointVariable = "";
+    // Imprime el nuevo valor en la consola
+    console.log("Nuevo valor de la variable:", endpointVariable);
 });
 
 function displayTypingIndicator() {
