@@ -1,31 +1,31 @@
 var endpointVariable = "";
 
-/*var boton = document.getElementById('send-btn');
-/ Agrega un evento de click al botón
-boton.addEventListener('click', function() {
-    // Incrementa el valor de la variable
-    endpointVariable = "";
-    // Imprime el nuevo valor en la consola
-    console.log("Nuevo valor de la variable:", endpointVariable);
-});*/
-/*
-var boton2 = document.getElementById('send-btn');
+var boton = document.getElementById('btn1');
 // Agrega un evento de click al botón
-boton2.addEventListener('click', function() {
+boton.addEventListener('click', function() {
     // Incrementa el valor de la variable
     endpointVariable = "conse";
     // Imprime el nuevo valor en la consola
     console.log("Nuevo valor de la variable:", endpointVariable);
 });
 
-var boton3 = document.getElementById('send-btn');
+var boton2 = document.getElementById('btn2');
 // Agrega un evento de click al botón
-boton3.addEventListener('click', function() {
+boton2.addEventListener('click', function() {
     // Incrementa el valor de la variable
     endpointVariable = "apo";
     // Imprime el nuevo valor en la consola
     console.log("Nuevo valor de la variable:", endpointVariable);
-});*/
+});
+
+var boton3 = document.getElementById('btn3');
+// Agrega un evento de click al botón
+boton3.addEventListener('click', function() {
+    // Incrementa el valor de la variable
+    endpointVariable = "";
+    // Imprime el nuevo valor en la consola
+    console.log("Nuevo valor de la variable:", endpointVariable);
+});
 
 
 document.getElementById('send-btn').addEventListener('click', function(e) {
