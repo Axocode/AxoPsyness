@@ -50,7 +50,6 @@
             <!-- Favicon -->
         <link href="../assets/images/Icono.svg" rel="icon" type="image/png">
 
-
             <!-- icons ================================================== -->
         <link rel="stylesheet" href="../assets/css/icons.css">
 

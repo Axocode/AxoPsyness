@@ -23,9 +23,9 @@
     <meta name="description" content="Socialite is - Professional A unique and beautiful collection of UI elements">
     <title>Datacenter - Psyness</title>
 
-     <div  hidden id="hiAxogg0"></div>       <!-- Favicon -->
+     <div  hidden id="hiAxogg0"></div>       
+     <!-- Favicon -->
         <link href="../assets/images/Icono.svg" rel="icon" type="image/png">
-
 
             <!-- icons ================================================== -->
         <link rel="stylesheet" href="assets/css/icons.css">

@@ -8022,7 +8022,7 @@ header .header_inner .right_side {
     border-color: #787DF1 !important; 
 }
 .contact-list .contact-username{
-    color: #ffff !important;
+    color: #fff !important;
 }
 .btn{
     padding: 0.375rem 7.5rem !important;
@@ -8030,8 +8030,7 @@ header .header_inner .right_side {
     border-radius: 4.25rem !important;
 }
 body p{
-        font-size: 17px !important;
-    line-height: 47px !important; 
+    font-size: 15px !important;
 }
 
 .message-reply button {
@@ -9229,7 +9228,7 @@ body.story-active header .header_widgets .is_link {
 
 @media (min-width: 1200px) {
   .main_content {
-    margin-left: 300px;
+    margin-left: 250px;
   }
   .container,
   .mcontainer {
@@ -9555,3 +9554,4 @@ html.dark,
 }
 
  
+

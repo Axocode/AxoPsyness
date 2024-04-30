@@ -26,48 +26,7 @@ img{
 }
 
 body{
-    background-color: #f1f1f1;
-}
-
-nav{
-    padding: 0 80px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 80px;
-}
-
-nav a.logo{
-    font-size: 33px;
-    color: #0f2182;
-    font-weight: 600;
-}
-
-nav .links a:not(:last-child){
-    margin-right: 20px;
-}
-
-nav .login button{
-    padding: 8px 14px;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-}
-
-nav .login button.signup{
-    background-color: #99D1FF;
-    color: #fff;
-    border-radius: 4px;
-    margin-right: 14px;
-}
-
-nav .login button.signup:hover{
-}
-
-
-nav .img-responsive-index{
-  height: 100px;
-  width: 200px;
+    background-color: #fff;
 }
 
 header{
@@ -372,7 +331,7 @@ footer .right p{
 }
 
 .get-started{
-    margin-top: 10rem;
+    margin-top: 5rem;
     display: flex;
     flex-direction: column;
 }
@@ -530,6 +489,12 @@ footer .right p{
 
     footer .links a{
         font-size: 15px;
+    }
+    
+    
+    #botones-index{
+       display: flex; 
+       justify-content: flex-end;
     }
 
 }

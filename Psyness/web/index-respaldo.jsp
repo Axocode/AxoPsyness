@@ -61,6 +61,32 @@
                   <a href="zInicio/login.jsp"><button type="button" class="btn btn-primary rounded-pill btn-custom2">Iniciar Sesion</button></a>
           </div>
         </header>
+        
+        
+     <!--   
+    <nav>
+        <img class="img-responsive-index" src="images/Logo con letras centrado.svg" alt="">
+        <div class="links">
+            <a href="#">Tecnología</a>
+            <a href="#">Sobre nosotros</a>
+            <a href="#">Politicas</a>
+            
+            <a href="#" class="btn dropdown-toggle btn-nav-custom " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Sobre las cuentas</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Cuenta con Código</a></li>
+              <li><a class="dropdown-item" href="#">Institución o Clinica</a></li>
+              <li><a class="dropdown-item" href="#">Creadores de Contenido</a></li>
+            </ul> 1
+        </div>
+        <div class="login">
+            <a href="zInicio/createSinCodigo.jsp"><button type="button" class="signup">Crear Cuenta</button></a>
+            <a href="zInicio/login.jsp"><button type="button" >Iniciar Sesion</button></a>
+        </div>
+    </nav>
+        
+        -->
+        
+        
       
     <!--/Nav Bar-->
     <!--Main Content 1-->

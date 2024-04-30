@@ -113,85 +113,108 @@
         <!-- Header -->
     <jsp:include page="sidebar.jsp"/>
 
+        <!------------------ CONTENIDO --------------------->
 
-<!-- CONTENIDOOOOOOOOOO
+            <div class="Main_content">
+                <div class="Main_container">
+   
+                     <!--  ICONO PARA REGRESARRRRRRRRRRRRR  -->
+                    <div class="section-page-publicaciones">
+                        
+                       <div class="lg:mx-0 uk-animation-slide-bottom-small" id="back_posts_feed">
+                            <button onclick="abrirModal()"> 
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                           <span>Post</span>
+                       </div>   
+                     
+                          <!--  POST  -->
+                        <div class="space-y-7 flex-shrink-0 md:w-full">
 
-
-
-
--->
-
-<div class="main_content">
-            <div class="mcontainer">
-
-                 <!--  Feeds  -->
-                 <div class="lg:flex lg:space-x-10">
-                    <div class="lg:w-3/4 lg:px-20 space-y-7">
-                
-                      <div  hidden id="hiAxogg0"></div>
-                
-                        <div class="card lg:mx-0 uk-animation-slide-bottom-small">
-                            <!-- post header-->
-                            
-                            
-                            <div class="flex justify-between items-center lg:p-4 p-2.5">
-                                <div class="flex flex-1 items-center space-x-4">
-                                    <a href="#">
-                                        <img src="../assets/images/avatars/<%=persona.getIImgNum()%>" class="bg-gray-200 border border-white rounded-full w-10 h-10">
-                                    </a>
-                                    <div class="flex-1 font-semibold capitalize">
-                                        <a href="profile-new.jsp?id=<%=persona.getIUserNum()%>" class="text-black"> <%=escapedUser%> </a>
-                                        <span class="text-gray-700"><%=horita%> hrs</span>
-                                        <%if (publi.getPubDate().equals(fecha12)) {%>
-                                            <div class="text-gray-700 flex items-center space-x-2">hoy <ion-icon name="people"></ion-icon></div>
-                                        <%} else {%>
-                                            <div class="text-gray-700 flex items-center space-x-2"><%=publi.getPubDate()%>"<ion-icon name="people"></ion-icon></div>
-                                        <%}%>
-                                    </div>
-                                </div>
-                              <div>
-                                <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i> </a>
-                                <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
-                                    <ul class="space-y-1">
-                                      <li> 
-                                          <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                           <i class="uil-share-alt mr-1"></i> Compartir
-                                          </a> 
-                                      </li>
-                                      <li> 
-                                          <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                           <i class="uil-edit-alt mr-1"></i>  Editar 
-                                          </a> 
-                                      </li>
-                                      <li>
-                                        <hr class="-mx-2 my-2 dark:border-gray-800">
-                                      </li>
-                                      <li> 
-                                          <a href="#" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
-                                           <i class="uil-trash-alt mr-1"></i>  Eliminar
-                                          </a> 
-                                      </li>
-                                    </ul>
-                                </div>
-                              </div>
+                            <div  hidden id="hiAxogg0">
                             </div>
-                                    
-                            <div class="p-4 space-y-3 relative"> 
-                                <p> <%=escapedCont%> </p>
-                                <hr>
-                                <div id="reaccion" class="flex space-x-4 lg:font-bold">
 
-                                </div>  
-                                        <%--  Comentarios  --%>   
-                                <div id="comentarios0"class="border-t py-4 space-y-4 dark:border-gray-600">
-                                    
-                                </div> 
+                            <div class="card uk-animation-slide-bottom-small" id="post-card-page">
+
+                                    <!-- post header-->   
+                                <div class="flex justify-between items-center lg:p-4 p-2.5">
+                                    <div class="flex flex-1 items-center space-x-4">
+                                        <a href="#">
+                                            <img src="../assets/images/avatars/<%=persona.getIImgNum()%>" class="bg-gray-200 border border-white rounded-full w-10 h-10">
+                                        </a>
+                                        <div class="flex-1 font-semibold capitalize">
+                                            <a href="profile-new.jsp?id=<%=persona.getIUserNum()%>" class="text-black"> <%=escapedUser%> </a>
+                                            <span class="text-gray-700"><%=horita%> hrs</span>
+                                            <%if (publi.getPubDate().equals(fecha12)) {%>
+                                                <div class="text-gray-700 flex items-center space-x-2">hoy <ion-icon name="people"></ion-icon></div>
+                                            <%} else {%>
+                                                <div class="text-gray-700 flex items-center space-x-2"><%=publi.getPubDate()%>"<ion-icon name="people"></ion-icon></div>
+                                            <%}%>
+                                        </div>
+                                    </div>
+                                  <div>
+                                    <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i> </a>
+                                    <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
+                                        <ul class="space-y-1">
+                                          <li> 
+                                              <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                               <i class="uil-share-alt mr-1"></i> Compartir
+                                              </a> 
+                                          </li>
+                                          <li> 
+                                              <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                               <i class="uil-edit-alt mr-1"></i>  Editar 
+                                              </a> 
+                                          </li>
+                                          <li>
+                                            <hr class="-mx-2 my-2 dark:border-gray-800">
+                                          </li>
+                                          <li> 
+                                              <a href="#" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
+                                               <i class="uil-trash-alt mr-1"></i>  Eliminar
+                                              </a> 
+                                          </li>
+                                        </ul>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="p-4 space-y-3 relative"> 
+                                    <p> <%=escapedCont%> </p>
+                                    <hr>
+                                    <div id="reaccion" class="flex space-x-4 lg:font-bold">
+
+                                    </div>  
+                                            <%--  Comentarios  --%>   
+                                    <div id="comentarios0"class="border-t py-4 space-y-4 dark:border-gray-600">
+
+                                    </div> 
+                                </div>
                             </div>
                         </div>
-                    </div>
+                     </div> 
+                                                  
                 </div>
+                                    
+                    <!---------------------------------------------- RIGHT CONTENT -------------------------------------------------------------------------->
+                         
+                    <div class="Right_container"> 
+                        
+                        <div class="section-info-profile-post">                                           
+                        
+                             <!--------------EMOTION BALL------------->
+                                    
+                            <div class=" widget p-4" id="emotion_ball">
+                                <h4 class="text-center font-semibold"> ESTADO DE ÁNIMO </h4>
+                                <h2 class="text-center p-1 mr-3"> Tu última publicación así estuvo representada </h2>
+
+                                <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6">
+                                    <img src="../assets/images/avatars/esfera-gradiente.png" class="object-cover rounded-lg col-span-full">
+                                </div>
+                            </div>
+                        </div>
+                  </div>      
             </div>
-        </div>
                                 
                                         <%request.setCharacterEncoding("UTF-8");%>
        <div id="create-comment-modal" class="create-post" uk-modal>
@@ -227,7 +250,24 @@
                     </form>
                 </div>
             </div>            
-                                        
+                         
+                                
+                                <style>
+                                                /*   ICONO back    */
+
+                                    .icon_back button {
+                                        width: 35px;
+                                        height: 35px;
+                                        position: absolute;
+                                        border-radius: 50px;
+                                        border: 1px solid #fff;
+                                        color: #030712;
+                                        box-shadow: 0px 1px 10px rgba(0,0,0,0.4);
+                                        transition: all 500ms ease;
+                                        text-decoration: none;
+                                        z-index: 99;
+                                    }
+                                 </style>      
                                         
                                         
 <script>

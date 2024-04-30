@@ -139,6 +139,11 @@
                                 </div>
                                 <div class="icon_change_photo" hidden> <ion-icon name="camera" class="text-xl"></ion-icon> </div>
                             </div>
+                            <div class="profile_seguir">
+                                <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
+                                <button type="submit" class="button bg-blue-700"> Seguir </button>
+                                </div>
+                            </div>    
                             <div class="profile_info">
                                 <h1> <c:out value='<%=nombre%>'/> </h1>
                             </div>
@@ -160,7 +165,8 @@
                             </div>
                             </a>
                         </div>
-<div  hidden id="hiAxogg0"></div>
+                        <div  hidden id="hiAxogg0"></div>
+                        
                         <div class="flex justify-between lg:border-t border-gray-100 flex-col-reverse lg:flex-row pt-2">
                             <nav class="responsive-nav pl-3">
                                 <ul uk-switcher="connect: #timeline-tab; animation: uk-animation-fade">

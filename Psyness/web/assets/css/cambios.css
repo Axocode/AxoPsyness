@@ -18,7 +18,7 @@ and open the template in the editor.
 
 body{
     margin: 0;
-    background: #fafafa;
+    background: #fff !important ;
     color: #262626;
     font-family: 'Segoe UI';
 }
@@ -26,11 +26,11 @@ body{
 .sidebar_feed{
     position: fixed;
     top: 0;
-    left: 0;
+    left: 10%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 250px;
+    width: 17%;
     height: 100%;
     padding: 40px 10px 30px 10px;
     background: #fff;
@@ -181,10 +181,10 @@ body{
 .sidebar-search{
     position: fixed;
     top: 0;
-    left: 250px;
+    left: 27%;
     flex-direction: column;
     align-items: flex-start;
-    width: 440px;
+    width: 400px;
     height: 100%;
     z-index: 99;
     padding: 40px 10px 30px 10px;
@@ -448,16 +448,29 @@ body{
 }
 
 
-/*MAIN CONTENT */
+
+
+/*MAIN CONTENT */ 
 
 #card_posting{
     margin-top: -45px;
-    margin-bottom: 30px;
+    border: 1px solid #eeeeee;
+    /*margin-bottom: 30px;*/
 }
 
+
 #posts_feed{
-    margin-bottom: 30px;
+    border: 1px solid #FFFEFD;
+    /*margin-bottom: 30px;*/
 }
+
+#posts_feed:hover{
+    background: #F5F5F5;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+
 
 #burguer_posts{
     z-index: 200;
@@ -524,6 +537,7 @@ body{
 /*RIGHT CORRECTO*/
 
 .lado_derecho{
+    border-left: 1px solid #eeeeee;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -547,7 +561,6 @@ body{
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    margin-left: -10px;
 }
 
 .boxesita_rights_feed a{
@@ -557,10 +570,12 @@ body{
 
 #contenedor_side_right{
     height: 300px;
+    border: 1px solid #eeeeee;
 }
 
 #contenedor_side_right_pf{
     margin-bottom: 30px;
+    border: 1px solid #eeeeee;
 }
 
 #second_box_right_feed{
@@ -612,7 +627,6 @@ body{
 #boxes_datacenter{
     margin-bottom: 20px;
 }
-
 
 
 /*Pagina Perfil User*/
@@ -686,8 +700,38 @@ body{
     display: none;
 }
 
-
 @media screen and (max-width: 1200px){
+    .sidebar_feed{
+        left: 20px;
+        width: 250px;
+    }
+    .Main_container{
+        margin-left: 270px !important;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .sidebar_feed{
+        left: 0;
+        width: 250px;
+    }
+    .Main_container{
+        margin-left: 250px !important;
+    }
+    .Right_container{
+        padding-left: 0px;
+        margin-left: 650px !important;
+    }
+    
+    .section-info-profile{
+        width: 200px;
+    }
+}
+
+
+@media screen and (max-width: 950px){
+    
+    
     .sidebar_feed .logo-img_sidebar{
         display: none;
     }
@@ -701,6 +745,7 @@ body{
     }
 
     .sidebar_feed{
+        left: 0;
         width: 72px;
     }
 
@@ -716,8 +761,8 @@ body{
 
 
     .sidebar_feed .profile-img{
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 32px;
     }
     
     .main_content{
@@ -727,10 +772,24 @@ body{
         margin-bottom: 50px;
         margin-top: 15px;
     }  
+    
+    
+    /**/
+    .Main_container{
+        margin-left: 150px !important;
+        width: 480px !important;
+    }
+    
+    .Right_container{
+        display: none;
+    }
 
+    /**/
+    
     .lado_derecho{
         padding: 0;
         left: 66%;
+        
     }
 
     .sidebar-search{
@@ -762,16 +821,31 @@ body{
     #feauturings_user_perfil{
         width: 85%;
     }
+
+    
 }
 
 
 @media screen and (max-width: 920px){
+    
+    #post-card-page{
+        margin-bottom: 70px;
+    }
+    
     .lado_derecho{
         padding: 0;
         left: 64%;
     }
     #feauturings_user_perfil{
         width: 80%;
+    }
+    .Right_container{
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+    }
+    .Main_container{
+        margin-left: 200px !important;
     }
 }
 
@@ -782,7 +856,7 @@ body{
 }
 
 @media screen and (max-width: 770px){
-    .lado_derecho{
+    .Right_container{
         display: none;
     }
 
@@ -798,17 +872,31 @@ body{
         display: none;
     }  
 
-    .lado_derecho{
+    .Right_container{
         display: none;
+        visibility: hidden;
+        opacity: 0;
     }
+    
+        /**/
+    .Main_container{
+        margin-left: 0px !important; 
+        left: 0;
+        padding: 15px 0px 60px 0px;
+        width: 99.755% !important;
+    }
+    
+    .section-publicacione{
+        width: 300px;
+    }
+    
+    /**/
 
-    .main_content{
+    .mcontainer{
         margin-left: 0px; 
         margin-right: 0px;  
         left: 0;
         padding-top: 15px !important;
-        padding-left: 0px;
-        padding-right: 0px;
     }   
 
     .header_wrap{
@@ -827,15 +915,18 @@ body{
     }
 
     .contenedor_datacenter{
-        padding-right: 0px;
+        margin-left: -120px;
+        padding-top: 35px !important;
     }
 
     .contenedor_editperfil{
-        padding-right: 0px;
+        margin-left: -120px;
+        padding-top: 35px !important;
     }
 
     .contenerdor_perfiluser{
-        padding-right: 0px;
+        margin-left: -120px;
+        padding-top: 35px !important;
     }
 
     #feauturings_user_perfil{
@@ -844,7 +935,8 @@ body{
         opacity: 0;
     }
     .contenedor_info_user{
-        padding-right: 0px;
+        margin-left: -120px;
+        padding-top: 35px !important;
     }
     #sidebar_seguidos{
         display: none;
@@ -872,7 +964,9 @@ body{
         opacity: 0;
     }
         
-
+    .section-page-publicaciones{
+        padding-top: 50px !important;
+    }
     
 }
 
@@ -888,7 +982,7 @@ body{
     border: 1px solid #fff;
     color: #f9f9f9;
     bottom: 70px;
-    right: 10px;
+    right: 3%;
     box-shadow: 0px 1px 10px rgba(0,0,0,0.4);
     transition: all 500ms ease;
     text-decoration: none;
@@ -1039,3 +1133,87 @@ body{
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
+
+/*-----------------  NUEVO FEED PRUEBA----------------------------------------*/
+
+/*Anterior main content*/
+.main_content{
+    margin-left: 27%;
+}
+
+.Main_content{
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #fff !important;
+}
+
+.Main_container{
+    margin-left: 27%;
+    width: 41%;
+}
+
+.section-publicaciones{
+    margin: 60px 0px 10px 0px;
+}
+
+.Right_container{
+    border-left: 1px solid #eeeeee;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    top: 0;
+    margin-left: 68%;
+    width: 100%;
+    padding-left: 20px;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.section-info-profile{
+    margin: 60px 5px 5px 5px;
+    width: 320px;
+}
+
+
+/*   ICONO back    */
+
+#back_posts_feed{
+    width: 100%;
+    position: relative;
+    padding: 10px;
+}
+
+#back_posts_feed button{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 0.3s ease;
+    z-index: 99;
+}
+
+#back_posts_feed button:hover{
+    background: #E8E8E8;
+}
+
+#back_posts_feed span{
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: 600;
+}
+
+.section-info-profile-post{
+    margin: 100px 5px 5px 5px;
+    width: 330px;
+}
+
+#emotion_ball{
+    border: 1px solid #fff;
+}
+
+.section-page-publicaciones{
+    padding: 0px 0px 55% 0px;
+}

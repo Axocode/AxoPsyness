@@ -146,7 +146,7 @@ public class PublicacionesPerfilServlet extends HttpServlet {
                     out.print("</div>");
                     out.print("</div>");
                     out.print("</div>");
-                    out.print("<div class=\"p-4 pt-0 border-b dark:border-gray-700\">");
+                    out.print("<div class=\"p-6 pt-12 border-b dark:border-gray-700\">");
                     out.print("<p class=\"post-text\">" + escapedCont + "</p>");
                     out.print("</div>");
                     out.print("<div class=\"p-4 space-y-3\">");
