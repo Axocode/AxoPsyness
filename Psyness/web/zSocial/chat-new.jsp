@@ -181,15 +181,15 @@
                                     <div class="message-bubble">
                                         <div class="message-bubble-inner">
                                             <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                            <div class="message-text"><p>Consejos</p></div>
+                                            <button type="submit" class="message-text bg-blue-700"> Consejos </button>
+                                        </div>                                        
+                                        <div class="message-bubble-inner">
+                                            <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
+                                            <button type="submit" class="message-text bg-blue-700"> Mensajes de Apoyo </button>
                                         </div>
                                         <div class="message-bubble-inner">
                                             <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                            <div class="message-text"><p>Mensajes de Apoyo</p></div>
-                                        </div>
-                                        <div class="message-bubble-inner">
-                                            <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                            <div class="message-text"><p>Actividades de Relajación</p></div>
+                                            <button type="submit" class="message-text  bg-blue-700"> Actividades de Relajación </button>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>

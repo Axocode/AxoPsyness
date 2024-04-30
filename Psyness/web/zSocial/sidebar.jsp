@@ -64,8 +64,11 @@
         <%request.setCharacterEncoding("UTF-8");        
           HttpSession sesion = request.getSession();
           String data = (String) sesion.getAttribute("SIImgNum");%>
+          
+          
         <!-- Header -->
         <div hidden id="hiAxoggA"></div>
+        
     <header>
         <div class="header_wrap">
             <div class="header_inner mcontainer">
@@ -79,7 +82,7 @@
                     -->
 
                     <div id="logo">
-                        <a href="feed-new.jsp"> 
+                        <a href="home.jsp"> 
                             <img src="../assets/images/avatars/Logo con letras centrado.svg" alt="">
                             <img src="../assets/images/avatars/Logo con letras centrado.svg" class="logo_mobile" alt="">
                         </a>
@@ -99,22 +102,23 @@
                     <div class="header_widgets">                       
 
                         <!-- Iconos -->
-
-                        <a href="feed-new.jsp" class="is_icon">
-                            <i class='bx bxs-home'></i>
-                        </a>
                         
                         <a href="data-new.jsp?follows=1" class="is_icon">
                             <i class='bx bx-user-voice'></i>
+                        </a>
+                        
+                        <a href="chat-new.jsp" class="is_icon" uk-tooltip="title: Message">
+                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path></svg>
+                        </a>
+                        
+                        <a href="home.jsp" class="is_icon">
+                            <i class='bx bxs-home'></i>
                         </a>
                         
                         <a href="settings-new.jsp" class="is_icon">
                             <i class='bx bx-cog' ></i>  
                         </a>
 
-                        <a href="chat1.jsp" class="is_icon" uk-tooltip="title: Message">
-                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path></svg>
-                        </a>
 
                         <!-- Message de Bolita - Perfil -->
                         <a href="">
@@ -169,9 +173,9 @@
         </div>
     </header>
                                 
-                            <!-- SIDEBAR -->
+                            <!-- ICONO POSTEO -->
     
-                      <div class="icon_posteo">
+                                <div class="icon_posteo">
                                     <button onclick="abrirModal()">
                                         <span>
                                             <i class="fa-solid fa-plus"></i>
@@ -188,7 +192,7 @@
 
 
         <nav>
-            <button onclick="location.href='feed-new.jsp'">
+            <button onclick="location.href='home.jsp'">
                 <span>
                      <i class='bx bx-home' ></i>
                     <span>Inicio</span>
@@ -430,6 +434,27 @@
                                 .responsive-overflow {
                                   overflow-x: auto;
                                   overflow-y: hidden; 
+                                  
+                                                                   
+                                  ::-webkit-scrollbar {
+                                      width: 10px; /* Ancho de la barra de desplazamiento */
+                                  }
+
+                                  /* Personaliza el fondo de la barra de desplazamiento */
+                                  ::-webkit-scrollbar-track {
+                                      background: #f8f8f8; /* Color de fondo */
+                                  }
+
+                                  /* Personaliza el indicador de desplazamiento */
+                                  ::-webkit-scrollbar-thumb {
+                                      background: #f8f8f8; /* Color del indicador */
+                                  }
+
+                                  /* Cambia el color del indicador al pasar el ratón */
+                                  ::-webkit-scrollbar-thumb:hover {     
+                                      background: #f8f8f8;
+                                  }
+
                                 }
 
                                 @media screen and (max-width: 768px) {

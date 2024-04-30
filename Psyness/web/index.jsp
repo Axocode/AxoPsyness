@@ -47,27 +47,46 @@
   <!--Nav Bar-->
         
 <!--/Nav Bar-->
-    <!--Main Content 1-->
-        
-        <nav>
-        <img class="img-responsive-index" src="images/Logo con letras centrado.svg" alt="">
-        <div class="links">
-            <a href="#">Tecnología</a>
-            <a href="#">Sobre nosotros</a>
-            <a href="#">Politicas</a>
-            <!--
-            <a href="#" class="btn dropdown-toggle btn-nav-custom " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Sobre las cuentas</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <!--Main Content 1-->  
+    
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom px-4" id="navbar-index">
+        <div class="col-md-3 mb-2 mb-md-0">
+            <img class="img-responsive logo" src="images/Logo con letras centrado.svg" alt="">
+        </div>
+    
+          <ul class="nav col-14 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2">Tecnología</a></li>
+            <li><a href="#" class="nav-link px-2">Sobre Nosotros</a></li>
+            <li><a href="#" class="nav-link px-2">Póliticas</a></li>
+            <li><button class="btn dropdown-toggle btn-nav-custom " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+               Sobre las cuentas
+            </button><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="#">Cuenta con Código</a></li>
               <li><a class="dropdown-item" href="#">Institución o Clinica</a></li>
               <li><a class="dropdown-item" href="#">Creadores de Contenido</a></li>
-            </ul> 1-->
-        </div>
-        <div class="login">
-            <a href="zInicio/createSinCodigo.jsp"><button type="button" class="signup">Crear Cuenta</button></a>
-            <a href="zInicio/login.jsp"><button type="button" >Iniciar Sesion</button></a>
-        </div>
-    </nav>
+            </ul></li>
+          </ul>
+    
+            <div class="col-md-3 text-end" id="botones-index">
+              <a href="zInicio/createSinCodigo.jsp"><button type="button" id="btonindex" class="btn btn-outline-primary me-2 rounded-pill btn-custom">Crear Cuenta</button></a>
+              <a href="zInicio/login.jsp"><button type="button" id="btonindex" class="btn btn-primary rounded-pill btn-custom2">Iniciar Sesion</button></a>
+          </div>
+    </div>
+    
+    <style>
+        @media screen and (max-width: 1200px) {
+            #botones-index{
+                display: flex;
+                justify-content: flex-end;
+            }
+            
+            #btonindex{
+                padding: 12px;
+                display: block;
+            }
+        }
+
+    </style>
 
     <header>
         <div class="left">
@@ -136,23 +155,23 @@
             </div>
         </div>
         <div class="item">
-            <img src="images/apoyofamiliar.png">
+            <img src="images/apoyopsicologico.png">
             <div class="info">
                 <h4>Psicologos verificados</h4>
                 <p>Click</p>
             </div>
         </div>
         <div class="item">
-            <img src="images/apoyofamiliar.png">
+            <img src="images/apoyomujeres.png">
             <div class="info">
                 <h4>Apoyo mutuo</h4>
                 <p>Click</p>
             </div>
         </div>
         <div class="item">
-            <img src="images/apoyofamiliar.png">
+            <img src="images/apoyotelefono.png">
             <div class="info">
-                <h4>Datos cientificos</h4>
+                <h4>Clínicas Asociadas</h4>
                 <p>Click</p>
             </div>
         </div>

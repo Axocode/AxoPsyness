@@ -52,7 +52,7 @@
                     sesion.setAttribute("SILastPub",null);
                     sesion.setAttribute("SIUserDescription", SIUserDescription);
 
-            response.sendRedirect("../zSocial/feed-new.jsp");
+            response.sendRedirect("../zSocial/home.jsp");
             
 
             
