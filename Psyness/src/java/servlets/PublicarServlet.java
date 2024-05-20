@@ -220,6 +220,9 @@ public class PublicarServlet extends HttpServlet {
                     out.println("<div id=\"hiAxogg" + (TotalCiclos2 + 1) + "\">");
                     out.println("<div hidden id=\"resultadoPublicacion"+(TotalCiclos2+1)+"\">" + resultado + "</div>");
                     out.println("</div>");
+                    
+                    String numpub = trows.getPubNumId().toString();
+                    out.print("<div id=\"publiTotal"+numpub+"\">");
                     out.print("<div class=\"card lg:mx-0 uk-animation-slide-bottom-small\" id=\"posts_feed\">");
                     out.print("<div class=\"flex justify-between items-center lg:p-4 p-2.5\">");
                     out.print("<div class=\"flex flex-1 items-center space-x-4\">");
@@ -245,27 +248,11 @@ public class PublicarServlet extends HttpServlet {
                     out.print("<div class=\"bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700\" uk-drop=\"mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small\">");
                     out.print("<ul class=\"space-y-0\">");
 
-                    if (sesion.getAttribute("SIUser").equals(interUsers.getIUser())) {
-                        out.print("<li uk-toggle=\"target: #create-post-modal-edit\" >");
-                        out.print("<a href=\"#\" class=\"flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800\">");
-                        out.print("<i class=\"uil-edit-alt mr-1\"></i>  Editar publicacion");
-                        out.print("</a>");
-                        out.print("</li>");
-                        out.print("<li>");
-                        out.print("<a href=\"#\" class=\"flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800\">");
-                        out.print("<i class=\"uil-comment-slash mr-1\"></i>  Desactivar");
-                        out.print("</a>");
-                        out.print("</li>");
-                        out.print("<li>");
-                        out.print("<hr class=\"-mx-2 my-2 dark:border-gray-800\">");
-                        out.print("</li>");
-                    }
-
                     if (sesion.getAttribute("SIUser").equals(interUsers.getIUser()) || sesion.getAttribute("SIRol").equals("Administrador")) {
                         out.print("<li>");
-                        out.print("<a href=\"../zProcesos/eliminarPub.jsp?eliminar=" + trows.getPubNumId() + "&per=" + interUsers.getIUserNum() + "&direct=0\" class=\"flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600\">");
-                        out.print("<i class=\"uil-trash-alt mr-1\"></i>  Eliminar");
-                        out.print("</a>");
+                        out.print("<button onclick=\"eliminarPub(" + trows.getPubNumId() + ", " + interUsers.getIUserNum() + ", 0)\" class=\"flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600\">");
+                        out.print("<i class=\"uil-trash-alt mr-1\"></i> Eliminar");
+                        out.print("</button>");
                         out.print("</li>");
                     }
 
@@ -285,7 +272,6 @@ public class PublicarServlet extends HttpServlet {
                     out.print("<p class=\"post-text\">" + escapedCont + "</p>");
                     out.print("</div>");
                     out.print("<div class=\"p-4 space-y-3\">");
-                    String numpub = trows.getPubNumId().toString();
                     out.print("<div id=\"pub"+numpub+"\" class=\"flex space-x-4 lg:font-bold\">");
 
                 InterLoveService lovee = new InterLoveService();
@@ -349,7 +335,7 @@ public class PublicarServlet extends HttpServlet {
                     }
                 }    
                 
-                        out.println("<button onclick=\"window.location.href='post.jsp?id=" + numpub + "'\" class=\"flex items-center space-x-2 flex-1 justify-end\" style=\"color: #99D1FF; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
+                        out.println("<button onclick=\"guardarPosicionEnHistorial(); window.location.href='post.jsp?id=" + numpub + "'\" class=\"flex items-center space-x-2 flex-1 justify-end\" style=\"color: #99D1FF; cursor: pointer; background-color: transparent; border: none; outline: none;\">");
                         out.println("        <div class=\"flex items-center p-2 rounded-full text-black lg:bg-gray-100 dark:bg-gray-600\">");
                         out.println("            <span style=\"color: #99D1FF;\">" + trows.getPubComent()+ "</span>");
                         out.println("            <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" width=\"22\" height=\"22\" style=\"fill: #99D1FF;\" class=\"dark:text-gray-100\">");
@@ -366,7 +352,7 @@ public class PublicarServlet extends HttpServlet {
                 out.print("</div>");
                 out.print("</div>");                 
                 out.print("</div>");
-         
+                out.print("</div>");
     }
                     out.println("</div>");
                 }

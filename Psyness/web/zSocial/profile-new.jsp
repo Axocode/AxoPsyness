@@ -105,6 +105,10 @@
             String[] partes =horaFormateada.split(" ");
             String fecha12 = partes[0] + " " + partes[1] + " " + partes[2] + " " + partes[3] + " " + partes[4];
             String hora12 = partes[5]; 
+
+                                    InterFlowService flowService = new InterFlowService();
+                                    int id = Integer.parseInt(request.getParameter("id"));
+                                    int idtu = Integer.parseInt(sesion.getAttribute("SIUserNum").toString());
 %>
     
 
@@ -139,11 +143,17 @@
                                 </div>
                                 <div class="icon_change_photo" hidden> <ion-icon name="camera" class="text-xl"></ion-icon> </div>
                             </div>
-                            <div class="profile_seguir">
-                                <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
-                                <button type="submit" class="button bg-blue-700"> Seguir </button>
+                            <% if (id != idtu) { %>
+                                <div class="profile_seguir">
+                                    <div id="seeg" class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
+                                        <% if (flowService.isUserFollowing(id, idtu)) { %>
+                                            <button onclick="agregarSeguido(<%= id %>, 'seguirnt')" type="submit" class="button" style="background-color: #DCDCDC; color: black;">Dejar de Seguir</button>
+                                        <% } else { %>
+                                            <button onclick="agregarSeguido(<%= id %>, 'seguir')" type="submit" class="button bg-blue-700">Seguir</button>
+                                        <% } %>
+                                    </div>
                                 </div>
-                            </div>    
+                            <% } %>
                             <div class="profile_info">
                                 <h1> <c:out value='<%=nombre%>'/> </h1>
                             </div>
@@ -156,7 +166,7 @@
                             onmouseover="this.style.color='#141414'; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '#141414')" 
                             onmouseout="this.style.color=''; this.querySelectorAll('svg').forEach(svg => svg.style.fill = '')">
                             <div class="profile_info">
-                                            <li class="flex items-center space-x-2"> 
+                                            <li id="numeroseg" class="flex items-center space-x-2"> 
                                                 <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
                                                 Seguidores: <strong> <%=seguidores%>  </strong>
                                                 <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>

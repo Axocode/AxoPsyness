@@ -406,7 +406,7 @@ public List<InterUsers> getInterUsersByFollow(int pubNumId) {
 
     try (Connection connection = getConnection()) {
         String sql = "select interusers.iuser, interusers.iusernum, interusers.iage, interusers.iemail, interusers.ipassword, " +
-                     "interusers.iimgnum, interusers.irol, interusers.iuserseguidores, interusers.iuserseguidos, interusers.iuserdescription " +
+                     "interusers.iimgnum, interusers.irol, interusers.iuserseguidores, interusers.iuserseguidos, interusers.iuserdescription, interusers.iuserdate, interusers.iuserhour " +
                      "from interusers " +
                      "inner join interflow on interusers.iusernum = interflow.flowseguidoid " +
                      "where interflow.flowseguidoresid = ?";
@@ -446,7 +446,7 @@ public List<InterUsers> getInterUsersByFollower(int ipubnumid) {
 
     try (Connection connection = getConnection()) {
         String sql = "select interusers.iuser, interusers.iusernum, interusers.iage, interusers.iemail, " +
-                     "interusers.ipassword, interusers.irol, interusers.iimgnum, interusers.iuserseguidores, interusers.iuserseguidos, interusers.iuserdescription " +
+                     "interusers.ipassword, interusers.irol, interusers.iimgnum, interusers.iuserseguidores, interusers.iuserseguidos, interusers.iuserdescription, interusers.iuserdate, interusers.iuserhour " +
                      "from interusers " +
                      "inner join interflow on interusers.iusernum = interflow.flowseguidoresid " +
                      "where interflow.flowseguidoid = ?";

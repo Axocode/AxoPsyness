@@ -362,8 +362,9 @@
                                     </div>
                                 <%}%>
                             </div>
-
-                        </div>                         
+                        </div> 
+                            <div class="right_sidebar_feed" id="imangesita">    
+                            </div>
                     </div>
                                             
                 </div>                   

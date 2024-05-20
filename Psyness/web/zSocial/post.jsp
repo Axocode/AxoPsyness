@@ -122,7 +122,7 @@
                     <div class="section-page-publicaciones">
                         
                        <div class="lg:mx-0 uk-animation-slide-bottom-small" id="back_posts_feed">
-                            <button onclick="abrirModal()"> 
+                            <button id="bvolver"> 
                                 <i class="fa-solid fa-arrow-left"></i>
                             </button>
                            <span>Post</span>
@@ -156,23 +156,21 @@
                                     <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i> </a>
                                     <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
                                         <ul class="space-y-1">
-                                          <li> 
-                                              <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                               <i class="uil-share-alt mr-1"></i> Compartir
-                                              </a> 
-                                          </li>
-                                          <li> 
-                                              <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                               <i class="uil-edit-alt mr-1"></i>  Editar 
-                                              </a> 
-                                          </li>
+                                            <li> 
+                                                <a href="" id="compartirEnlace" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                                    <i class="uil-share-alt mr-1"></i> Compartir
+                                                </a> 
+                                            </li>
+                                            <div id="mensajeCopiado" style="display: none;">Copiado al portapapeles</div>
                                           <li>
                                             <hr class="-mx-2 my-2 dark:border-gray-800">
                                           </li>
                                           <li> 
-                                              <a href="#" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
-                                               <i class="uil-trash-alt mr-1"></i>  Eliminar
-                                              </a> 
+                                                <li>
+                                                <button onclick="ejecutarAcciones(<%=publi.getPubNumId()%>, <%=persona.getIUserNum()%>);" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md dark:hover:bg-red-600">
+                                                <i class="uil-trash-alt mr-1"></i> Eliminar
+                                                </button>
+                                                </li>
                                           </li>
                                         </ul>
                                     </div>
@@ -228,7 +226,7 @@
                             <img src="../assets/images/avatars/<c:out value='<%=data%>'/>" class="bg-gray-200 border border-white rounded-full w-11 h-11">
                                 <div class="flex-1 pt-2">
                                     <input type="hidden" id="guardar" name="guardar" value="Submit" />
-                                    <input type="hidden" name="numero123" id="numero23" value="<%=request.getParameter("id")%>" />
+                                    <input type="hidden" name="numero23" id="numero23" value="<%=request.getParameter("id")%>" />
                                     <textarea id="inputText1" name="ComentCont" class="uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5" placeholder="¿Alguna recomendación o opinion?" maxlength="1250" autofocus></textarea>
                                     <input type="hidden" name="ComentDate" id="ComentDate" value="<%=fecha12%>" />
                                     <input type="hidden" name="ComentHour" id="ComentHour" value="<%=hora12%>" />
@@ -238,7 +236,7 @@
                         </div>
                         <div class="bsolute bottom-0 p-4 space-x-4 w-full">
                             <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
-                                <button type="submit" class="button bg-blue-700" id="guardadito1" ontouchstart="this.click()"> Publicar </button>
+                                <button type="submit" class="button bg-blue-700" name="guardadito2" id="guardadito2" ontouchstart="this.click()"> Publicar </button>
                                     <div class="flex flex-1 items-center lg:justify-end justify-center space-x-2">
                                         <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                         <svg class="text-red-600 h-9 p-1.5 rounded-full bg-red-100 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"> </path></svg>
@@ -325,6 +323,7 @@
     <script src="../assets/js/simplebar.js"></script>
     <script src="../assets/js/custom.js"></script>
     <script src="../assets/js/bootstrap-select.min.js"></script>
+    <script src="../assets/js/ProcesosAjax.js"></script>
 <audio id="miSonido">
     <source src="../assets/audio.mp3" type="audio/mp3">
     Tu navegador no soporta el elemento de audio.
@@ -455,7 +454,38 @@ function handleButtonHover2(button, isHover) {
         }
    }
    
-</script>
+       document.getElementById('compartirEnlace').addEventListener('click', function(event) {
+                event.preventDefault(); // Prevenir la acción predeterminada del enlace
 
+                // Copiar la URL al portapapeles
+                navigator.clipboard.writeText(window.location.href).then(function() {
+                    // Mostrar el mensaje de copiado
+                    var mensaje = document.getElementById('mensajeCopiado');
+                    mensaje.style.position = 'fixed';
+                    mensaje.style.bottom = '30px';
+                    mensaje.style.left = '50%';
+                    mensaje.style.transform = 'translateX(-50%)';
+                    mensaje.style.backgroundColor = '#787DF1';
+                    mensaje.style.color = '#fff';
+                    mensaje.style.padding = '10px';
+                    mensaje.style.borderRadius = '2px';
+                    mensaje.style.textAlign = 'center';
+                    mensaje.style.zIndex = '1';
+                    mensaje.style.display = 'block';
+
+                    // Ocultar el mensaje después de 2 segundos
+                    setTimeout(function() {
+                        mensaje.style.display = 'none';
+                    }, 2000);
+                }).catch(function(err) {
+                    console.error('Error al copiar la URL: ', err);
+                });
+            });
+            
+            function ejecutarAcciones(pubId, userId) {
+            eliminarPub(pubId, userId); // Ejecutar la función de eliminar publicación
+            window.location.href = "home.jsp";
+        }
+    </script>
 </html>    
 

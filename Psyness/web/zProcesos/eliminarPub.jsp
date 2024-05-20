@@ -41,7 +41,7 @@
             publicTDelete.setPubNumId(cont);
             InterPubService borrar = new InterPubService();
             borrar.deleteUsers(publicTDelete);    
-            response.sendRedirect("../zSocial/feed-new.jsp#"+con2);
+            response.sendRedirect("../zSocial/home.jsp#"+con2);
             } else if (request.getParameter("direct").equals("1")) {
                 int cont = Integer.parseInt(request.getParameter("eliminar"));
                 int con2 = cont + 1;

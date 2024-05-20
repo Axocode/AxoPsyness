@@ -6,7 +6,14 @@
         $("#guardadito1").prop('disabled', false);
     }
 
+    function doPub1() {
+        $("#guardadito2").prop('disabled', true);
+    }
 
+    function resPub1() {
+        $("#guardadito2").prop('disabled', false);
+    }
+    
     function enviarAmor(pub1, action) {
         var url = '/Psyness/MeGustaServlet?pub=' + pub1 + '&action1=' + action;
 
@@ -23,6 +30,65 @@
 
         return false;
     }
+    
+    function eliminarPub(pub, numUser) {
+        var url = '/Psyness/ServletEliminar?per=' + numUser + '&eliminar=' + pub;
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(data) {
+                var div = document.getElementById("publiTotal"+pub);
+                div.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                div.style.opacity = '0';
+                div.style.transform = 'scale(0.5)';
+            
+                div.addEventListener('transitionend', function() {
+                div.remove();
+            });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", status, error);
+                console.log(xhr.responseText);
+            }
+        });
+
+        return false;
+    }
+
+    function agregarSeguido(num, action) {
+        var url = '/Psyness/SeguidoresServlet?id=' + num + '&action1=' + action;
+        console.log("numero:", num, "accion:", action);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(data) {
+                $('#seeg').html(data);
+                actualizarSeguidos(num)
+            },
+            error: function(xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", status, error);
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+    function actualizarSeguidos(id){
+        var url = '/Psyness/ServletSeguidosSeguidores?id=' + id;
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(data) {
+                $('#numeroseg').html(data);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error en la solicitud AJAX:", status, error);
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+    var sonidoReproducido = false; // Variable para rastrear si el sonido ya se ha reproducido
 
     function agregarFav(pub1, action) {
         var url = '/Psyness/FavoritoServlet?pub=' + pub1 + '&action1=' + action;
@@ -40,24 +106,6 @@
 
         return false;
     }
-
-    function agregarSeguido(num, action) {
-        var url = '/Psyness/SeguidoresServlet?id=' + num + '&action1=' + action;
-        console.log("numero:",num,"acccion:",action),
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function(data) {
-            },
-            error: function(xhr, status, error) {
-                console.error("Error en la solicitud AJAX:", status, error);
-                console.log(xhr.responseText);
-            }
-        });
-    }
-   
-
-    var sonidoReproducido = false; // Variable para rastrear si el sonido ya se ha reproducido
 
     function actualizarPub(num) {
         var url = '/Psyness/ReaccionesServlet?key2=' + num;
@@ -285,20 +333,21 @@ $(document).ready(function () {
                             success: function (response) {
                                 console.log("Formulario enviado por AJAX", numero1);
                                 console.log(response);
-                                doPub();
-                                UIkit.modal("#create-post-modal").hide();
-                                document.getElementById('inputText').value = '';
-                                var botonPublicar = document.getElementById('guardadito1');
-                                var colorOriginal = window.getComputedStyle(botonPublicar).backgroundColor;
-                                botonPublicar.style.backgroundColor = '#CFCFCF';
+                                doPub1();
+                                UIkit.modal("#create-comment-modal").hide();
+                                document.getElementById('inputText1').value = '';
+                                
+                                var botonPublicar1 = document.getElementById('guardadito2');
+                                var colorOriginal = window.getComputedStyle(botonPublicar1).backgroundColor;
+                                botonPublicar1.style.backgroundColor = '#CFCFCF';
                                 
                                 setTimeout(function () {
-                                    resPub();
-                                    botonPublicar.style.backgroundColor = colorOriginal;
+                                    resPub1();
+                                    botonPublicar1.style.backgroundColor = colorOriginal;
                                 }, 10000);
 
                                   // Ejemplo de uso
-                                    mostrarNotificacionComent("Publicación Realizada. Ver comentario", "success", numero1);
+                                    mostrarNotificacion("Publicación Realizada. Ver comentario", "success", numero1);
 
                             },
                             error: function (error) {
@@ -308,7 +357,7 @@ $(document).ready(function () {
                         });
                     } else {
                         console.log("publicacion invalida");
-                        UIkit.modal("#create-post-modal").hide();
+                        UIkit.modal("#create-comment-modal").hide();
                         const modalsita = document.getElementById("modal_offensive_announce");
                         modalsita.style.display = 'block';
                         modalsita.style.opacity = 1;
@@ -325,7 +374,7 @@ $(document).ready(function () {
 
 //volver comandos 
 
-/*
+
     function guardarPosicionEnHistorial() {
         const posicionActual = window.scrollY || window.pageYOffset;
         history.replaceState({ scrollPos: posicionActual }, "");
@@ -338,12 +387,9 @@ $(document).ready(function () {
       });
 
 
- document.getElementById('botonVolver').addEventListener('click', function() {
-  // Volver atrás en el historial
+ document.getElementById('bvolver').addEventListener('click', function() {
   history.go(-1);
 });
-
-*/
 
 
 async function fetchWithBackoff(url, options, maxAttempts = 5, attempt = 1) {
@@ -427,7 +473,7 @@ async function translateAndAnalyze() {
     var imgElement = new Image();
     imgElement.src = circleDataURL; // Establece el Data URL como fuente de la imagen
     // Encuentra el div donde quieres mostrar la imagen
-    var container = document.getElementById("imagengen");
+    var container = document.getElementById("imangesita");
     container.innerHTML = ''; // Limpia el contenido anterior del div
     container.appendChild(imgElement); // Añade la imagen al div
   };

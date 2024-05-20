@@ -90,7 +90,7 @@
     String comentar = request.getParameter("comentar");
     helperss = new InterComentHelper( ).addRequest( request );
                 
-    
+    response.sendRedirect("home.jsp");
                 ZoneId zonaCiudadMexico = ZoneId.of("America/Mexico_City");
                 ZonedDateTime horaCiudadMexico = ZonedDateTime.now(zonaCiudadMexico);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d 'de' MMMM yyyy HH:mm:ss", new Locale("es", "MX"));
@@ -555,5 +555,10 @@ function handleButtonHover2(button, isHover) {
    
    
 </script>
+
+
+
+
+
 
 </html>    

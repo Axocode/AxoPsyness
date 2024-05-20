@@ -56,8 +56,8 @@ public class ServletPublicacionIndividual extends HttpServlet {
         
         request.setCharacterEncoding("UTF-8");       
         response.setContentType("text/html;charset=UTF-8");
-        
-        int NumPubToAct = Integer.parseInt(request.getParameter("key2"));
+        String num = request.getParameter("key2");
+        int NumPubToAct = Integer.parseInt(num);
              
           HttpSession sesion = request.getSession();
           

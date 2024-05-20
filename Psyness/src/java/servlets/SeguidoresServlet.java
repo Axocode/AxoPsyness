@@ -23,88 +23,54 @@ import org.axocode.dao.service.InterUsersService;
 @WebServlet(name = "SeguidoresServlet", urlPatterns = {"/SeguidoresServlet"})
 public class SeguidoresServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
         HttpSession sesion = request.getSession();
         
         int FlowSeguidoresID = Integer.parseInt(request.getParameter("id"));
         int FlowSeguidorID = (Integer) sesion.getAttribute("SIUserNum");
         String action = request.getParameter("action1");
-        
-        if (action.equals("seguir")) {
-            InterFlowService flower = new InterFlowService();
-            InterFlow flow = new InterFlow();
-            flow.setFlowSeguidoresID(FlowSeguidoresID);
-            flow.setFlowSeguidorID(FlowSeguidorID);
-            boolean exist = flower.isUserFollowing(flow);
-            if (!exist) { 
-                boolean successs = flower.addInterFlow(flow);
-                if (successs) {
-                    InterUsersService usersService = new InterUsersService();
-                    usersService.actSeguidores(FlowSeguidoresID);
-                    usersService.actSeguidos(FlowSeguidorID);
+
+        InterFlowService flower = new InterFlowService();
+        InterFlow flow = new InterFlow();
+        flow.setFlowSeguidoresID(FlowSeguidoresID);
+        flow.setFlowSeguidorID(FlowSeguidorID);
+
+        try (PrintWriter out = response.getWriter()) {
+            if ("seguir".equals(action)) {
+                boolean exist = flower.isUserFollowing(flow);
+                if (!exist) {
+                    boolean successs = flower.addInterFlow(flow);
+                    if (successs) {
+                        InterUsersService usersService = new InterUsersService();
+                        usersService.actSeguidores(FlowSeguidoresID);
+                        usersService.actSeguidos(FlowSeguidorID);
+                        out.println("<button onclick=\"agregarSeguido(" + FlowSeguidoresID + ", 'seguirnt')\" type=\"submit\" class=\"button bg-blue-700\" style=\"background-color: #DCDCDC; color: black;\">Dejar de Seguir</button>");
+                    }
                 }
-            }
-        }
-        
-        if (action.equals("seguirnt")) {
-            InterFlowService flower = new InterFlowService();
-            InterFlow flow = new InterFlow();
-            flow.setFlowSeguidoresID(FlowSeguidoresID);
-            flow.setFlowSeguidorID(FlowSeguidorID);
-            boolean exist = flower.isUserFollowing(flow);
-            if (exist) {
-                boolean successs = flower.unfollowUser(flow);
-                if (successs) {
-                    InterUsersService usersService = new InterUsersService();
-                    usersService.actSeguidores(FlowSeguidoresID);
-                    usersService.actSeguidos(FlowSeguidorID);
+            } else if ("seguirnt".equals(action)) {
+                boolean exist = flower.isUserFollowing(flow);
+                if (exist) {
+                    boolean successs = flower.unfollowUser(flow);
+                    if (successs) {
+                        InterUsersService usersService = new InterUsersService();
+                        usersService.actSeguidores(FlowSeguidoresID);
+                        usersService.actSeguidos(FlowSeguidorID);
+                        out.println("<button onclick=\"agregarSeguido(" + FlowSeguidoresID + ", 'seguir')\" type=\"submit\" class=\"button bg-blue-700\">Seguir</button>");
+                    }
                 }
             }
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
+
 
     /**
      * Returns a short description of the servlet.
