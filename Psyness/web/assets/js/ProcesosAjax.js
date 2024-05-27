@@ -407,75 +407,75 @@ async function fetchWithBackoff(url, options, maxAttempts = 5, attempt = 1) {
      return await fetchWithBackoff(url, options, maxAttempts, attempt + 1);
    }
  }
- var textureSrc = '5687053.jpg'; // Reemplaza con el camino correcto a tu imagen de textura
+ 
+ 
 async function translateAndAnalyze() {
-   const API_TOKEN = "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";
-   const translationModel = "Helsinki-NLP/opus-mt-es-en";
-   const emotionModel = "itzo/distilbert-base-uncased-fine-tuned-on-emotion-dataset";
- 
-   const textToTranslate = document.getElementById("inputText").value;
- 
-   try {
-     const translationData = {
-       inputs: textToTranslate,
-     };
- 
-     const translationResult = await fetchWithBackoff(
-       `https://api-inference.huggingface.co/models/${translationModel}`, {
-         method: "POST",
-         headers: {
-           Authorization: `Bearer ${API_TOKEN}`,
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify(translationData),
-       }
-     );
- 
-     if (Array.isArray(translationResult) && translationResult.length > 0) {
-       const translatedText = translationResult[0].translation_text;
-       console.log("Texto original:", textToTranslate);
-       console.log("Traducción:", translatedText);
- 
-       const emotionData = { text: translatedText };
- 
-       const emotionResult = await fetchWithBackoff(
-         `https://api-inference.huggingface.co/models/${emotionModel}`, {
-           method: "POST",
-           body: JSON.stringify({ inputs: emotionData }),
-           headers: {
-             'Content-Type': 'application/json',
-             'Authorization': `Bearer ${API_TOKEN}`
-           }
-         }
-       );
- 
-       console.log("Resultado del análisis de emoción:", emotionResult);
- 
-       const scores = emotionResult.reduce((acc, curr) => {
-         acc[curr.label] = curr.score;
-         return acc;
-       }, {});
- 
-       // Actualización para imprimir el enlace en la consola
-       loadTextureAndGenerateCircle(scores, [200, 200], textureSrc);
-     }
-   } catch (error) {
-     console.error("Error durante la traducción o análisis de emoción:", error.message);
-   }
- }
- 
- function loadTextureAndGenerateCircle(scores, size, textureSrc) {
+  const API_TOKEN = "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";
+  const translationModel = "Helsinki-NLP/opus-mt-es-en";
+  const emotionModel = "itzo/distilbert-base-uncased-fine-tuned-on-emotion-dataset";
+  const textToTranslate = document.getElementById("inputText").value;
+  const textureSrc = '5687053.jpg'; // Definir textureSrc aquí
+
+  try {
+    const translationData = {
+      inputs: textToTranslate,
+    };
+
+    const translationResult = await fetchWithBackoff(
+      `https://api-inference.huggingface.co/models/${translationModel}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${API_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(translationData),
+      }
+    );
+
+    if (Array.isArray(translationResult) && translationResult.length > 0) {
+      const translatedText = translationResult[0].translation_text;
+      console.log("Texto original:", textToTranslate);
+      console.log("Traducción:", translatedText);
+
+      const emotionData = { text: translatedText };
+
+      const emotionResult = await fetchWithBackoff(
+        `https://api-inference.huggingface.co/models/${emotionModel}`, {
+          method: "POST",
+          body: JSON.stringify({ inputs: emotionData }),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_TOKEN}`
+          }
+        }
+      );
+
+      console.log("Resultado del análisis de emoción:", emotionResult);
+
+      const scores = emotionResult.reduce((acc, curr) => {
+        acc[curr.label] = curr.score;
+        return acc;
+      }, {});
+
+      // Llamar a la función con textureSrc definido
+      loadTextureAndGenerateCircle(scores, [200, 200], textureSrc);
+    }
+  } catch (error) {
+    console.error("Error durante la traducción o análisis de emoción:", error.message);
+  }
+}
+
+function loadTextureAndGenerateCircle(scores, size, textureSrc) {
   var texture = new Image();
   texture.src = textureSrc;
   texture.onload = function() {
+    console.log("Corrio");
     var circleDataURL = generateSmoothGradientCircle(scores, size, texture);
-    // Crea un nuevo elemento de imagen
     var imgElement = new Image();
-    imgElement.src = circleDataURL; // Establece el Data URL como fuente de la imagen
-    // Encuentra el div donde quieres mostrar la imagen
+    imgElement.src = circleDataURL;
     var container = document.getElementById("imangesita");
-    container.innerHTML = ''; // Limpia el contenido anterior del div
-    container.appendChild(imgElement); // Añade la imagen al div
+    container.innerHTML = '';
+    container.appendChild(imgElement);
   };
 }
 
