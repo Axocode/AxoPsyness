@@ -367,7 +367,8 @@
                             </div>
                     </div>
                                             
-                </div>                   
+                </div>  
+            </div>
                       
                                 <!--Fin - Cambios-->
 

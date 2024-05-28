@@ -20,6 +20,14 @@
     
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="assets/css/indexcss.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    
+    <link href="assets/css/output.css" rel="stylesheet">
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
 </head>
 <body>
    <%HttpSession sesion = request.getSession();
@@ -48,45 +56,25 @@
         
 <!--/Nav Bar-->
     <!--Main Content 1-->  
-    
+
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom px-4" id="navbar-index">
         <div class="col-md-3 mb-2 mb-md-0">
             <img class="img-responsive logo" src="images/Logo con letras centrado.svg" alt="">
         </div>
     
-          <ul class="nav col-14 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2">Tecnología</a></li>
-            <li><a href="#" class="nav-link px-2">Sobre Nosotros</a></li>
-            <li><a href="#" class="nav-link px-2">Póliticas</a></li>
-            <li><button class="btn dropdown-toggle btn-nav-custom " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-               Sobre las cuentas
-            </button><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">Cuenta con Código</a></li>
-              <li><a class="dropdown-item" href="#">Institución o Clinica</a></li>
-              <li><a class="dropdown-item" href="#">Creadores de Contenido</a></li>
-            </ul></li>
+          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2 link-secondary">Inicio</a></li>
+            <li><a href="#" class="nav-link px-2">Acerca de</a></li>
+            <li><a href="#" class="nav-link px-2">Funciones</a></li>
+            <li><a href="#" class="nav-link px-2">Precios</a></li>
+            <li><a href="#" class="nav-link px-2">FAQs</a></li>
           </ul>
-    
-            <div class="col-md-3 text-end" id="botones-index">
-              <a href="zInicio/createSinCodigo.jsp"><button type="button" id="btonindex" class="btn btn-outline-primary me-2 rounded-pill btn-custom">Crear Cuenta</button></a>
-              <a href="zInicio/login.jsp"><button type="button" id="btonindex" class="btn btn-primary rounded-pill btn-custom2">Iniciar Sesion</button></a>
+        
+          <div class="col-md-3 text-end">
+            <button type="button" id="btnnavindex2" class="btn btn-outline-primary me-2 btn-custom2"><a href="zInicio/login.jsp">Iniciar Sesión</a></button>
+            <button type="button" id="btnnavindex"  class="btn btn-primary"><a href="zInicio/createSinCodigo.jsp" class="text-white">Crear Cuenta</a></button>
           </div>
     </div>
-    
-    <style>
-        @media screen and (max-width: 1200px) {
-            #botones-index{
-                display: flex;
-                justify-content: flex-end;
-            }
-            
-            #btonindex{
-                padding: 12px;
-                display: block;
-            }
-        }
-
-    </style>
 
     <header>
         <div class="left">
@@ -98,84 +86,364 @@
                 <span>Click aquí para crear tu cuenta</span>
             </a>
         </div>
-        <img src="images/imgindex.jpg">
+        <img src="images/hero.png">
     </header><hr>
+    
+    
+     <!--Explicación Aplicación WEB-->     
+    
+    <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:py-24 lg:px-6">
+
+        <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
+            <div class="text-gray-500 sm:text-lg dark:text-gray-400">
+                <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Gestiona tus emociones</h2>
+                <p class="mb-8 font-light lg:text-xl">Proporcionamos una herramienta para gestionar y fortalecer la salud mental mediante una plataforma de red social especializada en métodos psicológicos,
+                utilizando tecnologías de vanguardia como lo son la inteligencia artificial y el analisis de datos.</p>
+
+                <ul role="list" class="pt-8 space-y-5 border-t border-gray-200 my-7 dark:border-gray-700">
+                    <li class="flex space-x-3">
+
+                    <svg class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Terapia Cognitivo Conductual</span>
+                    </li>
+                    <li class="flex space-x-3">
+
+                    <svg class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Psicoterapia</span>
+                    </li>
+                </ul>
+                <p class="mb-8 font-light lg:text-xl">Ayudate a ti mismo y a otros al alcance de tu mano.</p>
+            </div>
+            <img class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src="./images/feature-1.png" alt="dashboard feature image">
+        </div>
+
+        <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
+            <img class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src="./images/axoindex.png" alt="feature image 2">
+            <div class="text-gray-500 sm:text-lg dark:text-gray-400">
+                <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Axochat - Un chatbot de Ayuda</h2>
+                <p class="mb-8 font-light lg:text-xl">Axochat, una inteligencia artificial, que brinda orientación inmediata
+                en situaciones de crisis y ayuda a contactar a los usuarios con psicólogos verificados registrados en la plataforma. </p>
+
+                <ul role="list" class="pt-8 space-y-5 border-t border-gray-200 my-7 dark:border-gray-700">
+                    <li class="flex space-x-3">
+
+                    <svg class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Compañero de Ayuda Psicológica</span>
+                    </li>
+                    <li class="flex space-x-3">
+
+                    <svg class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Situaciones de Crisis</span>
+                    </li>
+                    <li class="flex space-x-3">
+
+                    <svg class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Asesoramiento y Consejos Personales</span>
+                    </li>
+                    <li class="flex space-x-3">
+
+                    <svg class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Disponible en todo momento</span>
+                    </li>
+                </ul>
+                <p class="font-light lg:text-xl">Enfocado en brindar apoyo emocional</p>
+            </div>
+        </div>
         
-<!-- Get Stearted -->
-        <div class="get-started">
-            <p class="header">Clínicas Asociadas</p>
-            <p class="info-text">Como funciona y cuales son las ventajas</p>
-            <div class="items-box">
-                <div class="item-container">
-                    <div class="item">
-                        <i class='bx bx-check-shield'></i>
-                    </div>
-                    <p>Para atener acceso a todas las funciones especiales es necesario tener una cuenta con código</p>
-                </div>
-                <div class="item-container">
-                    <div class="item">
-                        <i class='bx bx-wallet-alt'></i>
-                    </div>
-                    <p>Algunas funciones extras son la IA Axochat, realizar publicaciones, llevar un seguimiento clinico</p>
-                </div>
-                <div class="item-container">
-                    <div class="item">
-                        <i class='bx bx-money'></i>
-                    </div>
-                    <p>Para poder obtener un código de acceso este deberá ser expedido por una de las clínicas afiliadas</p>
-                </div>
-                <div class="item-container">
-                    <div class="item">
-                        <i class='bx bx-rocket'></i>
-                    </div>
-                    <p>En caso de no contar con una cuenta con código, se puede acceder con una pública</p>
-                </div>
-            </div>
-        </div>
-        <!-- End of Get Started -->
+        <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
+            <div class="text-gray-500 sm:text-lg dark:text-gray-400">
+                <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Psyness - Un entorno Virtual</h2>
+                    <p class="mb-8 font-light lg:text-xl">Proporcionamos un entorno virtual, seguro y anónimo que permita a los usuarios com-
+                    partir experiencias personales, fomentando así la comunicación y reduciendo el estigma asociado a los trastornos mentales</p>
 
+                <ul role="list" class="pt-8 space-y-5 border-t border-gray-200 my-7 dark:border-gray-700">
+                    <li class="flex space-x-3">
 
-    <!--/Main Content 1-->
-<hr>
+                    <svg class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Compartir experiencias</span>
+                    </li>
+                    <li class="flex space-x-3">
 
-      
-      
-            <!--Creadores de contenido-->
-      
-     <h2 class="separator">
-        Creadores de Contenido
-    </h2>
+                    <svg class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Fomentar la comunicación</span>
+                    </li>
+                    
+                    <li class="flex space-x-3">
 
-    <div class="sellers">
-        <div class="item">
-            <img src="images/apoyofamiliar.png">
-            <div class="info">
-                <h4>Contenido Hopcore</h4>
-                <p>Click</p>
+                    <svg class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Comunidad Sana</span>
+                    </li>
+                </ul>
+                <p class="mb-8 font-light lg:text-xl">Ayudate a ti mismo y a otros al alcance de tu mano.</p>
             </div>
+            <img class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex" src="./images/axoentorno-index.png" alt="dashboard feature image">
         </div>
-        <div class="item">
-            <img src="images/apoyopsicologico.png">
-            <div class="info">
-                <h4>Psicologos verificados</h4>
-                <p>Click</p>
+    </div>            
+            
+            <!--FUNCIONALIDADES-->            
+            
+    <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Clínicas Asociadas</h2>
+    
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+            
+          <div class="col">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('images/unsplash-photo-1.jpg'); background-position: center center;
+            background-size: cover; ">
+              <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Funciones</h3>
+                <p>Descubre una amplia variedad de eventos que se adaptan a todos los gustos. Desde conciertos y festivales hasta exposiciones y deportes, tenemos algo para todos. ¡No te pierdas la oportunidad de vivir momentos únicos!</p>
+                <ul class="d-flex list-unstyled mt-auto py-3">
+                  <li class="me-auto">
+                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+                  </li>
+                  <li class="d-flex align-items-center me-3">
+                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+                    <small>Earth</small>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+                    <small>3d</small>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
+    
+          <div class="col">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('images/unsplash-photo-5.jpg'); background-position: center center;
+            background-size: cover;">
+              <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Axochat</h3>
+                <p>Adquiere tus boletos de manera rápida y segura. Encuentra entradas para los mejores eventos y disfruta de una experiencia inolvidable. Compra ahora y asegura tu lugar en los eventos más esperados.</p>
+                <ul class="d-flex list-unstyled mt-auto py-3">
+                  <li class="me-auto">
+                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+                  </li>
+                  <li class="d-flex align-items-center me-3">
+                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+                    <small>Pakistan</small>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+                    <small>4d</small>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+    
+          <div class="col">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('images/unsplash-photo-3.jpg'); background-position: center center;
+            background-size: cover;">
+              <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Dashboard</h3>
+                <p>Consulta las bases y el proceso de Sorteos</p>
+                <ul class="d-flex list-unstyled mt-auto py-3">
+                  <li class="me-auto">
+                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+                  </li>
+                  <li class="d-flex align-items-center me-3">
+                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
+                    <small>California</small>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
+                    <small>5d</small>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="item">
-            <img src="images/apoyomujeres.png">
-            <div class="info">
-                <h4>Apoyo mutuo</h4>
-                <p>Click</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/apoyotelefono.png">
-            <div class="info">
-                <h4>Clínicas Asociadas</h4>
-                <p>Click</p>
-            </div>
+      </div>    
+            
+
+            <!--JUMPBUTTON COMIENZA-->              
+                
+    <div class="container my-5">
+        <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5" style="background-image: url('images/humanos-index.png'); background-position: center center;
+            background-size: cover;">
+          <svg class="bi mt-5 mb-3" width="48" height="48"><use xlink:href="#check2-circle"></use></svg>
+          <h1 class="text-white">Comienza a Priorizar tu Salud Mental</h1>
+          <p class="col-lg-6 mx-auto mb-4 mt-5 text-white ">
+            Comienza con una cuenta sin código, gestiona tus emociones y ayuda a otros en nuestra comunidad.
+          </p>
+          <button class="btn btn-primary px-5 mb-5" style="background: #99d1ff" type="button">
+            Crear Cuenta
+          </button>
         </div>
     </div>
+            
+            
+            <!--PRICING--> 
+            
+            
+    <section class="bg-white dark:bg-gray-900">
+        <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-24 lg:px-6">
+            <div class="max-w-screen-md mx-auto mb-8 text-center lg:mb-12">
+                <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Diseñado para Clínicas Médicas</h2>
+                <p class="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">Elige la mejor opción que se acople a las necesidades de tu negocio.</p>
+            </div>
+
+            <div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
+                <div class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                    <h3 class="mb-4 text-2xl font-semibold">1 MES</h3>
+                    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Mejor opción para una clínica médica pequeña.</p>
+                    <div class="flex items-baseline justify-center my-8">
+                        <span class="mr-2 text-5xl font-extrabold">$29</span>
+                        <span class="text-gray-500 dark:text-gray-400">/month</span>
+                    </div>
+
+                    <ul role="list" class="mb-8 space-y-4 text-left">
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Acceso a todas las funciones</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Axochat</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Seguimiento Clínico c/paciente</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Códigos: <span class="font-semibold">20 pacientes</span></span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Soporte Premium: <span class="font-semibold">1 mes</span></span>
+                        </li>
+                    </ul>
+                    <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Get started</a>
+                </div>
+
+                <div class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                    <h3 class="mb-4 text-2xl font-semibold">6 MESES</h3>
+                    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Enfocado a una clínica médica relativamente grande.</p>
+                    <div class="flex items-baseline justify-center my-8">
+                        <span class="mr-2 text-5xl font-extrabold">$99</span>
+                        <span class="text-gray-500 dark:text-gray-400" dark:text-gray-400="">/month</span>
+                    </div>
+
+                    <ul role="list" class="mb-8 space-y-4 text-left">
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Acceso a todas las funciones</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Axochat</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Seguimiento Clínico c/paciente</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Códigos: <span class="font-semibold">50 pacientes</span></span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Soporte Premium: <span class="font-semibold">6 meses</span></span>
+                        </li>
+                    </ul>
+                    <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Get started</a>
+                </div>
+
+                <div class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                    <h3 class="mb-4 text-2xl font-semibold">1 AÑO</h3>
+                    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Mejor opción para una clínica médica a gran escala.</p>
+                    <div class="flex items-baseline justify-center my-8">
+                        <span class="mr-2 text-5xl font-extrabold">$499</span>
+                        <span class="text-gray-500 dark:text-gray-400">/month</span>
+                    </div>
+
+                    <ul role="list" class="mb-8 space-y-4 text-left">
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Acceso a todas las funciones</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Axochat</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Seguimiento Clínico c/paciente</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Códigos: <span class="font-semibold">100+ pacientes</span></span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            <span>Soporte Premium: <span class="font-semibold">12 meses</span></span>
+                        </li>
+                    </ul>
+                    <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Get started</a>
+                </div>
+            </div>
+        </div>
+   </section>      
+
+
+             <!--PREGUNTAS FRECUENTES-->      
+    
+    <section class="bg-white dark:bg-gray-900">
+        <div class="max-w-screen-xl px-4 pb-8 mx-auto lg:pb-24 lg:px-6 ">
+            <h2 class="mb-6 text-3xl font-extrabold tracking-tight text-center text-gray-900 lg:mb-8 lg:text-3xl dark:text-white">Preguntas Frecuentes</h2>
+        <div class="max-w-screen-md mx-auto">
+            <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+                <h3 id="accordion-flush-heading-1">
+                    <button id="boton-FQ" class="flex items-center justify-between w-full py-5 font-medium text-left border-b border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-1" aria-expanded="false" aria-controls="accordion-flush-body-1">
+                    <span>¿Qué diferencia hay de una Cuenta con Código y Sin Código?</span>
+                    <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                </h3>
+                <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
+                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                    <p class="mb-2 text-gray-500 dark:text-gray-400">La principal diferencia radica en si eres perteneciente a una clínica Médica.</p>
+                    <p class="text-gray-500 dark:text-gray-400">De ser el caso una <a href="#" class="text-purple-600 dark:text-purple-500 hover:underline">Cuenta con Código</a> tendrá disponibles todas las funciones dentro de la aplicación, además se le brindará un seguimiento clínico.</p>
+                    </div>
+                </div>
+                
+                <h3 id="accordion-flush-heading-2">
+                    <button id="boton-FQ" class="flex items-center justify-between w-full py-5 font-medium text-left border-b border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
+                    <span>¿Cómo estoy seguro que las publicaciones son seguras ?</span>
+                    <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                </h3>
+                <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
+                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                    <p class="mb-2 text-gray-500 dark:text-gray-400">Todas las publicaciones antes de ser publicadas pasan por un filtro, una inteligencia artificial que detectará si el contenido es apto para ser compartido.</p>
+                    <p class="text-gray-500 dark:text-gray-400">Utilizamos PLN <a href="#" class="text-purple-600 dark:text-purple-500 hover:underline">Procesamiento de Lenguaje Natural</a> una inteligencia artificial que se centra en la interacción entre computadoras y lenguaje humano.</p>
+                    </div>
+                </div>
+                
+                <h3 id="accordion-flush-heading-3">
+                    <button id="boton-FQ" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
+                    <span>¿Qué puedo hacer si necesito ayuda profesional y no estoy asociado a una Clínica?</span>
+                    <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                </h3>
+                <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
+                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Proporciamos un apartado dentro de la aplicación <a href="#" class="text-purple-600 dark:text-purple-500 hover:underline">Datacenter</a> donde compartimos información de contacto de diferntes instituciones y psicólogos verificados.</p>
+                        <ul class="pl-5 text-gray-500 list-disc dark:text-gray-400">
+                            <li><a href="#" class="text-purple-600 dark:text-purple-500 hover:underline">Apoyo Profesional Privado</a></li>
+                            <li><a href="#" class="text-purple-600 dark:text-purple-500 hover:underline">Apoyo Profesional Gratuito</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>    
+                      
+            
            
     
       <!--Footer-->
