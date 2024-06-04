@@ -124,7 +124,18 @@
         <!-- Main Contents -->
         <div class="main_content">
             <div class="mcontainer">
+                
                 <div class="contenerdor_perfiluser">
+                    
+                     <div class="section-page-returnback" style=" margin-top: -50px; padding-bottom: 10px;">
+                        
+                       <div class="lg:mx-0 uk-animation-slide-bottom-small" id="back_posts_feed">
+                            <button id="bvolver"> 
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                           <span>Profile</span>
+                       </div> 
+                    </div> 
 
                     <!-- Profile cover -->
                     <div class="profile user-profile">
@@ -133,13 +144,15 @@
                             <img src="../assets/images/avatars/fondomorado.png" alt="">
                             <div class="profile_action absolute bottom-0 right-0 space-x-1.5 p-3 text-sm z-50 hidden lg:flex">
                             
-                        </div>
+                            </div>
                         </div>
                         <div class="profiles_content">
 
                             <div class="profile_avatar">
                                 <div class="profile_avatar_holder"> 
-                                    <img src="../assets/images/avatars/<%=data%>" alt="">
+                                    <a href="fotoprofile.jsp">
+                                        <img src="../assets/images/avatars/<%=data%>" alt="">
+                                    </a>    
                                 </div>
                                 <div class="icon_change_photo" hidden> <ion-icon name="camera" class="text-xl"></ion-icon> </div>
                             </div>
@@ -180,9 +193,9 @@
                         <div class="flex justify-between lg:border-t border-gray-100 flex-col-reverse lg:flex-row pt-2">
                             <nav class="responsive-nav pl-3">
                                 <ul uk-switcher="connect: #timeline-tab; animation: uk-animation-fade">
-                                    <li><a href="">Perfil</a></li>
+                                    <li><a href="">Perfil<span>5</span></a></li>
                                     <% if ((request.getParameter("id")).equals(sesion.getAttribute("SIUserNum").toString())) { %>
-                                        <li><a href="" id="pubsFavoritas">Pubs Favoritas <span></span> </a></li>
+                                        <li><a href="" id="pubsFavoritas">Pubs Favoritas <span>12</span> </a></li>
                                     <% } %>
                                 </ul>
                             </nav>
@@ -201,18 +214,13 @@
                     <div class="uk-switcher lg:mt-8 mt-4" id="timeline-tab">
     
                         <!-- Perfil -->
-                        <div class="md:flex md:space-x-6 lg:mx-16">
+                        <div class=" md:flex md:space-x-6 lg:mx-16">
+                            
                             <div class="space-y-5 flex-shrink-0 md:w-7/12">
                                 <div id="hiAxo0"></div>
                             </div>
                             
-                            <div class="right_side_profile">
-
-                                <div class="w-full space-y-6" id="feauturings_user_perfil">
-
-                                    <!--------------BOLITA ESTADO DE ANIMO------------->
-                                    
-                                    <div class="widget card p-4">
+                            <div class=" p-5 space-y-5 flex-shrink-0 md:w-5/12">
                                         <h4 class="text-center font-semibold"> ESTADO DE ÁNIMO </h4>
 
 
@@ -221,39 +229,20 @@
                                         <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6">
                                             <img src="../assets/images/avatars/esfera-gradiente.png" class="object-cover rounded-lg col-span-full">
                                         </div>
-
-                                        <!--CARRUSSEL-->
-
-                                        <div class="flex items-center justify-between border-t border-gray-200 bg-white py-3 sm:px-4">
-                                            <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-                                                <div>
-                                                <p class="text-gray-700 px-1 sm:px-4">
-                                                    BAD
-                                                </p>
-                                                </div>
-                                                <div>
-                                                <nav class="isolate inline-flex  shadow-sm" aria-label="Pagination">
-                                                    <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
-                                                    <button class="relative inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0" id="numerito_bola_perfil">1</button>
-                                                    <button class="relative inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0" id="numerito_bola_perfil">2</button>
-                                                    <button class="relative inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex" id="numerito_bola_perfil">3</button>
-                                                    <button class="relative inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex" id="numerito_bola_perfil">4</button>
-                                                    <button class="relative inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0" id="numerito_bola_perfil">5</button>
-                                                    </a>
-                                                </nav>
-                                                </div>
-                                                <div>
-                                                    <p class="text-gray-700 px-1 sm:px-4">
-                                                        COOL
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>  
-                            </div>     
-                        </div>                 
-                <div id="PublicacionesFavoritas0"></div>
+                                        <div class="mb-3">
+                                            <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3" wfd-id="id7">
+                                            
+                                            <p class="text-left text-gray-700 px-1 sm:px-4">
+                                                BAD
+                                            </p>
+                                            <p class="text-right text-gray-700 px-1 sm:px-4">
+                                                COOL
+                                            </p>                                           
+                                        </div>   
+                            </div>
+                        </div>  
+                        
+                    <div id="PublicacionesFavoritas0"></div>
                           
                                         <script>
                                             function toggleContainer(clave) {

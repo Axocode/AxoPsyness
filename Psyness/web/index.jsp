@@ -62,37 +62,52 @@
             <img class="img-responsive logo" src="images/Logo con letras centrado.svg" alt="">
         </div>
     
-          <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 link-secondary">Inicio</a></li>
-            <li><a href="#" class="nav-link px-2">Acerca de</a></li>
-            <li><a href="#" class="nav-link px-2">Funciones</a></li>
-            <li><a href="#" class="nav-link px-2">Precios</a></li>
-            <li><a href="#" class="nav-link px-2">FAQs</a></li>
+          <ul id="nav-indexcito" class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+              <li><a href="#section-header-info" class="nav-link px-2" style="background: ">Inicio</a></li>
+            <li><a href="#section-about-info" class="nav-link px-2">Acerca de</a></li>
+            <li><a href="#custom-cards" class="nav-link px-2">Funciones</a></li>
+            <li><a href="#section-pricing" class="nav-link px-2">Precios</a></li>
+            <li><a href="#section-faqs" class="nav-link px-2">FAQs</a></li>
           </ul>
         
           <div class="col-md-3 text-end">
             <button type="button" id="btnnavindex2" class="btn btn-outline-primary me-2 btn-custom2"><a href="zInicio/login.jsp">Iniciar Sesión</a></button>
-            <button type="button" id="btnnavindex"  class="btn btn-primary"><a href="zInicio/createSinCodigo.jsp" class="text-white">Crear Cuenta</a></button>
+            <button type="button" id="btnnavindex"  class="btn btn-primary btn-custom"><a href="zInicio/createSinCodigo.jsp" class="text-white">Crear Cuenta</a></button>
           </div>
+        
+        <style>
+            
+            
+            #btnnavindex2:hover,
+            #btnCrearCuenta2:hover,
+            #cards-funciones:hover,
+            #cards-pricing:hover,
+            #btnnavindex:hover{
+                transform: scale(1.02);
+                transition: transform 0.5s ease;
+                cursor: pointer;
+            }
+        </style>
     </div>
 
-    <header>
+    <header id="section-header-info">
         <div class="left">
             <h1>Una Red Social Orientada a la <span>Psicología</span></h1>
             <p> Somos una herramienta de ayuda psicológica, buscamos ayudar a las personas a través del uso de la psicoterapia y de la terapia cognitivo conductual.
             </p>
-            <a href="zInicio/createSinCodigo.jsp">
+            <a id="btnCrearCuenta2" href="zInicio/createSinCodigo.jsp">
                 <i class='bx bx-click'></i>
                 <span>Click aquí para crear tu cuenta</span>
             </a>
         </div>
         <img src="images/hero.png">
+         <!--<img src="images/Mancha-img-index.png">--> 
     </header><hr>
     
     
      <!--Explicación Aplicación WEB-->     
     
-    <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:py-24 lg:px-6">
+    <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:py-24 lg:px-6" id="section-about-info">
 
         <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
             <div class="text-gray-500 sm:text-lg dark:text-gray-400">
@@ -187,7 +202,7 @@
     
         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
             
-          <div class="col">
+          <div class="col" id="cards-funciones">
             <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('images/unsplash-photo-1.jpg'); background-position: center center;
             background-size: cover; ">
               <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
@@ -195,22 +210,18 @@
                 <p>Descubre una amplia variedad de eventos que se adaptan a todos los gustos. Desde conciertos y festivales hasta exposiciones y deportes, tenemos algo para todos. ¡No te pierdas la oportunidad de vivir momentos únicos!</p>
                 <ul class="d-flex list-unstyled mt-auto py-3">
                   <li class="me-auto">
-                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                  </li>
-                  <li class="d-flex align-items-center me-3">
-                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                    <small>Earth</small>
+                    <img src="images/favicon.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle">
                   </li>
                   <li class="d-flex align-items-center">
                     <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                    <small>3d</small>
+                    <small>Ver</small>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
     
-          <div class="col">
+          <div class="col" id="cards-funciones">
             <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('images/unsplash-photo-5.jpg'); background-position: center center;
             background-size: cover;">
               <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
@@ -218,22 +229,18 @@
                 <p>Adquiere tus boletos de manera rápida y segura. Encuentra entradas para los mejores eventos y disfruta de una experiencia inolvidable. Compra ahora y asegura tu lugar en los eventos más esperados.</p>
                 <ul class="d-flex list-unstyled mt-auto py-3">
                   <li class="me-auto">
-                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                  </li>
-                  <li class="d-flex align-items-center me-3">
-                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                    <small>Pakistan</small>
+                    <img src="images/favicon.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle">
                   </li>
                   <li class="d-flex align-items-center">
                     <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                    <small>4d</small>
+                    <small>Ver</small>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
     
-          <div class="col">
+          <div class="col" id="cards-funciones">
             <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('images/unsplash-photo-3.jpg'); background-position: center center;
             background-size: cover;">
               <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
@@ -241,15 +248,11 @@
                 <p>Consulta las bases y el proceso de Sorteos</p>
                 <ul class="d-flex list-unstyled mt-auto py-3">
                   <li class="me-auto">
-                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                  </li>
-                  <li class="d-flex align-items-center me-3">
-                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                    <small>California</small>
+                    <img src="images/favicon.svg" alt="Bootstrap" width="32" height="32" class="rounded-circle">
                   </li>
                   <li class="d-flex align-items-center">
                     <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                    <small>5d</small>
+                    <small>Ver</small>
                   </li>
                 </ul>
               </div>
@@ -269,8 +272,8 @@
           <p class="col-lg-6 mx-auto mb-4 mt-5 text-white ">
             Comienza con una cuenta sin código, gestiona tus emociones y ayuda a otros en nuestra comunidad.
           </p>
-          <button class="btn btn-primary px-5 mb-5" style="background: #99d1ff" type="button">
-            Crear Cuenta
+          <button id="btnCrearCuenta3" class="btn btn-primary btn-custom px-5 mb-5" style="background: #99d1ff" type="button">
+            <a href="zInicio/createSinCodigo.jsp" class="text-white">Crear Cuenta</a>
           </button>
         </div>
     </div>
@@ -279,7 +282,7 @@
             <!--PRICING--> 
             
             
-    <section class="bg-white dark:bg-gray-900">
+     <section class="bg-white dark:bg-gray-900" id="section-pricing">
         <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-24 lg:px-6">
             <div class="max-w-screen-md mx-auto mb-8 text-center lg:mb-12">
                 <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Diseñado para Clínicas Médicas</h2>
@@ -287,7 +290,7 @@
             </div>
 
             <div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
-                <div class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                <div id="cards-pricing" class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                     <h3 class="mb-4 text-2xl font-semibold">1 MES</h3>
                     <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Mejor opción para una clínica médica pequeña.</p>
                     <div class="flex items-baseline justify-center my-8">
@@ -320,7 +323,7 @@
                     <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Get started</a>
                 </div>
 
-                <div class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                <div id="cards-pricing" class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                     <h3 class="mb-4 text-2xl font-semibold">6 MESES</h3>
                     <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Enfocado a una clínica médica relativamente grande.</p>
                     <div class="flex items-baseline justify-center my-8">
@@ -353,7 +356,7 @@
                     <a href="#" class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-purple-900">Get started</a>
                 </div>
 
-                <div class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                <div id="cards-pricing" class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                     <h3 class="mb-4 text-2xl font-semibold">1 AÑO</h3>
                     <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Mejor opción para una clínica médica a gran escala.</p>
                     <div class="flex items-baseline justify-center my-8">
@@ -392,7 +395,7 @@
 
              <!--PREGUNTAS FRECUENTES-->      
     
-    <section class="bg-white dark:bg-gray-900">
+             <section class="bg-white dark:bg-gray-900" id="section-faqs">
         <div class="max-w-screen-xl px-4 pb-8 mx-auto lg:pb-24 lg:px-6 ">
             <h2 class="mb-6 text-3xl font-extrabold tracking-tight text-center text-gray-900 lg:mb-8 lg:text-3xl dark:text-white">Preguntas Frecuentes</h2>
         <div class="max-w-screen-md mx-auto">
