@@ -72,7 +72,7 @@ public class InterLocationService extends Conexion<InterLocation>{
             }
             if (location.getLocationMessage() != null || !location.getLocationMessage().equals("")) {
                  sql = "INSERT INTO interlocation (locuser, loclatitud, loclongitud, locmensagge, loctoken) VALUES (?, ?, ?, ?, ?) " +
-                         "ON DUPLICATE KEY UPDATE loclatitud = VALUES(loclatitud), loclongitud = VALUES(loclongitud), locmensagge = VALUES(locmensagge)";
+                         "ON DUPLICATE KEY UPDATE loclatitud = VALUES(loclatitud), loclongitud = VALUES(loclongitud), locmensagge = VALUES(locmensagge), loctoken = VALUES(loctoken)";
                  
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, location.getLocationUser());
@@ -81,8 +81,8 @@ public class InterLocationService extends Conexion<InterLocation>{
                 preparedStatement.setString(4, location.getLocationMessage());
                 preparedStatement.setString(5, location.getLocationToken());
             } else {
-             sql = "INSERT INTO interlocation (locuser, loclatitud, loclongitud, locmensagge, loctoken) VALUES (?, ?, ?, ?) " +
-                         "ON DUPLICATE KEY UPDATE loclatitud = VALUES(loclatitud), loclongitud = VALUES(loclongitud)";
+             sql = "INSERT INTO interlocation (locuser, loclatitud, loclongitud, loctoken) VALUES (?, ?, ?, ?) " +
+                         "ON DUPLICATE KEY UPDATE loclatitud = VALUES(loclatitud), loclongitud = VALUES(loclongitud, loctoken = VALUES(loctoken))";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, location.getLocationUser());
             preparedStatement.setDouble(2, location.getLocationLatitud());

@@ -35,12 +35,12 @@ import org.axocode.dao.service.InterUsersService;
 @WebServlet(name = "notificacion", urlPatterns = {"/notificacion"}, loadOnStartup = 1)
 public class notificacion extends HttpServlet {
 
-    private InterLocationService locationService;
+    private notificacion notificacion;
     
     @Override
     public void init() throws ServletException {
         super.init();
-        locationService = new InterLocationService();
+        notificacion = new notificacion();
 
         String relativePath = "assets/js/hola.json";
         String absolutePath = getServletContext().getRealPath("/") + relativePath;
@@ -56,30 +56,49 @@ public class notificacion extends HttpServlet {
         }
     }
 
+    
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userId = request.getParameter("userId");
         String userToken = request.getParameter("userToken");
         String mensaje = request.getParameter("mensaje");
-        int userIdInt = Integer.parseInt(userId);
-        double latitude = Double.parseDouble(request.getParameter("latitude"));
-        double longitude = Double.parseDouble(request.getParameter("longitude"));
-        
+        String latitudeStr = request.getParameter("latitude");
+        String longitudeStr = request.getParameter("longitude");
+        if (userId == null || userToken == null || latitudeStr == null || longitudeStr == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("Missing parameters");
+            return;
+        }
+
+        int userIdInt;
+        double latitude;
+        double longitude;
+        try {
+            userIdInt = Integer.parseInt(userId);
+            latitude = Double.parseDouble(latitudeStr);
+            longitude = Double.parseDouble(longitudeStr);
+        } catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("Invalid number format");
+            return;
+        }
+
         InterLocation location = new InterLocation();
+        InterLocationService locationService = new InterLocationService();
         location.setLocationUser(userIdInt);
         location.setLocationToken(userToken);
-        location.setLocationLatitud(longitude);
+        location.setLocationLatitud(latitude);
         location.setLocationLongitud(longitude);
-        
+
         if (mensaje != null) {
             location.setLocationMessage(mensaje);
         } else {
-            location.setLocationMessage("Hola, ¡lindo día!");
+            location.setLocationMessage("");
         }
-                
+
         locationService.updateLocationInDatabase(location);
         List<InterLocation> nearbyUsers = locationService.findInterLocationsWithinRadius(latitude, longitude, 5);
-        
+
         for (InterLocation user : nearbyUsers) {
             String supportMessage = locationService.getSupportMessageFromDatabase(userIdInt);
             InterUsersService users = new InterUsersService();
@@ -90,9 +109,10 @@ public class notificacion extends HttpServlet {
         response.getWriter().write("Location updated and support messages sent");
     }
 
+
     private void sendNotification(String token, String mensaje, String persona) {
         Notification notification = Notification.builder()
-                .setTitle("Psyness: " + persona)
+                .setTitle(persona)
                 .setBody(mensaje)
                 .build();
 
