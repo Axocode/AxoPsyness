@@ -9324,7 +9324,7 @@ body.story-active header .header_widgets .is_link {
 }
 
 /* Night mode applied */
-.dark .btn-night-mode .uk-switch-button {
+.dark .btn-night-mode .uk-switch-button{
   background-color: #4e4e4e !important;
 }
 
@@ -9388,6 +9388,9 @@ body.story-active header .header_widgets .is_link {
 /*Level one d*/
 html.dark,
 .dark body,
+.dark .Main_content,
+.dark .Main_container,
+.dark .Right_container,
 .dark .sidebar,
 .dark body.story-active .story-prev {
   background-color: #18191a !important;
@@ -9515,7 +9518,7 @@ html.dark,
 
 /* hide default logo image */
 .app_sidebar #logo img.logo_inverse,
-.dark .app_sidebar #logo img {
+.dark .app_sidebar #logo img{
   display: none;
 }
 

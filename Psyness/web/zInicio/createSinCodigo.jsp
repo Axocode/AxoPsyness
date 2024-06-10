@@ -79,6 +79,13 @@
         </div>
     </div>
     </body>
+    
+                    <style>
+                         #actionsita:hover{
+                             background: #787df1;
+                             color: #fff;
+                         }
+                    </style> 
     <script>
         <!--
         function validateTexto( obj , textoError, campoError )

@@ -100,6 +100,13 @@
             </div>
         </div>
     </div>
+                                
+                     <style>
+                         #guardadito:hover{
+                             background: #787df1;
+                             color: #fff;
+                         }
+                    </style>          
                     <script>
                     document.getElementsByTagName("input")[0].value = "";
                     document.getElementsByTagName("input")[1].value = "";

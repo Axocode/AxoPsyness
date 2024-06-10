@@ -280,7 +280,7 @@
                                                 <ul class="space-y-1">
                                                     <li> 
                                                         <a onclick="location.href='../index.jsp?cerrar=true'" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                                        <i class="icon-feather-log-out px-1"></i> Cerrar
+                                                        <i class="icon-feather-log-out px-1"></i> Cerrar Sesión
                                                         </a> 
                                                     </li>
                                                 </ul>
@@ -367,7 +367,8 @@
                             </div>
                     </div>
                                             
-                </div>                   
+                </div>  
+            </div>
                       
                                 <!--Fin - Cambios-->
 
