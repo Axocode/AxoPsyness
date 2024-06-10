@@ -1,4 +1,4 @@
-   function doPub() {
+function doPub() {
         $("#guardadito1").prop('disabled', true);
     }
 
@@ -391,7 +391,6 @@ $(document).ready(function () {
   history.go(-1);
 });
 
-
 async function fetchWithBackoff(url, options, maxAttempts = 5, attempt = 1) {
    const backoffDelay = (attempt) => Math.min(1000 * Math.pow(2, attempt), 30000);
    try {
@@ -407,14 +406,13 @@ async function fetchWithBackoff(url, options, maxAttempts = 5, attempt = 1) {
      return await fetchWithBackoff(url, options, maxAttempts, attempt + 1);
    }
  }
- 
- 
+
 async function translateAndAnalyze() {
   const API_TOKEN = "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";
   const translationModel = "Helsinki-NLP/opus-mt-es-en";
   const emotionModel = "itzo/distilbert-base-uncased-fine-tuned-on-emotion-dataset";
   const textToTranslate = document.getElementById("inputText").value;
-  const textureSrc = '5687053.jpg'; // Definir textureSrc aquí
+  const textureSrc = 'teamofernanda.jpg'; // Definir textureSrc aquí
 
   try {
     const translationData = {
@@ -479,7 +477,7 @@ function loadTextureAndGenerateCircle(scores, size, textureSrc) {
   };
 }
 
-function generateSmoothGradientCircle(scores, size) {
+function generateSmoothGradientCircle(scores, size, texture) {
   var canvas = document.createElement('canvas');
   canvas.width = size[0];
   canvas.height = size[1];
@@ -487,7 +485,7 @@ function generateSmoothGradientCircle(scores, size) {
 
   // Configura la sombra para profundidad
   ctx.shadowBlur = 1;
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
   
   var colors = {
     'LABEL_0': 'rgb(134, 198, 238)', //azul | tristeza
@@ -524,6 +522,22 @@ function generateSmoothGradientCircle(scores, size) {
   // Rellenar el canvas con el gradiente radial
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, size[0], size[1]);
+
+  // Crear un canvas temporal para redimensionar la textura
+  var tempCanvas = document.createElement('canvas');
+  tempCanvas.width = size[0];
+  tempCanvas.height = size[1];
+  var tempCtx = tempCanvas.getContext('2d');
+
+  // Dibujar la textura redimensionada en el canvas temporal
+  tempCtx.drawImage(texture, 0, 0, size[0], size[1]);
+
+  // Obtener la textura redimensionada como patrón
+  var pattern = ctx.createPattern(tempCanvas, 'repeat');
+  ctx.globalAlpha = 0.9; // Ajustar la opacidad de la textura
+  ctx.fillStyle = pattern;
+  ctx.fillRect(0, 0, size[0], size[1]);
+  ctx.globalAlpha = 1.0;
 
   // Crear una máscara circular para mantener la forma del círculo
   ctx.globalCompositeOperation = 'destination-in';
