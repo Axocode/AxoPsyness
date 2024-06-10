@@ -16,8 +16,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.axocode.dao.InterLocation;
 import org.axocode.dao.InterTagUsers;
 import org.axocode.dao.InterUsers;
+import org.axocode.dao.service.InterLocationService;
 import org.axocode.dao.service.InterTagUsersService;
 import org.axocode.dao.service.InterUsersService;
 
@@ -120,6 +122,25 @@ public class signin extends HttpServlet {
                     tagUser.setTagUser(user.getIUserNum());
                     tag.addInterTagUsers(tagUser);
                     
+                    
+                    InterLocation location = new InterLocation();
+                    InterLocationService locationService = new InterLocationService();
+     
+                    
+                    String userToken = request.getParameter("userToken");
+                    double latitude = Double.parseDouble(request.getParameter("latitude"));
+                    double longitude = Double.parseDouble(request.getParameter("longitude"));
+                    String mensaje = request.getParameter("mensaje");
+                    
+                    location.setLocationUser(user.getIUserNum());
+                    location.setLocationToken(userToken);
+                    location.setLocationLatitud(longitude);
+                    location.setLocationLongitud(longitude);
+                    if (mensaje != null) {
+                        location.setLocationMessage(mensaje);
+                    }else {location.setLocationMessage("Hola, ¡lindo día!");}
+                    locationService.updateLocationInDatabase(location);
+
                     Gson gson = new Gson();
                     String json = gson.toJson(user);
                     try (PrintWriter out = response.getWriter()) {

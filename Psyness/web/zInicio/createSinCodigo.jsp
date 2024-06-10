@@ -62,6 +62,10 @@
                                 <label for="pass">Contraseña</label>
                             </div>
                             <div class="input-field">
+                                <input id="Apoyo" name="Apoyo" value="${param.Apoyo}" type="text" class="input" required maxlength="25"/> 
+                                <label for="pass">Mensaje de apoyo</label>
+                            </div>    
+                            <div class="input-field">
                                 <input id="IRol" type="hidden" value="Visitante" name="IRol"  class="submit" value="${param.IRol}">
                                 <input id="accion" type="hidden" value="Guardar" name="accion"  class="submit" value="${param.accion}">
                                 <input id="action" type="hidden" value="Empezar" name="action" class="submit" value="${param.accion}"> 
