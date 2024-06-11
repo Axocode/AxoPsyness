@@ -8610,7 +8610,7 @@ input[type="button"].dark1, input[type="submit"].dark1 {
   background: #f1f3f4;
   z-index: 12;
   width: 100%;
-  margin-top: 65px;
+  margin-top: 35px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8622,8 +8622,8 @@ input[type="button"].dark1, input[type="submit"].dark1 {
 
 .story-prev .story-sidebar {
   width: 25%;
-  padding: 12px;
-  background-color: #ffffff;
+  padding: 30px;
+  background-color: #99D1FF;
 }
 
 .story-prev .story-sidebar .story-sidebar-scrollbar {
@@ -8718,7 +8718,7 @@ body.story-active header .header_widgets .is_link {
 }
 
 .story-users-list a:hover, .story-users-list a.uk-active {
-  background: #f0f2f5;
+  background: #e0e7f1;
 }
 
 .story-users-list a .story-media {
