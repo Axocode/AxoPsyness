@@ -142,4 +142,44 @@ public class InterLocationService extends Conexion<InterLocation>{
 
         return supportMessage;
     }
+    
+    public List<InterLocation> findAll() {
+        List<InterLocation> locationsList = new ArrayList<>();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            if (connection == null) {
+                return null;
+            }
+            statement = connection.createStatement();
+            if (statement == null) {
+                return null;
+            }
+            resultSet = statement.executeQuery("SELECT locuser, loclatitud, loclongitud, loctoken, locmensagge FROM interlocation");
+            if (resultSet == null) {
+                return null;
+            }
+            while (resultSet.next()) {
+                String token = resultSet.getString("loctoken");
+                if (token != null && !token.isEmpty()) {
+                    InterLocation location = new InterLocation();
+                    location.setLocationUser(resultSet.getInt("locuser"));
+                    location.setLocationLatitud(resultSet.getDouble("loclatitud"));
+                    location.setLocationLongitud(resultSet.getDouble("loclongitud"));
+                    location.setLocationMessage(resultSet.getString("locmensagge"));
+                    location.setLocationToken(token);
+                    locationsList.add(location);
+                }
+            }
+            resultSet.close();
+            closeConnection(connection);
+            return locationsList;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
