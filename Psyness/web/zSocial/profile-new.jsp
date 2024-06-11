@@ -138,8 +138,7 @@
                     </div> 
 
                     <!-- Profile cover -->
-                    <div class="profile user-profile">
-    
+                    <div class="profile user-profile">   
                         <div class="profiles_banner">
                             <img src="../assets/images/avatars/fondomorado.png" alt="">
                             <div class="profile_action absolute bottom-0 right-0 space-x-1.5 p-3 text-sm z-50 hidden lg:flex">
@@ -193,9 +192,9 @@
                         <div class="flex justify-between lg:border-t border-gray-100 flex-col-reverse lg:flex-row pt-2">
                             <nav class="responsive-nav pl-3">
                                 <ul uk-switcher="connect: #timeline-tab; animation: uk-animation-fade">
-                                    <li><a href="">Perfil<span>5</span></a></li>
+                                    <li><a href="">Perfil</a></li>
                                     <% if ((request.getParameter("id")).equals(sesion.getAttribute("SIUserNum").toString())) { %>
-                                        <li><a href="" id="pubsFavoritas">Pubs Favoritas <span>12</span> </a></li>
+                                        <li><a href="" id="pubsFavoritas">Pubs Favoritas </a></li>
                                     <% } %>
                                 </ul>
                             </nav>
@@ -234,10 +233,7 @@
                                             
                                             <p class="text-left text-gray-700 px-1 sm:px-4">
                                                 BAD
-                                            </p>
-                                            <p class="text-right text-gray-700 px-1 sm:px-4">
-                                                COOL
-                                            </p>                                           
+                                            </p>                                          
                                         </div>   
                             </div>
                         </div>  

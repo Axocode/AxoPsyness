@@ -279,6 +279,17 @@
                                             <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700" uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small">
                                                 <ul class="space-y-1">
                                                     <li> 
+                                                        <a href="#" id="night-mode"  uk-drop="mode: click;offset:5" class="btn-night-mode">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                                                              </svg>
+                                                             Modo oscuro
+                                                            <span class="btn-night-mode-switch">
+                                                                <span class="uk-switch-button"></span>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    <li> 
                                                         <a onclick="location.href='../index.jsp?cerrar=true'" class="flex items-center px-3 py-2 hover:bg-gray-200 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
                                                         <i class="icon-feather-log-out px-1"></i> Cerrar Sesión
                                                         </a> 
