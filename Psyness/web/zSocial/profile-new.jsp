@@ -130,9 +130,9 @@
                      <div class="section-page-returnback" style=" margin-top: -50px; padding-bottom: 10px;">
                         
                        <div class="lg:mx-0 uk-animation-slide-bottom-small" id="back_posts_feed">
-                            <button id="bvolver"> 
+                           <a href="home.jsp" button id="bvolver"> 
                                 <i class="fa-solid fa-arrow-left"></i>
-                            </button>
+                            </a>
                            <span>Profile</span>
                        </div> 
                     </div> 
