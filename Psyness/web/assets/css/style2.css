@@ -7862,6 +7862,8 @@ header .header_inner .right_side {
 
 .message-bubble .message-text {
   margin-left: 70px;
+  
+  padding: 20px;
   background-color: #f4f4f4;
   border-radius: 30px;
   padding: 1px 18px;
@@ -7877,7 +7879,6 @@ header .header_inner .right_side {
 
 .message-bubble .message-text p {
   font-size: 15px;
-  padding: 0;
   margin: 0;
   line-height: 25px;
 }
@@ -7889,6 +7890,8 @@ header .header_inner .right_side {
 
 .message-bubble.me .message-text {
   margin-left: 0;
+  
+  padding: 20px;
   margin-right: 63px;
   background-color: #787DF1;
   color: #fff;
@@ -7902,7 +7905,6 @@ header .header_inner .right_side {
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
   border-right: 6px solid #f4f4f4;
-  left: 2px;
   right: auto;
   top: 19px;
   position: absolute;
@@ -8273,7 +8275,7 @@ input[type="button"].dark1, input[type="submit"].dark1 {
           justify-content: center;
   position: fixed;
   width: 50px;
-  bottom: 78px;
+  bottom: 178px;
   right: 50px;
   height: 50px;
   z-index: 1000;
@@ -9381,7 +9383,8 @@ body.story-active header .header_widgets .is_link {
 .dark #iconito_edit_post,
 .dark #name_user_feed,
 .dark .header_inicio_clinicas button,
-.dark .boton-desactivable label{
+.dark .boton-desactivable label,
+.dark .header_inicio_clinicass #btn_feed{
   color: #f1f1f1 !important;
 }
 
@@ -9391,6 +9394,7 @@ html.dark,
 .dark .Main_content,
 .dark .Main_container,
 .dark .Right_container,
+.dark .sidebar_feed,
 .dark .sidebar,
 .dark body.story-active .story-prev {
   background-color: #18191a !important;
@@ -9415,7 +9419,6 @@ html.dark,
 .dark .messages-container-inner .message-content,
 .dark .messages-headline,
 .dark .message-time-sign span,
-.dark .sidebar_feed,
 .dark .sidebar-search,
 .dark .boton-desactivable label,
 .dark .contact-list a:hover {
@@ -9442,6 +9445,7 @@ html.dark,
 .dark select, .dark textarea, .dark input, .dark input[type="text"],
 .dark input[type="password"], .dark input[type="email"], .dark input[type="number"],
 .dark .sidebar_feed button:hover > span,
+.dark .tags_Container:hover > label,
 .dark .box_profile_search:hover,
 .dark #busquedas_users_contenedor li:hover,
 .dark #busquedas_users_contenedor_data li:hover {

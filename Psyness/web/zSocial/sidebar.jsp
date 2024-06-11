@@ -353,6 +353,11 @@
             cursor: pointer;
             border-radius: 100px;
         }
+        
+        .disabled-button {
+            background-color: grey;
+            cursor: not-allowed;
+        }
             </style>
                     <div id="create-post-modal" class="create-post" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
@@ -721,22 +726,42 @@
     </script>
     
    <script>
-        async function query(file) {
+        async function queryWithBackoff(file, retries = 5, delay = 1000) {
             const data = await file.arrayBuffer();
-            const response = await fetch(
-                "https://api-inference.huggingface.co/models/Falconsai/nsfw_image_detection",
-                {
-                    headers: { Authorization: "Bearer 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" },
-                    method: "POST",
-                    body: data,
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(
+                        "https://api-inference.huggingface.co/models/Falconsai/nsfw_image_detection",
+                        {
+                            headers: { Authorization: "Bearer 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" },
+                            method: "POST",
+                            body: data,
+                        }
+                    );
+                    if (response.status === 404) {
+                        throw new Error('404 Not Found');
+                    }
+                    const result = await response.json();
+                    return result;
+                } catch (error) {
+                    console.error(`Attempt ${i + 1} failed. Retrying in ${delay}ms...`);
+                    if (i === retries - 1) {
+                        throw new Error('Max retries reached');
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2; // Exponential backoff
                 }
-            );
-            const result = await response.json();
-            return result;
+            }
         }
 
         function showPreview(event) {
             const input = event.target;
+            
+            const actionButton = document.getElementById('guardadito1');
+            actionButton.disabled = true;
+            actionButton.classList.add('disabled-button');
+            
+            
             if (input.files && input.files[0]) {
                 const file = input.files[0];
                 const reader = new FileReader();
@@ -752,14 +777,18 @@
                     previewImage.style.display = 'block';
 
                     // Llamar a la función de query con el archivo
-                    query(file).then(response => {
+                    queryWithBackoff(file).then(response => {
                         console.log(JSON.stringify(response));
                         const nsfwPrediction = response.find(prediction => prediction.label === "nsfw");
-                        if (nsfwPrediction && nsfwPrediction.score > 0.4) {
-                            alert("La imagen contiene contenido ofensivo y no puede ser subida.");
+                        if (nsfwPrediction && nsfwPrediction.score > 0.3) {                           
                             deleteMedia();
                             mostrarModal();
                         }
+                    }).catch(error => {
+                        console.error('Error querying the API:', error);
+                    }).finally(() => {
+                        actionButton.disabled = false;
+                        actionButton.classList.remove('disabled-button');
                     });
                 }
                 reader.readAsDataURL(input.files[0]);
@@ -768,6 +797,12 @@
 
        function showVideoPreview(event) {
             const input = event.target;
+            
+            const actionButton = document.getElementById('guardadito1');
+            actionButton.disabled = true;
+            actionButton.classList.add('disabled-button');
+            
+            
             if (input.files && input.files[0]) {
                 const file = input.files[0];
                 const videoURL = URL.createObjectURL(file);
@@ -780,6 +815,8 @@
                         </video>
                         <button class="delete-button" onclick="deleteMedia()">X</button>
                     </div>`;
+                actionButton.disabled = false;
+                actionButton.classList.remove('disabled-button');
             }
         }
 

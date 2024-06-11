@@ -112,121 +112,86 @@
 <div  hidden id="hiAxogg0"></div>
         <!-- Main Contents -->
         <div class="main_content"> 
-  
+            <div class="mcontainer" >
 
-            <div class="messages-container">
-                <div class="messages-container-inner">
+                <div class="messages-container">
+                    <div class="messages-container-inner">
 
-                   
-                    <div class="messages-inbox">
-                        <div class="messages-headline">
-                            <div class="input-with-icon" hidden>
-                                    <input id="autocomplete-input" type="text" placeholder="Search">
-                                <i class="icon-material-outline-search"></i>
+                        <div class="message-content">
+
+                            <div class="messages-headline">
+                                <h2 class="text-2xl font-semibold">AXOCHAT</h2>
                             </div>
-                            <h2 class="text-2xl font-semibold">AXOCHAT</h2>
-                            <span class="absolute icon-feather-edit mr-4 text-xl uk-position-center-right cursor-pointer"></span>
-                        </div>
-                        <div class="messages-inbox-inner" data-simplebar>
-                            <ul>
-    
-                                <li>
-                                    <a href="#">
-                                        <div class="message-avatar"><i class="status-icon status-online"></i><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-    
-                                        <div class="message-by">
-                                            <div class="message-by-headline">
-                                                <h5>AXO</h5>
-                                                <span>En linea</span>
+
+                            <div class="message-content-scrolbar" data-simplebar>
+
+                                <!-- Message Content Inner -->
+                                <div class="message-content-inner" id="contento">
+
+                                        <!-- Time Sign -->
+                                        <div class="message-time-sign">
+                                            <span>23, Abril 2024</span>
+                                        </div>
+
+
+
+                                        <div class="message-bubble">
+                                            <div class="message-bubble-inner">
+                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
+                                                <div class="message-text py-2"><p>Hola! Soy tu acompañante en esta red social!<br>Cuentame, que necesitas el dia de hoy?</p></div>
                                             </div>
-                                            <p>hola! Soy tu acompañante en esta aventura</p>
+                                            <div class="clearfix"></div>
                                         </div>
-                                    </a>
-                                </li>
-    
-                                
-    
-                            </ul>
-                        </div>
-                    </div>
+
+                                        <div class="message-bubble" id="botones-axochar">
+                                            <div class="message-bubble-inner">
+                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn1"> Consejos </button>
+                                            </div>                                        
+                                            <div class="message-bubble-inner">
+                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn2"> Mensajes de Apoyo </button>
+                                            </div>
+                                            <div class="message-bubble-inner">
+                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
+                                                <button type="submit" class="message-text  bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn3"> Actividades de Relajación </button>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
 
 
-                    <div class="message-content">
 
-                        <div class="messages-headline">
-                            <h4> Axo </h4>
-                            <a href="#" class="message-action text-red-500"><i class="icon-feather-trash-2"></i> <span class="md:inline hidden"> Eliminar Conversacion</span> </a>
-                        </div>
-                        
-                        <div class="message-content-scrolbar" data-simplebar>
-
-                            <!-- Message Content Inner -->
-                            <div class="message-content-inner" id="contento">
-                                    
-                                    <!-- Time Sign -->
-                                    <div class="message-time-sign">
-                                        <span>23, Abril 2024</span>
-                                    </div>
-    
-    
-                                    
-                                    <div class="message-bubble">
-                                        <div class="message-bubble-inner">
-                                            <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                            <div class="message-text"><p>Hola! Soy tu acompañante en esta red social!<br>Cuentame,que necesitas el dia de hoy?</p></div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    
-                                    <div class="message-bubble">
-                                        <div class="message-bubble-inner">
-                                            <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                            <button type="submit" class="message-text bg-blue-700" id="btn1"> Consejos </button>
-                                        </div>                                        
-                                        <div class="message-bubble-inner">
-                                            <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                            <button type="submit" class="message-text bg-blue-700" id="btn2"> Mensajes de Apoyo </button>
-                                        </div>
-                                        <div class="message-bubble-inner">
-                                            <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                            <button type="submit" class="message-text  bg-blue-700" id="btn3"> Actividades de Relajación </button>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-    
-                                                                     
-    
-                                   <!-- <div class="message-bubble">
-                                        <div class="message-bubble-inner">
-                                            <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                            <div class="message-text">
-                                                <!-- Typing Indicator <-Est0 es un comentario
-                                                <div class="typing-indicator">
-                                                    <span></span>
-                                                    <span></span>
-                                                    <span></span>
+                                       <!-- <div class="message-bubble">
+                                            <div class="message-bubble-inner">
+                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
+                                                <div class="message-text">
+                                                    <!-- Typing Indicator <-Est0 es un comentario
+                                                    <div class="typing-indicator">
+                                                        <span></span>
+                                                        <span></span>
+                                                        <span></span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div> -->
-                            </div>
-                            <!-- Message Content Inner / End -->
-                            
-                            <!-- Reply Area -->
-                            <div class="message-reply">
-                                <input cols="1" rows="1" placeholder="Escribe un mensaje" id="user-input"></input>
-                                <button class="button ripple-effect" id="send-btn">Enviar</button>
+                                            <div class="clearfix"></div>
+                                        </div> -->
+                                </div>
+                                <!-- Message Content Inner / End -->
+
+                                <!-- Reply Area -->
+                                <div class="message-reply">
+                                    <input cols="1" class="px-2" rows="1" placeholder="Escribe un mensaje" id="user-input"></input>
+                                    <button class="button ripple-effect" id="send-btn">Enviar</button>
+                                </div>
+
                             </div>
 
                         </div>
 
+
                     </div>
-
-
-                </div>
-            </div> 
-            
+                </div> 
+            </div>
         </div>
         
         
@@ -234,155 +199,6 @@
         
         
     </div>
-    <div uk-toggle="target: #offcanvas-chat" class="start-chat">
-        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
-        </svg>
-    </div>
-                        
-    
-    <div id="offcanvas-chat" uk-offcanvas="flip: true; overlay: true">
-        <div class="uk-offcanvas-bar bg-white p-0 w-full lg:w-80 shadow-2xl">
-
-
-            <div class="relative pt-5 px-4">
-
-                <h3 class="text-2xl font-bold mb-2"> Chats </h3>
-
-                <div class="absolute right-3 top-4 flex items-center space-x-2">
-
-                    <button class="uk-offcanvas-close  px-2 -mt-1 relative rounded-full inset-0 lg:hidden blcok"
-                        type="button" uk-close></button>
-
-                    <a href="#" uk-toggle="target: #search;animation: uk-animation-slide-top-small">
-                        <ion-icon name="search" class="text-xl hover:bg-gray-100 p-1 rounded-full"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="settings-outline" class="text-xl hover:bg-gray-100 p-1 rounded-full"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="ellipsis-vertical" class="text-xl hover:bg-gray-100 p-1 rounded-full"></ion-icon>
-                    </a>
-                    <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700"  
-                    uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small; offset:5">
-                        <ul class="space-y-1">
-                          <li> 
-                              <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                 <ion-icon name="checkbox-outline" class="pr-2 text-xl"></ion-icon> Mark all as read
-                              </a> 
-                          </li>
-                          <li> 
-                              <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                <ion-icon name="settings-outline" class="pr-2 text-xl"></ion-icon>  Chat setting 
-                              </a> 
-                          </li>
-                          <li> 
-                              <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                <ion-icon name="notifications-off-outline" class="pr-2 text-lg"></ion-icon>   Disable notifications
-                              </a> 
-                          </li> 
-                          <li> 
-                              <a href="#" class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                                <ion-icon name="star-outline"  class="pr-2 text-xl"></ion-icon>  Create a group chat 
-                              </a> 
-                          </li>
-                        </ul>
-                    </div>
-                              
-
-                </div>
-
-
-            </div>
-
-            <div class="absolute bg-white z-10 w-full -mt-5 lg:-mt-2 transform translate-y-1.5 py-2 border-b items-center flex"
-                id="search" hidden>
-                <input type="text" placeholder="Search.." class="flex-1">
-                <ion-icon name="close-outline" class="text-2xl hover:bg-gray-100 p-1 rounded-full mr-4 cursor-pointer"
-                    uk-toggle="target: #search;animation: uk-animation-slide-top-small"></ion-icon> 
-            </div>
-
-            <nav class="responsive-nav border-b extanded mb-2 -mt-2">
-                <ul uk-switcher="connect: #chats-tab; animation: uk-animation-fade">
-                    <li class="uk-active"><a class="active" href="#0"> Clinica </a></li>
-                    
-                </ul>
-            </nav>
-
-            <div class="contact-list px-2 uk-switcher" id="chats-tab">
-
-                <div class="p-1">
-                    
-                   
-
-
-
-                    
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-
-                        <div class="contact-username">Sexenal</div>
-                    </button><br><br>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-
-                        <div class="contact-username">Cañitas</div>
-                    </button><br>
-                    
-                    
-                    
-                   
-
-                </div>
-               
-
-            </div>
-        </div>
-    </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Sexenal</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-  <h5>NOMBRE</h5>
-  <p>Sexenal</p>
-  <hr><br>
-  <h5>TELEFONO DE CONTACTO</h5>
-  <p>555 <a href="psiconfio.jsp" class="link-dark"> aqui</a></p>
-  <hr><br>
-  <h5>Plan de Guadalupe 82, Nextitla, Miguel Hidalgo, 11420 Ciudad de México, CDMX</h5>
-  <!--<p>Link para visualizar ubicacion <a href="psiconfio.jsp" class="link-dark"> aqui</a></p>-->
-    </div>
-      <div class="modal-footer">
-        
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cañitas</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-  <h5>NOMBRE</h5>
-  <p>Cañitas</p>
-  <hr><br>
-  <h5>TELEFONO DE CONTACTO</h5>
-  <p> 555 <a href="psiconfio.jsp" class="link-dark"> aqui</a></p>
-  <hr><br>
-  <h5>C. Cañitas, Popotla, Miguel Hidalgo, 11400 Ciudad de México, CDMX</h5>
-  <p>Link para visualizar ubicacion <a href="psiconfio.jsp" class="link-dark"> aqui</a></p>
-    </div>
-      
-    </div>
-  </div>
-</div>
-
         
 
 
