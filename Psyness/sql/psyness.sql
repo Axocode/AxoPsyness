@@ -38,6 +38,17 @@ create table if not exists interclinic (
   foreign key (clinicuser) references interusers (iusernum) on delete cascade on update cascade
 ) engine = innodb auto_increment = 1 default character set = utf8;
 
+create table if not exists interlocation (
+  locuser int not null,
+  loclatitud varchar(25) default null,
+  loclongitud varchar(25) default null,
+  loctoken varchar(500) default null,
+  locmensagge varchar(70) not null default 'lindo día',
+  primary key (locuser),
+  foreign key (locuser) references interusers (iusernum) on delete cascade on update cascade
+) engine = innodb auto_increment = 1 default character set = utf8;
+
+
 create table if not exists interclinicusers (
   id int not null auto_increment,
   iusernum int not null,

@@ -3,6 +3,8 @@
     Created on : 19 may 2023, 12:51:17
     Author     : alumno
 --%>
+<%@page import="org.axocode.dao.service.InterLocationService"%>
+<%@page import="org.axocode.dao.InterLocation"%>
 <%@page import="org.axocode.dao.InterTagUsers"%>
 <%@page import="org.axocode.dao.service.InterTagUsersService"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -114,9 +116,14 @@
                     Integer SISeguidores = userR.getIUserSeguidores();
                     Integer SISeguidos = userR.getIUserSeguidos();
                     String SIUserDescription = userR.getIUserDescription();
+                    String apoyo = request.getParameter("Apoyo");            
                     
-            
-            
+                    InterLocation location = new InterLocation();
+                    InterLocationService locationService = new InterLocationService();  
+
+                    location.setLocationMessage(apoyo);
+                    location.setLocationUser(userR.getIUserNum());
+                    locationService.updateLocationInDatabase(location);
             
             
                     
