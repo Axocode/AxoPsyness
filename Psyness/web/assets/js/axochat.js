@@ -1,3 +1,4 @@
+
 var endpointVariable = "";
 
 var boton = document.getElementById('btn1');
