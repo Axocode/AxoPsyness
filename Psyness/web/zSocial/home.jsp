@@ -137,6 +137,28 @@
                                </nav>
                            </div>
                        </div>
+                               <div class="user_story grid md:grid-cols-5 grid-cols-3 gap-2 lg:-mx-20 relative">
+                
+                            <a href="#create-post" uk-toggle="target: body ; cls: story-active">
+                                <div class="single_story">
+                                    <img src="../assets/images/hopecore1.png" alt="">
+                                    <div class="story-avatar"> <img src="../assets/images/avatars/prof1.png" alt=""></div>
+                                    <div class="story-content"> <h4>Ansiedad </h4> </div>
+                                </div>
+                            </a>
+                            
+                            <a href="#" uk-toggle="target: body ; cls: story-active">
+                                <div class="single_story">
+                                    <img src="../assets/images/hopecore2.png" alt="">
+                                    <div class="story-avatar"> <img src="../assets/images/avatars/prof4.png" alt=""></div>
+                                    <div class="story-content"> <h4> Superacion Personal</h4> </div>
+                                </div>
+                            </a>
+                            
+                            
+                           
+                            
+                        </div>
                                
                                
                         <!------------------- Perfil --------------------------->
@@ -369,6 +391,131 @@
                                             
                 </div>  
             </div>
+                            <-<!-- VISUALIZACION DE ACTIVIDADES -->         
+            <div class="story-prev">
+    
+        <div class="story-sidebar uk-animation-slide-left-medium">
+            <div class="md:flex justify-between items-center py-2 hidden">
+                <h3 class="text-2xl font-semibold"> ACTIVIDAD </h3>
+            </div><br>
+    
+            <div class="story-sidebar-scrollbar" data-simplebar>
+                <h3 class="text-lg font-medium"> Proceso para calmar la ansiedad mediante proceso de respiracion profunda </h3>
+    
+                <br>
+     
+                <h3 class="text-lg font-medium lg:mt-3 mt-1"> Seguimiento </h3>
+    
+                <div class="story-users-list"  uk-switcher="connect: #story_slider ; toggle: > * ; animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium ">
+    
+                    <a href="#">
+                        <div class="story-media">
+                            <img src="../assets/images/1.png" alt="">
+                        </div>
+                        <div class="story-text">
+                            <div class="story-username"> Paso 1</div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="story-media">
+                            <img src="../assets/images/2.png" alt="">
+                        </div>
+                        <div class="story-text">
+                            <div class="story-username"> Paso 2</div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="story-media">
+                            <img src="../assets/images/3.png" alt="">
+                        </div>
+                        <div class="story-text">
+                            <div class="story-username"> Paso 3 </div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="story-media">
+                            <img src="../assets/images/4.png" alt="">
+                        </div>
+                        <div class="story-text">
+                            <div class="story-username"> Paso 4 </div>
+                        </div>
+                    </a>
+                    
+                 
+                    
+    
+                </div><br>
+    
+    
+            </div>
+    
+        </div>
+        <div class="story-content">
+    
+            <ul class="uk-switcher uk-animation-scale-up" id="story_slider" >
+                <li class="relative">
+
+                    <span uk-switcher-item="previous" class="slider-icon is-left"> </span>
+                    <span uk-switcher-item="next" class="slider-icon is-right"> </span>
+
+                    <div uk-lightbox>
+                        <a href="../assets/images/1.png" data-alt="Image">
+                            <img src="../assets/images/1.png" class="story-slider-image"  data-alt="Image">
+                        </a>
+                    </div>
+
+                </li>
+                <li class="relative">
+
+                    <span uk-switcher-item="previous" class="slider-icon is-left"> </span>
+                    <span uk-switcher-item="next" class="slider-icon is-right"> </span>
+
+                    <div uk-lightbox>
+                        <a href="../assets/images/2.png" data-alt="Image">
+                            <img src="../assets/images/2.png" class="story-slider-image"  data-alt="Image">
+                        </a>
+                    </div>
+
+                </li>
+                <li class="relative">
+
+                    <span uk-switcher-item="previous" class="slider-icon is-left"> </span>
+                    <span uk-switcher-item="next" class="slider-icon is-right"> </span>
+
+                    <div uk-lightbox>
+                        <a href="../assets/images/3.png" data-alt="Image">
+                            <img src="../assets/images/3.png" class="story-slider-image"  data-alt="Image">
+                        </a>
+                    </div>
+
+                </li>
+                <li class="relative">
+
+                    <span uk-switcher-item="previous" class="slider-icon is-left"> </span>
+                    <span uk-switcher-item="next" class="slider-icon is-right"> </span>
+
+                    <div uk-lightbox>
+                        <a href="../assets/images/4.png" data-alt="Image">
+                            <img src="../assets/images/4.png" class="story-slider-image"  data-alt="Image">
+                        </a>
+                    </div>
+
+                </li>
+
+                
+            </ul>
+    
+        </div>
+    
+        <!-- story colose button-->
+        <span class="story-btn-close" uk-toggle="target: body ; cls: story-active"
+            uk-tooltip="title:Close story ; pos: left">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </span>
+    
+    </div> 
                       
                                 <!--Fin - Cambios-->
 
