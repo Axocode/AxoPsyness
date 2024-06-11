@@ -47,7 +47,7 @@ public class enviarNotificacionATodos extends HttpServlet {
         for (InterLocation location : locations) {
             String token = location.getLocationToken();
             if (token != null && !token.isEmpty() && !token.equals("NULL")) {
-                sendNotification(token, location.getLocationMessage());
+                sendNotification(token, "Emergencia");
             }
         }
 

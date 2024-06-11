@@ -391,7 +391,7 @@
                                             
                 </div>  
             </div>
-                            <-<!-- VISUALIZACION DE ACTIVIDADES -->         
+                            <!-- VISUALIZACION DE ACTIVIDADES -->         
             <div class="story-prev">
     
         <div class="story-sidebar uk-animation-slide-left-medium">
