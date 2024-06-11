@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -93,19 +94,24 @@ public class notificacion extends HttpServlet {
         if (mensaje != null) {
             location.setLocationMessage(mensaje);
         } else {
-            location.setLocationMessage("");
+            location.setLocationMessage("¡Lindo día!");
         }
 
         locationService.updateLocationInDatabase(location);
         List<InterLocation> nearbyUsers = locationService.findInterLocationsWithinRadius(latitude, longitude, 5);
-
-        for (InterLocation user : nearbyUsers) {
-            String supportMessage = locationService.getSupportMessageFromDatabase(userIdInt);
-            InterUsersService users = new InterUsersService();
-            InterUsers persona = users.getUserByInterUsersNum(userIdInt);
-            sendNotification(user.getLocationToken(), supportMessage, persona.getIUser());
+        int cadenita = nearbyUsers.size();
+        Random random = new Random();
+        int pass =0;
+        while(pass == 0){
+            int n = random.nextInt(cadenita);
+            if (nearbyUsers.get(n).getLocationUser() != userIdInt) {
+                String supportMessage = locationService.getSupportMessageFromDatabase(nearbyUsers.get(n).getLocationUser());
+                InterUsersService users = new InterUsersService();
+                InterUsers persona = users.getUserByInterUsersNum(nearbyUsers.get(n).getLocationUser());
+                sendNotification(nearbyUsers.get(n).getLocationToken(), supportMessage, persona.getIUser());
+                pass = 1;
+            }
         }
-
         response.getWriter().write("Location updated and support messages sent");
     }
 
