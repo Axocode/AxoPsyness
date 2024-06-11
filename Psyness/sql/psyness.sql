@@ -48,6 +48,14 @@ create table if not exists interlocation (
   foreign key (locuser) references interusers (iusernum) on delete cascade on update cascade
 ) engine = innodb auto_increment = 1 default character set = utf8;
 
+create table if not exists interimages (
+  imagesnum int not null auto_increment,
+  imagespub int not null,
+  images longblob NOT null,
+  imagesname varchar(255) not null,
+  primary key (imagesnum),
+  foreign key (imagespub) references interpub (pubnumid) on delete cascade on update cascade
+) engine = innodb auto_increment = 1 default character set = utf8;
 
 create table if not exists interclinicusers (
   id int not null auto_increment,

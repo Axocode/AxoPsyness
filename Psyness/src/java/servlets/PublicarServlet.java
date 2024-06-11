@@ -4,7 +4,9 @@
  */
 package servlets;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -14,16 +16,20 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+import org.axocode.dao.InterImages;
 import org.axocode.dao.InterPub;
 import org.axocode.dao.InterTagPub;
 import org.axocode.dao.InterUsers;
 import org.axocode.dao.InterUsersPub;
 import org.axocode.dao.service.InterFavService;
+import org.axocode.dao.service.InterImagesService;
 import org.axocode.dao.service.InterLoveService;
 import org.axocode.dao.service.InterPubService;
 import org.axocode.dao.service.InterTagPubService;
@@ -37,6 +43,7 @@ import org.axocode.helper.InterPubHelper;
  * @author chump
  */
 @WebServlet(name = "PublicarServlet", urlPatterns = {"/PublicarServlet"})
+@MultipartConfig
 public class PublicarServlet extends HttpServlet {
 
     /**
@@ -65,6 +72,20 @@ public class PublicarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+           throws ServletException, IOException {
         processRequest(request, response);
         request.setCharacterEncoding("UTF-8");          
         HttpSession sesion = request.getSession();
@@ -133,6 +154,38 @@ public class PublicarServlet extends HttpServlet {
                                     t.setTagPubSueno(Integer.parseInt(tag11));
                                     resultado = objetodefinivo.getPubNumId().toString();
                                     tagService.addInterTagPub(t);
+                                    
+                                    try {
+            Part filePart = request.getPart("file");
+            byte[] fileContent = null;
+            String fileName = null;
+
+            if (filePart != null) {
+                fileName = filePart.getSubmittedFileName();
+                fileContent = getBytesFromInputStream(filePart.getInputStream());
+            }
+
+            if (fileContent != null && fileName != null) {
+                InterImages images = new InterImages();
+                InterImagesService imagesService = new InterImagesService();
+                images.setImageName(fileName);
+                images.setImages(fileContent);
+                images.setImagesPubNumId(PubNumIdefinitivo); // Ajusta esto según tu lógica
+
+                boolean result = imagesService.addInterImages(images);
+
+                if (result) {
+                    
+                } else {
+                    
+                }
+            } else {
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
                                 }
                             }
                         }else{
@@ -176,6 +229,34 @@ public class PublicarServlet extends HttpServlet {
                                         t.setTagPubSueno(Integer.parseInt(request.getParameter("TagPubSueno")));
                                         resultado = objetodefinivo.getPubNumId().toString();
                                         tagService.addInterTagPub(t);
+                                        
+                                        try {
+            Part filePart = request.getPart("file");
+            byte[] fileContent = null;
+            String fileName = null;
+
+            if (filePart != null) {
+                fileName = filePart.getSubmittedFileName();
+                fileContent = getBytesFromInputStream(filePart.getInputStream());
+            }
+
+            if (fileContent != null && fileName != null) {
+                InterImages images = new InterImages();
+                InterImagesService imagesService = new InterImagesService();
+                images.setImageName(fileName);
+                images.setImages(fileContent);
+                images.setImagesPubNumId(PubNumIdefinitivo); // Ajusta esto según tu lógica
+
+                boolean result = imagesService.addInterImages(images);
+
+                if (result) {
+                } else {
+                }
+            } else {
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
                                     }
                                 }} else {
                                 /*
@@ -271,6 +352,14 @@ public class PublicarServlet extends HttpServlet {
                     out.print("<div class=\"p-4 pt-0 border-b dark:border-gray-700\">");
                     out.print("<p class=\"post-text\">" + escapedCont + "</p>");
                     out.print("</div>");
+                    InterImagesService imageService = new InterImagesService();
+                    boolean imagensita =  imageService.knowImage(trows.getPubNumId());
+                            if (imagensita) {
+                                out.print("<div class=\"p-4 pt-0 border-b dark:border-gray-700\">");
+                                out.print("<br>");
+                                out.print("<div style=\"justify-content: center; display: flex; align-items: center;\"> <img class=\"h-100 text-bg-dark \" style=\"border-radius:15px;\" src=\"/Psyness/ServletSolicitarImagen?pubimageid="+trows.getPubNumId()+"\" alt=\"Imagen\"> </div>");
+                                out.print("</div>");
+                            }
                     out.print("<div class=\"p-4 space-y-3\">");
                     out.print("<div id=\"pub"+numpub+"\" class=\"flex space-x-4 lg:font-bold\">");
 
@@ -358,20 +447,6 @@ public class PublicarServlet extends HttpServlet {
                 }
     }}
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
     /**
      * Returns a short description of the servlet.
      *
@@ -380,6 +455,16 @@ public class PublicarServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
+// </editor-fold>
+    private byte[] getBytesFromInputStream(InputStream is) throws IOException {
+        try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = is.read(buffer)) != -1) {
+                os.write(buffer, 0, len);
+            }
+            return os.toByteArray();
+        }
+    }
 }

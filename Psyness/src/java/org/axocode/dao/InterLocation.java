@@ -4,11 +4,13 @@
  */
 package org.axocode.dao;
 
+import java.io.Serializable;
+
 /**
  *
  * @author chump
  */
-public class InterLocation {
+public class InterLocation implements Serializable {
     private int LocationUser;
     private double LocationLatitud;
     private double LocationLongitud;
