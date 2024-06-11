@@ -126,7 +126,7 @@
                             <div class="message-content-scrolbar" data-simplebar>
 
                                 <!-- Message Content Inner -->
-                                <div class="message-content-inner m-2" id="contento">
+                                <div class="message-content-inner" id="contento">
 
                                         <!-- Time Sign -->
                                         <div class="message-time-sign">
@@ -146,15 +146,15 @@
                                         <div class="message-bubble" id="botones-axochar">
                                             <div class="message-bubble-inner">
                                                 <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text bg-blue-700 py-2" style="background-color: #787df1; color: #fff" id="btn1"> Consejos </button>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn1"> Consejos </button>
                                             </div>                                        
                                             <div class="message-bubble-inner">
                                                 <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text bg-blue-700 py-2" style="background-color: #787df1; color: #fff" id="btn2"> Mensajes de Apoyo </button>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn2"> Mensajes de Apoyo </button>
                                             </div>
                                             <div class="message-bubble-inner">
                                                 <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text  bg-blue-700 py-2" style="background-color: #787df1; color: #fff" id="btn3"> Actividades de Relajación </button>
+                                                <button type="submit" class="message-text  bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn3"> Actividades de Relajación </button>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
