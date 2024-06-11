@@ -306,7 +306,7 @@
                                                                 </div>
 
                                                                 <div class="px-4 sm:flex sm:flex-row-reverse ">
-                                                                    <button type="button" class=" button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Contactar </button>
+                                                                    <a href ="psiconfio.jsp" button type="button" class=" button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Contactar </a>
                                                                 </div> 
                                                               </dl>
                                                             </div>
@@ -347,7 +347,7 @@
                                                                 </div>
 
                                                                 <div class="px-4 sm:flex sm:flex-row-reverse ">
-                                                                    <button type="button" class=" button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Contactar </button>
+                                                                    <a href ="psiconfio.jsp" button type="button" class=" button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Contactar </a>
                                                                 </div> 
                                                               </dl>
                                                             </div>
@@ -388,7 +388,7 @@
                                                                 </div>
 
                                                                 <div class="px-4 sm:flex sm:flex-row-reverse ">
-                                                                    <button type="button" class=" button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Contactar </button>
+                                                                    <a href ="psiconfio.jsp" button type="button" class=" button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Contactar </a>
                                                                 </div> 
                                                               </dl>
                                                             </div>
@@ -429,7 +429,7 @@
                                                                 </div>
 
                                                                 <div class="px-4 sm:flex sm:flex-row-reverse ">
-                                                                    <button type="button" class=" button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Contactar </button>
+                                                                    <a href ="psiconfio.jsp" button type="button" class=" button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Contactar </a>
                                                                 </div> 
                                                               </dl>
                                                             </div>
@@ -470,7 +470,7 @@
                                                                 </div>
 
                                                                 <div class="px-4 sm:flex sm:flex-row-reverse ">
-                                                                    <button type="button" class=" button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Contactar </button>
+                                                                    <a href ="psiconfio.jsp" button type="button" class=" button bg-blue-700 inline-flex w-full justify-center rounded-md px-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"> Contactar </a>
                                                                 </div> 
                                                               </dl>
                                                             </div>
