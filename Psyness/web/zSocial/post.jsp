@@ -1,4 +1,5 @@
 
+<%@page import="org.axocode.dao.service.InterImagesService"%>
 <%@page import="servlets.HtmlEscape"%>
 <%@page import="org.axocode.dao.InterComent"%>
 <%@page import="org.axocode.dao.service.InterComentService"%>
@@ -104,7 +105,9 @@
         String escapedCont = HtmlEscape.escapeHtml((publi.getPubCont()));
         String data = (String) sesion.getAttribute("SIImgNum");
         
-        request.setCharacterEncoding("UTF-8");      
+        request.setCharacterEncoding("UTF-8");  
+InterImagesService imageService = new InterImagesService();
+                    boolean imagensita =  imageService.knowImage(publi.getPubNumId());
 %>
     <div id="wrapper">
 
@@ -178,7 +181,15 @@
                                 </div>
 
                                 <div class="p-4 space-y-3 relative"> 
+                                    <div class="p-4 pt-0 border-b dark:border-gray-700">
                                     <p> <%=escapedCont%> </p>
+                                    </div>
+                            <%if (imagensita) {%>
+                                <div style="justify-content: center; display: flex; align-items: center;"> 
+                                    <img class="h-100 text-bg-dark " style="border-radius:15px;" src="/Psyness/ServletSolicitarImagen?pubimageid=<%=publi.getPubNumId()%>" alt="Imagen">
+                                
+                                </div>
+                            <%}%>
                                     <hr>
                                     <div id="reaccion" class="flex space-x-4 lg:font-bold">
 

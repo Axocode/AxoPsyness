@@ -220,74 +220,86 @@ $(document).ready(function () {
                     const puntuacionN = parseFloat(puntuacion);
                     // Ahora puedes utilizar puntuacionN en tu lógica
                     if (puntuacionN < 0.58) {
-                        console.log("publicacion valida");
-                        var numero1  = $("#numero123").val();
-                        // Resto de la lógica para publicación válida
-                        $.ajax({
-                            type: "GET",
-                            url: "/Psyness/PublicarServlet",
-                            data: {
-                                PubCont: $("#inputText").val(),
-                                guardar: $("#guardar").val(),
-                                PubDate: $("#PubDate").val(),
-                                PubHour: $("#PubHour").val(),
-                                PubRol: $("#PubRol").val(),
-                                TagPubSensible: $("#TagPubSensible").is(':checked') ? 1 : 0,
-                                TagPubAutoestima: $("#TagPubAutoestima").is(':checked') ? 5 : 0,
-                                TagPubRelaciones: $("#TagPubRelaciones").is(':checked') ? 5 : 0,
-                                TagPubAnsiedad: $("#TagPubAnsiedad").is(':checked') ? 5 : 0,
-                                TagPubDepresion: $("#TagPubDepresion").is(':checked') ? 5 : 0,
-                                TagPubConflictos: $("#TagPubConflictos").is(':checked') ? 5 : 0,
-                                TagPubBienestar: $("#TagPubBienestar").is(':checked') ? 5 : 0,
-                                TagPubCrecimiento: $("#TagPubCrecimiento").is(':checked') ? 5 : 0,
-                                TagPubSalud: $("#TagPubSalud").is(':checked') ? 5 : 0,
-                                TagPubTranstornos: $("#TagPubTranstornos").is(':checked') ? 5 : 0,
-                                TagPubRecaidas: $("#TagPubRecaidas").is(':checked') ? 5 : 0,
-                                TagPubSueno: $("#TagPubSueno").is(':checked') ? 5 : 0,
-                                key3: varvar.CicloPubli
-                            },
-                            success: function (data) {
-                                    if (data.length > 150) {
-                                        console.log(varvar.CicloPubli);
-                                        
-                                        $('#hiAxogg'+varvar.CicloPubli).html(data);
-                                        varvar.CicloPubli +=1;
-                                        
-                                        console.log(varvar.CicloPubli);
-                                    }else{
-                                     $('#hiAxoggA').html(data);  
-                                     console.log("error");
-                                    }
-                                console.log("Formulario enviado por AJAX", numero1);
-                                doPub();
-                                UIkit.modal("#create-post-modal").hide();
-                                document.getElementById('inputText').value = '';
-                                var botonPublicar = document.getElementById('guardadito1');
-                                var colorOriginal = window.getComputedStyle(botonPublicar).backgroundColor;
-                                botonPublicar.style.backgroundColor = '#CFCFCF';
-                                setTimeout(function () {
-                                    resPub();
-                                    botonPublicar.style.backgroundColor = colorOriginal;
-                                }, 10000);
-                                var elemento = document.getElementById('resultadoPublicacion'+varvar.CicloPubli);
-                                var contenido = elemento.textContent || elemento.innerText;
-                                if (contenido === "error") {
-                                    mostrarNotificacionErorr("Espera un poco para volver a publicar", "success");
-                                    $(".boton-desactivable input[type='checkbox']").each(function() {
-                                      $(this).prop('checked', false);
-                                    });
-                                } else {
-                                    mostrarNotificacion("Publicación válida. Ver Publicacion", "success", contenido);
-                                    $(".boton-desactivable input[type='checkbox']").each(function() {
-                                      $(this).prop('checked', false);
-                                    }); 
-                                }
-                                },
-                                error: function (error) {
-                                    console.error("Error en la solicitud AJAX: ", error);
-                                }
-                        });
-                    } else {
+    console.log("publicación válida");
+    var numero1 = $("#numero123").val();
+
+    // Crear un objeto FormData para enviar todos los datos del formulario y la imagen
+    var formData = new FormData();
+    formData.append("PubCont", $("#inputText").val());
+    formData.append("guardar", $("#guardar").val());
+    formData.append("PubDate", $("#PubDate").val());
+    formData.append("PubHour", $("#PubHour").val());
+    formData.append("PubRol", $("#PubRol").val());
+    formData.append("TagPubSensible", $("#TagPubSensible").is(':checked') ? 1 : 0);
+    formData.append("TagPubAutoestima", $("#TagPubAutoestima").is(':checked') ? 5 : 0);
+    formData.append("TagPubRelaciones", $("#TagPubRelaciones").is(':checked') ? 5 : 0);
+    formData.append("TagPubAnsiedad", $("#TagPubAnsiedad").is(':checked') ? 5 : 0);
+    formData.append("TagPubDepresion", $("#TagPubDepresion").is(':checked') ? 5 : 0);
+    formData.append("TagPubConflictos", $("#TagPubConflictos").is(':checked') ? 5 : 0);
+    formData.append("TagPubBienestar", $("#TagPubBienestar").is(':checked') ? 5 : 0);
+    formData.append("TagPubCrecimiento", $("#TagPubCrecimiento").is(':checked') ? 5 : 0);
+    formData.append("TagPubSalud", $("#TagPubSalud").is(':checked') ? 5 : 0);
+    formData.append("TagPubTranstornos", $("#TagPubTranstornos").is(':checked') ? 5 : 0);
+    formData.append("TagPubRecaidas", $("#TagPubRecaidas").is(':checked') ? 5 : 0);
+    formData.append("TagPubSueno", $("#TagPubSueno").is(':checked') ? 5 : 0);
+    formData.append("key3", varvar.CicloPubli);
+
+    // Añadir el archivo seleccionado al FormData
+    var fileInput = document.getElementById('file');
+    if (fileInput.files.length > 0) {
+        formData.append("file", fileInput.files[0]);
+    }
+
+    // Enviar todos los datos y la imagen en una solicitud POST
+    $.ajax({
+        type: "POST",
+        url: "/Psyness/PublicarServlet",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            if (data.length > 150) {
+                console.log(varvar.CicloPubli);
+
+                $('#hiAxogg' + varvar.CicloPubli).html(data);
+                varvar.CicloPubli += 1;
+
+                console.log(varvar.CicloPubli);
+            } else {
+                $('#hiAxoggA').html(data);
+                console.log("error");
+            }
+            console.log("Formulario enviado por AJAX", numero1);
+            doPub();
+            UIkit.modal("#create-post-modal").hide();
+            document.getElementById('inputText').value = '';
+            var botonPublicar = document.getElementById('guardadito1');
+            var colorOriginal = window.getComputedStyle(botonPublicar).backgroundColor;
+            botonPublicar.style.backgroundColor = '#CFCFCF';
+            setTimeout(function () {
+                resPub();
+                botonPublicar.style.backgroundColor = colorOriginal;
+            }, 10000);
+            var elemento = document.getElementById('resultadoPublicacion' + varvar.CicloPubli);
+            var contenido = elemento.textContent || elemento.innerText;
+            if (contenido === "error") {
+                mostrarNotificacionErorr("Espera un poco para volver a publicar", "success");
+                $(".boton-desactivable input[type='checkbox']").each(function() {
+                    $(this).prop('checked', false);
+                });
+            } else {
+                mostrarNotificacion("Publicación válida. Ver Publicacion", "success", contenido);
+                $(".boton-desactivable input[type='checkbox']").each(function() {
+                    $(this).prop('checked', false);
+                });
+            }
+        },
+        error: function (error) {
+            console.error("Error en la solicitud AJAX: ", error);
+        }
+    });
+}
+  else {
                         console.log("publicacion invalida");
                         UIkit.modal("#create-post-modal").hide();
                         const modalsita = document.getElementById("modal_offensive_announce");
@@ -534,7 +546,11 @@ function generateSmoothGradientCircle(scores, size, texture) {
 
   // Obtener la textura redimensionada como patrón
   var pattern = ctx.createPattern(tempCanvas, 'repeat');
+<<<<<<< HEAD
   ctx.globalAlpha = 0.2; // Ajustar la opacidad de la textura
+=======
+  ctx.globalAlpha = 0.3; // Ajustar la opacidad de la textura
+>>>>>>> a142f3397f8de632df8991ce22ce21038752d5c2
   ctx.fillStyle = pattern;
   ctx.fillRect(0, 0, size[0], size[1]);
   ctx.globalAlpha = 1.0;
