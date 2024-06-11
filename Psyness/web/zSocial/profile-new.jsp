@@ -223,18 +223,11 @@
                                         <h4 class="text-center font-semibold"> ESTADO DE ÁNIMO </h4>
 
 
-                                        <h2 class="text-center p-1 mr-3"> ¿Cómo te sientes el día de hoy? </h2>
+                                        <h2 class="text-center p-1 mr-3"> Tus emociones se reflejaron así en la semana </h2>
 
                                         <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6">
                                             <img src="../assets/images/avatars/esfera-gradiente.png" class="object-cover rounded-lg col-span-full">
                                         </div>
-                                        <div class="mb-3">
-                                            <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3" wfd-id="id7">
-                                            
-                                            <p class="text-left text-gray-700 px-1 sm:px-4">
-                                                BAD
-                                            </p>                                          
-                                        </div>   
                             </div>
                         </div>  
                         

@@ -534,7 +534,7 @@ function generateSmoothGradientCircle(scores, size, texture) {
 
   // Obtener la textura redimensionada como patrón
   var pattern = ctx.createPattern(tempCanvas, 'repeat');
-  ctx.globalAlpha = 0.9; // Ajustar la opacidad de la textura
+  ctx.globalAlpha = 0.2; // Ajustar la opacidad de la textura
   ctx.fillStyle = pattern;
   ctx.fillRect(0, 0, size[0], size[1]);
   ctx.globalAlpha = 1.0;

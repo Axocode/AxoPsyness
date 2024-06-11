@@ -7862,11 +7862,8 @@ header .header_inner .right_side {
 
 .message-bubble .message-text {
   margin-left: 70px;
-  
-  padding: 20px;
   background-color: #f4f4f4;
   border-radius: 30px;
-  padding: 1px 18px;
   position: relative;
   display: inline-block;
   float: left;
@@ -7878,6 +7875,7 @@ header .header_inner .right_side {
 }
 
 .message-bubble .message-text p {
+  padding: 0 20px 0 20px;
   font-size: 15px;
   margin: 0;
   line-height: 25px;

@@ -553,3 +553,13 @@ function handleButtonHover2(button, isHover) {
 </script>
 
 </html>    
+
+
+
+<div class="h-100 p-5 text-bg-dark rounded-3" style="background-image: url('concierto2.png'); background-position: center center;
+                        background-size: cover; ">
+                            <h2>Evento 2</h2>
+                            <p>Teatro Nacional - CDMX</p>
+                            <p>16 de marzo</p>
+                            <button class="btn btn-outline-light" type="button">Más info</button>
+                          </div>

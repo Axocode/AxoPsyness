@@ -1195,7 +1195,7 @@ body{
     padding: 10px;
 }
 
-#back_posts_feed button{
+ button{
     width: 40px;
     height: 40px;
     position: relative;
@@ -1226,4 +1226,8 @@ body{
 
 .section-page-publicaciones{
     padding: 0px 0px 55% 0px;
+}
+
+#back_posts_profile a:hover{
+    background: #E8E8E8;
 }
