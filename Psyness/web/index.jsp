@@ -63,7 +63,7 @@
         </div>
     
           <ul id="nav-indexcito" class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="#section-header-info" class="nav-link px-2" style="background: ">Inicio</a></li>
+              <li><a href="#section-header-info" class="nav-link px-2">Inicio</a></li>
             <li><a href="#section-about-info" class="nav-link px-2">Acerca de</a></li>
             <li><a href="#custom-cards" class="nav-link px-2">Funciones</a></li>
             <li><a href="#section-pricing" class="nav-link px-2">Precios</a></li>
@@ -100,7 +100,7 @@
                 <span>Click aquí para crear tu cuenta</span>
             </a>
         </div>
-        <img src="images/hero.png">
+        <img src="images/Mancha-img-index.png">
          <!--<img src="images/Mancha-img-index.png">--> 
     </header><hr>
     

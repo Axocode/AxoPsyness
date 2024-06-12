@@ -209,7 +209,7 @@
             <button onclick="location.href='data-new.jsp?follows=1'">
                 <span>
                    <i class='bx bx-user-voice' ></i>
-                    <span>Datacenter</span>
+                    <span>Clinicas</span>
                 </span>
             </button>
 
@@ -220,6 +220,12 @@
                         <em></em>
                     </i>
                     <span>Axochat</span>
+                </span>
+            </button>
+            <button onclick="location.href='testrano.jsp'">
+                <span>
+                    <i class="fa-solid fa-film fa-rotate-180 fa-sm" style="color: #000000;"></i><!-- comment -->          
+                    <span>Videos</span>
                 </span>
             </button>
 
@@ -774,7 +780,7 @@
                     queryWithBackoff(file).then(response => {
                         console.log(JSON.stringify(response));
                         const nsfwPrediction = response.find(prediction => prediction.label === "nsfw");
-                        if (nsfwPrediction && nsfwPrediction.score > 0.3) {                           
+                        if (nsfwPrediction && nsfwPrediction.score > 0.25) {                           
                             deleteMedia();
                             mostrarModal();
                         }

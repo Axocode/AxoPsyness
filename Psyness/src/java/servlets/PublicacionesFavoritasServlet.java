@@ -22,6 +22,7 @@ import org.axocode.dao.InterPub;
 import org.axocode.dao.InterUsers;
 import org.axocode.dao.service.InterComentService;
 import org.axocode.dao.service.InterFavService;
+import org.axocode.dao.service.InterImagesService;
 import org.axocode.dao.service.InterLoveService;
 import org.axocode.dao.service.InterPubService;
 import org.axocode.dao.service.InterUsersService;
@@ -133,6 +134,14 @@ public class PublicacionesFavoritasServlet extends HttpServlet {
                     out.print("<div class=\"p-6 pt-12 border-b dark:border-gray-700\">");
                     out.print("<p class=\"post-text\">" + escapedCont + "</p>");
                     out.print("</div>");
+                    InterImagesService imageService = new InterImagesService();
+                    boolean imagensita =  imageService.knowImage(trows.getPubNumId());
+                            if (imagensita) {
+                                out.print("<div class=\"p-4 pt-0 border-b dark:border-gray-700\">");
+                                out.print("<br>");
+                                out.print("<div style=\"justify-content: center; display: flex; align-items: center;\"> <img class=\"h-100 text-bg-dark \" style=\"border-radius:15px;\" src=\"/Psyness/ServletSolicitarImagen?pubimageid="+trows.getPubNumId()+"\" alt=\"Imagen\"> </div>");
+                                out.print("</div>");
+                            }
                     out.print("<div class=\"p-4 space-y-3\">");
                     out.print("<div id=\"pub"+numpub+"\" class=\"flex space-x-4 lg:font-bold\">");
 

@@ -213,7 +213,7 @@
                     <div class="lg:w-3/4"> 
                        
                         <div class="embed-video rounded">
-                            <iframe src="https://www.youtube.com/watch?v=6stlCkUDG_s&list=PL4Gr5tOAPttLOY9IrWVjJlv4CtkYI5cI_" frameborder="0" uk-video="automute: true" allowfullscreen="" uk-responsive="" class="uk-responsive-width"></iframe>
+                            <iframe src="https://www.youtube.com/embed/6stlCkUDG_s?list=PL4Gr5tOAPttLOY9IrWVjJlv4CtkYI5cI_" frameborder="0" allowfullscreen></iframe>
                         </div>
 
                         <div class="py-5 space-y-4">
