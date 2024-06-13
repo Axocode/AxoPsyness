@@ -11,7 +11,6 @@
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="org.axocode.dao.InterUsers"%>
 <%@page import="java.util.List"%>
-<%@page session="true"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -68,13 +67,7 @@
 
 
 <body>
-   <%
-    HttpSession sesion = request.getSession();
-          if (sesion.getAttribute("SIUser") != null){}
-          else{out.print("<script>location.replace('index.jsp');</script>");}
-    String data = (String) sesion.getAttribute("SIImgNum");
-                if (data == null) {data = "perfilsidebar.png";}
-                
+   <%       
     request.setCharacterEncoding("UTF-8");
 %>
 
@@ -84,24 +77,6 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    function buscarEnTiempoReal() {
-        var searchTerm = document.getElementById('campoBusqueda').value;
-
-        // Asegúrate de que la URL sea correcta
-        var url = '/Psyness/BusquedaServlet?term=' + searchTerm;
-
-        // Realizar solicitud AJAX
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function(data) {
-                $('#resultadosBusqueda').html(data);
-            },error: function(xhr, status, error) {
-                console.error("Error en la solicitud AJAX:", status, error);
-                console.log(xhr.responseText);  // Agrega esta línea para mostrar la respuesta del servidor en la consola.
-            }
-        });
-    }
     
     function abrirModal() {
       UIkit.modal("#create-post-modal").show();
@@ -191,30 +166,10 @@
                     </div>
                 </div> 
             </div>
-        </div>
-        
-        
-        
-        
-        
+        </div>        
     </div>
         
 
-
-    <script>
-        $(document).ready(function () {
-            $("#button_search").click(function () {
-                $(".sidebar-search").fadeToggle();
-            });
-        });
-    
-        $(document).ready(function () {
-            $("#button_close_offensive").click(function () {
-                $(".modal_offensive_announce").fadeOut();
-            });
-        });
-    
-    </script>
 
 
     <!-- Modo oscuro -->
@@ -251,76 +206,7 @@
             }, false);
     
         })(window, document);
-    </script>
-  
-<script>
-    function obtenerCoordenadasYCalcularDistancia(direccion) {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(position => {
-        buscarCoordenadas(direccion, position.coords.latitude, position.coords.longitude);
-      }, error => {
-        console.error("Error al obtener la ubicación del usuario:", error);
-      }, {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-      });
-    } else {
-      console.log("La geolocalización no está disponible en este navegador.");
-    }
-  }
-
-  function buscarCoordenadas(direccion, latUsuario, lonUsuario) {
-    const apiKey = 'pk.79194de17838dd557bc019090eca41e9'; // Asegúrate de que esto es una cadena de texto válida
-    const urlBase = 'https://us1.locationiq.com/v1/search.php';
-    var url = urlBase + "?key=" + apiKey + "&q=" + encodeURIComponent(direccion) + "&format=json";
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-          var data = xhr.response;
-          if (data && data.length > 0) {
-            // Accede al primer resultado
-            var lat = data[0].lat;
-            var lon = data[0].lon;
-            console.log("Latitud: " + lat + ", Longitud: " + lon);
-            var distancia = calcularDistancia(latUsuario, lonUsuario, lat, lon);
-            console.log("La distancia es: " + distancia + " kilómetros");
-
-          } else {
-            console.log("No se encontraron resultados.");
-          }
-        } else {
-          console.error('Error al obtener las coordenadas:', xhr.statusText);
-        }
-      };
-    xhr.onerror = function() {
-      console.error('Error en la solicitud a la API.');
-    };
-    xhr.send();
-  }
-
-  function calcularDistancia(lat1, lon1, lat2, lon2) {
-    const radioTierra = 6371; // Radio de la Tierra en kilómetros
-    const rad = x => x * Math.PI / 180;
-    const dLat = rad(lat2 - lat1);
-    const dLon = rad(lon2 - lon1);
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(rad(lat1)) * Math.cos(rad(lat2)) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return radioTierra * c;
-  }
-
-  // Ejemplo de uso
-  obtenerCoordenadasYCalcularDistancia("C. Cañitas, Popotla, Miguel Hidalgo, 11400 Ciudad de México, CDMX");
-  obtenerCoordenadasYCalcularDistancia("Plan de Guadalupe 82, Nextitla, Miguel Hidalgo, 11420 Ciudad de México, CDMX");
-
-</script>
-
-    
+    </script>    
     <!-- Javascript
     ================================================== -->
     <script src="../assets/js/tippy.all.min.js"></script>
