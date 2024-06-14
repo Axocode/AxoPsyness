@@ -155,8 +155,6 @@
                                 </div>
                             </a>
                             
-<<<<<<< HEAD
-=======
                             <a href="#" uk-toggle="target: body ; cls: story-active3">
                                 <div class="single_story">
                                     <img src="../assets/images/hopecore7.png.jpg" alt="">
@@ -177,9 +175,7 @@
                             shadow-md text-xl w-9 z-10 uk-position-center-right -mr-4 hidden" uk-toggle="target: body ; cls: story-active"> 
                             <i class="icon-feather-chevron-right"></i></span>
                             
-                           
-                            
->>>>>>> 9c70f407c4f047f1c0fddeba34c2820c4ccea5a1
+
                         </div>
                                
                                

@@ -7905,6 +7905,7 @@ header .header_inner .right_side {
   right: auto;
   top: 19px;
   position: absolute;
+  display: none;
 }
 
 .message-bubble.me .message-text:before {

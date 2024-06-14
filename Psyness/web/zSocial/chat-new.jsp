@@ -130,11 +130,7 @@
 
                                         <!-- Time Sign -->
                                         <div class="message-time-sign">
-<<<<<<< HEAD
                                             <span id="currentDate"></span>
-=======
-                                            <span>13, Junio 2024</span>
->>>>>>> 9bef9ab686bdd627bf92c408132a825c1f24fb89
                                         </div>
 
 
@@ -148,30 +144,18 @@
                                         </div>
 
                                         <div class="message-bubble" id="botones-axochar">
+                                            <
                                             <div class="message-bubble-inner">
-<<<<<<< HEAD
-                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="width: 90px; background-color: #787df1; color: #fff" id="btn1"> Consejos </button>
-                                            </div>                                        
-                                            <div class="message-bubble-inner">
-                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="width: 170px; background-color: #787df1; color: #fff" id="btn2"> Mensajes de Apoyo </button>
-                                            </div>
-                                            <div class="message-bubble-inner">
-                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text  bg-blue-700 py-2 my-2" style="width: 220px; background-color: #787df1; color: #fff" id="btn3"> Actividades de Relajación </button>
-=======
                                                 <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
-                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn1">Consejos</button>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="width: 90px; background-color: #787df1; color: #fff" id="btn1">Consejos</button>
                                             </div>
                                             <div class="message-bubble-inner">
                                                 <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
-                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn2">Mensajes de Apoyo</button>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="width: 170px; background-color: #787df1; color: #fff" id="btn2">Mensajes de Apoyo</button>
                                             </div>
                                             <div class="message-bubble-inner">
                                                 <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
-                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn3">Actividades de Relajación</button>
->>>>>>> 9c70f407c4f047f1c0fddeba34c2820c4ccea5a1
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="width: 220px; background-color: #787df1; color: #fff" id="btn3">Actividades de Relajación</button>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -197,13 +181,8 @@
 
                                 <!-- Reply Area -->
                                 <div class="message-reply">
-<<<<<<< HEAD
                                     <input cols="1" class="px-2" rows="1" placeholder="Escribe un mensaje" id="user-input"></input>
-                                    <button class="button ripple-effect" style="width: auto;" id="send-btn">Enviar</button>
-=======
-                                    <input cols="1" class="px-2" rows="1" placeholder="Escribe un mensaje" id="user-input" disabled></input>
-                                    <button class="button ripple-effect" id="send-btn" disabled>Enviar</button>
->>>>>>> 9c70f407c4f047f1c0fddeba34c2820c4ccea5a1
+                                    <button class="button ripple-effect"style="width: auto;"  id="send-btn">Enviar</button>
                                 </div>
                             </div>
 

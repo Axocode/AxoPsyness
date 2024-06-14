@@ -211,10 +211,7 @@
                     <span>Axochat</span>
                 </span>
             </button>
-<<<<<<< HEAD
-=======
             
->>>>>>> 9c70f407c4f047f1c0fddeba34c2820c4ccea5a1
             <button onclick="location.href='testrano.jsp'">
                 <span>
                     <i class="fa-solid fa-film fa-rotate-180 fa-sm" style="color: #000000;"></i><!-- comment -->          
