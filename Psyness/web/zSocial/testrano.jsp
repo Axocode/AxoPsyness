@@ -230,98 +230,80 @@
                                     <img src="../assets/images/icon-play.svg" class="w-12 h-12 uk-position-center" alt="">
                                 </a>
                                 <div class="pt-3">
-                                    <a href="vervideo.jsp" class="font-semibold line-clamp-2"> Hope Core 1  </a>
+                                    <p class="font-semibold line-clamp-2"> Superacion Personal  </p>
                                     <div class="pt-2">
-                                        <a href="#" class="text-sm">  HOPE CORE  </a>
-                                        <div class="flex space-x-2 items-center text-sm mt-1">
-                                            <div> 11:11</div>
-                                            <div class="md:block hidden">·</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li tabindex="-1" class="uk-active">
-                                <a href="video-watch.html" class="w-full md:h-36 h-28 overflow-hidden rounded-lg relative block">
-                                    <img src="../assets/images/hopecore1.png" alt="" class="w-full h-full absolute inset-0 object-cover">
-                                    <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 11:11 </span>
-                                    <img src="../assets/images/icon-play.svg" class="w-12 h-12 uk-position-center" alt="">
-                                </a>
-                                <div class="pt-3">
-                                    <a href="vervideo.jsp" class="font-semibold line-clamp-2"> Hope Core 1  </a>
-                                    <div class="pt-2">
-                                        <a href="#" class="text-sm">  HOPE CORE  </a>
-                                        <div class="flex space-x-2 items-center text-sm mt-1">
-                                            <div> 11:11</div>
-                                            <div class="md:block hidden">·</div>
-                                        </div>
+                                        <p class="text-sm">  HOPE CORE  </p>
+                                        
                                     </div>
                                 </div>
                             </li>
                             <li tabindex="-1" class="uk-active">
                                 <a href="vervideo.jsp" class="w-full md:h-36 h-28 overflow-hidden rounded-lg relative block">
-                                    <img src="../assets/images/hopecore1.png" alt="" class="w-full h-full absolute inset-0 object-cover">
-                                    <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 11:11</span>
+                                    <img src="../assets/images/hopecore8.png" alt="" class="w-full h-full absolute inset-0 object-cover">
+                                    <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 02:24 </span>
                                     <img src="../assets/images/icon-play.svg" class="w-12 h-12 uk-position-center" alt="">
                                 </a>
                                 <div class="pt-3">
-                                    <a href="video-watch.html" class="font-semibold line-clamp-2"> Hope Core 1  </a>
+                                    <p class="font-semibold line-clamp-2"> Amor propio  </p>
                                     <div class="pt-2">
-                                        <a href="#" class="text-sm">  HOPE CORE  </a>
-                                        <div class="flex space-x-2 items-center text-sm mt-1">
-                                            <div> 11:11</div>
-                                            <div class="md:block hidden">·</div>
-                                        </div>
+                                        <p class="text-sm">  HOPE CORE  </p>
+                                        
                                     </div>
                                 </div>
                             </li>
                             <li tabindex="-1" class="uk-active">
                                 <a href="vervideo.jsp" class="w-full md:h-36 h-28 overflow-hidden rounded-lg relative block">
-                                    <img src="../assets/images/hopecore1.png" alt="" class="w-full h-full absolute inset-0 object-cover">
+                                    <img src="../assets/images/hopecore3.png" alt="" class="w-full h-full absolute inset-0 object-cover">
                                     <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 11:11</span>
                                     <img src="../assets/images/icon-play.svg" class="w-12 h-12 uk-position-center" alt="">
                                 </a>
                                 <div class="pt-3">
-                                    <a href="video-watch.html" class="font-semibold line-clamp-2"> Hope Core 1  </a>
+                                    <p class="font-semibold line-clamp-2"> Crecimiento Personal  </p>
                                     <div class="pt-2">
-                                        <a href="#" class="text-sm">  HOPE CORE  </a>
-                                        <div class="flex space-x-2 items-center text-sm mt-1">
-                                            <div> 11:11</div>
-                                            <div class="md:block hidden">·</div>
-                                        </div>
+                                        <p class="text-sm">  HOPE CORE  </p>
+                                        
                                     </div>
                                 </div>
                             </li>
                             <li tabindex="-1" class="uk-active">
                                 <a href="vervideo.jsp" class="w-full md:h-36 h-28 overflow-hidden rounded-lg relative block">
-                                    <img src="../assets/images/hopecore1.png" alt="" class="w-full h-full absolute inset-0 object-cover">
+                                    <img src="../assets/images/hopecore5.png.jpg" alt="" class="w-full h-full absolute inset-0 object-cover">
                                     <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 11:11</span>
                                     <img src="../assets/images/icon-play.svg" class="w-12 h-12 uk-position-center" alt="">
                                 </a>
                                 <div class="pt-3">
-                                    <a href="video-watch.html" class="font-semibold line-clamp-2"> Hope Core 1  </a>
+                                    <p class="font-semibold line-clamp-2"> Salud Mental  </p>
                                     <div class="pt-2">
-                                        <a href="#" class="text-sm">  HOPE CORE  </a>
-                                        <div class="flex space-x-2 items-center text-sm mt-1">
-                                            <div> 11:11</div>
-                                            <div class="md:block hidden">·</div>
-                                        </div>
+                                        <p class="text-sm">  HOPE CORE  </p>
+                                        
                                     </div>
                                 </div>
                             </li>
                             <li tabindex="-1" class="uk-active">
                                 <a href="vervideo.jsp" class="w-full md:h-36 h-28 overflow-hidden rounded-lg relative block">
-                                    <img src="../assets/images/hopecore2.png" alt="" class="w-full h-full absolute inset-0 object-cover">
+                                    <img src="../assets/images/hopecore7.png.jpg" alt="" class="w-full h-full absolute inset-0 object-cover">
                                     <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 11:11</span>
                                     <img src="../assets/images/icon-play.svg" class="w-12 h-12 uk-position-center" alt="">
                                 </a>
                                 <div class="pt-3">
-                                    <a href="video-watch.html" class="font-semibold line-clamp-2"> Hope Core 1  </a>
+                                    <p class="font-semibold line-clamp-2"> Autocuidado  </p>
                                     <div class="pt-2">
-                                        <a href="#" class="text-sm">  HOPE CORE  </a>
-                                        <div class="flex space-x-2 items-center text-sm mt-1">
-                                            <div> 11:11</div>
-                                            <div class="md:block hidden">·</div>
-                                        </div>
+                                        <p class="text-sm">  HOPE CORE  </p>
+                                        
+                                    </div>
+                                </div>
+                            </li>
+                            <li tabindex="-1" class="uk-active">
+                                <a href="vervideo.jsp" class="w-full md:h-36 h-28 overflow-hidden rounded-lg relative block">
+                                    <img src="../assets/images/hopecore4.png" alt="" class="w-full h-full absolute inset-0 object-cover">
+                                    <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 11:11</span>
+                                    <img src="../assets/images/icon-play.svg" class="w-12 h-12 uk-position-center" alt="">
+                                </a>
+                               <div class="pt-3">
+                                    <p class="font-semibold line-clamp-2"> Relaciones Saludables </p>
+                                    <div class="pt-2">
+                                        <p class="text-sm">  HOPE CORE  </p>
+                                        
                                     </div>
                                 </div>
                             </li>
@@ -353,15 +335,16 @@
                         </a>
                         <div class="flex-1 space-y-2"> 
                              
-                            <a href="vervideo.jsp" class="md:text-xl font-semibold line-clamp-2">   Superacion Personal  </a>
-                            <p class="leading-6 pr-4 line-clamp-2 md:block hidden"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna . </p>
-                            <p class="font-semibold block text-sm"> Joahan Morales</p>
+                            <p class="md:text-xl font-semibold line-clamp-2">   Superacion Personal  </p>
+                            <p class="leading-6 pr-4 line-clamp-2 md:block hidden"> Técnicas para establecer y alcanzar metas personales con llevando de la mano
+las historias inspiradoras de personas que han superado desafíos significativos. </p>
+                            <p class="font-semibold block text-sm"> Isaias RF</p>
                            
                            <div class="flex items-center justify-between">
                                 <div class="flex space-x-3 items-center text-sm md:pt-3">
-                                    <div> 27 minutes ago</div>
+                                    <div> Hace 14 minutos</div>
                                     <div class="md:block hidden">·</div>
-                                    <div> 156.9K views</div>
+                                    <div> 13K views</div>
                                 </div>
                             </div>
 
@@ -400,15 +383,15 @@
                         </a>
                         <div class="flex-1 space-y-2"> 
                              
-                            <a href="vervideo.jsp" class="md:text-xl font-semibold line-clamp-2">   Superacion Personal  </a>
-                            <p class="leading-6 pr-4 line-clamp-2 md:block hidden"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna . </p>
-                            <p class="font-semibold block text-sm"> Joahan Morales</p>
+                            <p class="md:text-xl font-semibold line-clamp-2">   Crecimiento Personal  </p>
+                            <p class="leading-6 pr-4 line-clamp-2 md:block hidden"> Cómo desarrollar una mentalidad de crecimiento y resiliencia dando paso a la importancia de la gratitud y prácticas para incorporarla en la vida diaria. </p>
+                            <p class="font-semibold block text-sm"> Samuel Piña</p>
                            
                            <div class="flex items-center justify-between">
                                 <div class="flex space-x-3 items-center text-sm md:pt-3">
-                                    <div> 27 minutes ago</div>
-                                    <div class="md:block hidden">·</div>
-                                    <div> 156.9K views</div>
+<div> Hace 46 minutos</div>             
+<div class="md:block hidden">·</div>
+                                    <div> 9K views</div>
                                 </div>
                             </div>
 
@@ -443,15 +426,15 @@
                         </a>
                         <div class="flex-1 space-y-2"> 
                              
-                            <a href="vervideo.jsp" class="md:text-xl font-semibold line-clamp-2">   Superacion Personal  </a>
-                            <p class="leading-6 pr-4 line-clamp-2 md:block hidden"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna . </p>
-                            <p class="font-semibold block text-sm"> Joahan Morales</p>
+                            <p class="md:text-xl font-semibold line-clamp-2">   Relaciones Saludables  </p>
+                            <p class="leading-6 pr-4 line-clamp-2 md:block hidden"> Comunicación efectiva en las relaciones interpersonales,
+ademas de cómo construir y mantener relaciones saludables y de apoyo. </p>
+                            <p class="font-semibold block text-sm"> Valentin Hernandez</p>
                            
                            <div class="flex items-center justify-between">
                                 <div class="flex space-x-3 items-center text-sm md:pt-3">
-                                    <div> 27 minutes ago</div>
-                                    <div class="md:block hidden">·</div>
-                                    <div> 156.9K views</div>
+                                    <div> Hace 37 minutos</div><!-- comment -->                                    <div class="md:block hidden">·</div>
+                                    <div> 6K views</div>
                                 </div>
                             </div>
 

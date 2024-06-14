@@ -139,22 +139,41 @@
                        </div>
                                <div class="user_story grid md:grid-cols-5 grid-cols-3 gap-2 lg:-mx-20 relative">
                 
-                            <a href="#create-post" uk-toggle="target: body ; cls: story-active">
+                            <a href="#" uk-toggle="target: body ; cls: story-active">
                                 <div class="single_story">
-                                    <img src="../assets/images/hopecore1.png" alt="">
+                                    <img src="../assets/images/hopecore5.png.jpg" alt="">
                                     <div class="story-avatar"> <img src="../assets/images/avatars/prof1.png" alt=""></div>
                                     <div class="story-content"> <h4>Ansiedad </h4> </div>
                                 </div>
                             </a>
                             
-                            <a href="#" uk-toggle="target: body ; cls: story-active">
+                            <a href="#" uk-toggle="target: body ; cls: story-active2">
                                 <div class="single_story">
-                                    <img src="../assets/images/hopecore2.png" alt="">
+                                    <img src="../assets/images/hopecore6.png.jpg" alt="">
                                     <div class="story-avatar"> <img src="../assets/images/avatars/prof4.png" alt=""></div>
-                                    <div class="story-content"> <h4> Superacion Personal</h4> </div>
+                                    <div class="story-content"> <h4> Mente saludable</h4> </div>
                                 </div>
                             </a>
                             
+                            <a href="#" uk-toggle="target: body ; cls: story-active3">
+                                <div class="single_story">
+                                    <img src="../assets/images/hopecore7.png.jpg" alt="">
+                                    <div class="story-avatar"> <img src="../assets/images/avatars/prof2.png" alt=""></div>
+                                    <div class="story-content"> <h4> Paz mental</h4> </div>
+                                </div>
+                            </a>
+                            
+                                   <a href="#" uk-toggle="target: body ; cls: story-active4">
+                                <div class="single_story">
+                                    <img src="../assets/images/hopecore1.png" alt="">
+                                    <div class="story-avatar"> <img src="../assets/images/avatars/prof6.png" alt=""></div>
+                                    <div class="story-content"> <h4> Superacion Personal</h4> </div>
+                                </div>
+                            </a>
+                                   
+                                   <span class="absolute bg-white lg:flex items-center justify-center p-2 rounded-full 
+                            shadow-md text-xl w-9 z-10 uk-position-center-right -mr-4 hidden" uk-toggle="target: body ; cls: story-active"> 
+                            <i class="icon-feather-chevron-right"></i></span>
                             
                            
                             
