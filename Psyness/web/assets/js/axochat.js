@@ -1,3 +1,36 @@
+document.getElementById('btn1').addEventListener('click', function() {
+    activateElements('Claro,puedo darte un consejo si así lo deseas,cuentame tu situación y con gusto te aconsejaré.');
+});
+document.getElementById('btn2').addEventListener('click', function() {
+    activateElements('Me encantaría poder ayudarte,cuentame ¿qué es lo que pasa?');
+});
+document.getElementById('btn3').addEventListener('click', function() {
+    activateElements('Por supuesto!,dime que es lo que sientes y con gusto te ayudaré a relajarte');
+});
+
+function activateElements(message) {
+    document.getElementById('user-input').disabled = false;
+    document.getElementById('send-btn').disabled = false;
+
+    // Mostrar el indicador de que el bot está escribiendo
+    var typingIndicator = displayTypingIndicator();
+
+    // Esperar 1.2 segundos antes de quitar el indicador y mostrar el mensaje del bot
+    setTimeout(() => {
+        // Quitar el indicador de escritura
+        removeTypingIndicator(typingIndicator);
+
+        // Mostrar el mensaje del bot en el chat
+        displayBotMessage(message);
+    }, 1200);
+}
+
+function displayBotMessage(message) {
+    displayMessage('bot', message);
+}
+
+
+
 
 var endpointVariable = "";
 
@@ -23,7 +56,7 @@ var boton3 = document.getElementById('btn3');
 // Agrega un evento de click al botón
 boton3.addEventListener('click', function() {
     // Incrementa el valor de la variable
-    endpointVariable = "";
+    endpointVariable = "act";
     // Imprime el nuevo valor en la consola
     console.log("Nuevo valor de la variable:", endpointVariable);
 });
@@ -52,13 +85,25 @@ document.getElementById('send-btn').addEventListener('click', function(e) {
         },
         body: JSON.stringify({message: userMessage}),
     })
-    .then(response => response.json())
-    .then(data => {
-        // Quitar el indicador de escritura antes de mostrar la respuesta
-        removeTypingIndicator(typingIndicator);
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text(); // Primero lo obtenemos como texto
+    })
+    .then(text => {
+        console.log('Response text:', text); // Para ver el contenido de la respuesta
+        try {
+            const data = JSON.parse(text); // Intentamos parsear el texto como JSON
+            // Quitar el indicador de escritura antes de mostrar la respuesta
+            removeTypingIndicator(typingIndicator);
 
-        // Mostrar la respuesta del bot en el chat
-        displayMessage('bot', data.message);
+            // Mostrar la respuesta del bot en el chat
+            displayMessage('bot', data.message);
+        } catch (error) {
+            console.error('Error parsing JSON:', error);
+            throw new Error('Response is not valid JSON');
+        }
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -72,7 +117,7 @@ document.getElementById('send-btn').addEventListener('click', function(e) {
     // Limpiar el campo de entrada del usuario
     document.getElementById('user-input').value = '';
     // Incrementa el valor de la variable
-    endpointVariable = "";
+    endpointVariable = "norm";
     // Imprime el nuevo valor en la consola
     console.log("Nuevo valor de la variable:", endpointVariable);
 });
@@ -88,7 +133,7 @@ function displayTypingIndicator() {
     var avatarDiv = document.createElement('div');
     avatarDiv.className = 'message-avatar';
     var avatarImg = document.createElement('img');
-    avatarImg.src = '../assets/images/avatars/axo.jpg'; // Ajusta la ruta al avatar del bot
+    avatarImg.src = '../assets/images/Axo_cantante.svg'; // Ajusta la ruta al avatar del bot
     avatarImg.alt = 'avatar';
     avatarDiv.appendChild(avatarImg);
 
@@ -139,7 +184,7 @@ function displayMessage(sender, message) {
     if (sender === 'user') {
         avatarImg.src = '../assets/images/avatars/prof3.png'; // Ruta a la imagen del avatar del usuario
     } else {
-        avatarImg.src = '../assets/images/avatars/axo.jpg'; // Ruta a la imagen del avatar del bot
+        avatarImg.src = '../assets/images/Axo_cantante.svg'; // Ruta a la imagen del avatar del bot
     }
     avatarImg.alt = 'avatar'; // Texto alternativo para la imagen
 

@@ -236,13 +236,18 @@
                                 <div id="hiAxo0"></div>
                             </div>
                             
+                            <script>
+                               <-<!-- Puntuacion lo sacas de la q se almacene en la bd -->
+                              generateSmoothGradientCircle(puntuacion, [200, 200]);
+                             </script>
+                            
                             <div class=" p-5 space-y-5 flex-shrink-0 md:w-5/12">
                                         <h4 class="text-center font-semibold"> ESTADO DE ÁNIMO </h4>
 
 
                                         <h2 class="text-center p-1 mr-3"> Tus emociones se reflejaron así en la semana </h2>
 
-                                        <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6">
+                                        <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6 imangesita">
                                             <img src="../assets/images/avatars/esfera-gradiente.png" class="object-cover rounded-lg col-span-full">
                                         </div>
                             </div>

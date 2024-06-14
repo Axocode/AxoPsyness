@@ -130,21 +130,26 @@
 
                                         <!-- Time Sign -->
                                         <div class="message-time-sign">
-                                            <span>23, Abril 2024</span>
+<<<<<<< HEAD
+                                            <span id="currentDate"></span>
+=======
+                                            <span>13, Junio 2024</span>
+>>>>>>> 9bef9ab686bdd627bf92c408132a825c1f24fb89
                                         </div>
 
 
 
                                         <div class="message-bubble">
                                             <div class="message-bubble-inner">
-                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <div class="message-text py-2"><p>Hola! Soy tu acompañante en esta red social!<br>Cuentame, que necesitas el dia de hoy?</p></div>
+                                                <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
+                                                <div class="message-text py-2"><p>Hi Axo! Soy tu acompañante en esta red social!<br>Cuentame, que necesitas el dia de hoy?</p></div>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
 
                                         <div class="message-bubble" id="botones-axochar">
                                             <div class="message-bubble-inner">
+<<<<<<< HEAD
                                                 <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
                                                 <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="width: 90px; background-color: #787df1; color: #fff" id="btn1"> Consejos </button>
                                             </div>                                        
@@ -155,6 +160,18 @@
                                             <div class="message-bubble-inner">
                                                 <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
                                                 <button type="submit" class="message-text  bg-blue-700 py-2 my-2" style="width: 220px; background-color: #787df1; color: #fff" id="btn3"> Actividades de Relajación </button>
+=======
+                                                <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn1">Consejos</button>
+                                            </div>
+                                            <div class="message-bubble-inner">
+                                                <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn2">Mensajes de Apoyo</button>
+                                            </div>
+                                            <div class="message-bubble-inner">
+                                                <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn3">Actividades de Relajación</button>
+>>>>>>> 9c70f407c4f047f1c0fddeba34c2820c4ccea5a1
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -180,10 +197,14 @@
 
                                 <!-- Reply Area -->
                                 <div class="message-reply">
+<<<<<<< HEAD
                                     <input cols="1" class="px-2" rows="1" placeholder="Escribe un mensaje" id="user-input"></input>
                                     <button class="button ripple-effect" style="width: auto;" id="send-btn">Enviar</button>
+=======
+                                    <input cols="1" class="px-2" rows="1" placeholder="Escribe un mensaje" id="user-input" disabled></input>
+                                    <button class="button ripple-effect" id="send-btn" disabled>Enviar</button>
+>>>>>>> 9c70f407c4f047f1c0fddeba34c2820c4ccea5a1
                                 </div>
-
                             </div>
 
                         </div>
@@ -217,7 +238,27 @@
     
     </script>
 
+    <script>
+        // Función para obtener la fecha actual en el formato deseado
+function getCurrentDate() {
+    var months = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
 
+    var now = new Date();
+    var day = now.getDate();
+    var month = months[now.getMonth()];
+    var year = now.getFullYear();
+
+    return day + ", " + month + " " + year;
+}
+
+// Establecer la fecha actual en el elemento con id 'currentDate'
+document.getElementById("currentDate").textContent = getCurrentDate();
+
+        
+        </script>
     <!-- Modo oscuro -->
     <script>
         (function (window, document, undefined) {
@@ -254,74 +295,9 @@
         })(window, document);
     </script>
   
-<script>
-    function obtenerCoordenadasYCalcularDistancia(direccion) {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(position => {
-        buscarCoordenadas(direccion, position.coords.latitude, position.coords.longitude);
-      }, error => {
-        console.error("Error al obtener la ubicación del usuario:", error);
-      }, {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-      });
-    } else {
-      console.log("La geolocalización no está disponible en este navegador.");
-    }
-  }
-
-  function buscarCoordenadas(direccion, latUsuario, lonUsuario) {
-    const apiKey = 'pk.79194de17838dd557bc019090eca41e9'; // Asegúrate de que esto es una cadena de texto válida
-    const urlBase = 'https://us1.locationiq.com/v1/search.php';
-    var url = urlBase + "?key=" + apiKey + "&q=" + encodeURIComponent(direccion) + "&format=json";
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-          var data = xhr.response;
-          if (data && data.length > 0) {
-            // Accede al primer resultado
-            var lat = data[0].lat;
-            var lon = data[0].lon;
-            console.log("Latitud: " + lat + ", Longitud: " + lon);
-            var distancia = calcularDistancia(latUsuario, lonUsuario, lat, lon);
-            console.log("La distancia es: " + distancia + " kilómetros");
-
-          } else {
-            console.log("No se encontraron resultados.");
-          }
-        } else {
-          console.error('Error al obtener las coordenadas:', xhr.statusText);
-        }
-      };
-    xhr.onerror = function() {
-      console.error('Error en la solicitud a la API.');
-    };
-    xhr.send();
-  }
-
-  function calcularDistancia(lat1, lon1, lat2, lon2) {
-    const radioTierra = 6371; // Radio de la Tierra en kilómetros
-    const rad = x => x * Math.PI / 180;
-    const dLat = rad(lat2 - lat1);
-    const dLon = rad(lon2 - lon1);
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(rad(lat1)) * Math.cos(rad(lat2)) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return radioTierra * c;
-  }
-
-  // Ejemplo de uso
-  obtenerCoordenadasYCalcularDistancia("C. Cañitas, Popotla, Miguel Hidalgo, 11400 Ciudad de México, CDMX");
-  obtenerCoordenadasYCalcularDistancia("Plan de Guadalupe 82, Nextitla, Miguel Hidalgo, 11420 Ciudad de México, CDMX");
-
-</script>
-
     
+
+
     <!-- Javascript
     ================================================== -->
     <script src="../assets/js/tippy.all.min.js"></script>

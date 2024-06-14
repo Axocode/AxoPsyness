@@ -218,6 +218,13 @@
                     <span>Axochat</span>
                 </span>
             </button>
+            
+            <button onclick="location.href='testrano.jsp'">
+                <span>
+                    <i class="fa-solid fa-film fa-rotate-180 fa-sm" style="color: #000000;"></i><!-- comment -->          
+                    <span>Videos</span>
+                </span>
+            </button>
 
             <button onclick="location.href='profile-new.jsp?id=<%=sesion.getAttribute("SIUserNum")%>'">
                     <span>
