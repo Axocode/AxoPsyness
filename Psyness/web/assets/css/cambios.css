@@ -885,6 +885,12 @@ body{
         padding: 15px 0px 60px 0px;
         width: 99.755% !important;
     }
+
+    #contenedor_dash{
+        margin-left: 0px !important; 
+        left: 0;
+        width: 99.755% !important;
+    }
     
     .section-publicacione{
         width: 300px;
