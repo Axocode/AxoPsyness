@@ -130,7 +130,7 @@
 
                                         <!-- Time Sign -->
                                         <div class="message-time-sign">
-                                            <span>23, Abril 2024</span>
+                                            <span id="currentDate"></span>
                                         </div>
 
 
@@ -217,7 +217,27 @@
     
     </script>
 
+    <script>
+        // Función para obtener la fecha actual en el formato deseado
+function getCurrentDate() {
+    var months = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
 
+    var now = new Date();
+    var day = now.getDate();
+    var month = months[now.getMonth()];
+    var year = now.getFullYear();
+
+    return day + ", " + month + " " + year;
+}
+
+// Establecer la fecha actual en el elemento con id 'currentDate'
+document.getElementById("currentDate").textContent = getCurrentDate();
+
+        
+        </script>
     <!-- Modo oscuro -->
     <script>
         (function (window, document, undefined) {

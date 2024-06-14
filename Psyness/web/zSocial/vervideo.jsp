@@ -220,7 +220,7 @@
 
                             <div>
                                 <h1 class="text-2xl font-semibold line-clamp-1"> Hacer TODO lo que ESTÁ en TUS MANOS | Rocky | Relato & Reflexiones  </h1>
-                                <p> 60,723,169 views </p>
+                                <p> 723,169 views </p>
                             </div>
                             
                             <div class="md:flex items-center justify-between">
@@ -244,9 +244,7 @@
                             </div>
                             
                             <div class="text-lg font-semibold pt-2"> Descripción </div>
-                            <p> Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna
-                                aliqua.
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.</p>
+                            <p> En este inspirador video, te llevaremos a un viaje de autodescubrimiento y crecimiento personal. Aprende cómo desbloquear tu verdadero potencial y alcanzar tus sueños con técnicas prácticas y consejos motivadores. A través de historias reales de superación y éxitos, descubrirás cómo la actitud positiva y la perseverancia pueden cambiar tu vida..</p>
                             
                             <hr>
                             <div class="text-lg font-semibold pt-2"> Comentarios </div>
@@ -255,14 +253,12 @@
                             <div class="my-5">
 
                                 <div class="flex gap-x-4 mb-5 relative">
-                                    <img src="../assets/images/avatars/axo.jpg" alt="" class="rounded-full shadow w-12 h-12">
+                                    <img src="../assets/images/avatars/prof3.png" alt="" class="rounded-full shadow w-12 h-12">
                                     <div>
                                         <h4 class="text-base m-0 font-semibold"> Axel Rodriguez</h4>
                                         <span class="text-gray-700 text-sm"> 10th June 2021 </span>
                                         <p class="mt-3">
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam ut laoreet dolore
-                                            magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                            Los videos de motivación personal son una herramienta poderosa y accesible para cualquier persona que busque inspiración y apoyo en su camino hacia el crecimiento personal y profesional. En un mundo lleno de desafíos y distracciones, estos videos ofrecen un respiro necesario, proporcionando un impulso emocional y mental que puede ser crucial para mantenerse enfocado y positivo.
                                         </p>
                         
                                         
@@ -271,12 +267,13 @@
                                 </div>
 
                                 <div class="flex gap-x-4 mb-5 relative">
-                                    <img src="../assets/images/avatars/axo.jpg" alt="" class="rounded-full shadow w-12 h-12">
+                                    <img src="../assets/images/avatars/prof5.png" alt="" class="rounded-full shadow w-12 h-12">
                                     <div>
                                         <h4 class="text-base m-0 font-semibold">  Jorge Mendoza  </h4>
                                         <span class="text-gray-700 text-sm"> 10th April 2021 </span>
                                         <p class="mt-3">
-                                             elit, sed diam ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim ipsum dolor sit amet, consectetuer adipiscing elit, sed diam ut laoreet dolore
+los videos de motivación personal son una excelente fuente de inspiración y herramientas prácticas. Ofrecen una combinación de apoyo emocional y consejos accionables que pueden ayudar a cualquier persona a superar obstáculos y alcanzar sus metas. Recomiendo a todos incorporar estos videos en su rutina regular como una forma de mantenerse inspirados y enfocados en sus objetivos.
+
                                            </p>
                         
                                         
@@ -301,21 +298,21 @@
                            <a href="vervideo.jsp" class="w-full h-32 overflow-hidden rounded-lg relative shadow-sm flex-shrink-0 block"> 
                                 <img src="../assets/images/hopecore3.png" alt="" class="w-full h-full absolute inset-0 object-cover">
                                 <img src="../assets/images/icon-play.svg" class="w-12 h-12 uk-position-center" alt="">
-                                <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 12:21</span>
+                                <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 25:01</span>
                            </a>
                            <div class="flex-1 pt-3 relative"> 
                                <a href="vervideo.jsp" class="line-clamp-2 font-semibold">     Si te sientes mal en tu vida, mira este video   </a>
                                <div class="flex space-x-2 items-center text-sm pt-1">
                                    <div> Hace 2 dias</div>
                                    <div>·</div>
-                                   <div> 156.9K views</div>
+                                   <div> 12K views</div>
                                </div>
                            </div>
                         </div> 
                        <div class="py-2 relative">
                           <a href="vervideo.jsp" class="w-full h-32 overflow-hidden rounded-lg relative shadow-sm flex-shrink-0 block"> 
                                <img src="../assets/images/hopecore4.png" alt="" class="w-full h-full absolute inset-0 object-cover">
-                               <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 12:21</span>
+                               <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 26:21</span>
                                <img src="../assets/images/icon-play.svg" class="w-12 h-12 uk-position-center" alt="">
                            </a>
                           <div class="flex-1 pt-3 relative"> 
@@ -323,24 +320,24 @@
                                  Hope Core   
                               </a>
                               <div class="flex space-x-2 items-center text-sm pt-1">
-                                  <div> Hace 2 dias</div>
+                                  <div> Hace 6 dias</div>
                                   <div>·</div>
-                                  <div>156.9K views</div>
+                                  <div>23K views</div>
                               </div>
                           </div> 
                        </div>
                        <div class="py-2 relative">
                            <a href="vervideo.jsp" class="w-full h-32 overflow-hidden rounded-lg relative shadow-sm flex-shrink-0 block"> 
                                 <img src="../assets/images/hopecore2.png" alt="" class="w-full h-full absolute inset-0 object-cover">
-                                <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 12:21</span>
+                                <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 24:01</span>
                                 <img src="../assets/images/icon-play.svg" class="w-12 h-12 uk-position-center" alt="">
                            </a>
                            <div class="flex-1 pt-3 relative"> 
                                <a href="video-watch.html" class="line-clamp-2 font-semibold"> Hope Core  </a>
                                <div class="flex space-x-2 items-center text-sm pt-1">
-                                   <div> Hace 2 dias </div>
+                                   <div> Hace 14 dias </div>
                                    <div>·</div>
-                                   <div> 156.9K views</div>
+                                   <div> 19K views</div>
                                </div>
                            </div>
                        </div>
