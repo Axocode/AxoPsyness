@@ -133,7 +133,7 @@ function displayTypingIndicator() {
     var avatarDiv = document.createElement('div');
     avatarDiv.className = 'message-avatar';
     var avatarImg = document.createElement('img');
-    avatarImg.src = '../assets/images/avatars/axo.jpg'; // Ajusta la ruta al avatar del bot
+    avatarImg.src = '../assets/images/Axo_cantante.svg'; // Ajusta la ruta al avatar del bot
     avatarImg.alt = 'avatar';
     avatarDiv.appendChild(avatarImg);
 
@@ -184,7 +184,7 @@ function displayMessage(sender, message) {
     if (sender === 'user') {
         avatarImg.src = '../assets/images/avatars/prof3.png'; // Ruta a la imagen del avatar del usuario
     } else {
-        avatarImg.src = '../assets/images/Axo_smile.svg'; // Ruta a la imagen del avatar del bot
+        avatarImg.src = '../assets/images/Axo_cantante.svg'; // Ruta a la imagen del avatar del bot
     }
     avatarImg.alt = 'avatar'; // Texto alternativo para la imagen
 

@@ -1,8 +1,4 @@
- <%-- 
-    Document   : settings-new
-    Created on : 23 nov. 2023, 19:00:41
-    Author     : axelitomixxxddd
---%>
+ 
 
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.Locale"%>
@@ -11,6 +7,7 @@
 <%@page import="org.axocode.dao.service.InterUsersService"%>
 <%@page import="org.axocode.dao.InterUsers"%>
 <%@page import="java.util.List"%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -67,22 +64,13 @@
 
 
 <body>
-   <%       
-    request.setCharacterEncoding("UTF-8");
-%>
-
+  
     <div id="wrapper">
 
               
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    
-    function abrirModal() {
-      UIkit.modal("#create-post-modal").show();
-    }
 
-</script>
+
 <div  hidden id="hiAxogg0"></div>
         <!-- Main Contents -->
         <div class="main_content"> 
@@ -104,31 +92,31 @@
 
                                         <!-- Time Sign -->
                                         <div class="message-time-sign">
-                                            <span>23, Abril 2024</span>
+                                            <span>13, Junio 2024</span>
                                         </div>
 
 
 
                                         <div class="message-bubble">
                                             <div class="message-bubble-inner">
-                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <div class="message-text py-2"><p>Hola! Soy tu acompañante en esta red social!<br>Cuentame, que necesitas el dia de hoy?</p></div>
+                                                <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
+                                                <div class="message-text py-2"><p>Hi Axo! Soy tu acompañante en esta red social!<br>Cuentame, que necesitas el dia de hoy?</p></div>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
 
                                         <div class="message-bubble" id="botones-axochar">
                                             <div class="message-bubble-inner">
-                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn1"> Consejos </button>
-                                            </div>                                        
-                                            <div class="message-bubble-inner">
-                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn2"> Mensajes de Apoyo </button>
+                                                <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn1">Consejos</button>
                                             </div>
                                             <div class="message-bubble-inner">
-                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text  bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn3"> Actividades de Relajación </button>
+                                                <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn2">Mensajes de Apoyo</button>
+                                            </div>
+                                            <div class="message-bubble-inner">
+                                                <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn3">Actividades de Relajación</button>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -154,10 +142,9 @@
 
                                 <!-- Reply Area -->
                                 <div class="message-reply">
-                                    <input cols="1" class="px-2" rows="1" placeholder="Escribe un mensaje" id="user-input"></input>
-                                    <button class="button ripple-effect" id="send-btn">Enviar</button>
+                                    <input cols="1" class="px-2" rows="1" placeholder="Escribe un mensaje" id="user-input" disabled></input>
+                                    <button class="button ripple-effect" id="send-btn" disabled>Enviar</button>
                                 </div>
-
                             </div>
 
                         </div>
@@ -166,10 +153,14 @@
                     </div>
                 </div> 
             </div>
-        </div>        
+        </div>
+        
+        
+        
+        
+        
     </div>
         
-
 
 
     <!-- Modo oscuro -->
@@ -206,7 +197,11 @@
             }, false);
     
         })(window, document);
-    </script>    
+    </script>
+  
+
+
+    
     <!-- Javascript
     ================================================== -->
     <script src="../assets/js/tippy.all.min.js"></script>

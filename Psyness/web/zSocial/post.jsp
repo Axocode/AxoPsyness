@@ -212,13 +212,19 @@ InterImagesService imageService = new InterImagesService();
                         <div class="section-info-profile-post">                                           
                         
                              <!--------------EMOTION BALL------------->
-                                    
+                             <script>
+                               <-<!-- Puntuacion lo sacas de la q se almacene en la bd -->
+                              generateSmoothGradientCircle(puntuacion, [200, 200]);
+                             </script>
+                             
+                             
+                             
                             <div class=" widget p-4" id="emotion_ball">
                                 <h4 class="text-center font-semibold"> ESTADO DE ÁNIMO </h4>
                                 <h2 class="text-center p-1 mr-3"> Tu última publicación así estuvo representada </h2>
 
-                                <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6">
-                                    <img src="../assets/images/avatars/esfera-gradiente.png" class="object-cover rounded-lg col-span-full">
+                                <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6 imangesita">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -498,5 +504,6 @@ function handleButtonHover2(button, isHover) {
             window.location.href = "home.jsp";
         }
     </script>
+    <script src="../assets/js/ProcesosAjax.js"></script>
 </html>    
 
