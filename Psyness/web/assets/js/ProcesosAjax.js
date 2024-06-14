@@ -475,8 +475,8 @@ async function translateAndAnalyze() {
   }
 }
 
-async function fetchWithBackoff(url, options, maxAttempts = 5, attempt = 1) {
-   const backoffDelay = (attempt) => Math.min(1000 * Math.pow(1.2, attempt), 30000);
+async function fetchWithBackoff(url, options, maxAttempts = 15, attempt = 1) {
+   const backoffDelay = (attempt) => Math.min(1000 * Math.pow(1.1, attempt), 30000);
    try {
      const response = await fetch(url, options);
      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
