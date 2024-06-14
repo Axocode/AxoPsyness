@@ -209,7 +209,7 @@ $(document).ready(function () {
         const claveAPIPerspective = "AIzaSyBhcaemBy-DSswtEZplbfxJcOTqrSYmHNw";
         const estadosCheckboxes = recolectarEstadosCheckboxes();
         
-        translateAndAnalyze(textoAEvaluar);
+        
         
         obtenerPuntuacionPerspectiveAPI(textoAEvaluar, claveAPIPerspective)
             .then((puntuacion) => {
@@ -220,6 +220,7 @@ $(document).ready(function () {
                     const puntuacionN = parseFloat(puntuacion);
                     // Ahora puedes utilizar puntuacionN en tu lógica
                     if (puntuacionN < 0.58) {
+                        translateAndAnalyze(textoAEvaluar);
     console.log("publicación válida");
     var numero1 = $("#numero123").val();
 
@@ -424,7 +425,6 @@ async function translateAndAnalyze() {
   const translationModel = "Helsinki-NLP/opus-mt-es-en";
   const emotionModel = "itzo/distilbert-base-uncased-fine-tuned-on-emotion-dataset";
   const textToTranslate = document.getElementById("inputText").value;
-  const textureSrc = 'teamofernanda.jpg'; // Definir textureSrc aquí
 
   try {
     const translationData = {
@@ -467,45 +467,102 @@ async function translateAndAnalyze() {
         return acc;
       }, {});
 
-      // Llamar a la función con textureSrc definido
-      loadTextureAndGenerateCircle(scores, [200, 200], textureSrc);
+      // Llamar a la función para generar el círculo sin textura
+      generateSmoothGradientCircle(scores, [200, 200]);
     }
   } catch (error) {
     console.error("Error durante la traducción o análisis de emoción:", error.message);
   }
 }
 
-function loadTextureAndGenerateCircle(scores, size, textureSrc) {
-  var texture = new Image();
-  texture.src = textureSrc;
-  texture.onload = function() {
-    console.log("Corrio");
-    var circleDataURL = generateSmoothGradientCircle(scores, size, texture);
-    var imgElement = new Image();
-    imgElement.src = circleDataURL;
-    var container = document.getElementById("imangesita");
-    container.innerHTML = '';
-    container.appendChild(imgElement);
-  };
+async function fetchWithBackoff(url, options, maxAttempts = 5, attempt = 1) {
+   const backoffDelay = (attempt) => Math.min(1000 * Math.pow(1.2, attempt), 30000);
+   try {
+     const response = await fetch(url, options);
+     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+     return await response.json();
+   } catch (error) {
+     console.log(`Attempt ${attempt}: Failed - ${error.message}`);
+     if (attempt >= maxAttempts) throw new Error('Max attempts reached');
+     const delay = backoffDelay(attempt);
+     console.log(`Waiting ${delay}ms before next attempt`);
+     await new Promise(resolve => setTimeout(resolve, delay));
+     return await fetchWithBackoff(url, options, maxAttempts, attempt + 1);
+   }
+ }
+
+async function translateAndAnalyze() {
+  const API_TOKEN = "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";
+  const translationModel = "Helsinki-NLP/opus-mt-es-en";
+  const emotionModel = "itzo/distilbert-base-uncased-fine-tuned-on-emotion-dataset";
+  const textToTranslate = document.getElementById("inputText").value;
+
+  try {
+    const translationData = {
+      inputs: textToTranslate,
+    };
+
+    const translationResult = await fetchWithBackoff(
+      `https://api-inference.huggingface.co/models/${translationModel}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${API_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(translationData),
+      }
+    );
+
+    if (Array.isArray(translationResult) && translationResult.length > 0) {
+      const translatedText = translationResult[0].translation_text;
+      console.log("Texto original:", textToTranslate);
+      console.log("Traducción:", translatedText);
+
+      const emotionData = { text: translatedText };
+
+      const emotionResult = await fetchWithBackoff(
+        `https://api-inference.huggingface.co/models/${emotionModel}`, {
+          method: "POST",
+          body: JSON.stringify({ inputs: emotionData }),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_TOKEN}`
+          }
+        }
+      );
+
+      console.log("Resultado del análisis de emoción:", emotionResult);
+
+      const scores = emotionResult.reduce((acc, curr) => {
+        acc[curr.label] = curr.score;
+        return acc;
+      }, {});
+
+      // Llamar a la función para generar el círculo sin textura
+      generateSmoothGradientCircle(scores, [200, 200]);
+    }
+  } catch (error) {
+    console.error("Error durante la traducción o análisis de emoción:", error.message);
+  }
 }
 
-function generateSmoothGradientCircle(scores, size, texture) {
+function generateSmoothGradientCircle(scores, size) {
   var canvas = document.createElement('canvas');
   canvas.width = size[0];
   canvas.height = size[1];
   var ctx = canvas.getContext('2d');
 
   // Configura la sombra para profundidad
-  ctx.shadowBlur = 1;
+  ctx.shadowBlur = 5;
   ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
   
   var colors = {
-    'LABEL_0': 'rgb(134, 198, 238)', //azul | tristeza
-    'LABEL_1': 'rgb(255,218,91)', //amarillo | felicidad
-    'LABEL_2': 'rgb(242,154,186)', //rosa | amor
-    'LABEL_3': 'rgb(255,44,33)', //enojo | rojo
-    'LABEL_4': 'rgb(201,201,255)', //miedo | morado
-    'LABEL_5': 'rgb(218,218,210)', //sorpresa | gris
+    'LABEL_0': 'rgb(0, 0, 255)', // azul | tristeza
+    'LABEL_1': 'rgb(244, 208, 63)', // amarillo | felicidad
+    'LABEL_2': 'rgb(255, 20, 147)', // rosa | amor
+    'LABEL_3': 'rgb(255, 0, 0)', // enojo | rojo
+    'LABEL_4': 'rgb(128, 0, 128)', // miedo | morado
+    'LABEL_5': 'rgb(169, 169, 169)', // sorpresa | gris
   };
 
   // Ordenar los sentimientos por score descendente y tomar solo los dos primeros
@@ -515,7 +572,7 @@ function generateSmoothGradientCircle(scores, size, texture) {
 
   // Selecciona un punto aleatorio dentro del círculo para el centro del gradiente radial
   var angle = Math.random() * Math.PI * 2;
-  var radius = Math.random() * (size[0] / 4); // hasta 1/4 del ancho total para mantenerlo dentro
+  var radius = Math.random() * (size[0] / 3); // hasta 1/4 del ancho total para mantenerlo dentro
   var x = (size[0] / 2) + radius * Math.cos(angle);
   var y = (size[1] / 2) + radius * Math.sin(angle);
 
@@ -523,37 +580,16 @@ function generateSmoothGradientCircle(scores, size, texture) {
   var innerRadius = 0; // Comienza desde el centro
   var outerRadius = size[0] / 2; // El radio máximo para el gradiente radial
 
-  ctx.filter = 'blur(2px)';
   // Crear el degradado radial
   var gradient = ctx.createRadialGradient(x, y, innerRadius, x, y, outerRadius);
 
   // Aquí invertimos los colores al establecer los puntos de parada del gradiente
   gradient.addColorStop(0, colors[sortedScores[1]]); // Usar el segundo color (amarillo) en el centro
-  gradient.addColorStop(scores[sortedScores[0]] / (scores[sortedScores[0]] + scores[sortedScores[1]]), colors[sortedScores[0]]); // El primer color (rosa) comienza en la posición calculada
+  gradient.addColorStop(1, colors[sortedScores[0]]); // El primer color (rosa) comienza en la posición calculada
 
   // Rellenar el canvas con el gradiente radial
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, size[0], size[1]);
-
-  // Crear un canvas temporal para redimensionar la textura
-  var tempCanvas = document.createElement('canvas');
-  tempCanvas.width = size[0];
-  tempCanvas.height = size[1];
-  var tempCtx = tempCanvas.getContext('2d');
-
-  // Dibujar la textura redimensionada en el canvas temporal
-  tempCtx.drawImage(texture, 0, 0, size[0], size[1]);
-
-  // Obtener la textura redimensionada como patrón
-  var pattern = ctx.createPattern(tempCanvas, 'repeat');
-<<<<<<< HEAD
-  ctx.globalAlpha = 0.2; // Ajustar la opacidad de la textura
-=======
-  ctx.globalAlpha = 0.3; // Ajustar la opacidad de la textura
->>>>>>> a142f3397f8de632df8991ce22ce21038752d5c2
-  ctx.fillStyle = pattern;
-  ctx.fillRect(0, 0, size[0], size[1]);
-  ctx.globalAlpha = 1.0;
 
   // Crear una máscara circular para mantener la forma del círculo
   ctx.globalCompositeOperation = 'destination-in';
@@ -564,5 +600,11 @@ function generateSmoothGradientCircle(scores, size, texture) {
 
   ctx.shadowBlur = 0;
   ctx.filter = 'none';
-  return canvas.toDataURL();
+  
+  var circleDataURL = canvas.toDataURL();
+  var imgElement = new Image();
+  imgElement.src = circleDataURL;
+  var container = document.getElementById("imangesita");
+  container.innerHTML = '';
+  container.appendChild(imgElement);
 }
