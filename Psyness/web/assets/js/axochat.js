@@ -1,3 +1,36 @@
+document.getElementById('btn1').addEventListener('click', function() {
+    activateElements('Aquí tienes algunos consejos útiles.');
+});
+document.getElementById('btn2').addEventListener('click', function() {
+    activateElements('Aquí tienes un mensaje de apoyo para ti.');
+});
+document.getElementById('btn3').addEventListener('click', function() {
+    activateElements('Aquí tienes algunas actividades de relajación.');
+});
+
+function activateElements(message) {
+    document.getElementById('user-input').disabled = false;
+    document.getElementById('send-btn').disabled = false;
+
+    // Mostrar el indicador de que el bot está escribiendo
+    var typingIndicator = displayTypingIndicator();
+
+    // Esperar 1.2 segundos antes de quitar el indicador y mostrar el mensaje del bot
+    setTimeout(() => {
+        // Quitar el indicador de escritura
+        removeTypingIndicator(typingIndicator);
+
+        // Mostrar el mensaje del bot en el chat
+        displayBotMessage(message);
+    }, 1200);
+}
+
+function displayBotMessage(message) {
+    displayMessage('bot', message);
+}
+
+
+
 
 var endpointVariable = "";
 
@@ -23,7 +56,7 @@ var boton3 = document.getElementById('btn3');
 // Agrega un evento de click al botón
 boton3.addEventListener('click', function() {
     // Incrementa el valor de la variable
-    endpointVariable = "";
+    endpointVariable = "act";
     // Imprime el nuevo valor en la consola
     console.log("Nuevo valor de la variable:", endpointVariable);
 });
@@ -52,13 +85,25 @@ document.getElementById('send-btn').addEventListener('click', function(e) {
         },
         body: JSON.stringify({message: userMessage}),
     })
-    .then(response => response.json())
-    .then(data => {
-        // Quitar el indicador de escritura antes de mostrar la respuesta
-        removeTypingIndicator(typingIndicator);
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text(); // Primero lo obtenemos como texto
+    })
+    .then(text => {
+        console.log('Response text:', text); // Para ver el contenido de la respuesta
+        try {
+            const data = JSON.parse(text); // Intentamos parsear el texto como JSON
+            // Quitar el indicador de escritura antes de mostrar la respuesta
+            removeTypingIndicator(typingIndicator);
 
-        // Mostrar la respuesta del bot en el chat
-        displayMessage('bot', data.message);
+            // Mostrar la respuesta del bot en el chat
+            displayMessage('bot', data.message);
+        } catch (error) {
+            console.error('Error parsing JSON:', error);
+            throw new Error('Response is not valid JSON');
+        }
     })
     .catch((error) => {
         console.error('Error:', error);
