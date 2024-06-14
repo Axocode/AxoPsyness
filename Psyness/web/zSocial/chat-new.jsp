@@ -146,15 +146,15 @@
                                         <div class="message-bubble" id="botones-axochar">
                                             <div class="message-bubble-inner">
                                                 <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn1"> Consejos </button>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="width: 90px; background-color: #787df1; color: #fff" id="btn1"> Consejos </button>
                                             </div>                                        
                                             <div class="message-bubble-inner">
                                                 <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn2"> Mensajes de Apoyo </button>
+                                                <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="width: 170px; background-color: #787df1; color: #fff" id="btn2"> Mensajes de Apoyo </button>
                                             </div>
                                             <div class="message-bubble-inner">
                                                 <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <button type="submit" class="message-text  bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn3"> Actividades de Relajación </button>
+                                                <button type="submit" class="message-text  bg-blue-700 py-2 my-2" style="width: 220px; background-color: #787df1; color: #fff" id="btn3"> Actividades de Relajación </button>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
@@ -165,7 +165,7 @@
                                             <div class="message-bubble-inner">
                                                 <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
                                                 <div class="message-text">
-                                                    <!-- Typing Indicator <-Est0 es un comentario
+                                                    Typing Indicator <-Est0 es un comentario
                                                     <div class="typing-indicator">
                                                         <span></span>
                                                         <span></span>
@@ -181,7 +181,7 @@
                                 <!-- Reply Area -->
                                 <div class="message-reply">
                                     <input cols="1" class="px-2" rows="1" placeholder="Escribe un mensaje" id="user-input"></input>
-                                    <button class="button ripple-effect" id="send-btn">Enviar</button>
+                                    <button class="button ripple-effect" style="width: auto;" id="send-btn">Enviar</button>
                                 </div>
 
                             </div>

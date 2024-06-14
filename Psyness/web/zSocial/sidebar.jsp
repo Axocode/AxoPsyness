@@ -654,7 +654,7 @@
                         
                                 <div class="bsolute bottom-0 p-4 space-x-4 w-full">
                                     <div class="flex bg-gray-50 border border-purple-100 rounded-2xl p-3 shadow-sm items-center">
-                                        <button type="submit" class="button bg-blue-700" id="guardadito1" ontouchstart="this.click()"> Publicar </button>
+                                        <button type="submit" class="button bg-blue" style="width: auto;" id="guardadito1" ontouchstart="this.click()"> Publicar </button>
                                             <div class="flex flex-1 items-center lg:justify-end justify-center space-x-2">                                
                                                 <div class="upload">
                                                     <svg class="bg-blue-100 h-9 p-1.5 rounded-full text-blue-600 w-9 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -684,37 +684,76 @@
                           <!-- Modal para publicaciones ofensivas -->
 
                             <div class="modal_offensive" id="modal_offensive_announce">
-                                <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                                <div class="relative z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                                     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
                                     <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
                                         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
 
                                             <!--Panel-->
                                             <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                                            <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                                                <div class="sm:flex sm:items-start">
-                                                <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                                    <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                                                    </svg>
-                                                </div>
-                                                <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                                                    <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Comentario ofensivo</h3>
-                                                    <div class="mt-2">
-                                                    <p class="text-sm text-gray-500">Puede que tu publicación contenga contenido sensible para otros usuarios.
-                                                    Por favor edita el contenido y vuelve a intentarlo</p>
+                                                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                                                    <div class="sm:flex sm:items-start">
+                                                    <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                                        <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Comentario ofensivo</h3>
+                                                        <div class="mt-2">
+                                                        <p class="text-sm text-gray-500">Puede que tu publicación contenga contenido sensible para otros usuarios.
+                                                        Por favor edita el contenido y vuelve a intentarlo</p>
+                                                        </div>
+                                                        <div id="imageContainern" style="justify-content: center; display: flex; align-items: center;">
+                                                            <img id="randomImagen" src="../assets/images/axos-ofensiva/Axo4.svg" width="200">
+                                                        </div>    
+                                                    </div>
                                                     </div>
                                                 </div>
+                                                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                                    <button type="button" onClick="cerrarModal()" id="button_close_offensive" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Cerrar</button>
                                                 </div>
-                                            </div>
-                                            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                <button type="button" onClick="cerrarModal()" id="button_close_offensive" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">Cerrar</button>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>       
+                            </div>    
+                            
+                            
+                <script>
+                  // Función para seleccionar una imagen aleatoria de la carpeta y mostrarla
+                    function showRandomImage() {
+                        // Número total de imágenes
+                        const totalImages = 4;
+                        
+                        // Generar un número aleatorio entre 1 y totalImages (ambos inclusive)
+                        const randomIndex = Math.floor(Math.random() * totalImages) + 1;
+                        
+                        // Crear la ruta de la imagen aleatoria
+                        const imagePath = `../assets/images/axos-ofensiva/Axo${randomIndex}.svg`;
+                        
+                        // Crear un nuevo elemento de imagen
+                        const imgElement = document.createElement('img');
+                        
+                        // Establecer el atributo src de la imagen al path generado
+                        imgElement.src = imagePath;
+                        
+                        // Seleccionar el contenedor de la imagen en el HTML
+                        const imageContainer = document.getElementById('imageContainer');
+                        
+                        // Vaciar el contenedor por si ya tiene una imagen
+                        imageContainer.innerHTML = '';
+                        
+                        // Agregar la nueva imagen al contenedor
+                        imageContainer.appendChild(imgElement);
+                    }
+
+                    // Llamar a la función para mostrar una imagen aleatoria cuando la página se carga
+                    window.onload = showRandomImage;
+
+                </script>            
+
+
 <script src="../assets/js/ProcesosAjax.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="../assets/js/Perspective.js" defer></script>

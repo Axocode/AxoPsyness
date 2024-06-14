@@ -7875,7 +7875,7 @@ header .header_inner .right_side {
 }
 
 .message-bubble .message-text p {
-  padding: 0 20px 0 20px;
+  padding: 10px;
   font-size: 15px;
   margin: 0;
   line-height: 25px;
@@ -7888,8 +7888,7 @@ header .header_inner .right_side {
 
 .message-bubble.me .message-text {
   margin-left: 0;
-  
-  padding: 20px;
+  padding: 5px;
   margin-right: 63px;
   background-color: #787DF1;
   color: #fff;
@@ -7900,18 +7899,18 @@ header .header_inner .right_side {
   content: "";
   width: 0;
   height: 0;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-  border-right: 6px solid #f4f4f4;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #f4f4f4;
   right: auto;
   top: 19px;
   position: absolute;
 }
 
 .message-bubble.me .message-text:before {
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-  border-left: 8px solid #787DF1;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #787DF1;
   border-right: none;
   right: 5px;
   left: auto;

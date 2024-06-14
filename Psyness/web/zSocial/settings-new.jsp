@@ -125,7 +125,7 @@
                             </div> 
         
                             <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
-                                <button type="submit" class="button bg-blue-700"> Modificar </button>
+                                <button type="submit" class="button bg-blue-700 w-auto"> Modificar </button>
                             </div>
                             </form>
                         </div>

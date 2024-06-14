@@ -667,11 +667,11 @@
                     
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
-                        <div class="contact-username">Sexenal</div>
+                        <div class="contact-username w-full">Sexenal</div>
                     </button><br><br>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
 
-                        <div class="contact-username">Cañitas</div>
+                        <div class="contact-username  w-full">Cañitas</div>
                     </button><br>
                     
                     

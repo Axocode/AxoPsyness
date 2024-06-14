@@ -68,6 +68,7 @@ body{
 
 .sidebar_feed button{
     height: 70px;
+    width: 100%;
     background: transparent;
     border: 0;
     padding: 0;
@@ -88,6 +89,7 @@ body{
 .sidebar_feed button:hover > span{
     background: #f2f2f2;
 }
+
 
 .sidebar_feed button:hover > span :is(i, img){
     scale: 1.05;

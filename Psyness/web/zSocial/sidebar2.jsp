@@ -172,7 +172,7 @@
                             <!-- SIDEBAR -->
                          
     <!-- SIDEBAR -->
-        <aside class="sidebar_feed">
+            <aside class="sidebar_feed">
 
         <div class="sidebar_header">
             <img src="../assets/images/avatars/Logo con letras centrado.svg" class="logo-img_sidebar">
@@ -198,7 +198,7 @@
             <button onclick="location.href='data-new.jsp?follows=1'">
                 <span>
                    <i class='bx bx-user-voice' ></i>
-                    <span>Datacenter</span>
+                    <span>Clinicas</span>
                 </span>
             </button>
 
@@ -209,6 +209,12 @@
                         <em></em>
                     </i>
                     <span>Axochat</span>
+                </span>
+            </button>
+            <button onclick="location.href='testrano.jsp'">
+                <span>
+                    <i class="fa-solid fa-film fa-rotate-180 fa-sm" style="color: #000000;"></i><!-- comment -->          
+                    <span>Videos</span>
                 </span>
             </button>
 

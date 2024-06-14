@@ -119,7 +119,7 @@
         <!---------------CREAR----------------->
         <!---------------------------------------------- MAIN CONTENT -------------------------------------------------------------------------->
                 <div class="Main_content">
-                    <div class="Main_container">  
+                        <div class="Main_container">  
                         
                         <!--------------- BARRA INICIO  - CLIENTE   -------------->
 
@@ -154,9 +154,6 @@
                                     <div class="story-content"> <h4> Superacion Personal</h4> </div>
                                 </div>
                             </a>
-                            
-                            
-                           
                             
                         </div>
                                

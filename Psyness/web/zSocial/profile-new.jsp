@@ -159,9 +159,9 @@
                                 <div class="profile_seguir">
                                     <div id="seeg" class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
                                         <% if (flowService.isUserFollowing(id, idtu)) { %>
-                                            <button onclick="agregarSeguido(<%= id %>, 'seguirnt')" type="submit" class="button" style="background-color: #DCDCDC; color: black;">Dejar de Seguir</button>
+                                            <button onclick="agregarSeguido(<%= id %>, 'seguirnt')" type="submit" class="button w-auto" style="background-color: #DCDCDC; color: black;">Dejar de Seguir</button>
                                         <% } else { %>
-                                            <button onclick="agregarSeguido(<%= id %>, 'seguir')" type="submit" class="button bg-blue-700">Seguir</button>
+                                            <button onclick="agregarSeguido(<%= id %>, 'seguir')" type="submit" class="button bg-blue-700 w-auto">Seguir</button>
                                         <% } %>
                                     </div>
                                 </div>
@@ -197,6 +197,23 @@
                                         <li><a href="" id="pubsFavoritas">Pubs Favoritas </a></li>
                                     <% } %>
                                 </ul>
+                            </nav>
+
+                            <nav class="responsive-nav" style="display: flex; justify-content: flex-end;">
+                                <div class="is-right">
+                                    <a href="" aria-expanded="false" class=""> 
+                                        <i class="icon-feather-more-vertical text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 dark:hover:bg-gray-700"></i>
+                                    </a>
+                                    <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700 uk-drop uk-drop-bottom-right" uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small" style="left: 362.237px; top: 4.45001px;">
+                                        <ul class="space-y-0">
+                                            <li>
+                                                <button onclick="location.href='dashboard-new.jsp'" class="flex items-center px-3 py-2 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                                                    <i class="icon-feather-log-out px-1"></i> Dashboard
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </nav>
     
                             <!-- button actions -->
