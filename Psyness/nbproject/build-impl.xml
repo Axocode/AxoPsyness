@@ -188,9 +188,6 @@
             <and>
                 <isset property="endorsed.classpath"/>
                 <length length="0" string="${endorsed.classpath}" when="greater"/>
-                <not>
-                    <matches pattern="1[0-9]|11|12|13|14|15|16|17|18|19" string="${java.specification.version}"/>
-                </not>
             </and>
         </condition>
         <condition else="false" property="jdkBug6558476">
