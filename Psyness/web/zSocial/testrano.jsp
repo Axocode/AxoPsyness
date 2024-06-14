@@ -243,7 +243,7 @@
                             <li tabindex="-1" class="uk-active">
                                 <a href="video-watch.html" class="w-full md:h-36 h-28 overflow-hidden rounded-lg relative block">
                                     <img src="../assets/images/hopecore1.png" alt="" class="w-full h-full absolute inset-0 object-cover">
-                                    <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 11:11</span>
+                                    <span class="absolute bg-black bg-opacity-60 bottom-1 font-semibold px-1.5 py-0.5 right-1 rounded text-white text-xs"> 11:11 </span>
                                     <img src="../assets/images/icon-play.svg" class="w-12 h-12 uk-position-center" alt="">
                                 </a>
                                 <div class="pt-3">
