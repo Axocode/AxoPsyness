@@ -1,11 +1,11 @@
 document.getElementById('btn1').addEventListener('click', function() {
-    activateElements('Aquí tienes algunos consejos útiles.');
+    activateElements('Claro,puedo darte un consejo si así lo deseas,cuentame tu situación y con gusto te aconsejaré.');
 });
 document.getElementById('btn2').addEventListener('click', function() {
-    activateElements('Aquí tienes un mensaje de apoyo para ti.');
+    activateElements('Me encantaría poder ayudarte,cuentame ¿qué es lo que pasa?');
 });
 document.getElementById('btn3').addEventListener('click', function() {
-    activateElements('Aquí tienes algunas actividades de relajación.');
+    activateElements('Por supuesto!,dime que es lo que sientes y con gusto te ayudaré a relajarte');
 });
 
 function activateElements(message) {
@@ -117,7 +117,7 @@ document.getElementById('send-btn').addEventListener('click', function(e) {
     // Limpiar el campo de entrada del usuario
     document.getElementById('user-input').value = '';
     // Incrementa el valor de la variable
-    endpointVariable = "";
+    endpointVariable = "norm";
     // Imprime el nuevo valor en la consola
     console.log("Nuevo valor de la variable:", endpointVariable);
 });

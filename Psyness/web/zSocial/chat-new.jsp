@@ -130,7 +130,7 @@
 
                                         <!-- Time Sign -->
                                         <div class="message-time-sign">
-                                            <span>23, Abril 2024</span>
+                                            <span>13, Junio 2024</span>
                                         </div>
 
 
@@ -138,7 +138,7 @@
                                         <div class="message-bubble">
                                             <div class="message-bubble-inner">
                                                 <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
-                                                <div class="message-text py-2"><p>Hola! Soy tu acompañante en esta red social!<br>Cuentame, que necesitas el dia de hoy?</p></div>
+                                                <div class="message-text py-2"><p>Hi Axo! Soy tu acompañante en esta red social!<br>Cuentame, que necesitas el dia de hoy?</p></div>
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
