@@ -184,7 +184,7 @@ function displayMessage(sender, message) {
     if (sender === 'user') {
         avatarImg.src = '../assets/images/avatars/prof3.png'; // Ruta a la imagen del avatar del usuario
     } else {
-        avatarImg.src = '../assets/images/avatars/axo.jpg'; // Ruta a la imagen del avatar del bot
+        avatarImg.src = '../assets/images/Axo_smile.svg'; // Ruta a la imagen del avatar del bot
     }
     avatarImg.alt = 'avatar'; // Texto alternativo para la imagen
 

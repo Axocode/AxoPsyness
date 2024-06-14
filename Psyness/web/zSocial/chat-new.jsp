@@ -137,7 +137,7 @@
 
                                         <div class="message-bubble">
                                             <div class="message-bubble-inner">
-                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
+                                                <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
                                                 <div class="message-text py-2"><p>Hi Axo! Soy tu acompañante en esta red social!<br>Cuentame, que necesitas el dia de hoy?</p></div>
                                             </div>
                                             <div class="clearfix"></div>
@@ -153,7 +153,7 @@
                                                 <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn2">Mensajes de Apoyo</button>
                                             </div>
                                             <div class="message-bubble-inner">
-                                                <div class="message-avatar"><img src="../assets/images/avatars/axo.jpg" alt=""></div>
+                                                <div class="message-avatar"><img src="../assets/images/Axo_cantante.svg" alt=""></div>
                                                 <button type="submit" class="message-text bg-blue-700 py-2 my-2" style="background-color: #787df1; color: #fff" id="btn3">Actividades de Relajación</button>
                                             </div>
                                             <div class="clearfix"></div>
